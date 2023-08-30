@@ -84,12 +84,11 @@
             border-top: none; 
         }
       
-        @media only screen and  (min-width:300px)and(max-width:768px)and(max-height:768px) {
+        @media only screen and  (min-width:300px)and(max-width:1000px) {
             body{
-                background-image: url('tree2.jpg');
-            background-repeat: no-repeat;
+            
 
-            background-size:  300%;
+            background-size:  200%;
             }
 
             .cells2,.cells1{
@@ -103,71 +102,16 @@
             font-size: 14px;
 }
 .cell{           
-            cursor: pointer;
-            display: flex;
-            justify-content: unset;
-            align-items: center;
            
     border: 3px solid #000;
             border-top:5%;
-            
-           
-            font-size: 14px;
+            font-size: 20px;
 }
 .board{
     border: 10px solid #000;
             border-radius: 15px;
 
-            position: fixed;
-            display: grid;
-            transform: translate(-50%,-50%);
-            grid-template-columns: repeat(-3%, auto);
-            top: 50%;
-            left: 50%;
-            
-            padding: auto;
-}
-        }
-        @media only screen and  (min-width:800px) {
-            body{
-                background-size:  1000%;
-
-            }
-
-            .cells2,.cells1{
-    border: 3px solid #000;
-            width: 50px;
-            height: 50px;
-            border-bottom: none; 
-            border-left: none; 
-            border-right: none; 
-            border-top: none; 
-            font-size: 14px;
-}
-.cell{           
-            cursor: pointer;
-            display: flex;
-            justify-content: unset;
-            align-items: center;
-           
-    border: 3px solid #000;
-            border-top:5%;
-            
-           
-            font-size: 14px;
-}
-.board{
-    border: 10px solid #000;
-            border-radius: 15px;
-
-            position: fixed;
-            display: grid;
-            transform: translate(-50%,-50%);
-            grid-template-columns: repeat(-3%, auto);
-            top: 50%;
-            left: 50%;
-            
-            padding: auto;
+    
 }
         }
   
