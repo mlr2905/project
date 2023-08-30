@@ -180,20 +180,20 @@ img{
 
     <div  class="board ">
         <div class="form-row body">
-            <div class="cell left top"  style="display:none"  id="cell-0" onclick="cell_click(0)"></div>
-            <div class="cell top"       style="display:none" id="cell-1" onclick="cell_click(1)"></div>
-            <div class="cell right top" style="display:none" id="cell-2" onclick="cell_click(2)"></div>
+            <div class="cell left top"  style="display:none"  id="cell-0" onclick="cell_click(0)">0</div>
+            <div class="cell top"       style="display:none" id="cell-1" onclick="cell_click(1)">1</div>
+            <div class="cell right top" style="display:none" id="cell-2" onclick="cell_click(2)">2</div>
         </div>
         <div class="form-row body">
-            <div class="cell left"  style="display:none"  id="cell-3" onclick="cell_click(3)"></div>
-            <div class="cell"       style="display:none"   id="cell-4" onclick="cell_click(4)"></div>
-            <div class="cell right" style="display:none"   id="cell-5" onclick="cell_click(5)"></div>
+            <div class="cell left"  style="display:none"  id="cell-3" onclick="cell_click(3)">3</div>
+            <div class="cell"       style="display:none"   id="cell-4" onclick="cell_click(4)">4</div>
+            <div class="cell right" style="display:none"   id="cell-5" onclick="cell_click(5)">5</div>
         </div>
 
         <div class="form-row body">
-            <div class="cell down left" style="display:none"  id="cell-6" onclick="cell_click(6)"></div>
-            <div class="cell down" style="display:none"  id="cell-7" onclick="cell_click(7)"></div>
-            <div class="cell down right" style="display:none"  id="cell-8" onclick="cell_click(8)"></div>
+            <div class="cell down left" style="display:none"  id="cell-6" onclick="cell_click(6)">6</div>
+            <div class="cell down" style="display:none"  id="cell-7" onclick="cell_click(7)">7</div>
+            <div class="cell down right" style="display:none"  id="cell-8" onclick="cell_click(8)">8</div>
         </div>
         <HR>
         <div class="form-row body">
@@ -229,11 +229,7 @@ img{
            const value = div.textContent;
             if (value == 'stop') { ;
                 document.getElementById("name").textContent = "play"
-                amounr_of_games =0, win_x=0, win_o=0
-                document.getElementById("cell-9").textContent = win_x,
-                document.getElementById("cell-10").textContent = amounr_of_games,
-                document.getElementById("cell-11").textContent = win_o;
-
+                Cleaning_results()
             }
             else  { 
                 
@@ -245,13 +241,22 @@ img{
             Hide_divs()
                                     
                 }
-          function Hide_divs(){
+
+        function Cleaning_results(){
+            amounr_of_games =0, win_x=0, win_o=0
+            document.getElementById("cell-9").textContent = win_x,
+                document.getElementById("cell-10").textContent = amounr_of_games,
+                document.getElementById("cell-11").textContent = win_o;
+
+}
+           function Hide_divs(){
                 for (let index = 0; index <arr.length; index++) {
                 const div1 = document.getElementById(`cell-${index}`);
                 div1.style.display = div1.style.display === "block" ? "none" : "block";
                 }
             }
-        function cell_click(cell_number){
+
+           function cell_click(cell_number){
 
             if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o"   ) {
                 
@@ -325,91 +330,67 @@ img{
 
                 if(number == 0){
 
-                for (let index = 0; index <arr.length; index++) {
-                    document.getElementById(`cell-${index}`).textContent = null;
-
-
-                                    
-                }
+                    for (let index = 0; index <arr.length; index++) {
+                        document.getElementById(`cell-${index}`).textContent = null;                
+                    }
           
-                return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_x++,
-                document.getElementById("cell-9").textContent = win_x,
-                document.getElementById("cell-10").textContent = amounr_of_games,
-                document.getElementById("cell-11").textContent = win_o;
-
-
-                
-                
-  
-
+                    return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_x++,
+                    document.getElementById("cell-9").textContent = win_x,
+                    document.getElementById("cell-10").textContent = amounr_of_games,
+                    document.getElementById("cell-11").textContent = win_o;
 
                 }
 
                 else{
                 return xo ="0" ,com(number)
                 }
-                }
             }
-            function finish2(){
+        }
+
+        function finish2(){
             for (const number of arr){
 
                 if(number == 0){
 
                 for (let index = 0; index <arr.length; index++) {
-                    document.getElementById(`cell-${index}`).textContent = null;
-                                    
+                    document.getElementById(`cell-${index}`).textContent = null;                  
                 }
                 return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_o++,xo ="1",
                 document.getElementById("cell-9").textContent = win_x,
                 document.getElementById("cell-10").textContent = amounr_of_games,
                 document.getElementById("cell-11").textContent = win_o;
-
                 }
-
                 else{
                 return xo ="1" 
                 }
                 }
             }
-            function win1(){
+
+        function win1(){
             switch(true){
                 
-                case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x"):
-                return alert("win - x"), arr=arr.map(reset) ;
-                case (arr[0]=="x" && arr[3]=="x" && arr[6]=="x"):
-                return alert("win - x"), arr=arr.map(reset);
-                case (arr[0]=="x" && arr[4]=="x" && arr[8]=="x"):
-                return alert("win - x"), arr=arr.map(reset);
-                case (arr[3]=="x" && arr[4]=="x" && arr[5]=="x"):
-                return alert("win - x"), arr=arr.map(reset);
-                case (arr[6]=="x" && arr[7]=="x" && arr[8]=="x"):
-                return alert("win - x"), arr=arr.map(reset);
-                case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x"):
-                return alert("win - x"), arr=arr.map(reset);
-                case (arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
-                return alert("win - x"), arr=arr.map(reset);
-        
+                case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x")||(arr[2]=="x" && arr[4]=="x" && arr[6]=="x"):
+                    return alert("win - x"), arr=arr.map(reset) ;
+                case (arr[0]=="x" && arr[3]=="x" && arr[6]=="x")||(arr[0]=="x" && arr[4]=="x" && arr[8]=="x"):
+                    return alert("win - x"), arr=arr.map(reset);
+                case (arr[3]=="x" && arr[4]=="x" && arr[5]=="x")||(arr[6]=="x" && arr[7]=="x" && arr[8]=="x"):
+                    return alert("win - x"), arr=arr.map(reset);
+                case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x")||(arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
+                    return alert("win - x"), arr=arr.map(reset);
+                        
             }
         }
         function win2(){
             switch(true){
                 
-        case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o"):
-            return alert("win - o"), arr=arr.map(reset);
-        case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o"):
-        return alert("win - o"), arr=arr.map(reset);
-        case (arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
-        return alert("win - o"), arr=arr.map(reset);
-        case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o"):
-        return alert("win - o"), arr=arr.map(reset);
-        case (arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
-        return alert("win - o"), arr=arr.map(reset);
-        case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o"):
-        return alert("win - o"), arr=arr.map(reset);
-        case (arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
-        return alert("win - o"), arr=arr.map(reset);
-
-
+                case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o")||(arr[2]=="o" && arr[4]=="ox" && arr[6]=="o"):
+                    return alert("win - o"), arr=arr.map(reset);
+                case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o")||(arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
+                    return alert("win - o"), arr=arr.map(reset);
+                case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o")||(arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
+                    return alert("win - o"), arr=arr.map(reset);
+                case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o")||(arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
+                   return alert("win - o"), arr=arr.map(reset);
             }
         }
 
