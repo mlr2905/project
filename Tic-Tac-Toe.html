@@ -14,7 +14,7 @@
                 background-image: url('tree2.jpg');
             background-repeat: no-repeat;
 
-            background-size:  100%;
+            background-size:  300%;
             }
 
         
@@ -84,12 +84,12 @@
             border-top: none; 
         }
       
-        @media only screen and  (min-width:300px) {
+        @media only screen and  (min-width:800px)and(max-width:900px) {
             
             body{
                 background-image: url('tree2.jpg');
             background-repeat: no-repeat;
-            background-size:  300%;
+            background-size:  250%;
             }
 
             .cells2,.cells1{
@@ -119,9 +119,9 @@
             border-radius: 15px;
 
             position: unset;
-            display: unset;
-            transform: none;
-            grid-template-columns: none;
+            display: grid;
+            transform: translate(-50%,-50%);
+            grid-template-columns: repeat(-3%, auto);
             top: 50%;
             left: 50%;
             width: 200px;
