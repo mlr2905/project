@@ -85,17 +85,39 @@
             border-left: none; 
             border-right: none; 
             border-top: none; 
-
-
-
-
- 
-
-
         }
       
-        
-      
+        @media only screen and (max-width: 700px) {
+            body{
+                background-size:  300%;
+
+            }
+
+            .cells2,.cells1{
+    border: 3px solid #000;
+            border-top:7%;
+            width: 50px;
+            height: 50px;
+            border-bottom: none; 
+            border-left: none; 
+            border-right: none; 
+            border-top: none; 
+            font-size: 14px;
+}
+.cell{
+    border: 3px solid #000;
+            border-top:7%;
+            width: 50px;
+            height: 50px;
+           
+            font-size: 14px;
+}
+.board{
+    border: 10px solid #000;
+            border-radius: 15px;
+}
+        }
+  
   
  .top { 
      border-top: none; 
@@ -134,6 +156,10 @@
 hr.rounded {
   border-top: 8px solid #bbb;
   border-radius: 5px;
+}
+img{
+    width: 70px;
+    height: 70px;
 }
     </style>    
 </head>
@@ -183,7 +209,11 @@ hr.rounded {
         function cell_click(cell_number){
 
             if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o"   ) {
-                document.getElementById(`cell-${cell_number}`).textContent = "x" 
+                 var img = document.createElement("img");
+                 img.src = "imgs/x.png";
+                 var src = document.getElementById(`cell-${cell_number}`);
+                 src.appendChild(img);
+
                 arr[cell_number] = "x"
 
                 win1()
@@ -192,7 +222,11 @@ hr.rounded {
               
             }
             if (arr[cell_number] !="o" && xo == "0" && arr[cell_number] !="x"   ) {
-                document.getElementById(`cell-${cell_number}`).textContent = "o"
+                var img = document.createElement("img");
+                 img.src = "imgs/o.png";
+                 var src = document.getElementById(`cell-${cell_number}`);
+                 src.appendChild(img);
+
                 arr[cell_number] = "o"
                 win2()
                 finish2()
