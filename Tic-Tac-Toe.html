@@ -358,14 +358,12 @@ img{
             }
 
         function win1(){
+
             switch(true){
                 
                 case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x")||(arr[2]=="x" && arr[4]=="x" && arr[6]=="x"):
-                    return alert("win - x"), arr=arr.map(reset) ;
                 case (arr[0]=="x" && arr[3]=="x" && arr[6]=="x")||(arr[0]=="x" && arr[4]=="x" && arr[8]=="x"):
-                    return alert("win - x"), arr=arr.map(reset);
                 case (arr[3]=="x" && arr[4]=="x" && arr[5]=="x")||(arr[6]=="x" && arr[7]=="x" && arr[8]=="x"):
-                    return alert("win - x"), arr=arr.map(reset);
                 case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x")||(arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
                     return alert("win - x"), arr=arr.map(reset);
                         
@@ -374,12 +372,9 @@ img{
         function win2(){
             switch(true){
                 
-                case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o")||(arr[2]=="o" && arr[4]=="ox" && arr[6]=="o"):
-                    return alert("win - o"), arr=arr.map(reset);
+                case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o")||(arr[2]=="o" && arr[4]=="o" && arr[6]=="o"):
                 case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o")||(arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
-                    return alert("win - o"), arr=arr.map(reset);
                 case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o")||(arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
-                    return alert("win - o"), arr=arr.map(reset);
                 case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o")||(arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
                    return alert("win - o"), arr=arr.map(reset);
             }
