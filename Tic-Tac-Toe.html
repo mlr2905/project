@@ -12,13 +12,11 @@
     <style>
     body
            {
-            background-image: url('tree2.jpg');
+            background-image: url('d.png');
             background-repeat: no-repeat;
-
             background-size:  100%;
             margin: auto;
-
-        
+            
 
            }
         
@@ -26,7 +24,7 @@
            
            
            
-            background-image: url('tree.jpg');
+            background-image: url('Sand.jpg');
             background-repeat: no-repeat;
             background-size: 100% 100%;
             border: 20px solid #000;
@@ -231,40 +229,28 @@ img{
            const value = div.textContent;
             if (value == 'stop') { ;
                 document.getElementById("name").textContent = "play"
-                
+                amounr_of_games =0, win_x=0, win_o=0
+                document.getElementById("cell-9").textContent = win_x,
+                document.getElementById("cell-10").textContent = amounr_of_games,
+                document.getElementById("cell-11").textContent = win_o;
+
             }
             else  { 
+                
                 document.getElementById("name").textContent = "stop"
-            }
-           
-          
-        const div1 = document.getElementById("cell-0");
-        const div2 = document.getElementById("cell-1");
-        const div3 = document.getElementById("cell-2");
-        const div4 = document.getElementById("cell-3");
-        const div5 = document.getElementById("cell-4");
-        const div6 = document.getElementById("cell-5");
-        const div7 = document.getElementById("cell-6");
-        const div8 = document.getElementById("cell-7");
-        const div9 = document.getElementById("cell-8");
-        const div10 = document.getElementById("cell-9");
-        const div11 = document.getElementById("cell-10");
-        const div12 = document.getElementById("cell-11");
-       
-        div1.style.display = div1.style.display === "block" ? "none" : "block";
-        div2.style.display = div2.style.display === "block" ? "none" : "block";
-        div3.style.display = div3.style.display === "block" ? "none" : "block";
-        div4.style.display = div4.style.display === "block" ? "none" : "block";
-        div5.style.display = div5.style.display === "block" ? "none" : "block";
-        div6.style.display = div6.style.display === "block" ? "none" : "block";
-        div7.style.display = div7.style.display === "block" ? "none" : "block";
-        div8.style.display = div8.style.display === "block" ? "none" : "block";
-        div9.style.display = div9.style.display === "block" ? "none" : "block";
-        div10.style.display = div10.style.display === "block" ? "none" : "block";
-        div11.style.display = div11.style.display === "block" ? "none" : "block";
-        div12.style.display = div12.style.display === "block" ? "none" : "block";
+                end()
 
-    }
+            }
+            
+            Hide_divs()
+                                    
+                }
+          function Hide_divs(){
+                for (let index = 0; index <arr.length; index++) {
+                const div1 = document.getElementById(`cell-${index}`);
+                div1.style.display = div1.style.display === "block" ? "none" : "block";
+                }
+            }
         function cell_click(cell_number){
 
             if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o"   ) {
@@ -295,6 +281,17 @@ img{
             }
         }
         
+        function end(){
+            
+            for (let index = 0; index <arr.length; index++) {
+                    document.getElementById(`cell-${index}`).textContent = null;
+
+
+                                    
+                }
+          
+                return  arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] 
+        }
         function clearCells(cells) {
             for (const cell of cells) {
                 cell.value="";
