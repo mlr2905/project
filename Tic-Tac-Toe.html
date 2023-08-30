@@ -225,40 +225,38 @@ img{
         let arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
          
         function paly_game(){
-           const div = document.querySelector('#name');
-           const value = div.textContent;
+            const div = document.querySelector('#name');
+            const value = div.textContent;
             if (value == 'stop') { ;
                 document.getElementById("name").textContent = "play"
                 Cleaning_results()
             }
-            else  { 
-                
+
+            else { 
                 document.getElementById("name").textContent = "stop"
                 end()
-
             }
-            
             Hide_divs()
                                     
-                }
+        }
 
         function Cleaning_results(){
             amounr_of_games =0, win_x=0, win_o=0
             document.getElementById("cell-9").textContent = win_x,
-                document.getElementById("cell-10").textContent = amounr_of_games,
-                document.getElementById("cell-11").textContent = win_o;
+            document.getElementById("cell-10").textContent = amounr_of_games,
+            document.getElementById("cell-11").textContent = win_o;
 
-}
-           function Hide_divs(){
-                for (let index = 0; index <arr.length; index++) {
+        }
+        function Hide_divs(){
+            for (let index = 0; index <arr.length; index++) {
                 const div1 = document.getElementById(`cell-${index}`);
                 div1.style.display = div1.style.display === "block" ? "none" : "block";
-                }
             }
+        }
 
-           function cell_click(cell_number){
+        function cell_click(cell_number){
 
-            if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o"   ) {
+            if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o") {
                 
                  const img = document.createElement("img");
                  img.src = "imgs/x.png";
@@ -272,16 +270,14 @@ img{
 
               
             }
-            if (arr[cell_number] !="o" && xo == "0" && arr[cell_number] !="x"   ) {
-                var img = document.createElement("img");
-                 img.src = "imgs/o.png";
-                 var src = document.getElementById(`cell-${cell_number}`);
-                 src.appendChild(img);
-
+            if (arr[cell_number] !="o" && xo == "0" && arr[cell_number] !="x") {
+                const img = document.createElement("img");
+                img.src = "imgs/o.png";
+                const src = document.getElementById(`cell-${cell_number}`);
+                src.appendChild(img);
                 arr[cell_number] = "o"
                 win2()
                 finish2()
-
                 return xo ="1"
             }
         }
@@ -289,41 +285,36 @@ img{
         function end(){
             
             for (let index = 0; index <arr.length; index++) {
-                    document.getElementById(`cell-${index}`).textContent = null;
-
-
-                                    
+                    document.getElementById(`cell-${index}`).textContent = null;                    
                 }
-          
                 return  arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] 
         }
+
         function clearCells(cells) {
             for (const cell of cells) {
-                cell.value="";
+                 cell.value="";
             }
-            }
+        }
 
         function com(){
             while (true) {
             const cell_number = Math.floor(Math.random() * arr.length);
 
-            if (arr[cell_number] === -1) {
-            cell_click(cell_number)
-            break;
-            
+                if (arr[cell_number] === -1) {
+                cell_click(cell_number)
+                break;
+                
+                }
+                else{
+                    continue;
+                }
             }
-            else{
-                continue;
-            }
-            
-            }
-
-                 } 
+         } 
                  
                  
-                 function reset(n){
-                    return 0;
-                 }
+        function reset(n){
+             return 0;
+        }
             
         function finish1(){
             for (const number of arr){
