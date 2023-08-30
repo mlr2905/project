@@ -49,7 +49,7 @@
             font-size: 28px;
 
         }
-        .cells{
+        .cells1{
             
             border: 12px solid #000;
             border-top:15%;
@@ -63,6 +63,29 @@
             border-bottom: none; 
             border-left: none; 
             border-right: none; 
+
+
+
+ 
+
+
+        }
+        .cells2{
+            
+            border: 12px solid #000;
+            border-top:15%;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            border-bottom: none; 
+            border-left: none; 
+            border-right: none; 
+            border-top: none; 
+
 
 
 
@@ -137,10 +160,16 @@ hr.rounded {
         </div>
         <HR>
         <div class="form-row body">
-        <div class="cells "  id="cell-9" >0</div>
-        <div class="cells "  id="cell-10" >0</div>
-        <div class="cells  "  id="cell-11">0</div>
+        <div class="cells1 "  id="cell-12" placeholder="X-WIN"><B>X-WIN</B></div>
+        <div class="cells1 "  id="cell-12"placeholder="round" ><B>round</B></div>
+        <div class="cells1  "  id="cell-14"placeholder="O-WIN"><B>O-WIN</B></div>
         </div>
+
+        <div class="form-row body">
+            <div class="cells2 "  id="cell-9" placeholder="X-WIN"><B>0</B></div>
+            <div class="cells2 "  id="cell-10"placeholder="round" ><B>0</B></div>
+            <div class="cells2  "  id="cell-11"placeholder="O-WIN"><B>0</B></div>
+            </div>
     </div>
     <script>
         let xo = "1" 
@@ -214,8 +243,9 @@ hr.rounded {
           
                 return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_x++,
                 document.getElementById("cell-9").textContent = win_x,
-                document.getElementById("cell-10").textContent = win_o,
-                document.getElementById("cell-10").textContent = amounr_of_games;
+                document.getElementById("cell-10").textContent = amounr_of_games,
+                document.getElementById("cell-11").textContent = win_o;
+
 
                 
                 
@@ -239,9 +269,10 @@ hr.rounded {
                                     
                 }
                 return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_o++,xo ="1",
-                document.getElementById("cell-9").textContent = win_x
-                document.getElementById("cell-10").textContent = win_o
-                document.getElementById("cell-11").textContent = amounr_of_games
+                document.getElementById("cell-9").textContent = win_x,
+                document.getElementById("cell-10").textContent = amounr_of_games,
+                document.getElementById("cell-11").textContent = win_o;
+
                 }
 
                 else{
