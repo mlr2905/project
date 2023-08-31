@@ -226,14 +226,15 @@ img{
     <button type="button" id="play" style="display:none" class="btn btn-dark ml-5 col-md-4 mb-3 "  onclick=" paly_game()" value="">Play</button>
     <select  onchange="select()" id="select" class="custom-select mr-sm-1 col-md-4 mb-3 bg-dark text-white" id="select" required>
         <option  value="">Difficulty </option>
-        <option  value= 1 id="even" style='font-size:24px'class="fa">&#xf007;<b>VS ROBOT</b></option>
-        <option value= 2 id="positive"  style='font-size:24px'class="fa">&#xf007;<b>VS</b>&#xf007;</option>
+        <option  value= 1 id="even"><b>Player VS ROBOT</b></option>
+        <option value= 2 id="positive">Two playur</option>
         </select>
     </div>
     </div>
      </div>
      
     <script>
+        //style='font-size:24px'class="fa">&#xf007;<b>
          function select(){
                 let option = document.getElementById('select').value;
             switch(option){
