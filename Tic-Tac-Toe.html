@@ -348,20 +348,60 @@ img{
         }
 
         function easy(){
-            while (true) {
-            const cell_number = Math.floor(Math.random() * arr.length);
-
-                if (arr[cell_number] == -1) {
-                 cell_click(cell_number)
-                break;
+            switch (true) {
+                case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4) ;
+                break;               
                 
-                }
-                else{
-                    continue;
-                }
+                case (arr[1,7,6,0,3] == "x"):cell_click(5)
+                break;
+                case (arr[0,2,7,5] == "x"):cell_click(6);
+                break;
+                case (arr[0,2,6,8] == "x" ):cell_click(7);
+                break;
+                case (arr[0,2,7,6] == "x"):cell_click(3);
+                break;
+                case (arr[0,6,5,8] == "x" ):cell_click(8)
+                break;
+                case (arr[1,7,6,5] == "x"):cell_click(0)
+                break;
+                case (arr[2,8,1,3] == "x"):cell_click(0)
+                break;
+                case (arr[2,8,1] == "x" ):cell_click(5);
+                break;
+                case (arr[0,5,2] == "x" ):cell_click(1);
+                break;
+                case (arr[0,6,5] == "x" ):cell_click(1);
+                break;
+                case (arr[0,2,7] == "x" ):cell_click(8);
+                break;
+                case (arr[1,7,6] == "x" ):cell_click(8)
+                break;
+                case (arr[0,2,8] == "x"):cell_click(1)
+                break;
+                case (arr[2,8,3] == "x"):cell_click(6)
+                break;
+                case (arr[2,8] == "x" ):cell_click(5);
+                break;
+                case (arr[0,2] == "x" ):cell_click(1);
+                break;
+                case (arr[0],6 == "x"):cell_click(3);
+                break;
+                case (arr[0,6] == "x" ):cell_click(8);
+                break;
+                case (arr[1,7] == "x"):cell_click(2)
+                break;
+                case (arr[0] == "x" && arr[2] == "x"|| arr[5] == "x"|| arr[8] == "x"||arr[3] == "x"||arr[6] == "x"):cell_click(7);
+                break;
+                case (arr[1] == "x"&& arr[7] == "x"|| arr[0] == "x"|| arr[3] == "x"|| arr[8] == "x"|| arr[5] == "x"):cell_click(6)
+                break;
+                case (arr[0] == "x" && arr[6] == "x" ||  arr[1] == "x"|| arr[2] == "x"|| arr[7] == "x" || arr[8] == "x"):cell_click(5)
+                break;
+
+
+              
 
             }
-            
+
          } 
 
         function medium(arr) {
