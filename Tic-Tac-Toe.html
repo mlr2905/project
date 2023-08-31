@@ -228,8 +228,10 @@ img{
     <button type="button" id="play" style="display:none" class="btn btn-dark ml-5 col-md-4 mb-3 "  onclick=" paly_game()" value="">Play</button>
     <select  onchange="select()" id="select" class="custom-select mr-sm-1 col-md-4 mb-3 bg-dark text-white" id="select" required>
         <option  value="">select  </option>
-        <option  value= 1 id="even"><b>Player VS ROBOT</b></option>
-        <option value= 2 id="positive">Two playur</option>
+        <option  value= 1 id="Easy"><b>Player VS Easy Bot</b></option>
+        <option value= 2 id="Medium"><B>Player VS Medium Bot</B></option>
+        <option value= 3 id="Two_Player"><B>Two Player</B></option>
+
         </select>
     </div>
     </div>
@@ -240,9 +242,11 @@ img{
          function select(){
                 let option = document.getElementById('select').value;
             switch(option){
-                case "1":one_playur ()
+                case "1":Easy_Bot ()
                 break;
-                case "2":two_playur ()
+                case "2":Medium_Bot()
+                break;
+                case "3":Two_Player()
                 break;
             }
         }
@@ -251,19 +255,25 @@ img{
             div1.style.display = div1.style.display === "none" ? "block" : "none";
         }
 
-         function one_playur (){
+         function Easy_Bot (){
             const div1 = document.getElementById("play");
                 div1.style.display = div1.style.display === "block" ? "none" : "block"; 
                 Hide_sekect()
             return playur=1;
-            
          }
-         function  two_playur (){
+         function  Medium_Bot (){
             const div1 = document.getElementById("play");
             div1.style.display = div1.style.display === "block" ? "none" : "block"; 
             Hide_sekect()
             return playur=2; 
         }
+        function  Two_Player (){
+            const div1 = document.getElementById("play");
+            div1.style.display = div1.style.display === "block" ? "none" : "block"; 
+            Hide_sekect()
+            return playur=3; 
+        }
+        
 
 
         let playur=0
@@ -367,13 +377,13 @@ img{
             
        
                 
-            
+        
             
         
-      
-        function easy(){
+        
+        function medium_bot(){
             
-            
+            easy
             switch (true) {
                 case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4) ;
                 break;               
@@ -443,30 +453,24 @@ img{
          }
          
       
-        function medium(arr) {
+        function easy_bot() {
 
-        for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === "x") {
-            if (i > 0 && arr[i - 1] === "x") {
-            arr[i] = "o";
-            } else if (i < arr.length - 1 && arr[i + 1] === "x") {
-            arr[i] = "o";
+            
+            switch (true) {
+                case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4) ;
+                break;               
+                default: return default1()
             }
         }
-        }
 
-        cell_click(i)
-
-        }
+        
                         
                  
         function reset(n){
              return 0;
         }
             
-        function reset1(n){
-             return 0;
-        }
+        
         function finish1(){
             for (const number of arr){
 
@@ -485,7 +489,7 @@ img{
 
                 else{
                  xo ="0"
-                return playur == 2? xo ="0": check_arr(arr) ;
+                return playur == 3? xo ="0": check_arr(arr) ;
                     
                 }
                 }
