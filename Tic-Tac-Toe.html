@@ -355,14 +355,13 @@ img{
                  cell.value="";
             }
         }
-
-        function check_arr(arr) {
-            
-        
-        
        
-            if (arr[0,1,2,3,4,5,6,7,8] == -1 ) {
-             easy()
+        function Check_arr_Medium_Bot(arr) {
+       
+           
+             if (arr[0,1,2,3,4,5,6,7,8] == -1 ) {
+
+             return Medium_bot()
            
             }
             else{
@@ -373,14 +372,24 @@ img{
              end()
             }
         }
+
+        function Check_arr_Easy_Bot(arr) {
+            
+        if (arr[0,1,2,3,4,5,6,7,8] == -1 ) {
+
+        return easy_bot()
+      
+       }
+       else{
+       arr=arr.map(reset);
+           amounr_of_games++,
+       document.getElementById("cell-10").textContent = amounr_of_games;
+        alert("Dead heat"), xo=1
+        end()
+       }
+   }
     
             
-       
-                
-        
-            
-        
-        
         function medium_bot(){
             
             easy
@@ -489,12 +498,13 @@ img{
 
                 else{
                  xo ="0"
-                return playur == 3? xo ="0": check_arr(arr) ;
-                    
-                }
+                 
+                return playur == 3? xo ="0": playur == 1? Check_arr_Easy_Bot(arr):playur == 2? Check_arr_Medium_Bot(arr):"";
+                
+                
                 }
             }
-        
+        }
 
         function finish2(){
             for (const number of arr){
