@@ -30,7 +30,7 @@
             background-color: gray;
             background-repeat: no-repeat;
             background-size: 100% 100%;
-            border: 6px solid rgb(74, 68, 68);
+            border: 20px solid rgb(74, 68, 68);
             border-radius: 30px;
             margin: auto;
             width: 21%;
@@ -105,7 +105,7 @@
          .board {
            
             border: 10px solid gray;
-            border: 20px solid rgb(74, 68, 68);
+            border: 6px solid rgb(74, 68, 68);
 
             border-radius: 15px;
             margin: auto;
@@ -216,9 +216,9 @@ img{
         </div>
 
         <div class="form-row body">
-            <div class="cells2 " style="display:none"   id="cell-9" ><B>0</B></div>
-            <div class="cells2 " style="display:none"   id="cell-10"><B>0</B></div>
-            <div class="cells2  " style="display:none"  id="cell-11"><B>0</B></div>
+            <div class="cells2 "  id="cell-9" ><B>0</B></div>
+            <div class="cells2 "    id="cell-10"><B>0</B></div>
+            <div class="cells2  "   id="cell-11"><B>0</B></div>
         </div>
     </div>
     <br/>
@@ -298,10 +298,11 @@ img{
 
         }
         function Hide_divs(){
-            for (let index = 0; index <12; index++) {
+            for (let index = 0; index <arr.length; index++) {
                 const div1 = document.getElementById(`cell-${index}`);
                 div1.style.display = div1.style.display === "block" ? "none" : "block";
             }
+            
         }
 
         function cell_click(cell_number){
