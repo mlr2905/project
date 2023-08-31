@@ -390,20 +390,32 @@ img{
                 break;
                 case (arr[1,7] == "x"):cell_click(2)
                 break;
-                case (arr[0] == "x" && arr[2] == "x"|| arr[5] == "x"|| arr[8] == "x"||arr[3] == "x"||arr[6] == "x"):cell_click(7);
+                case (arr[0,2,5] == "x" || arr[0,2,3] == "x"|| arr[0,2,6] == "x"|| arr[0,2,8] == "x"):cell_click(7);
                 break;
-                case (arr[1] == "x"&& arr[7] == "x"|| arr[0] == "x"|| arr[3] == "x"|| arr[8] == "x"|| arr[5] == "x"):cell_click(6)
+                case (arr[1,7,0] == "x" || arr[1,7,3] == "x"|| arr[1,7,8] == "x"|| arr[1,7,5] == "x"):cell_click(6)
                 break;
-                case (arr[0] == "x" && arr[6] == "x" ||  arr[1] == "x"|| arr[2] == "x"|| arr[7] == "x" || arr[8] == "x"):cell_click(5)
+                case (arr[0,6,1] == "x" || arr[0,6,2] == "x" ||  arr[0,6,7] == "x"|| arr[0,6,8] == "x"):cell_click(5)
                 break;
-
-
-              
+                default: return default1()
+                
 
             }
 
          } 
+         function default1(){
+            while (true) {
+            const cell_number = Math.floor(Math.random() * arr.length);
 
+                if (arr[cell_number] === -1) {
+               return  cell_click(cell_number)
+                }
+                else{
+                    continue;
+                }
+            }
+         }
+         
+      
         function medium(arr) {
 
         for (let i = 0; i < arr.length; i++) {
