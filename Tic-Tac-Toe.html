@@ -238,7 +238,16 @@ img{
      </div>
      
     <script>
-        //style='font-size:24px'class="fa">&#xf007;<b>
+        
+        let playur=0
+        let xo = "1" //כדי לשנות  בין איקס לעיגול
+        let amounr_of_games =0   // כדי לדעת כמות סבבים
+        let win_x=0 // כדי לדעת כמות נצחונות של איקס
+        let win_o=0// כדי לדעת כמות נצחונות של עיגול
+
+        // בהתחלה אני מגדיר מחרוזת עם 9 מספרים שכולם מוגדרים -1
+        let arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
+         
          function select(){
                 let option = document.getElementById('select').value;
             switch(option){
@@ -249,42 +258,33 @@ img{
                 case "3":Two_Player()
                 break;
             }
-        }
-        function Hide_sekect(){
-            const div1 = document.getElementById("select");
-            div1.style.display = div1.style.display === "none" ? "block" : "none";
-        }
+       
 
          function Easy_Bot (){
             const div1 = document.getElementById("play");
                 div1.style.display = div1.style.display === "block" ? "none" : "block"; 
-                Hide_sekect()
+                Hide_select()
             return playur=1;
          }
          function  Medium_Bot (){
             const div1 = document.getElementById("play");
             div1.style.display = div1.style.display === "block" ? "none" : "block"; 
-            Hide_sekect()
+            Hide_select()
             return playur=2; 
         }
         function  Two_Player (){
             const div1 = document.getElementById("play");
             div1.style.display = div1.style.display === "block" ? "none" : "block"; 
-            Hide_sekect()
+            Hide_select()
             return playur=3; 
         }
         
+ }
+        function Hide_select(){
+            const div1 = document.getElementById("select");
+            div1.style.display = div1.style.display === "none" ? "block" : "none";
+        }
 
-
-        let playur=0
-        let xo = "1" //כדי לשנות  בין איקס לעיגול
-        let amounr_of_games =0   // כדי לדעת כמות סבבים
-        let win_x=0 // כדי לדעת כמות נצחונות של איקס
-        let win_o=0// כדי לדעת כמות נצחונות של עיגול
-
-        // בהתחלה אני מגדיר מחרוזת עם 9 מספרים שכולם מוגדרים -1
-        let arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
-         
         function paly_game(){
             const div = document.querySelector('#play');
             const value = div.textContent;
@@ -307,6 +307,15 @@ img{
             document.getElementById("cell-11").textContent = win_o;
 
         }
+
+        function end(){
+        
+            for (let index = 0; index <arr.length; index++) {
+                    document.getElementById(`cell-${index}`).textContent = null;                    
+                }
+                return  arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] 
+        }
+
         function Hide_divs(){
             for (let index = 0; index <arr.length; index++) {
                 const div1 = document.getElementById(`cell-${index}`);
@@ -314,6 +323,8 @@ img{
             }
             
         }
+
+        
 
         function cell_click(cell_number){
 
@@ -342,19 +353,120 @@ img{
             }
         }
         
-        function end(){
         
-            for (let index = 0; index <arr.length; index++) {
-                    document.getElementById(`cell-${index}`).textContent = null;                    
-                }
-                return  arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] 
-        }
+        
 
-        function clearCells(cells) {
-            for (const cell of cells) {
-                 cell.value="";
+
+
+
+
+
+
+
+
+
+        function win2(){
+            switch(true){
+                
+                case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o")||(arr[2]=="o" && arr[4]=="o" && arr[6]=="o"):
+                case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o")||(arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
+                case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o")||(arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
+                case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o")||(arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
+                   return alert("win - o"), arr=arr.map(reset);
             }
         }
+        function finish2(){
+            for (const number of arr){
+
+                if(number == 0){
+
+                for (let index = 0; index <arr.length; index++) {
+                    document.getElementById(`cell-${index}`).textContent = null;                  
+                }
+                return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_o++,xo ="1",
+                document.getElementById("cell-9").textContent = win_x,
+                document.getElementById("cell-10").textContent = amounr_of_games,
+                document.getElementById("cell-11").textContent = win_o;
+                }
+                else{
+                return xo ="1" 
+                }
+                }
+        }
+
+        function win1(){
+
+            switch(true){
+                
+                case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x")||(arr[2]=="x" && arr[4]=="x" && arr[6]=="x"):
+                case (arr[0]=="x" && arr[3]=="x" && arr[6]=="x")||(arr[0]=="x" && arr[4]=="x" && arr[8]=="x"):
+                case (arr[3]=="x" && arr[4]=="x" && arr[5]=="x")||(arr[6]=="x" && arr[7]=="x" && arr[8]=="x"):
+                case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x")||(arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
+                    return alert("win - x"), arr=arr.map(reset);
+                        
+            }
+        }
+
+                  
+        function reset(n){
+             return 0;
+        }
+        function finish1(){
+            for (const number of arr){
+
+                if(number == 0){
+
+                    for (let index = 0; index <arr.length; index++) {
+                        document.getElementById(`cell-${index}`).textContent = null;                
+                    }
+          
+                    return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_x++,
+                    document.getElementById("cell-9").textContent = win_x,
+                    document.getElementById("cell-10").textContent = amounr_of_games,
+                    document.getElementById("cell-11").textContent = win_o;
+
+                }
+
+                else{
+                 xo ="0"
+                 
+                return playur == 3? xo ="0": playur == 1? Check_arr_Easy_Bot(arr):playur == 2? Check_arr_Medium_Bot(arr):"";
+                
+                
+                }
+            }
+        }
+ function Check_arr_Easy_Bot(arr) {
+            
+        if (arr[0,1,2,3,4,5,6,7,8] === -1 ) {
+
+        return easy_bot()
+      
+       }
+       else{
+       arr=arr.map(reset);
+           amounr_of_games++,
+       document.getElementById("cell-10").textContent = amounr_of_games;
+        alert("Dead heat"), xo=1
+        end()
+       }
+   }
+    
+      
+        function easy_bot() {
+
+            
+            switch (true) {
+                case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4) ;
+                break;               
+                default: return default1()
+            }
+        }
+
+
+        
+
+
        
         function Check_arr_Medium_Bot(arr) {
        
@@ -373,22 +485,7 @@ img{
             }
         }
 
-        function Check_arr_Easy_Bot(arr) {
-            
-        if (arr[0,1,2,3,4,5,6,7,8] == -1 ) {
-
-        return easy_bot()
-      
-       }
-       else{
-       arr=arr.map(reset);
-           amounr_of_games++,
-       document.getElementById("cell-10").textContent = amounr_of_games;
-        alert("Dead heat"), xo=1
-        end()
-       }
-   }
-    
+       
             
         function medium_bot(){
             
@@ -461,93 +558,14 @@ img{
             }
          }
          
-      
-        function easy_bot() {
-
-            
-            switch (true) {
-                case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4) ;
-                break;               
-                default: return default1()
-            }
-        }
-
-        
-                        
                  
-        function reset(n){
-             return 0;
+               function clearCells(cells) {
+            for (const cell of cells) {
+                 cell.value="";
+            }
         }
             
         
-        function finish1(){
-            for (const number of arr){
-
-                if(number == 0){
-
-                    for (let index = 0; index <arr.length; index++) {
-                        document.getElementById(`cell-${index}`).textContent = null;                
-                    }
-          
-                    return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_x++,
-                    document.getElementById("cell-9").textContent = win_x,
-                    document.getElementById("cell-10").textContent = amounr_of_games,
-                    document.getElementById("cell-11").textContent = win_o;
-
-                }
-
-                else{
-                 xo ="0"
-                 
-                return playur == 3? xo ="0": playur == 1? Check_arr_Easy_Bot(arr):playur == 2? Check_arr_Medium_Bot(arr):"";
-                
-                
-                }
-            }
-        }
-
-        function finish2(){
-            for (const number of arr){
-
-                if(number == 0){
-
-                for (let index = 0; index <arr.length; index++) {
-                    document.getElementById(`cell-${index}`).textContent = null;                  
-                }
-                return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_o++,xo ="1",
-                document.getElementById("cell-9").textContent = win_x,
-                document.getElementById("cell-10").textContent = amounr_of_games,
-                document.getElementById("cell-11").textContent = win_o;
-                }
-                else{
-                return xo ="1" 
-                }
-                }
-            }
-
-        function win1(){
-
-            switch(true){
-                
-                case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x")||(arr[2]=="x" && arr[4]=="x" && arr[6]=="x"):
-                case (arr[0]=="x" && arr[3]=="x" && arr[6]=="x")||(arr[0]=="x" && arr[4]=="x" && arr[8]=="x"):
-                case (arr[3]=="x" && arr[4]=="x" && arr[5]=="x")||(arr[6]=="x" && arr[7]=="x" && arr[8]=="x"):
-                case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x")||(arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
-                    return alert("win - x"), arr=arr.map(reset);
-                        
-            }
-        }
-        function win2(){
-            switch(true){
-                
-                case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o")||(arr[2]=="o" && arr[4]=="o" && arr[6]=="o"):
-                case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o")||(arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
-                case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o")||(arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
-                case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o")||(arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
-                   return alert("win - o"), arr=arr.map(reset);
-            }
-        }
-
         
                  
     </script>
