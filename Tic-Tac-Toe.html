@@ -352,18 +352,6 @@ img{
                 return xo ="1"
             }
         }
-        
-        
-        
-
-
-
-
-
-
-
-
-
 
         function win2(){
             switch(true){
@@ -436,22 +424,27 @@ img{
                 }
             }
         }
- function Check_arr_Easy_Bot(arr) {
-            
-        if (arr[0,1,2,3,4,5,6,7,8] === -1 ) {
+        function Check_arr_Easy_Bot(arr) {
+            for (let i = 0; i < arr.length; i++){
 
-        return easy_bot()
-      
-       }
-       else{
-       arr=arr.map(reset);
-           amounr_of_games++,
-       document.getElementById("cell-10").textContent = amounr_of_games;
-        alert("Dead heat"), xo=1
-        end()
-       }
-   }
-    
+                if(arr[i] === -1){
+
+                return easy_bot()
+                break; 
+            }
+            
+        }
+            if(arr[0]  && arr[1]  && arr[1] && arr[2]  && arr[3] && arr[4] && arr[5] && arr[6] && arr[7]&& arr[8] !==-1){
+                return arr=arr.map(reset),
+                amounr_of_games++,
+                document.getElementById("cell-10").textContent = amounr_of_games;
+                alert("Dead heat"),
+                 xo=1,
+                end();
+                }
+            }
+         
+        
       
         function easy_bot() {
 
@@ -469,27 +462,30 @@ img{
 
        
         function Check_arr_Medium_Bot(arr) {
-       
-           
-             if (arr[0,1,2,3,4,5,6,7,8] == -1 ) {
+            for (const number of arr){
 
-             return Medium_bot()
+                if(number == -1){
+
+                return Medium_bot()
+
+                }
+                else{
+                arr=arr.map(reset);
+                    amounr_of_games++,
+                    alert("Dead heat"), 
+                    end(),
+                    document.getElementById("cell-10").textContent = amounr_of_games,xo=1;
+
+                }
+                }
            
-            }
-            else{
-            arr=arr.map(reset);
-                amounr_of_games++,
-            document.getElementById("cell-10").textContent = amounr_of_games;
-             alert("Dead heat"), xo=1
-             end()
-            }
         }
 
        
             
         function medium_bot(){
             
-            easy
+            
             switch (true) {
                 case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4) ;
                 break;               
@@ -558,15 +554,7 @@ img{
             }
          }
          
-                 
-               function clearCells(cells) {
-            for (const cell of cells) {
-                 cell.value="";
-            }
-        }
-            
-        
-        
+                    
                  
     </script>
 
