@@ -27,41 +27,64 @@
         .board {
            
            
-           
-            background-color: gray;
+            border: 10px solid rgb(26, 67, 162);
+            font-family:Arial, Helvetica, sans-serif;
+            background-color: rgba(152, 161, 114, 0.841);;
             background-repeat: no-repeat;
             background-size: 100% 100%;
-            border: 20px solid rgb(74, 68, 68);
             border-radius: 30px;
             margin: auto;
             width: 21%;
-            padding: 9px;
+            padding: 17px;
+            box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, 
+                rgb(18, 135, 178) 0px 0px 0px 5px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+                
 
 
         }
         
         .cell {
-            border: 5px solid #000;
+           
+            border: 5px solid  rgb(15, 106, 138);
             width: 90px;
             height: 90px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 28px;
+            font-size: 25px;
+            border-radius: 10px;
+
             
 
         }
         h3{
+            background-color:rgb(29, 36, 67);
+            border-radius: 10px;
+            font-size: 30px;
             margin: auto;
-            width: 23%;
-            padding: 10px;
-            color: #fff;            
+            width: 10%;
+            padding: 6px;
+            color: rgb(18, 135, 178); 
+            box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, 
+                rgb(18, 135, 178) 0px 0px 0px 5px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+                           
             
         }
         .cells1{
-            
-            border: 12px solid #000;
+            border-radius: 16px;
+
+            border: 8px solid rgb(15, 106, 138);
             border-top:15%;
             width: 90px;
             height: 90px;
@@ -69,14 +92,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
+            font-size: 25px;
             border-bottom: none; 
             border-left: none; 
-            border-right: none; 
+            border-right: none;
+            padding-top: 5%; 
         }
         .cells2{
-            
-            border: 12px solid #000;
+            border-radius: 10px;
+
+            border: 8px solid rgb(15, 106, 138);
             border-top:15%;
             width: 90px;
             height: 90px;
@@ -85,7 +110,6 @@
             justify-content: center;
             align-items: center;
             font-size: 28px;
-            border-bottom: none; 
             border-left: none; 
             border-right: none; 
             border-top: none; 
@@ -125,7 +149,8 @@
         
         .cells2,.cells1{
             
-            border: 6px solid #000;
+            border: 5px solid #000;
+
             border-top:6%;
             width: 100px;
             height: 100px;
@@ -148,6 +173,12 @@
             border-bottom: none; 
 
         }
+}
+
+
+        img{
+    width: 70px;
+    height: 70px;
 }
  .top { 
      border-top: none; 
@@ -174,27 +205,87 @@
  } 
   
  
- .visible { 
-     display: block; 
- }
+ 
         .center {
   margin: auto;
   width: 22%;
   border: 3px solid green;
   padding: 15px;
 }
-img{
-    width: 70px;
-    height: 70px;
+
+.exit{
+ position: relative;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  right: 25%;
+}
+
+.play{
+position: relative;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+}
+.TwoPlayer {
+position: relative;
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 45.5%;
+}
+.bot{
+position: relative;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 45%;
+}
+
+.select{
+    position: relative;
+  margin: 0;
+  position: absolute;
+  top: 60%;
+  left: 45.5%;
+
+
+}
+.button {
+    
+border: 5px solid rgb(74, 68, 68);
+font-family:Arial, Helvetica, sans-serif;
+padding: 10px 15px;
+font-size: 18px;
+color: #fff;
+background-color: rgb(29, 36, 67);
+border-radius: 20px;
+box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, 
+                rgb(18, 135, 178) 0px 0px 0px 5px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+  }
+
+.button:hover {background-color: rgb(84 105 212 / 0.5)}
+<!------שינוי צבע בעת לחיצה>
+.button:active {
+background-color: rgb(84 105 212 / 0.5);
+box-shadow: 0 5px #666;
 }
     </style>    
 </head>
-<body  >
+<body>
+    <br/><br/>
+
     <h3 >Tic-Tac-Toe</h3>
 
-    <div  class="board ">
+    <div  class="board text-center " style="display:none" id="1">
         <div class="form-row body">
-            <div class="cell left top"  style="display:none"  id="cell-0" onclick="cell_click(0)">0</div>
+            <div class="cell left top "  style="display:none"  id="cell-0" onclick="cell_click(0)">0</div>
             <div class="cell top"       style="display:none" id="cell-1" onclick="cell_click(1)">1</div>
             <div class="cell right top" style="display:none" id="cell-2" onclick="cell_click(2)">2</div>
         </div>
@@ -209,78 +300,88 @@ img{
             <div class="cell down" style="display:none"  id="cell-7" onclick="cell_click(7)">7</div>
             <div class="cell down right" style="display:none"  id="cell-8" onclick="cell_click(8)">8</div>
         </div>
-        <HR>
-        <div class="form-row body">
-            <div class="cells1"   id="cell-12" ><B>X-WIN</B></div>
-            <div class="cells1"  id="cell-13"><B>round</B></div>
-            <div class="cells1"    id="cell-14"><B>O-WIN</B></div>
+        <br/><br/>
+        <div class="form-row body " style="color: black;">
+            <div class="cells1 text-center"  style="display:none"  id="2" ><B>X-WIN</B></div>
+            <div class="cells1 text-center" style="display:none" id="3"><B>round</B></div>
+            <div class="cells1 text-center"  style="display:none"  id="4"><B>O-WIN</B></div>
         </div>
 
-        <div class="form-row body">
-            <div class="cells2 "  id="cell-9" ><B>0</B></div>
-            <div class="cells2 "    id="cell-10"><B>0</B></div>
-            <div class="cells2  "   id="cell-11"><B>0</B></div>
+        <div class="form-row body text-white">
+            <div class="cells2 text-center" style="display:none" id="5"><B>0</B></div>
+            <div class="cells2 text-center" style="display:none" id="6"><B>0</B></div>
+            <div class="cells2 text-center " style="display:none" id="7"><B>0</B></div>
         </div>
     </div>
     <br/>
+    <button type="button" id="play" style="display:none" class="btn button play text-center"  onclick=" paly_game()" value="">Play</button>
+    <button type="button" id="exit" style="display:none" class="btn button exit text-center"  onclick=" exit()" value="">Exit</button>
+    <button type="button" id="TwoPlayer" class="btn button text-center TwoPlayer"  onclick=" Two_Player()" value="">Two Player</button><br/><br/>
+    <button type="button" id="bot"  class="btn button text-center bot"  onclick=" Hide_select()" value="">Player VS  Bot</button><br/><br/>
+ 
+        <select  onchange="select()" id="select" class="  button   select text-center" style="display:none" required>
+            <br/>
+            <option   class="button" value="">Difficulty  </option>
+            <option class="button" value="3" id="Easy"><b>Easy</b></option>
+            <option value="4" id="Medium"><B>Medium</B></option>
+            </select>
     
-    <div class="mx-auto form-row" style="width: 300px;">  
-    
-    <button type="button" id="play" style="display:none" class="btn btn-dark ml-5 col-md-4 mb-3 "  onclick=" paly_game()" value="">Play</button>
-    <select  onchange="select()" id="select" class="custom-select mr-sm-1 col-md-4 mb-3 bg-dark text-white" id="select" required>
-        <option  value="">select  </option>
-        <option  value= 1 id="Easy"><b>Player VS Easy Bot</b></option>
-        <option value= 2 id="Medium"><B>Player VS Medium Bot</B></option>
-        <option value= 3 id="Two_Player"><B>Two Player</B></option>
-
-        </select>
+    </div>
     </div>
     </div>
      </div>
      
+     
     <script>
         
-        let playur=0
+        let player=0 // כדי לדעת סוג משחק
         let xo = "1" //כדי לשנות  בין איקס לעיגול
-        let amounr_of_games =0   // כדי לדעת כמות סבבים
+        let rounds =0   // כדי לדעת כמות סבבים
         let win_x=0 // כדי לדעת כמות נצחונות של איקס
         let win_o=0// כדי לדעת כמות נצחונות של עיגול
 
         // בהתחלה אני מגדיר מחרוזת עם 9 מספרים שכולם מוגדרים -1
         let arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
          
-         function select(){
+        
+        function select(){
                 let option = document.getElementById('select').value;
             switch(option){
-                case "1":Easy_Bot ()
+                
+                case "3":Easy()
                 break;
-                case "2":Medium_Bot()
+                case "4":medium()
                 break;
-                case "3":Two_Player()
-                break;
+              
             }
-       
-
-         function Easy_Bot (){
+        }
+        function hide_button(){
+            Hide_pattern()
             const div1 = document.getElementById("play");
                 div1.style.display = div1.style.display === "block" ? "none" : "block"; 
-                Hide_select()
-            return playur=1;
-         }
-         function  Medium_Bot (){
-            const div1 = document.getElementById("play");
-            div1.style.display = div1.style.display === "block" ? "none" : "block"; 
-            Hide_select()
-            return playur=2; 
+            const div2 = document.getElementById("TwoPlayer");
+                div2.style.display = div2.style.display === "none" ? "block" : "none";
+                const div3 = document.getElementById("bot");
+                div3.style.display = div3.style.display === "none" ? "block" : "none";
+            const div4 = document.getElementById("exit");
+                div4.style.display = div4.style.display === "block" ? "none" : "block";  
         }
-        function  Two_Player (){
-            const div1 = document.getElementById("play");
-            div1.style.display = div1.style.display === "block" ? "none" : "block"; 
+         function Easy(){
             Hide_select()
-            return playur=3; 
+            hide_button()
+            return player=3;
+         }
+         function medium(){
+            hide_button()
+            Hide_select()
+            return player=4; 
+        }
+        function  Two_Player(){
+            hide_button()
+            return player=2; 
         }
         
- }
+ 
         function Hide_select(){
             const div1 = document.getElementById("select");
             div1.style.display = div1.style.display === "none" ? "block" : "none";
@@ -302,10 +403,10 @@ img{
         }
 
         function Cleaning_results(){
-            amounr_of_games =0, win_x=0, win_o=0
-            document.getElementById("cell-9").textContent = win_x,
-            document.getElementById("cell-10").textContent = amounr_of_games,
-            document.getElementById("cell-11").textContent = win_o;
+            rounds =0, win_x=0, win_o=0
+            document.getElementById("5").textContent = win_x,
+            document.getElementById("6").textContent = rounds,
+            document.getElementById("7").textContent = win_o;
 
         }
 
@@ -320,6 +421,13 @@ img{
         function Hide_divs(){
             for (let index = 0; index <arr.length; index++) {
                 const div1 = document.getElementById(`cell-${index}`);
+                div1.style.display = div1.style.display === "block" ? "none" : "block";
+            }
+            
+        }
+        function Hide_pattern(){
+            for (let index = 1; index <8; index++) {
+                const div1 = document.getElementById(`${index}`);
                 div1.style.display = div1.style.display === "block" ? "none" : "block";
             }
             
@@ -340,7 +448,7 @@ img{
 
                 win()
                 finish1()
-                return xo ="0"
+               
 
 
             }
@@ -352,7 +460,7 @@ img{
                 arr[cell_number] = "o"
                 win()
                 finish2()
-                return xo ="1"
+                 xo ="1"
             }
         }
 
@@ -364,10 +472,10 @@ img{
                 for (let index = 0; index <arr.length; index++) {
                     document.getElementById(`cell-${index}`).textContent = null;                  
                 }
-                return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_o++,xo ="1",
-                document.getElementById("cell-9").textContent = win_x,
-                document.getElementById("cell-10").textContent = amounr_of_games,
-                document.getElementById("cell-11").textContent = win_o;
+                return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,rounds++,win_o++,xo ="1",
+                document.getElementById("5").textContent = win_x,
+                document.getElementById("6").textContent = rounds,
+                document.getElementById("7").textContent = win_o;
                 }
                 else{
                 return xo ="0" 
@@ -390,7 +498,7 @@ img{
                 case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o")||(arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
                 case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o")||(arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
                 case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o")||(arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
-                return alert("win - o"), arr=arr.map(reset);    
+                    return alert("win - o"), arr=arr.map(reset);    
                         
             }
         }
@@ -408,21 +516,33 @@ img{
                         document.getElementById(`cell-${index}`).textContent = null;                
                     }
           
-                    return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,amounr_of_games++,win_x++,
-                    document.getElementById("cell-9").textContent = win_x,
-                    document.getElementById("cell-10").textContent = amounr_of_games,
-                    document.getElementById("cell-11").textContent = win_o;
+                    return alert("end") , arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,rounds++,win_x++,
+                    document.getElementById("5").textContent = win_x,
+                    document.getElementById("6").textContent = rounds,
+                    document.getElementById("7").textContent = win_o;
 
                 }
 
                 else{
-                    xo =0                 
-                return playur == 3? xo ="0": playur == 1? Check_arr_Easy_Bot(arr):playur == 2? Check_arr_Medium_Bot(arr):"";
+                xo=0                
+                return player == 2? Check_arr_player_two(arr): player == 3? Check_arr_Easy_Bot(arr):player == 4? Check_arr_Medium_Bot(arr):"";
                 
                 
                 }
             }
         }
+        function Check_arr_player_two(arr) {
+            
+            if(arr[0]  && arr[1]  && arr[1] && arr[2]  && arr[3] && arr[4] && arr[5] && arr[6] && arr[7]&& arr[8] !==-1){
+                return arr=arr.map(reset),
+                rounds++,
+                document.getElementById("6").textContent = rounds,
+                alert("Dead heat"),
+                 xo=1,
+                 restarting();
+                }
+            }
+        
         function Check_arr_Easy_Bot(arr) {
             for (let i = 0; i < arr.length; i++){
 
@@ -435,8 +555,8 @@ img{
         }
             if(arr[0]  && arr[1]  && arr[1] && arr[2]  && arr[3] && arr[4] && arr[5] && arr[6] && arr[7]&& arr[8] !==-1){
                 return arr=arr.map(reset),
-                amounr_of_games++,
-                document.getElementById("cell-10").textContent = amounr_of_games;
+                rounds++,
+                document.getElementById("6").textContent = rounds;
                 alert("Dead heat"),
                  xo=1,
                  restarting();
@@ -465,16 +585,16 @@ img{
 
                 if(number == -1){
 
-                return Medium_bot()
+                return medium_bot()
 
                 }
-                else{
-                arr=arr.map(reset);
-                    amounr_of_games++,
-                    alert("Dead heat"), 
-                    end(),
-                    document.getElementById("cell-10").textContent = amounr_of_games,xo=1;
-
+                if (arr[0]  && arr[1]  && arr[1] && arr[2]  && arr[3] && arr[4] && arr[5] && arr[6] && arr[7]&& arr[8] !==-1){
+                 return arr=arr.map(reset),
+              rounds++,
+                document.getElementById("6").textContent = rounds;
+                alert("Dead heat"),
+                 xo=1,
+                 restarting();
                 }
                 }
            
@@ -488,7 +608,6 @@ img{
             switch (true) {
                 case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4) ;
                 break;               
-                
                 case (arr[0] === "x" && arr[1] === "x" && arr[3] === "x" &&arr[6] === "x" && arr[7] === "x"  && arr[5] === -1):cell_click(5)
                 break;
                 case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[7] === "x" && arr[1] === -1):cell_click(1);
@@ -552,15 +671,15 @@ img{
                 }
             }
          }
-         
+         function exit(){
+            
+       window.setTimeout( function() {
+  window.location.reload();
+}, 1);
+
+         }
                     
-         Swal.fire({
-  position: 'top-end',
-  icon: 'success',
-  title: 'Your work has been saved',
-  showConfirmButton: false,
-  timer: 1500
-})     
+   
     </script>
 
 
