@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Tic-Tac-Toe-❌⭕ </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N6JLWRHB89"></script>
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+    <link rel="stylesheet" href="Tic-Tac-Toe.css">
+    <script src="Tic-Tac-Toe.js"></script>
+
+
+      
+</head>
+<body>
+    <br/><br/>
+    <h3 >Tic-Tac-Toe</h3>
+    <div  class="board text-center " style="display:none" id="1">
+        <div class="form-row body ">
+            <div class="cell left top "  style="display:none"  id="cell-0" onclick="cell_click(0)">0</div>
+            <div class="cell top"       style="display:none" id="cell-1" onclick="cell_click(1)">1</div>
+            <div class="cell right top" style="display:none" id="cell-2" onclick="cell_click(2)">2</div>
+        </div>
+        <div class="form-row body">
+            <div class="cell left"  style="display:none"  id="cell-3" onclick="cell_click(3)">3</div>
+            <div class="cell"       style="display:none"   id="cell-4" onclick="cell_click(4)">4</div>
+            <div class="cell right" style="display:none"   id="cell-5" onclick="cell_click(5)">5</div>
+        </div>
+        <div class="form-row body">
+            <div class="cell down left" style="display:none"  id="cell-6" onclick="cell_click(6)">6</div>
+            <div class="cell down" style="display:none"  id="cell-7" onclick="cell_click(7)">7</div>
+            <div class="cell down right" style="display:none"  id="cell-8" onclick="cell_click(8)">8</div>
+        </div>
+        <br/><br/>
+        <div class="form-row body " style="color: black;">
+            <div class="cells1 text-center"  style="display:none"  id="2"><B><img src="imgs/x.png"></B></div>
+            <div class="cells1 text-center" style="display:none" id="3"><B class="img"><img src="imgs/round.png"></B></div>
+            <div class="cells1 text-center"  style="display:none"  id="4"><B><img src="imgs/o.png"></B></div>
+        </div>
+        <div class="form-row body text-white">
+            <div class="cells2 text-center" style="display:none" id="5"><B>0</B></div>
+            <div class="cells2 text-center" style="display:none" id="6"><B>0</B></div>
+            <div class="cells2 text-center " style="display:none" id="7"><B>0</B></div>
+            <div id="strike" class="strike"></div>
+        </div>
+    </div>
+    <br/>
+    <button type="button" id="play" style="display:none" class="btn button play "  onclick=" paly_game()" value="">Play</button>
+    <button type="button" id="exit" style="display:none" class="btn button exit "  onclick=" exit()" value="">Exit</button>
+    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick=" Two_Player()" value="">Two Player</button><br/><br/>
+    <button type="button" id="bot"  class="btn button  bot"  onclick=" Hide_select()" value="">Player VS  Bot</button><br/><br/>
+        <select  onchange="select()" id="select" class="  button   select text-center" style="display:none" required>
+            <br/>
+            <option   class="button" value="">Difficulty  </option>
+            <option class="button" value="3" id="Easy"><b>Easy</b></option>
+            <option value="4" id="Medium"><B>Medium</B></option>
+            </select>
+         
+        </div>
+     </div>
+</body>
+</html>
