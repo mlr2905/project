@@ -166,8 +166,8 @@
 
         }
         img{
-    width: 70px;
-    height: 70x;
+        width: 70px;
+        height: 70x;
 }
         .cells2{
             border-top: none; 
@@ -219,13 +219,9 @@ position: unset;
   margin: 0;
   position: unset;
   top: 60%;
-
-
 }
-
         }
 
- 
   
      
  .top { 
@@ -252,9 +248,6 @@ position: unset;
      cursor: not-allowed; 
  } 
   
- 
- 
-
 .exit{
  position: relative;
   margin: 0;
@@ -331,11 +324,7 @@ box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
   }
 
 .button:hover {background-color: rgb(84 105 212 / 0.5)}
-<!------שינוי צבע בעת לחיצה>
-.button:active {
-    background-color: rgb(84 105 212 / 0.5);
-box-shadow: 0 5px #666;
-}
+
 
 
     </style>    
@@ -399,7 +388,7 @@ box-shadow: 0 5px #666;
     <script>
 
         
-        let player=0 // כדי לדעת סוג משחק
+    let player=0 // כדי לדעת סוג משחק
         let xo = "1" //כדי לשנות  בין איקס לעיגול
         let rounds =0   // כדי לדעת כמות סבבים
         let win_x=0 // כדי לדעת כמות נצחונות של איקס
@@ -434,11 +423,13 @@ box-shadow: 0 5px #666;
          function Easy(){
             Hide_select()
             hide_button()
+            paly_game()
             return player=3;
          }
          function medium(){
             hide_button()
             Hide_select()
+            paly_game()
             return player=4; 
         }
         function  Two_Player(){
