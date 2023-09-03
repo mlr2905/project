@@ -121,8 +121,9 @@
         }
         @media only screen and (max-width: 600px) {
             h3{
-            text-align: unset;
-        }
+                width: 250px;
+            }
+          
   body {
 
             background-size:  300%; 
@@ -179,15 +180,14 @@
  position: relative;
   margin: 0;
   position: absolute;
-  top: 5%;
+  margin-bottom: 95%;
+
   right: 25%;
 }
 
         .play{
-position: relative;
   margin: 0;
-  position: absolute;
-  top: 5%;
+  margin-bottom: 95%;
   left: 25%;
 }
 
@@ -196,18 +196,33 @@ position: relative;
   margin: 0;
   position: absolute;
   top: 40%;
-  left: 40%;
+  right: 25%;
 }
 .bot{
-position: relative;
+position: unset;
   margin: 0;
-  position: absolute;
+  position: unset;
   top: 50%;
-  left: 40%;
+  left: 15%;
+  
 }
+.button {
+    
+    border: 5px solid rgb(74, 68, 68);
+    font-family:Arial, Helvetica, sans-serif;
+    padding: 0px 1px;
 }
 
+.select{
+    position: unset;
+  margin: 0;
+  position: unset;
+  top: 60%;
 
+
+}
+
+        }
  
  .top { 
      border-top: none; 
@@ -257,6 +272,7 @@ position: relative;
   position: absolute;
   top: 40%;
   left: 45.5%;
+  
 }
 .bot{
 position: relative;
@@ -265,6 +281,23 @@ position: relative;
   top: 50%;
   left: 45%;
 }
+.bot:active {
+    background-color: rgb(84 105 212 / 0.5);
+box-shadow: 0 5px #666;
+}
+.play:active {
+    background-color: rgb(84 105 212 / 0.5);
+box-shadow: 0 5px #666;
+}
+.TwoPlayer:active {
+    background-color: rgb(84 105 212 / 0.5);
+box-shadow: 0 5px #666;
+}
+.exit:active {
+    background-color: rgb(84 105 212 / 0.5);
+box-shadow: 0 5px #666;
+}
+
 
 .select{
     position: relative;
@@ -296,7 +329,7 @@ box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
 .button:hover {background-color: rgb(84 105 212 / 0.5)}
 <!------שינוי צבע בעת לחיצה>
 .button:active {
-background-color: rgb(84 105 212 / 0.5);
+    background-color: rgb(84 105 212 / 0.5);
 box-shadow: 0 5px #666;
 }
 
@@ -339,10 +372,10 @@ box-shadow: 0 5px #666;
         </div>
     </div>
     <br/>
-    <button type="button" id="play" style="display:none" class="btn button play text-center"  onclick=" paly_game()" value="">Play</button>
-    <button type="button" id="exit" style="display:none" class="btn button exit text-center"  onclick=" exit()" value="">Exit</button>
-    <button type="button" id="TwoPlayer" class="btn button text-center TwoPlayer"  onclick=" Two_Player()" value="">Two Player</button><br/><br/>
-    <button type="button" id="bot"  class="btn button text-center bot"  onclick=" Hide_select()" value="">Player VS  Bot</button><br/><br/>
+    <button type="button" id="play" style="display:none" class="btn button play "  onclick=" paly_game()" value="">Play</button>
+    <button type="button" id="exit" style="display:none" class="btn button exit "  onclick=" exit()" value="">Exit</button>
+    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick=" Two_Player()" value="">Two Player</button><br/><br/>
+    <button type="button" id="bot"  class="btn button  bot"  onclick=" Hide_select()" value="">Player VS  Bot</button><br/><br/>
  
         <select  onchange="select()" id="select" class="  button   select text-center" style="display:none" required>
             <br/>
