@@ -23,7 +23,7 @@
             div1.style.display = div1.style.display === "block" ? "none" : "block"; 
         const div2 = document.getElementById("TwoPlayer");
             div2.style.display = div2.style.display === "none" ? "block" : "none";
-            const div3 = document.getElementById("bot");
+        const div3 = document.getElementById("bot");
             div3.style.display = div3.style.display === "none" ? "block" : "none";
         const div4 = document.getElementById("exit");
             div4.style.display = div4.style.display === "block" ? "none" : "block";  
@@ -32,22 +32,22 @@
         Hide_select()
         hide_button()
         paly_game()
-        return player=3;
+            return player=3;
     }
     function medium(){
         hide_button()
         Hide_select()
         paly_game()
-        return player=4; 
+            return player=4; 
     }
     function  Two_Player(){
         hide_button()
-        return player=2; 
+            return player=2; 
     }
 
     function Hide_select(){
         const div1 = document.getElementById("select");
-        div1.style.display = div1.style.display === "none" ? "block" : "none";
+            div1.style.display = div1.style.display === "none" ? "block" : "none";
     }
 
     function paly_game(){
@@ -75,7 +75,7 @@
 
         for (let index = 0; index <arr.length; index++) {
                 document.getElementById(`cell-${index}`).textContent = null;                    
-            }
+        }
             return  arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] 
     }
 
@@ -131,7 +131,7 @@
             document.getElementById("7").textContent = win_o;
             }
             else{
-            return xo ="0" 
+                return xo ="0" 
             }
         }    
     }
@@ -197,7 +197,7 @@
 
             if(arr[i] === -1){
                 return easy_bot()
-                break; 
+                break;
             }
         }
         if(arr[0] !==-1  && arr[1] !==-1 && arr[1]  !==-1&& arr[2] !==-1 && arr[3]!==-1 && arr[4]!==-1 && arr[5]!==-1 && arr[6]!==-1 && arr[7]!==-1&& arr[8] !==-1){
