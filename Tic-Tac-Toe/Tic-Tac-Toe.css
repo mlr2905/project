@@ -96,7 +96,7 @@ h3{
         height: 89px;
         animation: blinking 1s infinite;
       }
-@media only screen and (max-width: 450px){
+@media only screen and (max-width: 550px){
 h3{
     width: 250px;
     }
@@ -117,15 +117,15 @@ body{
     }
 .cell {
     border: 6px solid rgb(15, 106, 138);
-    width: 106px;
-    height: 106px;
+    width: 91px;
+    height: 89px;
     font-size: 14px;
     }
     
 .cells2,.cells1{
     border: 5px solid rgb(15, 106, 138);
-    width: 106px;
-    height: 106px;
+    width: 91px;
+    height: 89px;
     font-size: 20px;
     border-left: none; 
     border-right: none; 
