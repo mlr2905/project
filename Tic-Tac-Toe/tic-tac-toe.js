@@ -96,6 +96,9 @@
     }
 
     function cell_click(cell_number){
+        if (arr[cell_number] =="x" || xo == "1" && arr[cell_number] =="o"){
+            swal("Error!", "The place is taken, you need to choose a new place", "error")
+        }
 
         if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o") {
             
@@ -137,21 +140,71 @@
             }
         }    
     }
+   
+    function blink(d,e,f){
+        const a =d
+        const b =e
+        const c =f
 
+        const div1 = document.querySelector(`#cell-${a}`);
+        div1.id=`blink-cell-${a}`;
+        const div2 = document.querySelector(`#cell-${b}`);
+        div2.id=`blink-cell-${b}`;
+        const div3 = document.querySelector(`#cell-${c}`);
+        div3.id=`blink-cell-${c}`;
+       
+    }
+    function col(d,e,f){
+        const a =d
+        const b =e
+        const c =f
+  
+        const div1 = document.querySelector(`#blink-cell-${a}`);
+        div1.id=`cell-${a}`;
+        const div2 = document.querySelector(`#blink-cell-${b}`);
+        div2.id=`cell-${b}`;
+        const div3 = document.querySelector(`#blink-cell-${c}`);
+        div3.id=`cell-${c}`;
+
+    }
+
+   
     function win(){
 
         switch(true){
             
-            case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x")||(arr[2]=="x" && arr[4]=="x" && arr[6]=="x"):
-            case (arr[0]=="x" && arr[3]=="x" && arr[6]=="x")||(arr[0]=="x" && arr[4]=="x" && arr[8]=="x"):
-            case (arr[3]=="x" && arr[4]=="x" && arr[5]=="x")||(arr[6]=="x" && arr[7]=="x" && arr[8]=="x"):
-            case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x")||(arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
-                return  swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
-            case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o")||(arr[2]=="o" && arr[4]=="o" && arr[6]=="o"):
-            case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o")||(arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
-            case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o")||(arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
-            case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o")||(arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
-                return  swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);             
+            case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x"): 
+                return  blink(0,1,2),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}),col(0,1,2),arr=arr.map(reset)
+            case (arr[2]=="x" && arr[4]=="x" && arr[6]=="x"):
+                return blink(2,4,6),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[0]=="x" && arr[3]=="x" && arr[6]=="x"):
+                return blink(0,3,6),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[0]=="x" && arr[4]=="x" && arr[8]=="x"):
+                return blink(0,4,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[3]=="x" && arr[4]=="x" && arr[5]=="x"):
+                return blink(3,4,5),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[6]=="x" && arr[7]=="x" && arr[8]=="x"):
+                return blink(6,7,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x"):
+                return blink(2,5,28),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
+                return blink(1,4,7),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o"):
+                return blink(0,1,2),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[2]=="o" && arr[4]=="o" && arr[6]=="o"):
+                return blink(2,4,6),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o"):
+                return blink(0,3,6),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
+                return blink(0,4,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o"):
+                return blink(3,4,5),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
+                return blink(6,7,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o"):
+                return blink(2,5,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+            case (arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
+                return blink(1,4,7),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
         }
     }
             
@@ -163,7 +216,7 @@
         for (const number of arr){
 
             if(number == 0){
-
+                
                 for (let index = 0; index <arr.length; index++) {
                     document.getElementById(`cell-${index}`).textContent = null;                
                 }
@@ -184,16 +237,17 @@
 
     function Check_arr_player_two(arr) {
         
-        if(arr[0] !==-1  && arr[1] !==-1 && arr[1]  !==-1&& arr[2] !==-1 && arr[3]!==-1 && arr[4]!==-1 && arr[5]!==-1 && arr[6]!==-1 && arr[7]!==-1&& arr[8] !==-1){
-            return arr=arr.map(reset),
+        if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
+            arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
+            arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){     
+            return swal({title: "Dead heat!!",text: "",timer: 2000}),
+            arr=arr.map(reset),
             rounds++,
             document.getElementById("6").textContent = rounds,
-            swal({title: "Dead heat!!",text: "",timer: 2000}),
             xo=1,
             restarting();
         }
     }
-
     function Check_arr_Easy_Bot(arr) {
         for (let i = 0; i < arr.length; i++){
 
@@ -202,8 +256,11 @@
                 break;
             }
         }
-        if(arr[0] !==-1  && arr[1] !==-1 && arr[1]  !==-1&& arr[2] !==-1 && arr[3]!==-1 && arr[4]!==-1 && arr[5]!==-1 && arr[6]!==-1 && arr[7]!==-1&& arr[8] !==-1){
-            return arr=arr.map(reset),
+        if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
+           arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
+           arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){
+            return swal({title: "Dead heat!!",text: "",timer: 2000}),
+            arr=arr.map(reset),
             rounds++,
             document.getElementById("6").textContent = rounds,
             swal({title: "Dead heat!!",text: "",timer: 2000}),
@@ -220,7 +277,7 @@
             default: return default1()
         }
     }
-
+    
     function Check_arr_Medium_Bot(arr) {
         for (const number of arr){
 
@@ -229,12 +286,13 @@
                 return medium_bot()
             }
         }
-        if(arr[0] !==-1  && arr[1] !==-1 && arr[1]  !==-1&& arr[2] !==-1 && arr[3]!==-1 && arr[4]!==-1 && arr[5]!==-1 && arr[6]!==-1 && arr[7]!==-1&& arr[8] !==-1){
-            return arr=arr.map(reset),
+        if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
+            arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
+            arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){
+            return swal({title: "Dead heat!!",text: "",timer: 2000}),
+            xo=1,arr=arr.map(reset),
             rounds++,
             document.getElementById("6").textContent = rounds,
-            swal({title: "Dead heat!!",text: "",timer: 2000}),
-            xo=1,
             restarting();
         }
     }
@@ -244,65 +302,133 @@
         switch (true) {
             case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4) ;
             break;               
-            case (arr[0] === "x" && arr[1] === "x" && arr[3] === "x" &&arr[6] === "x" && arr[7] === "x"  && arr[5] === -1):cell_click(5)
+            case (arr[0] === "x" && arr[1] === "x" && arr[3] === "x" && arr[6] === "x" && arr[7] === "x" && arr[5] === -1):cell_click(5)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[7] === "x" && arr[1] === -1):cell_click(1);
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[7] === "x" && arr[1] === -1):cell_click(1)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[6] === "x" && arr[8] === "x" && arr[7] === -1):cell_click(7);
+            case (arr[0] === "x" && arr[2] === "x" && arr[6] === "x" && arr[8] === "x" && arr[7] === -1):cell_click(7)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[6] === "x" && arr[7] === "x" && arr[3] === -1):cell_click(3);
+            case (arr[0] === "x" && arr[2] === "x" && arr[6] === "x" && arr[7] === "x" && arr[3] === -1):cell_click(3)
             break;
-            case (arr[0] === "x" && arr[5] === "x" && arr[6] === "x" &&  arr[7] === "x" && arr[8] === -1):cell_click(8)
+            case (arr[0] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === "x" && arr[8] === -1):cell_click(8)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[3] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[1] === "x" && arr[7] === "x" && arr[3] === "x" && arr[6] === -1):cell_click(6)
+            break;
+            case (arr[0] === "x" && arr[1] === "x" && arr[7] === "x" && arr[8] === "x" && arr[6] === -1):cell_click(6)
+            break;
+            case (arr[0] === "x" && arr[1] === "x" && arr[6] === "x" && arr[2] === "x" && arr[5] === -1):cell_click(5)
+            break;
+            case (arr[0] === "x" && arr[1] === "x" && arr[6] === "x" && arr[8] === "x" && arr[5] === -1):cell_click(5)
+            break;
+            case (arr[0] === "x" && arr[1] === "x" && arr[6] === "x" && arr[7] === "x" && arr[5] === -1):cell_click(5)
+            break;
+            case (arr[0] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === "x" && arr[2] === -1):cell_click(2)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === "x" && arr[1] === -1):cell_click(1)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === "x" && arr[1] === -1):cell_click(1)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
+            break;
+            case (arr[0] === "x" && arr[1] === "x" && arr[3] === "x" && arr[7] === "x" && arr[4] === -1):cell_click(4)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === "x" && arr[1] === -1):cell_click(1)
+            break;
+            case (arr[0] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === "x" && arr[2] === -1):cell_click(2)
+            break;
+            case (arr[1] === "x" && arr[6] === "x" && arr[7] === "x" && arr[8] === "x" && arr[0] === -1):cell_click(0)
             break;
             case (arr[1] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === "x" && arr[0] === -1):cell_click(0)
             break;
             case (arr[1] === "x" && arr[2] === "x" && arr[3] === "x" && arr[8] === "x" && arr[0] === -1):cell_click(0)
             break;
-            case (arr[1] === "x" && arr[2] === "x" && arr[8] === "x" && arr[5] === -1):cell_click(5);
+            case (arr[1] === "x" && arr[6] === "x" && arr[7] === "x" && arr[8] === "x" && arr[0] === -1):cell_click(0)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[1] === -1):cell_click(1);
+            case (arr[3] === "x" && arr[2] === "x" && arr[7] === "x" && arr[8] === "x" && arr[5] === -1):cell_click(5)
             break;
-            case (arr[0] === "x" && arr[5] === "x" && arr[6] === "x" &&  arr[3] === -1 ):cell_click(3);
+            case (arr[4] === "x" && arr[8] === "x" && arr[1] === "x" && arr[5] === "x" && arr[3] === -1):cell_click(3)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[7] === "x" &&  arr[8] === -1):cell_click(8);
+            case (arr[4] === "x" && arr[8] === "x" && arr[1] === "x" && arr[3] === "x" && arr[5] === -1):cell_click(5)
             break;
-            case (arr[1] === "x" && arr[6] === "x" && arr[7] === "x" && arr[8] === -1):cell_click(8)
+            case (arr[4] === "x" && arr[1] === "x" && arr[7] === "x" && arr[0] === "x" && arr[5] === -1):cell_click(5)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[8] === "x" &&  arr[1] === -1):cell_click(1)
-            break;
-            case (arr[2] === "x" && arr[3] === "x" && arr[8] === "x" && arr[6] === -1):cell_click(6)
-            break;
-            case (arr[4] === "x" && arr[1] === "x" && arr[6] === "x" && arr[5] == "x" && arr[5] === -1):cell_click(3)
+            case (arr[4] === "x" && arr[1] === "x" && arr[6] === "x" && arr[5] === "x" && arr[5] === -1):cell_click(3)
             break;
             case (arr[4] === "x" && arr[2] === "x" && arr[3] === "x" && arr[7] === "x" && arr[1] === -1):cell_click(1)
             break;
             case (arr[4] === "x" && arr[2] === "x" && arr[3] === "x" && arr[1] === "x" && arr[1] === -1):cell_click(7)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[3] == "x" && arr[7] === -1):cell_click(7)
+            case (arr[4] === "x" && arr[8] === "x" && arr[1] === "x" && arr[5] === "x" && arr[3] === -1):cell_click(3)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] == "x" && arr[7] === -1):cell_click(7)
+            case (arr[4] === "x" && arr[1] === "x" && arr[7] === "x" && arr[0] === "x" && arr[5] === -1):cell_click(5)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[6] == "x" && arr[7] === -1):cell_click(7)
+            case (arr[4] === "x" && arr[2] === "x" && arr[3] === "x" && arr[7] === "x" && arr[1] === -1):cell_click(1)
             break;
-            case (arr[0] === "x" && arr[1] === "x" && arr[7] === "x" && arr[3] == "x" && arr[6] === -1):cell_click(6)
+            case (arr[4] === "x" && arr[8] === "x" && arr[0] === "x" && arr[6] === "x" && arr[2] === -1):cell_click(2)
             break;
-            case (arr[0] === "x" && arr[1] === "x" && arr[7] === "x" && arr[8] == "x" && arr[6] === -1):cell_click(6)
+            case (arr[4] === "x" && arr[1] === "x" && arr[7] === "x" && arr[3] === "x" && arr[5] === -1):cell_click(5)
+            break; 
+            case (arr[4] === "x" && arr[0] === "x" && arr[5] === "x" && arr[7] === "x" && arr[1] === -1):cell_click(1)
             break;
-            case (arr[0] === "x" && arr[1] === "x" && arr[6] === "x" && arr[2] == "x" && arr[5] === -1):cell_click(5)
+            case (arr[4] === "x" && arr[0] === "x" && arr[7] === "x" && arr[5] === "x" && arr[3] === -1):cell_click(3)
             break;
-            case (arr[0] === "x" && arr[1] === "x" && arr[6] === "x" && arr[8] == "x" && arr[5] === -1):cell_click(5)
+            case (arr[0] === "x" && arr[1] === "x" && arr[2] === "x" && arr[3] === -1):cell_click(3)
             break;
-            case (arr[0] === "x" && arr[1] === "x" && arr[6] === "x" && arr[7] == "x" && arr[5] === -1):cell_click(5)
+            case (arr[0] === "x" && arr[3] === "x" && arr[6] === "x" && arr[7] === -1):cell_click(7)
             break;
-            case (arr[4] === "x" && arr[8] === "x" && arr[1] === "x" && arr[5] == "x" && arr[3] === -1):cell_click(3)
+            case (arr[0] === "x" && arr[2] === "x" && arr[8] === "x" && arr[1] === -1):cell_click(1)
             break;
-            case (arr[4] === "x" && arr[8] === "x" && arr[1] === "x" && arr[3] == "x" && arr[5] === -1):cell_click(5)
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[1] === -1):cell_click(1)
             break;
-            case (arr[4] === "x" && arr[1] === "x" && arr[7] === "x" && arr[0] == "x" && arr[5] === -1):cell_click(5)
+            case (arr[0] === "x" && arr[5] === "x" && arr[6] === "x" && arr[3] === -1):cell_click(3)
             break;
-            case (arr[4] === "x" && arr[1] === "x" && arr[7] === "x" && arr[3] == "x" && arr[5] === -1):cell_click(5)
+            case (arr[0] === "x" && arr[1] === "x" && arr[2] === "x" && arr[3] === -1):cell_click(3)
+            break;
+            case (arr[0] === "x" && arr[3] === "x" && arr[6] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[3] === "x" && arr[6] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[3] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[8] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[6] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[7] === "x" && arr[5] === -1):cell_click(5)
+            break;
+            case (arr[1] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
+            break;
+            case (arr[1] === "x" && arr[7] === "x" && arr[0] === "x" && arr[2] === -1):cell_click(2)
+            break;
+            case (arr[1] === "x" && arr[7] === "x" && arr[0] === "x" && arr[2] === -1):cell_click(0)
+            break;
+            case (arr[1] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
+            break;
+            case (arr[1] === "x" && arr[6] === "x" && arr[7] === "x" && arr[8] === -1):cell_click(8)
+            break;
+            case (arr[1] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
+            break;
+            case (arr[1] === "x" && arr[2] === "x" && arr[8] === "x" && arr[5] === -1):cell_click(5)
+            break;
+            case (arr[1] === "x" && arr[7] === "x" && arr[0] === "x" && arr[2] === -1):cell_click(2)
+            break;
+            case (arr[2] === "x" && arr[8] === "x" && arr[5] === "x" && arr[1] === -1):cell_click(1)
+            break;
+            case (arr[2] === "x" && arr[3] === "x" && arr[8] === "x" && arr[6] === -1):cell_click(6)
+            break;
+            case (arr[3] === "x" && arr[2] === "x" && arr[7] === "x" && arr[0] === -1):cell_click(0)
             break;
             case (arr[4] === "x" && arr[8] === "x" && arr[3] === "x" && arr[1] === -1):cell_click(1)
+            break;
+            case (arr[4] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === -1):cell_click(7)
             break;
             case (arr[4] === "x" && arr[8] === "x" && arr[7] === "x" && arr[1] === -1):cell_click(1)
             break;
@@ -316,78 +442,71 @@
             break;
             case (arr[4] === "x" && arr[1] === "x" && arr[0] === "x" && arr[6] === -1):cell_click(6)
             break;
+            case (arr[4] === "x" && arr[0] === "x" && arr[5] === "x" && arr[3] === -1):cell_click(3)
+            break;
             case (arr[4] === "x" && arr[1] === "x" && arr[3] === "x" && arr[6] === -1):cell_click(6)
             break;
             case (arr[4] === "x" && arr[1] === "x" && arr[2] === "x" && arr[6] === -1):cell_click(6)
             break;
             case (arr[4] === "x" && arr[1] === "x" && arr[5] === "x" && arr[6] === -1):cell_click(6)
             break;
-            case (arr[2] === "x" && arr[8] === "x" && arr[5] === -1 ):cell_click(5);
+            case (arr[4] === "x" && arr[0] === "x" && arr[6] === "x" && arr[5] === -1):cell_click(5)
             break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[1] === -1 ):cell_click(1);
+            case (arr[4] === "x" && arr[2] === "x" && arr[0] === "x" && arr[7] === -1):cell_click(7)
             break;
-            case (arr[0] === "x"&&  arr[6] === "x"&& arr[3] === -1):cell_click(3);
+            case (arr[4] === "x" && arr[2] === "x" && arr[7] === "x" && arr[1] === -1):cell_click(1)
             break;
-            case (arr[1] === "x"&& arr[7] === "x" &&  arr[2] === -1):cell_click(2)
+            case (arr[4] === "x" && arr[7] === "x" && arr[0] === "x" && arr[8] === -1):cell_click(8)
             break;
-            case (arr[1] === "x"&& arr[2] === "x" && arr[0] === -1):cell_click(0)
+            case (arr[4] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[0] === "x" && arr[2] === "x" && arr[1] === -1):cell_click(1)
+            break;
+            case (arr[0] === "x" && arr[6] === "x" && arr[3] === -1):cell_click(3)
+            break;
+            case (arr[0] === "x" && arr[1] === "x" && arr[2] === -1):cell_click(2)
+            break;
+            case (arr[0] === "x" && arr[3] === "x" && arr[6] === -1):cell_click(6)
+            break;
+            case (arr[0] === "x" && arr[4] === "x" && arr[8] === -1):cell_click(8)
+            break;
+            case (arr[1] === "x" && arr[7] === "x" && arr[2] === -1):cell_click(2)
+            break;
+            case (arr[1] === "x" && arr[4] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[1] === "x" && arr[2] === "x" && arr[0] === -1):cell_click(0)
+            break;
+            case (arr[2] === "x" && arr[8] === "x" && arr[5] === -1):cell_click(5)
+            break;
+            case (arr[2] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
+            break;
+            case (arr[2] === "x" && arr[4] === "x" && arr[6] === -1):cell_click(6)
+            break;
+            case (arr[3] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
             break;
             case (arr[4] === "x" && arr[2] === "x" && arr[6] === -1):cell_click(6)
             break;
-            case (arr[4] === "x"&& arr[8] === "x" && arr[0] === -1):cell_click(0)
+            case (arr[4] === "x" && arr[8] === "x" && arr[0] === -1):cell_click(0)
             break;
-            case (arr[4] === "x"&& arr[1] === "x" && arr[7] === -1):cell_click(7)
+            case (arr[4] === "x" && arr[1] === "x" && arr[7] === -1):cell_click(7)
+            break;
+            case (arr[4] === "x" && arr[0] === "x" && arr[2] === -1):cell_click(2)
+            break;
+            case (arr[5] === "x" && arr[4] === "x" && arr[3] === -1):cell_click(3)
+            break;
+            case (arr[6] === "x" && arr[7] === "x" && arr[8] === -1):cell_click(8)
+            break;
+            case (arr[6] === "x" && arr[7] === "x" && arr[8] === -1):cell_click(8)
+            break;
+            case (arr[6] === "x" && arr[4] === "x" && arr[2] === -1):cell_click(2)
+            break;
+            case (arr[7] === "x" && arr[4] === "x" && arr[1] === -1):cell_click(1)
+            break;
+            case (arr[8] === "x" && arr[4] === "x" && arr[0] === -1):cell_click(0)
             break;
             case (arr[4] === "x" && arr[8] === -1):cell_click(8)
             break;
-            case (arr[2] === "x" && arr[8] === "x" && arr[5] === "x" && arr[1] === -1): cell_click(1);
-            break;
-            case (arr[1] === "x" && arr[7] === "x" && arr[0] === "x" && arr[2] === -1): cell_click(2);
-            break;
-            case (arr[4] === "x" && arr[2] === "x" && arr[0] === "x" && arr[6] === -1): cell_click(6);
-            break;
-            case (arr[4] === "x" && arr[7] === "x" && arr[0] === "x" && arr[8] === -1): cell_click(8);
-            break;
-            case (arr[0] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === "x" && arr[2] === -1): cell_click(2);
-            break;
-            case (arr[1] === "x" && arr[6] === "x" && arr[7] === "x" && arr[8] === "x" && arr[0] === -1): cell_click(0);
-            break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === "x" && arr[1] === -1): cell_click(1);
-            break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === "x" && arr[1] === -1): cell_click(1);
-            break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === "x" && arr[4] === -1): cell_click(4);
-            break;
-            case (arr[1] === "x" && arr[7] === "x" && arr[0] === "x" && arr[2] === -1): cell_click(2);
-            break;
-            case (arr[1] === "x" && arr[7] === "x" && arr[0] === "x" && arr[2] === -1): cell_click(0);
-            break;
-            case (arr[0] === "x" && arr[1] === "x" && arr[3] === "x" && arr[7] === "x" && arr[4] === -1): cell_click(4);
-            break;
-            case (arr[0] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === "x" && arr[1] === -1): cell_click(1);
-            break;
-            case (arr[0] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === "x" && arr[2] === -1): cell_click(2);
-            break;
-            case (arr[1] === "x" && arr[6] === "x" && arr[7] === "x" && arr[8] === "x" && arr[0] === -1): cell_click(0);
-            break;
-            case (arr[0] === "x" && arr[1] === "x" && arr[2] === "x" && arr[3] === -1): cell_click(3);
-            break;
-            case (arr[0] === "x" && arr[3] === "x" && arr[6] === "x" && arr[7] === -1): cell_click(7);
-            break;
-            case (arr[1] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === -1): cell_click(8);
-            break;
-            case (arr[4] === "x" && arr[5] === "x" && arr[6] === "x" && arr[7] === -1): cell_click(7);
-            break;
-            case (arr[0] === "o" && arr[1] === "o" && arr[2] === -1): cell_click(2);
-            break;
-            case (arr[3] === "o" && arr[4] === "o" && arr[5] === -1): cell_click(5);
-            break;
-            case (arr[6] === "o" && arr[7] === "o" && arr[8] === -1): cell_click(8);
-            break;
-            case (arr[0] === "x" && arr[3] === "x" && arr[6] === "x" && arr[7] === -1): cell_click(7);
-            break;
-            case (arr[1] === "x" && arr[2] === "x" && arr[5] === "x" && arr[8] === -1): cell_click(8);
-            break;
+            
             default: return default1()   
         }
     }
