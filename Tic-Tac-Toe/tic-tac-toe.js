@@ -42,6 +42,8 @@
     }
     function  Two_Player(){
         hide_button()
+        paly_game()
+
             return player=2; 
     }
 
