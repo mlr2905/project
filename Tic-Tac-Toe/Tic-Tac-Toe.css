@@ -90,6 +90,7 @@ h3{
     }
 body{
     background-size:  300%; 
+    width: 100%;
     }
 .board {
     border: 10px solid rgb(26, 67, 162);
@@ -97,29 +98,29 @@ body{
     background-color: rgb(20,189,172,255);
     border-radius: 15px;
     width: auto;
-    padding: 6px;
-    margin-left: 12%;
+    padding: 10%;
+    margin: auto;
 
 
     }
 .cell {
     border: 6px solid rgb(15, 106, 138);
-    width: 100px;
-    height: 100px;
+    width: 106px;
+    height: 106px;
     font-size: 14px;
     }
     
 .cells2,.cells1{
     border: 5px solid rgb(15, 106, 138);
-    border-top:6%;
-    width: 100px;
-    height: 100px;
+    width: 106px;
+    height: 106px;
     font-size: 20px;
     border-left: none; 
     border-right: none; 
     }
 .cells1{
     border-bottom: none; 
+    margin-top: 30%;
     }
 img{
     width: 70px;
@@ -129,16 +130,20 @@ img{
     border-top: none; 
     border-bottom: none;
     }
+.bottom{
+    margin-top: 90%;
+}
 .exit{
     position: relative;
     margin: 0;
     position: absolute;
-    margin-bottom: 95%;
+    margin-top: 65%;
     right: 25%;
+
     }
 .play{
     margin: 0;
-    margin-bottom: 95%;
+    margin-top: 65%;
     left: 25%;
     }
 
