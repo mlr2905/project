@@ -223,7 +223,7 @@
                 return blink(6,7,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(6,7,8)}, 1299);
             case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x"):
-                return blink(2,5,28),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(2,5,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(2,5,8)}, 1299);
             case (arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
                 return blink(1,4,7),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
