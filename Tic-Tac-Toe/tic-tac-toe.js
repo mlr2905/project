@@ -198,59 +198,68 @@
         div3.id=`cell-${c}`;
 
     }
-
+    function show_x_win() {
+        var x = document.getElementById("x");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+      }
+      function show_o_win() {
+        var o = document.getElementById("o");
+        o.className = "show";
+        setTimeout(function(){ o.className = o.className.replace("show", ""); }, 3000);
+      }
    
     function win(){
 
         switch(true){
             
             case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x"): 
-                return  blink(0,1,2),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}),arr=arr.map(reset),
+                return  blink(0,1,2),show_x_win(),arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(0,1,2)}, 1299);
             case (arr[2]=="x" && arr[4]=="x" && arr[6]=="x"):
-                return blink(2,4,6),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(2,4,6),show_x_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(2,4,6)}, 1299);
             case (arr[0]=="x" && arr[3]=="x" && arr[6]=="x"):
-                return blink(0,3,6),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(0,3,6),show_x_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(0,3,6)}, 1299);
             case (arr[0]=="x" && arr[4]=="x" && arr[8]=="x"):
-                return blink(0,4,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(0,4,8),show_x_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(0,4,8)}, 1299);
             case (arr[3]=="x" && arr[4]=="x" && arr[5]=="x"):
-                return blink(3,4,5),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(3,4,5),show_x_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(3,4,5)}, 1299);
             case (arr[6]=="x" && arr[7]=="x" && arr[8]=="x"):
-                return blink(6,7,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(6,7,8),show_x_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(6,7,8)}, 1299);
             case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x"):
-                return blink(2,5,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(2,5,8),show_x_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(2,5,8)}, 1299);
             case (arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
-                return blink(1,4,7),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(1,4,7),show_x_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(1,4,7)}, 1299);
             case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o"):
-                return blink(0,1,2),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(0,1,2),show_o_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(0,1,2)}, 1299);
             case (arr[2]=="o" && arr[4]=="o" && arr[6]=="o"):
-                return blink(2,4,6),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(2,4,6),show_o_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(2,4,6)}, 1299);
             case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o"):
-                return blink(0,3,6),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(0,3,6),show_o_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(0,3,6)}, 1299);
             case (arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
-                return blink(0,4,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(0,4,8),show_o_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(0,4,8)}, 1299);
             case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o"):
-                return blink(3,4,5),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(3,4,5),show_o_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(3,4,5)}, 1299);
             case (arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
-                return blink(6,7,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(6,7,8),show_o_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(6,7,8)}, 1299);
             case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o"):
-                return blink(2,5,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(2,5,8),show_o_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(2,5,8)}, 1299);
             case (arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
-                return blink(1,4,7),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                return blink(1,4,7),show_o_win(), arr=arr.map(reset),
                 setTimeout(function () {Canceling_blink(1,4,7)}, 1299);
 
         }
