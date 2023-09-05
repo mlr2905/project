@@ -88,10 +88,10 @@ h3{
           border: 3px solid #666;
         }
         100% {
-          background-color: #270da6;
+          background-color: #0d8aa6;
         }
       }
-      #blink-cell-0,#blink-2,#blink-4,#blink-cell-1,#blink-cell-2,#blink-cell-3,#blink-cell-4,#blink-cell-5,#blink-cell-6,#blink-cell-7,#blink-cell-78 {
+      #blink-cell-0,#blink-2,#blink-4,#blink-cell-1,#blink-cell-2,#blink-cell-3,#blink-cell-4,#blink-cell-5,#blink-cell-6,#blink-cell-7,#blink-cell-8 {
         width: 91px;
         height: 89px;
         animation: blinking 1s infinite;
