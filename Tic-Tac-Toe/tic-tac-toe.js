@@ -67,9 +67,9 @@
 
     function Cleaning_results(){
         rounds =0, win_x=0, win_o=0
-        document.getElementById("5").textContent = win_x,
-        document.getElementById("6").textContent = rounds,
-        document.getElementById("7").textContent = win_o;
+        document.getElementById("c-5").textContent = win_x,
+        document.getElementById("c-6").textContent = rounds,
+        document.getElementById("c-7").textContent = win_o;
 
     }
 
@@ -90,7 +90,7 @@
     }
     function Hide_pattern(){
         for (let index = 1; index <8; index++) {
-            const div1 = document.getElementById(`${index}`);
+            const div1 = document.getElementById(`c-${index}`);
             div1.style.display = div1.style.display === "block" ? "none" : "block";
         }  
     }
@@ -101,24 +101,38 @@
         }
 
         if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o") {
-            
+            const div1 = document.querySelector("#c-2");
+            div1.id="blink-2";
             const img = document.createElement("img");
             img.src = "imgs/x.png";
             const src = document.getElementById(`cell-${cell_number}`);
             src.appendChild(img);
             arr[cell_number] = "x"
+            xo=3
             win()
-            finish1()
+            xo=3
+            setTimeout(function () {finish1(),Canceling_blink_for_o();}, 1300);
+           
+
+
+            
         }
         if (arr[cell_number] !="o" && xo == "0" && arr[cell_number] !="x") {
+            
+            const div3 = document.querySelector('#c-4');
+            div3.id="blink-4";
             const img = document.createElement("img");
             img.src = "imgs/o.png";
             const src = document.getElementById(`cell-${cell_number}`);
             src.appendChild(img);
             arr[cell_number] = "o"
+            xo=3
             win()
-            finish2()
-            xo ="1"
+            xo=
+            setTimeout(function () {finish2(),Canceling_blink_for_X();}, 1300);
+            
+            
+
         }
     }
 
@@ -131,16 +145,33 @@
                 document.getElementById(`cell-${index}`).textContent = null;                  
             }
             return  arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,rounds++,win_o++,xo ="1",
-            document.getElementById("5").textContent = win_x,
-            document.getElementById("6").textContent = rounds,
-            document.getElementById("7").textContent = win_o;
+            document.getElementById("c-5").textContent = win_x,
+            document.getElementById("c-6").textContent = rounds,
+            document.getElementById("c-7").textContent = win_o,
+            xo=1
             }
             else{
-                return xo ="0" 
+                return xo ="1" 
             }
         }    
     }
    
+    function Canceling_blink_for_o(){        
+
+        const div2 = document.querySelector("#blink-2");
+        div2.id="c-2";
+        
+        
+    }
+    function Canceling_blink_for_X(){        
+
+        const div2 = document.querySelector("#blink-4");
+        div2.id="c-4";
+        
+       
+    }
+    
+
     function blink(d,e,f){
         const a =d
         const b =e
@@ -154,7 +185,7 @@
         div3.id=`blink-cell-${c}`;
        
     }
-    function col(d,e,f){
+    function Canceling_blink(d,e,f){
         const a =d
         const b =e
         const c =f
@@ -174,37 +205,54 @@
         switch(true){
             
             case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x"): 
-                return  blink(0,1,2),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}),col(0,1,2),arr=arr.map(reset)
+                return  blink(0,1,2),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}),arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(0,1,2)}, 1299);
             case (arr[2]=="x" && arr[4]=="x" && arr[6]=="x"):
-                return blink(2,4,6),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(2,4,6),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(2,4,6)}, 1299);
             case (arr[0]=="x" && arr[3]=="x" && arr[6]=="x"):
-                return blink(0,3,6),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(0,3,6),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(0,3,6)}, 1299);
             case (arr[0]=="x" && arr[4]=="x" && arr[8]=="x"):
-                return blink(0,4,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(0,4,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(0,4,8)}, 1299);
             case (arr[3]=="x" && arr[4]=="x" && arr[5]=="x"):
-                return blink(3,4,5),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(3,4,5),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(3,4,5)}, 1299);
             case (arr[6]=="x" && arr[7]=="x" && arr[8]=="x"):
-                return blink(6,7,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(6,7,8),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(6,7,8)}, 1299);
             case (arr[2]=="x" && arr[5]=="x" && arr[8]=="x"):
-                return blink(2,5,28),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(2,5,28),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(2,5,8)}, 1299);
             case (arr[1]=="x" && arr[4]=="x" && arr[7]=="x"):
-                return blink(1,4,7),swal({title: "win",imageUrl: "imgs/x.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(1,4,7),swal({title: "win",imageUrl: "imgs/x.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(1,4,7)}, 1299);
             case (arr[0]=="o" && arr[1]=="o" && arr[2]=="o"):
-                return blink(0,1,2),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(0,1,2),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(0,1,2)}, 1299);
             case (arr[2]=="o" && arr[4]=="o" && arr[6]=="o"):
-                return blink(2,4,6),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(2,4,6),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(2,4,6)}, 1299);
             case (arr[0]=="o" && arr[3]=="o" && arr[6]=="o"):
-                return blink(0,3,6),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(0,3,6),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(0,3,6)}, 1299);
             case (arr[0]=="o" && arr[4]=="o" && arr[8]=="o"):
-                return blink(0,4,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(0,4,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(0,4,8)}, 1299);
             case (arr[3]=="o" && arr[4]=="o" && arr[5]=="o"):
-                return blink(3,4,5),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(3,4,5),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(3,4,5)}, 1299);
             case (arr[6]=="o" && arr[7]=="o" && arr[8]=="o"):
-                return blink(6,7,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(6,7,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(6,7,8)}, 1299);
             case (arr[2]=="o" && arr[5]=="o" && arr[8]=="o"):
-                return blink(2,5,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(2,5,8),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(2,5,8)}, 1299);
             case (arr[1]=="o" && arr[4]=="o" && arr[7]=="o"):
-                return blink(1,4,7),swal({title: "win",imageUrl: "imgs/o.png",timer: 6000,}), arr=arr.map(reset);
+                return blink(1,4,7),swal({title: "win",imageUrl: "imgs/o.png",timer: 1000,}), arr=arr.map(reset),
+                setTimeout(function () {Canceling_blink(1,4,7)}, 1299);
+
         }
     }
             
@@ -213,6 +261,7 @@
     }
 
     function finish1(){
+        
         for (const number of arr){
 
             if(number == 0){
@@ -222,9 +271,11 @@
                 }
     
                 return arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,rounds++,win_x++,
-                document.getElementById("5").textContent = win_x,
-                document.getElementById("6").textContent = rounds,
-                document.getElementById("7").textContent = win_o;
+                document.getElementById("c-5").textContent = win_x,
+                document.getElementById("c-6").textContent = rounds,
+                document.getElementById("c-7").textContent = win_o,
+                xo=1;
+                
 
             }else{
                 xo=0                
@@ -240,10 +291,10 @@
         if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
             arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
             arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){     
-            return swal({title: "Dead heat!!",text: "",timer: 2000}),
+            return swal({title: "Dead heat!!",text: "",timer: 1000}),
             arr=arr.map(reset),
             rounds++,
-            document.getElementById("6").textContent = rounds,
+            document.getElementById("c-6").textContent = rounds,
             xo=1,
             restarting();
         }
@@ -259,11 +310,10 @@
         if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
            arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
            arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){
-            return swal({title: "Dead heat!!",text: "",timer: 2000}),
+            return swal({title: "Dead heat!!",text: "",timer: 1000}),
             arr=arr.map(reset),
             rounds++,
-            document.getElementById("6").textContent = rounds,
-            swal({title: "Dead heat!!",text: "",timer: 2000}),
+            document.getElementById("c-6").textContent = rounds,
             xo=1,
             restarting();
         }
@@ -289,10 +339,10 @@
         if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
             arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
             arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){
-            return swal({title: "Dead heat!!",text: "",timer: 2000}),
+            return swal({title: "Dead heat!!",text: "",timer: 1000}),
             xo=1,arr=arr.map(reset),
             rounds++,
-            document.getElementById("6").textContent = rounds,
+            document.getElementById("c-6").textContent = rounds,
             restarting();
         }
     }

@@ -91,7 +91,7 @@ h3{
           background-color: #270da6;
         }
       }
-      #blink-cell-0,#blink-cell-1,#blink-cell-2,#blink-cell-3,#blink-cell-4,#blink-cell-5,#blink-cell-6,#blink-cell-7,#blink-cell-78 {
+      #blink-cell-0,#blink-2,#blink-4,#blink-cell-1,#blink-cell-2,#blink-cell-3,#blink-cell-4,#blink-cell-5,#blink-cell-6,#blink-cell-7,#blink-cell-78 {
         width: 91px;
         height: 89px;
         animation: blinking 1s infinite;
