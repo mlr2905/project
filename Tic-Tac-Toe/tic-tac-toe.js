@@ -8,6 +8,7 @@
     let arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
     
     function select(){
+                document.getElementById('x_or_o').style.display="none"; 
             let option = document.getElementById('select').value;
         switch(option){
             
