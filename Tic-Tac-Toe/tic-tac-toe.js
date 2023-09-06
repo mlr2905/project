@@ -36,7 +36,9 @@
     }
     function bot_or_you(){
 
-       document.getElementById('x_or_o').style.display="none";  document.getElementById('bot_or_you').style.display="block"; 
+      const div1 = document.getElementById('x_or_o');
+            div1.style.display = div1.style.display === "block" ? "none" : "block";
+ document.getElementById('bot_or_you').style.display="block"; 
         document.getElementById('you_first').onclick = function(){
             return xo=1, medium1(),document.getElementById('bot_or_you').style.display="none"; 
 
@@ -48,8 +50,11 @@
         }  
         
         function o_or_x(){
-document.getElementById('bot_or_you').style.display="none"; 
-            document.getElementById('x_or_o').style.display="block"; 
+
+const div1 = document.getElementById('bot_or_you');
+            div1.style.display = div1.style.display === "block" ? "none" : "block";
+
+ document.getElementById('x_or_o').style.display="block"; 
             document.getElementById('x_first').onclick = function(){
                 return xo=1, Two_Player1(),document.getElementById('x_or_o').style.display="none"; 
 
