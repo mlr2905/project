@@ -51,7 +51,7 @@ document.getElementById('x_or_o').style.display="none";
 
 
 
-medium1(),document.getElementById('bot_or_you').style.display="none"; 
+document.getElementById('bot_or_you').style.display="none"; 
  document.getElementById('x_or_o').style.display="block"; 
             document.getElementById('x_first').onclick = function(){
                 return xo=1, Two_Player1(),document.getElementById('x_or_o').style.display="none"; 
