@@ -36,7 +36,7 @@
     }
     function bot_or_you(){
 
-       document.getElementById('x_or_o').style.display="none";  document.getElementById('bot_or_you').style.display="block"; 
+       document.getElementById('o_or_x').style.display="none";  document.getElementById('bot_or_you').style.display="block"; 
         document.getElementById('you_first').onclick = function(){
             return xo=1, medium1(),document.getElementById('bot_or_you').style.display="none"; 
 
