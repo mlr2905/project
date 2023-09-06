@@ -1,5 +1,5 @@
     let player=0 // כדי לדעת סוג משחק
-    let xo = "1" //כדי לשנות  בין איקס לעיגול
+    let xo = "0" //כדי לשנות  בין איקס לעיגול
     let rounds =0   // כדי לדעת כמות סבבים
     let win_x=0 // כדי לדעת כמות נצחונות של איקס
     let win_o=0// כדי לדעת כמות נצחונות של עיגול
@@ -13,7 +13,7 @@
             
             case "3":Easy()
             break;
-            case "4":medium()
+            case "4":bot_or_you()
             break;
         }
     }
@@ -34,11 +34,49 @@
         paly_game()
             return player=3;
     }
-    function medium(){
+    function bot_or_you(){
+        document.getElementById('bot_or_you').style.display="block"; 
+        document.getElementById('you_first').onclick = function(){
+            return xo=1, medium1()
+        };
+        document.getElementById('bot_first').onclick = function(){
+           return  xo=0, medium()
+
+        };
+        }  
+        
+        function o_or_x(){
+            Hide_select()
+
+            document.getElementById('x_or_o').style.display="block"; 
+            document.getElementById('x_first').onclick = function(){
+                return xo=1, Two_Player1()
+            };
+            document.getElementById('o_first').onclick = function(){
+               return  xo=0, Two_Player()
+    
+            };
+            } 
+    
+
+    function medium1(){
         hide_button()
         Hide_select()
         paly_game()
             return player=4; 
+    }
+    function medium(){
+        hide_button()
+        Hide_select()
+        paly_game()
+        cell_click(4)
+            return player=4; 
+    }
+    function  Two_Player1(){
+        hide_button()
+        paly_game()
+
+            return player=2; 
     }
     function  Two_Player(){
         hide_button()

@@ -51,7 +51,7 @@
     
     <button type="button" id="play" style="display:none" class="btn button play "  onclick=" paly_game()" value="">Play</button>
     <button type="button" id="exit" style="display:none" class="btn button exit "  onclick=" exit()" value="">Exit</button>
-    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick=" Two_Player()" value="">Two Player</button><br/><br/>
+    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick=" o_or_x()" value="">Two Player</button><br/><br/>
     <button type="button" id="bot"  class="btn button  bot"  onclick=" Hide_select()" value="">Player VS  Bot</button><br/><br/>
     <select  onchange="select()" id="select" class="  button   select text-center" style="display:none" required>
         <br/>
@@ -61,7 +61,17 @@
         </select>
         <div id="x"><img src="imgs/x.png"><p><b>win</b></p></div>
         <div id="o"><img src="imgs/o.png"><p><b>win</b></p</div>
+            
+    </div>
+    <div class="bot_or_you" id="bot_or_you"><p><b>Who will start first?</b></p>
+        <button id="you_first"><img src="imgs/player.png"></button>
+        <button id="bot_first"><img src="imgs/bot.png"></button>
+    </div>
+    <div class="x_or_o" id="x_or_o"><p><b>Who will start first?</b></p>
+        <button id="x_first"><img src="imgs/x.png"></button>
+        <button id="o_first"><img src="imgs/o.png"></button>
     </div>
     </div>
+    
 </body>
 </html>
