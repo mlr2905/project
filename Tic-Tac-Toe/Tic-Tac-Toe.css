@@ -320,8 +320,7 @@ img{
 {
     display: none;
     background-color: rgba(84, 105, 212, 0.87);
-    border-radius: 5px;
-    border: 1px solid #aaa;
+    border-radius: 10px;
     position: fixed;
     width: 300px;
     left: 50%;
