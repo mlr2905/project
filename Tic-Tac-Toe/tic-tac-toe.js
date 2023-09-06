@@ -42,7 +42,7 @@
 
         };
         document.getElementById('bot_first').onclick = function(){
-           document.getElementById('bot_or_you').style.display="none";  xo=0document.getElementById('bot_or_you').style.display="none";  medium(),document.getElementById('bot_or_you').style.display="none"; 
+           document.getElementById('bot_or_you').style.display="none";  xo=0, medium(),document.getElementById('bot_or_you').style.display="none"; 
 
         };
         }  
