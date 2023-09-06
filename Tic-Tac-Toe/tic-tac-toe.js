@@ -38,7 +38,7 @@
 document.getElementById('x_or_o').style.display="none"; 
        document.getElementById('bot_or_you').style.display="block"; 
         document.getElementById('you_first').onclick = function(){
-            return xo=1, medium1(),document.getElementById('bot_or_you').style.display="none"; 
+            return xo=1,medium1(),document.getElementById('bot_or_you').style.display="none"; 
 
         };
         document.getElementById('bot_first').onclick = function(){
@@ -58,7 +58,7 @@ medium1(),document.getElementById('bot_or_you').style.display="none";
 
             };
             document.getElementById('o_first').onclick = function(){
-               return  xo=0, Two_Player(),document.getElementById('x_or_o').style.display="none";
+               return  xo=0,Two_Player(),document.getElementById('x_or_o').style.display="none";
     
             };
             } 
