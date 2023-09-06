@@ -46,7 +46,6 @@
         }  
         
         function o_or_x(){
-            Hide_select()
 
             document.getElementById('x_or_o').style.display="block"; 
             document.getElementById('x_first').onclick = function(){
