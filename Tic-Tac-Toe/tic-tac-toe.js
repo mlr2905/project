@@ -35,19 +35,20 @@
             return player=3;
     }
     function bot_or_you(){
-        document.getElementById('bot_or_you').style.display="block"; 
+
+       document.getElementById('x_or_o').style.display="none";  document.getElementById('bot_or_you').style.display="block"; 
         document.getElementById('you_first').onclick = function(){
             return xo=1, medium1(),document.getElementById('bot_or_you').style.display="none"; 
 
         };
         document.getElementById('bot_first').onclick = function(){
-           return  xo=0, medium(),document.getElementById('bot_or_you').style.display="none"; 
+           document.getElementById('bot_or_you').style.display="none";  xo=0document.getElementById('bot_or_you').style.display="none";  medium(),document.getElementById('bot_or_you').style.display="none"; 
 
         };
         }  
         
         function o_or_x(){
-
+document.getElementById('bot_or_you').style.display="none"; 
             document.getElementById('x_or_o').style.display="block"; 
             document.getElementById('x_first').onclick = function(){
                 return xo=1, Two_Player1(),document.getElementById('x_or_o').style.display="none"; 
