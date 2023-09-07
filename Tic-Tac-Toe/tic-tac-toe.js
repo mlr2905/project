@@ -459,6 +459,9 @@ function medium_bot(){
         break;
         case (arr[4] === "x" && arr[8] === -1):cell_click(8)
         break; 
+        case (arr[4] === "o" && arr[8] === -1):cell_click(8)
+        break; 
+        
         case (arr[0] === "o" && arr[1] === "o" && arr[2] === -1):cell_click(2)
         break; 
         case (arr[7] === "o" && arr[5] === "o" && arr[8] === -1):cell_click(8)
