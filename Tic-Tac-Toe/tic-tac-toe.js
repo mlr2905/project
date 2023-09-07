@@ -99,11 +99,11 @@ function Hide_select(){
 function paly_game(){
     const div = document.querySelector('#play');
     const value = div.textContent;
-    if (value == 'stop') { ;
+    if (value == 'reset') { ;
         document.getElementById("play").textContent = "play"
         Cleaning_results()
     }else { 
-        document.getElementById("play").textContent = "stop"
+        document.getElementById("play").textContent = "reset"
         restarting()
         
         
