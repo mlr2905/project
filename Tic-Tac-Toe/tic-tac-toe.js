@@ -1,26 +1,87 @@
-let player=0 // כדי לדעת סוג משחק
-let xo = "-1" //כדי לשנות  בין איקס לעיגול
+let game_type=0 // סוגי משחק: 1 זה נגד משתתף אחר 2 זה נגד מחשב רמה קלה 3 נגד מחשב רמה קשה
+let xo = "1" // ו0 שווה לעיגול xכדי לשנות  בין איקס לעיגול 1 שווה ל
 let rounds =0   // כדי לדעת כמות סבבים
 let win_x=0 // כדי לדעת כמות נצחונות של איקס
 let win_o=0// כדי לדעת כמות נצחונות של עיגול
 
-// בהתחלה אני מגדיר מחרוזת עם 9 מספרים שכולם מוגדרים -1
+// בהתחלה אני מגדיר מחרוזת עם 9 מספרים שכולם מוגדרים -1 זחשוב להמשך המשחק
 let arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
 
+// פונקציה שאחראית לנתב לפוקציה רצוי ברגע שבוחרים באחד מאפשרויות
 function select(){
             
-        let option = document.getElementById('select').value;
+        let option = document.getElementById('select').value;  
     switch(option){
         
-        case "3":Easy()
+        case "3":Easy()  // #1
         break;
-        case "4":bot_or_you()
+        case "4":bot_or_you() // #2
         break;
     }
 }
+// פונקציה זו מפעילה מספר פונקציות וגם מגירה שהשחקן משחק נגד רמה הקלה #1
+function Easy(){
+    Hide_select() //  מסתיר את הרדימה הנפתחת
+    hide_button() // מסתירה את הכפתורים
+        return game_type=2;
+}
+function bot_or_you(){  // #2   פוקציה זו מציג בפניה המשתמש שתי אופציות 1 שהוא מתחיל והשניה שהמחשב מתחיל
+document.getElementById('x_or_o').style.display="none";   // זה הגדרתי שם במידה התחרט ורוצה לשחק נגד מחשב
+   document.getElementById('bot_or_you').style.display="block"; // מציג את האפשרויות
+    document.getElementById('you_first').onclick = function(){  // אפשרות ראשנה השחקן משחק ראשון 
+        return xo=1,Hard_last_game(),document.getElementById('bot_or_you').style.display="none"; 
+
+    };
+    document.getElementById('bot_first').onclick = function(){// אפשרות שניה המחשב משחק ראשון
+    document.getElementById('bot_or_you').style.display="none";  xo=0, Hard(),document.getElementById('bot_or_you').style.display="none"; 
+
+    };
+    }  
+    
+    function o_or_x_first(){ //  ומציגה שתי אפשרויות שמי ישחק ראשון Two Playerפוקציה זו מופעלת ברגע שלוחצים על כפתור 
+
+document.getElementById('bot_or_you').style.display="none"; // זה הגדרתי שם במידה התחרט ורוצה לשחק נגד שחקן אחר
+document.getElementById('x_or_o').style.display="block";  // מציג את האפשרויות 
+        document.getElementById('x_first').onclick = function(){ // מתחיל  X אפשרות ראשון ה
+            return xo=1, Two_Player(),document.getElementById('x_or_o').style.display="none";  //
+
+        };
+        document.getElementById('o_first').onclick = function(){ //מתחיל  X אפשרות שני ה
+           return  xo=0,Two_Player(),document.getElementById('x_or_o').style.display="none";
+
+        };
+        } 
+
+
+function Hard_last_game(){ //  פןקציה זו מופעלת על ידי בחירה ששחקן יתחיל ראשון בעת משחק נגד מחשב ברשמה קשה ומפעילה מספר פוקציות
+    hide_button() 
+    Hide_select()
+        return game_type=3;  // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
+}
+function Hard(){ // פוקציה זו מופעלת על ידי בחירה שהמחשב יתחיל ראשון ברמה הקשה ומפעילה מספר פוקציות
+    hide_button()
+    Hide_select()
+    cell_click(4) // צעד ראשון שהמחשב תופס את המרכז
+        return game_type=3;   // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
+}
+
+function  Two_Player(){ // פוקציה זו מגדירה שהמחשק הוא נגד שחקן אחר  ומפעילה מספר פוקציות
+    hide_button()
+
+        return game_type=1; 
+}
+
+function Hide_select(){ // מסתיר או מציג בהתאם את הרשימה הנפתחת
+    const div1 = document.getElementById("select");
+        div1.style.display = div1.style.display === "none" ? "block" : "none";
+}
+
+
+// פונקציה שמסתירה את הכפתורים או מציגה בהתאם למצב הקיים וגם מסתירה את התבנית המשחק בהתאם למצב הקיים
 function hide_button(){
-    Hide_pattern()
-    const div1 = document.getElementById("play");
+    Hide_divs() // מציג/מסתיר את החלק העליון של הלוח  בהתאם למצב הקיים
+    Hide_pattern() // מציג/ מסתיר את החלק התחתון של הלוח בהאתם למצב הקיים
+    const div1 = document.getElementById("reset");
         div1.style.display = div1.style.display === "block" ? "none" : "block"; 
     const div2 = document.getElementById("TwoPlayer");
         div2.style.display = div2.style.display === "none" ? "block" : "none";
@@ -28,93 +89,32 @@ function hide_button(){
         div3.style.display = div3.style.display === "none" ? "block" : "none";
     const div4 = document.getElementById("exit");
         div4.style.display = div4.style.display === "block" ? "none" : "block";  
+
 }
-function Easy(){
-    Hide_select()
-    hide_button()
-    paly_game()
-        return player=3;
-}
-function bot_or_you(){
-document.getElementById('x_or_o').style.display="none"; 
-   document.getElementById('bot_or_you').style.display="block"; 
-    document.getElementById('you_first').onclick = function(){
-        return xo=1,medium1(),document.getElementById('bot_or_you').style.display="none"; 
+                           
 
-    };
-    document.getElementById('bot_first').onclick = function(){
-       document.getElementById('bot_or_you').style.display="none";  xo=0, medium(),document.getElementById('bot_or_you').style.display="none"; 
-
-    };
-    }  
-    
-    function o_or_x(){
-
-document.getElementById('bot_or_you').style.display="none"; 
-document.getElementById('x_or_o').style.display="block"; 
-        document.getElementById('x_first').onclick = function(){
-            return xo=1, Two_Player1(),document.getElementById('x_or_o').style.display="none"; 
-
-        };
-        document.getElementById('o_first').onclick = function(){
-           return  xo=0,Two_Player(),document.getElementById('x_or_o').style.display="none";
-
-        };
-        } 
-
-
-function medium1(){
-    hide_button()
-    Hide_select()
-    paly_game()
-        return player=4; 
-}
-function medium(){
-    hide_button()
-    Hide_select()
-    paly_game()
-    cell_click(4)
-        return player=4; 
-}
-function  Two_Player1(){
-    hide_button()
-    paly_game()
-
-        return player=2; 
-}
-function  Two_Player(){
-    hide_button()
-    paly_game()
-
-        return player=2; 
-}
-
-function Hide_select(){
-    const div1 = document.getElementById("select");
-        div1.style.display = div1.style.display === "none" ? "block" : "none";
-}
-
-function paly_game(){
-    const div = document.querySelector('#play');
-    const value = div.textContent;
-    if (value == 'reset') { ;
-        document.getElementById("play").textContent = "play"
-        Cleaning_results()
-    }else { 
-        document.getElementById("play").textContent = "reset"
-        restarting()
-        
-        
-    }
-        Hide_divs()                         
-}
-
-function Cleaning_results(){
+function Cleaning_results(){//מתבצע מחקה של הנצחונות וסיבובים reset  בעת לחיצה על כפתור 
     rounds =0, win_x=0, win_o=0
     document.getElementById("c-5").textContent = win_x,
     document.getElementById("c-6").textContent = rounds,
     document.getElementById("c-7").textContent = win_o;
+    return arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
 
+}
+
+
+function Hide_divs(){  // תאי הלוח מוסתרים ומוצגים בהתאם  
+    for (let index = 0; index <arr.length; index++) {
+        const div1 = document.getElementById(`cell-${index}`);
+        div1.style.display = div1.style.display === "block" ? "none" : "block";
+    }
+    
+}
+function Hide_pattern(){ // מסתיר או מציג את החלק התחתון של הלוח
+    for (let index = 1; index <8; index++) {
+        const div1 = document.getElementById(`c-${index}`);
+        div1.style.display = div1.style.display === "block" ? "none" : "block";
+    }  
 }
 
 function restarting(){
@@ -125,46 +125,27 @@ function restarting(){
         return  arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] 
 }
 
-function Hide_divs(){
-    for (let index = 0; index <arr.length; index++) {
-        const div1 = document.getElementById(`cell-${index}`);
-        div1.style.display = div1.style.display === "block" ? "none" : "block";
-    }
-    
-}
-function Hide_pattern(){
-    for (let index = 1; index <8; index++) {
-        const div1 = document.getElementById(`c-${index}`);
-        div1.style.display = div1.style.display === "block" ? "none" : "block";
-    }  
-}
-
-function cell_click(cell_number){
-    if (arr[cell_number] =="x" || xo == "1" && arr[cell_number] =="o"){
+function cell_click(cell_number){ //  פוקציה אשר בודקת תורמי ואם יש בחירה כפולה על תא
+    if (arr[cell_number] =="x" || arr[cell_number] =="o"){ // בודק עם אין בחירה נוספת על תא תופס
         swal("Error!", "The place is taken, you need to choose a new place", "error")
     }
 
-    if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o") {
-        const div1 = document.querySelector("#c-2");
-        div1.id="blink-2";
+    if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o") { // מפניה לפוקציות נוספות X בודק עם התא הנבחר פנוי ואם זה תור של 
+        on_blink_for_x() //
         const img = document.createElement("img");
-        img.src = "imgs/x.png";
+        img.src = "imgs/x.png"; 
         const src = document.getElementById(`cell-${cell_number}`);
-        src.appendChild(img);
-        arr[cell_number] = "x"
-        xo=3
-        win()
-        xo=3
-        setTimeout(function () {finish1(),Canceling_blink_for_o();}, 1300);
-       
-
-
-        
+        src.appendChild(img); //בתא הנבחר X  שם תמונה של 
+        arr[cell_number] = "x"//זהה למספר התא indexב  X מגדיר מחרוזת 
+        xo=3 // נועל את האפשרות ללחוץ על הלוקח
+        win() // מפנה לפוקציה בדיקת ניצחון
+        xo=3 // נועל את האפשרות ללחוץ על הלוקח
+        //X פוקציה זו מחכה שהסתיים בדיקה של הנצחון ואז מפנה לבדיקה של סיום משחק וכיבוי האור המהבב מעל ה
+        setTimeout(function () {finish1(),off_blink_for_x();}, 1300); 
+          
     }
-    if (arr[cell_number] !="o" && xo == "0" && arr[cell_number] !="x") {
-        
-        const div3 = document.querySelector('#c-4');
-        div3.id="blink-4";
+    if (arr[cell_number] !="o" && xo == "0" && arr[cell_number] !="x") { //O כנל בהקשר של 
+        on_blink_for_o()
         const img = document.createElement("img");
         img.src = "imgs/o.png";
         const src = document.getElementById(`cell-${cell_number}`);
@@ -173,88 +154,35 @@ function cell_click(cell_number){
         xo=3
         win()
         xo=
-        setTimeout(function () {finish2(),Canceling_blink_for_X();}, 1300);
-        
-        
-
+        setTimeout(function () {finish2(),off_blink_for_o();}, 1300);
     }
 }
 
-function finish2(){
-    for (const number of arr){
+function off_blink_for_x(){  //X מכבה אור מהבב של ה     
 
-        if(number == 0){
+    const div1 = document.querySelector("#blink-2");
+    div1.id="c-2"     
+}
+function off_blink_for_o(){  //O מכבה אור מהבב של ה        
 
-        for (let index = 0; index <arr.length; index++) {
-            document.getElementById(`cell-${index}`).textContent = null;                  
-        }
-        return  arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,rounds++,win_o++,xo ="1",
-        document.getElementById("c-5").textContent = win_x,
-        document.getElementById("c-6").textContent = rounds,
-        document.getElementById("c-7").textContent = win_o,
-        xo=1
-        }
-        else{
-            return xo ="1" 
-        }
-    }    
+    const div1 = document.querySelector("#blink-4");
+    div1.id="c-4";
 }
 
-function Canceling_blink_for_o(){        
-
-    const div2 = document.querySelector("#blink-2");
-    div2.id="c-2";
-    
-    
+function on_blink_for_o(){ // Oמפעיל אור מהבב על ה 
+    const div2 = document.querySelector('#c-4');
+        div2.id="blink-4"; 
 }
-function Canceling_blink_for_X(){        
 
-    const div2 = document.querySelector("#blink-4");
-    div2.id="c-4";
-    
-   
+function on_blink_for_x(){  // X אור מהבב על ה 
+    const div2 = document.querySelector("#c-2"); 
+    div2.id="blink-2"; //Xמפעיל אור מהבב על ה
+
 }
 
 
-function blink(d,e,f){
-    const a =d
-    const b =e
-    const c =f
-
-    const div1 = document.querySelector(`#cell-${a}`);
-    div1.id=`blink-cell-${a}`;
-    const div2 = document.querySelector(`#cell-${b}`);
-    div2.id=`blink-cell-${b}`;
-    const div3 = document.querySelector(`#cell-${c}`);
-    div3.id=`blink-cell-${c}`;
-   
-}
-function Canceling_blink(d,e,f){
-    const a =d
-    const b =e
-    const c =f
-
-    const div1 = document.querySelector(`#blink-cell-${a}`);
-    div1.id=`cell-${a}`;
-    const div2 = document.querySelector(`#blink-cell-${b}`);
-    div2.id=`cell-${b}`;
-    const div3 = document.querySelector(`#blink-cell-${c}`);
-    div3.id=`cell-${c}`;
-
-}
-function show_x_win() {
-    var x = document.getElementById("x");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-  }
-  function show_o_win() {
-    var o = document.getElementById("o");
-    o.className = "show";
-    setTimeout(function(){ o.className = o.className.replace("show", ""); }, 3000);
-  }
-
-function win(){
-
+function win(){ // O או של  X פונקציה שבודקת ניצחון של
+                // במידה ושי ניצחון היא מפעילה מספר פונקציות
     switch(true){
         
         case (arr[0]=="x" && arr[1]=="x" && arr[2]=="x"): 
@@ -308,12 +236,67 @@ function win(){
 
     }
 }
-        
-function reset(n){
+function blink(d,e,f){ //מדליק אור מהבהב על השורה המנצחת
+    const a =d
+    const b =e
+    const c =f
+
+    const div1 = document.querySelector(`#cell-${a}`);
+    div1.id=`blink-cell-${a}`;
+    const div2 = document.querySelector(`#cell-${b}`);
+    div2.id=`blink-cell-${b}`;
+    const div3 = document.querySelector(`#cell-${c}`);
+    div3.id=`blink-cell-${c}`;
+   
+}
+function Canceling_blink(d,e,f){   // מכבה את האור המהבהב של השורה המנצחת
+    const a =d
+    const b =e
+    const c =f
+
+    const div1 = document.querySelector(`#blink-cell-${a}`);
+    div1.id=`cell-${a}`;
+    const div2 = document.querySelector(`#blink-cell-${b}`);
+    div2.id=`cell-${b}`;
+    const div3 = document.querySelector(`#blink-cell-${c}`);
+    div3.id=`cell-${c}`;
+
+}
+function show_x_win() { // מציגה התראה ניצחון מרחפת מלמטה ללמעלה
+    var x = document.getElementById("x");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
+  function show_o_win() { // מציגה התראה ניצחון מרחפת מלמטה ללמעלה
+    var o = document.getElementById("o");
+    o.className = "show";
+    setTimeout(function(){ o.className = o.className.replace("show", ""); }, 3000);
+  }
+   
+function reset(n){ // למספר 0  MAP בעזרת  ARR בעת ניצחון מתבצע איפוס לרשימה 
     return 0;
 }
 
-function finish1(){
+function finish2(){  // פונקציה בודקת אם המשחק  הסתיים ומעלה את מספר הסיבובים והנצחנות של עיגול ואם לא ממשיכה לתור הבא
+    for (const number of arr){
+
+        if(number == 0){
+
+        for (let index = 0; index <arr.length; index++) {
+            document.getElementById(`cell-${index}`).textContent = null;                  
+        }
+        return  arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1] ,rounds++,win_o++,xo ="1",
+        document.getElementById("c-5").textContent = win_x,
+        document.getElementById("c-6").textContent = rounds,
+        document.getElementById("c-7").textContent = win_o,
+        xo=1
+        }
+        else{
+            return Check_full_arr2(arr) 
+        }
+    }    
+}
+function finish1(){  // פונקציה בודקת אם המשחק  הסתיים  מעלה  ב1 את מספר הסיבובים ומספר הנצחונות של איקס ואם לא אז בודקת אם היה תיקו
     
     for (const number of arr){
 
@@ -332,48 +315,46 @@ function finish1(){
 
         }else{
             xo=0                
-            return  player == 2? Check_arr_player_two(arr): 
-                    player == 3? Check_arr_Easy_Bot(arr):
-                    player == 4? Check_arr_Medium_Bot(arr):"";
+            return Check_full_arr(arr) 
         }
     }
 }
-
-function Check_arr_player_two(arr) {
-    
-    if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
-        arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
-        arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){     
-        return swal({title: "Dead heat!!",text: "",timer: 1000}),
-        arr=arr.map(reset),
-        rounds++,
-        document.getElementById("c-6").textContent = rounds,
-        xo=1,
-        restarting();
-    }
-}
-function Check_arr_Easy_Bot(arr) {
+function Check_full_arr(arr) { // בודקת אם נישאר תא פנוי או שהכל התאים תפוסים 
     for (let i = 0; i < arr.length; i++){
 
         if(arr[i] === -1){
-            return easy_bot()
+            return game_type == 1? xo=0: 
+            game_type == 2? easy_bot(arr):
+            game_type == 3? Hard_bot(arr):"";
             break;
         }
     }
-    //arr.every(x => x !==-1 )
-    if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
-       arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
-       arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){
         return swal({title: "Dead heat!!",text: "",timer: 1000}),
         arr=arr.map(reset),
         rounds++,
         document.getElementById("c-6").textContent = rounds,
         xo=1,
-        restarting();
-    }
+        restarting();  // הקוד יבוצע אם כל הערכים של המערך אינם שווים ל--1
 }
+        
+    
+function Check_full_arr2(arr) { // בודקת אם נישאר תא פנוי או שהכל התאים תפוסים  
+    for (let i = 0; i < arr.length; i++){
 
-function easy_bot() {
+        if(arr[i] === -1){
+            return xo=1
+            break;
+        }
+    }
+    return swal({title: "Dead heat!!",text: "",timer: 1000}),
+    arr=arr.map(reset),
+    rounds++,
+    document.getElementById("c-6").textContent = rounds,
+    xo=1,
+    restarting();
+    }
+
+function easy_bot() { //  זה בעצם הרמה הקלה  היא יכולה לנצח וגם נתן לנצח אותה
 
     switch (true) {
         case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4)
@@ -395,78 +376,13 @@ function easy_bot() {
         case (arr[0] === "x" && arr[4] === "x" && arr[8] === -1):cell_click(8) 
         break;
         case (arr[0] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
-        break; 
-        case (arr[8] === "x" && arr[4] === "x" && arr[0] === -1):cell_click(0) 
-        break;
-        case (arr[2] === "x" && arr[4] === "x" && arr[6] === -1):cell_click(6)
-        break;
-        case (arr[2] === "x" && arr[6] === "x" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[6] === "x" && arr[4] === "x" && arr[2] === -1):cell_click(2)
-        break;
-        case (arr[2] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[2] === "x" && arr[8] === "x" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[8] === "x" && arr[5] === "x" && arr[2] === -1):cell_click(2)
         break;
         case (arr[3] === "x" && arr[4] === "x" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[3] === "x" && arr[5] === "x" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[5] === "x" && arr[4] === "x" && arr[3] === -1):cell_click(3)
-        break;
-        case (arr[6] === "x" && arr[7] === "x" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[6] === "x" && arr[8] === "x" && arr[7] === -1):cell_click(7)
-        break;
-        case (arr[8] === "x" && arr[7] === "x" && arr[6] === -1):cell_click(6)
-        break;
-        case (arr[1] === "x" && arr[4] === "x" && arr[7] === -1):cell_click(7)
         break;
         case (arr[1] === "x" && arr[7] === "x" && arr[4] === -1):cell_click(4)
         break;
         case (arr[7] === "x" && arr[4] === "x" && arr[1] === -1):cell_click(1)
-        break;            
-        default: return default1()
-    }
-}
-
-function Check_arr_Medium_Bot(arr) {
-    for (const number of arr){
-
-        if (number == -1){
-
-            return medium_bot()
-        }
-    }
-    if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
-        arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
-        arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){
-        return swal({title: "Dead heat!!",text: "",timer: 1000}),
-        xo=1,arr=arr.map(reset),
-        rounds++,
-        document.getElementById("c-6").textContent = rounds,
-        restarting();
-    }
-}
-    
-function medium_bot(){
-     //  const cond = []
-     //  cond.push(() => arr[4] !== "o" && arr[4] !== "x" )
-      // const action = []
-      // action.push(( )=> cell_click(4))
-      // for ( let i = 0 ; i<cond.length; i++ ){
-      //   if (cond[i] () ){
-      //      acshn[i]()
-      //      break 
-      //   }
-      // }
-    switch (true) {
-        case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4)
-        break;
-        case (arr[4] === "x" && arr[8] === -1):cell_click(8)
-        break; 
+        break;     
         case (arr[0] === "o" && arr[1] === "o" && arr[2] === -1):cell_click(2)
         break; 
         case (arr[7] === "o" && arr[5] === "o" && arr[8] === -1):cell_click(8)
@@ -483,109 +399,140 @@ function medium_bot(){
         break;
         case (arr[0] === "o" && arr[3] === "o" && arr[6] === -1):cell_click(6)
         break; 
-        case (arr[0] === "o" && arr[6] === "o" && arr[3] === -1):cell_click(3)
+        case (arr[0] === "o" && arr[6] === "o" && arr[3] === -1):cell_click(3)  
         break; 
+   
+        default: return default1()
+    }
+}
+    
+function Hard_bot(){ // הרמה הקשה לא ניתן לנמח אותה
+
+    switch (true) {
+        case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4)
+        break;
+        case (arr[4] === "x" && arr[8] === -1):cell_click(8)
+        break; 
+        case (arr[1] === "o" && arr[3] === "o" && arr[0] === -1):cell_click(0)
+        break; 
+        case (arr[1] === "o" && arr[2] === "o" && arr[0] === -1):cell_click(0) 
+        break;
         case (arr[3] === "o" && arr[6] === "o" && arr[0] === -1):cell_click(0)
         break;
-        case (arr[0] === "o" && arr[4] === "o" && arr[8] === -1):cell_click(8) 
+        case (arr[8] === "o" && arr[4] === "o" && arr[0] === -1):cell_click(0) 
+        break;
+        case (arr[2] === "o" && arr[6] === "o" && arr[1] === -1):cell_click(1)
+        break;
+        case (arr[0] === "o" && arr[2] === "o" && arr[1] === -1):cell_click(1)
+        break;
+        case (arr[7] === "o" && arr[4] === "o" && arr[1] === -1):cell_click(1)
+        break;        
+        case (arr[6] === "o" && arr[4] === "o" && arr[2] === -1):cell_click(2)
+        break;
+        case (arr[0] === "o" && arr[1] === "o" && arr[2] === -1):cell_click(2)
+        break; 
+        case (arr[8] === "o" && arr[5] === "o" && arr[2] === -1):cell_click(2)
+        break;
+        case (arr[0] === "o" && arr[6] === "o" && arr[3] === -1):cell_click(3)
+        break; 
+        case (arr[5] === "o" && arr[4] === "o" && arr[3] === -1):cell_click(3)
         break;
         case (arr[0] === "o" && arr[8] === "o" && arr[4] === -1):cell_click(4)
         break; 
-        case (arr[8] === "o" && arr[4] === "o" && arr[0] === -1):cell_click(0) 
-        break;
-        case (arr[2] === "o" && arr[4] === "o" && arr[6] === -1):cell_click(6)
-        break;
         case (arr[2] === "o" && arr[6] === "o" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[6] === "o" && arr[4] === "o" && arr[2] === -1):cell_click(2)
-        break;
-        case (arr[2] === "o" && arr[5] === "o" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[2] === "o" && arr[8] === "o" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[8] === "o" && arr[5] === "o" && arr[2] === -1):cell_click(2)
-        break;
-        case (arr[3] === "o" && arr[4] === "o" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[5] === "o" && arr[1] === "o" && arr[8] === -1):cell_click(8)
         break;
         case (arr[3] === "o" && arr[5] === "o" && arr[4] === -1):cell_click(4)
         break;
-        case (arr[5] === "o" && arr[4] === "o" && arr[3] === -1):cell_click(3)
+        case (arr[1] === "o" && arr[7] === "o" && arr[4] === -1):cell_click(4)
         break;
-        case (arr[6] === "o" && arr[7] === "o" && arr[8] === -1):cell_click(8)
+        case (arr[2] === "o" && arr[8] === "o" && arr[5] === -1):cell_click(5)
         break;
-        case (arr[6] === "o" && arr[8] === "o" && arr[7] === -1):cell_click(7)
+        case (arr[3] === "o" && arr[4] === "o" && arr[5] === -1):cell_click(5)
+        break;
+        case (arr[0] === "o" && arr[3] === "o" && arr[6] === -1):cell_click(6)
+        break; 
+        case (arr[2] === "o" && arr[4] === "o" && arr[6] === -1):cell_click(6)
         break;
         case (arr[8] === "o" && arr[7] === "o" && arr[6] === -1):cell_click(6)
         break;
         case (arr[1] === "o" && arr[4] === "o" && arr[7] === -1):cell_click(7)
         break;
-        case (arr[1] === "o" && arr[7] === "o" && arr[4] === -1):cell_click(4)
+        case (arr[0] === "o" && arr[8] === "o" && arr[7] === -1):cell_click(7)
+        break; 
+        case (arr[6] === "o" && arr[8] === "o" && arr[7] === -1):cell_click(7)
         break;
-        case (arr[7] === "o" && arr[4] === "o" && arr[1] === -1):cell_click(1)
-        break;           
-        case (arr[0] === "x" && arr[1] === "x" && arr[2] === -1):cell_click(2)
+        case (arr[0] === "o" && arr[4] === "o" && arr[8] === -1):cell_click(8) 
+        break;
+        case (arr[7] === "o" && arr[5] === "o" && arr[8] === -1):cell_click(8)
         break; 
-        case (arr[0] === "x" && arr[2] === "x" && arr[1] === -1):cell_click(1)
-        break;  
-        case (arr[0] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
-        break; 
-        case (arr[1] === "x" && arr[2] === "x" && arr[0] === -1):cell_click(0)
-        break; 
-        case (arr[0] === "x" && arr[3] === "x" && arr[6] === -1):cell_click(6)
-        break; 
-        case (arr[0] === "x" && arr[6] === "x" && arr[3] === -1):cell_click(3)
-        break; 
+        case (arr[2] === "o" && arr[5] === "o" && arr[8] === -1):cell_click(8)
+        break;
+        case (arr[5] === "o" && arr[1] === "o" && arr[8] === -1):cell_click(8)
+        break;
+        case (arr[6] === "o" && arr[7] === "o" && arr[8] === -1):cell_click(8)
+        break;
         case (arr[3] === "x" && arr[6] === "x" && arr[0] === -1):cell_click(0)
         break;
-        case (arr[0] === "x" && arr[4] === "x" && arr[8] === -1):cell_click(8) 
+        case (arr[1] === "x" && arr[2] === "x" && arr[0] === -1):cell_click(0)
         break;
-        case (arr[0] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
-        break; 
         case (arr[8] === "x" && arr[4] === "x" && arr[0] === -1):cell_click(0) 
         break;
-        case (arr[2] === "x" && arr[4] === "x" && arr[6] === -1):cell_click(6)
+        case (arr[0] === "x" && arr[2] === "x" && arr[1] === -1):cell_click(1)
         break;
-        case (arr[2] === "x" && arr[6] === "x" && arr[4] === -1):cell_click(4)
+        case (arr[7] === "x" && arr[4] === "x" && arr[1] === -1):cell_click(1)
+        break;
+        case (arr[2] === "x" && arr[6] === "x" && arr[1] === -1):cell_click(1)
+        break;
+        case (arr[0] === "x" && arr[1] === "x" && arr[2] === -1):cell_click(2)
         break;
         case (arr[6] === "x" && arr[4] === "x" && arr[2] === -1):cell_click(2)
         break;
-        case (arr[2] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[2] === "x" && arr[8] === "x" && arr[5] === -1):cell_click(5)
-        break;
         case (arr[8] === "x" && arr[5] === "x" && arr[2] === -1):cell_click(2)
-        break;
-        case (arr[3] === "x" && arr[4] === "x" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[3] === "x" && arr[5] === "x" && arr[4] === -1):cell_click(4)
         break;
         case (arr[5] === "x" && arr[4] === "x" && arr[3] === -1):cell_click(3)
         break;
-        case (arr[6] === "x" && arr[7] === "x" && arr[8] === -1):cell_click(8)
+        case (arr[0] === "x" && arr[6] === "x" && arr[3] === -1):cell_click(3)
         break;
-        case (arr[6] === "x" && arr[8] === "x" && arr[7] === -1):cell_click(7)
+        case (arr[0] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
         break;
-        case (arr[8] === "x" && arr[7] === "x" && arr[6] === -1):cell_click(6)
+        case (arr[0] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
         break;
-        case (arr[1] === "x" && arr[4] === "x" && arr[7] === -1):cell_click(7)
+        case (arr[2] === "x" && arr[6] === "x" && arr[4] === -1):cell_click(4)
         break;
         case (arr[1] === "x" && arr[7] === "x" && arr[4] === -1):cell_click(4)
         break;
-        case (arr[7] === "x" && arr[4] === "x" && arr[1] === -1):cell_click(1)
+        case (arr[3] === "x" && arr[5] === "x" && arr[4] === -1):cell_click(4)
+        break;
+        case (arr[2] === "x" && arr[8] === "x" && arr[5] === -1):cell_click(5)
+        break;
+        case (arr[3] === "x" && arr[4] === "x" && arr[5] === -1):cell_click(5)
+        break;
+        case (arr[0] === "x" && arr[3] === "x" && arr[6] === -1):cell_click(6)
         break; 
+        case (arr[2] === "x" && arr[4] === "x" && arr[6] === -1):cell_click(6)
+        break;
+        case (arr[8] === "x" && arr[7] === "x" && arr[6] === -1):cell_click(6)
+        break;
+        case (arr[6] === "x" && arr[8] === "x" && arr[7] === -1):cell_click(7)
+        break;
+        case (arr[1] === "x" && arr[4] === "x" && arr[7] === -1):cell_click(7)
+        break;
+        case (arr[6] === "x" && arr[7] === "x" && arr[8] === -1):cell_click(8)
+        break;
+        case (arr[2] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
+        break;
+        case (arr[0] === "x" && arr[4] === "x" && arr[8] === -1):cell_click(8) 
+        break;
         case (arr[7] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
-        break; 
-        case (arr[2] === "x" && arr[6] === "x" && arr[1] === -1):cell_click(1)
         break;
         case (arr[5] === "x" && arr[1] === "x" && arr[8] === -1):cell_click(8)
-        break; 
+        break;
+        
         default: return default1()   
     }
 }
 
-function default1(){
+function default1(){ //פונקציה שנתונת תא אקראי
     while (true) {
         const cell_number = Math.floor(Math.random() * arr.length);
 
@@ -597,7 +544,7 @@ function default1(){
     }
 }
 
-function exit(){
+function exit(){ // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
     
-    window.setTimeout( function() {window.location.reload();}, 1);
+    window.setTimeout( function() {window.location.reload();}, 0.1);
 }

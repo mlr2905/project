@@ -21,19 +21,19 @@
     <h3 >Tic-Tac-Toe</h3>
     <div  class="board text-center " style="display:none" id="c-1" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off/>
         <div class="form-row body ">
-            <div class="cell left top"   style="display:none" id="cell-0"  onclick="cell_click(0)">0</div></samp>
-            <div class="cell top"       style="display:none"  id="cell-1" class="1" onclick="cell_click(1)">1</div></samp>
-            <div class="cell right top"  style="display:none"  id="cell-2" class="2" onclick="cell_click(2)">2</div></samp>
+            <div class="cell left top"   style="display:none" id="cell-0"  onclick="cell_click(0)"></div></samp>
+            <div class="cell top"       style="display:none"  id="cell-1" class="1" onclick="cell_click(1)"></div></samp>
+            <div class="cell right top"  style="display:none"  id="cell-2" class="2" onclick="cell_click(2)"></div></samp>
         </div>
         <div class="form-row body">
-            <div class="cell left"  style="display:none"  id="cell-3" onclick="cell_click(3)">3</div>
-            <div class="cell"       style="display:none"   id="cell-4" onclick="cell_click(4)">4</div>
-            <div class="cell right" style="display:none"   id="cell-5" onclick="cell_click(5)">5</div>
+            <div class="cell left"  style="display:none"  id="cell-3" onclick="cell_click(3)"></div>
+            <div class="cell"       style="display:none"   id="cell-4" onclick="cell_click(4)"></div>
+            <div class="cell right" style="display:none"   id="cell-5" onclick="cell_click(5)"></div>
         </div>
         <div class="form-row body ">
-            <div class="cell down left" style="display:none"  id="cell-6" onclick="cell_click(6)">6</div>
-            <div class="cell down" style="display:none"  id="cell-7" onclick="cell_click(7)">7</div>
-            <div class="cell down right " style="display:none"  id="cell-8" onclick="cell_click(8)">8</div>
+            <div class="cell down left" style="display:none"  id="cell-6" onclick="cell_click(6)"></div>
+            <div class="cell down" style="display:none"  id="cell-7" onclick="cell_click(7)"></div>
+            <div class="cell down right " style="display:none"  id="cell-8" onclick="cell_click(8)"></div>
         </div>
         <br/><br/>
         <div class="form-row body">
@@ -49,15 +49,15 @@
     </div>
     <br/>
     <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off>
-    <button type="button" id="play" style="display:none" class="btn button play "  onclick=" paly_game()" value="">Play</button>
+    <button type="button" id="reset" style="display:none" class="btn button reset "  onclick=" Cleaning_results()" value="">reset</button>
     <button type="button" id="exit" style="display:none" class="btn button exit "  onclick=" exit()" value="">Exit</button>
-    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick=" o_or_x()" value="">Two Player</button><br/><br/>
+    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick=" o_or_x_first()" value="">Two Player</button><br/><br/>
     <button type="button" id="bot"  class="btn button  bot"  onclick=" Hide_select()" value="">Player VS  Bot</button><br/><br/>
     <select  onchange="select()" id="select" class="  button   select text-center" style="display:none" required>
         <br/>
         <option class="button" value="">Difficulty  </option>
         <option class="button" value="3" id="Easy"><b>Easy</b></option>
-        <option value="4" id="Medium"><B>Medium</B></option>
+        <option value="4" id="Medium"><B>Hard</B></option>
         </select>
         <div id="x"><img src="imgs/x.png"><p><b>win</b></p></div>
         <div id="o"><img src="imgs/o.png"><p><b>win</b></p</div>
