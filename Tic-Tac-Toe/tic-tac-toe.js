@@ -1,5 +1,5 @@
 let player=0 // כדי לדעת סוג משחק
-let xo = "0" //כדי לשנות  בין איקס לעיגול
+let xo = "-1" //כדי לשנות  בין איקס לעיגול
 let rounds =0   // כדי לדעת כמות סבבים
 let win_x=0 // כדי לדעת כמות נצחונות של איקס
 let win_o=0// כדי לדעת כמות נצחונות של עיגול
@@ -49,8 +49,6 @@ document.getElementById('x_or_o').style.display="none";
     }  
     
     function o_or_x(){
-
-
 
 document.getElementById('bot_or_you').style.display="none"; 
 document.getElementById('x_or_o').style.display="block"; 
@@ -362,6 +360,7 @@ function Check_arr_Easy_Bot(arr) {
             break;
         }
     }
+    //arr.every(x => x !==-1 )
     if(arr[0] !==-1 && arr[1] !==-1 && arr[1] !==-1 &&
        arr[2] !==-1 && arr[3] !==-1 && arr[4] !==-1 &&
        arr[5] !==-1 && arr[6] !==-1 && arr[7] !==-1 && arr[8] !==-1){
@@ -453,7 +452,16 @@ function Check_arr_Medium_Bot(arr) {
 }
     
 function medium_bot(){
-    
+     //  const cond = []
+     //  cond.push(() => arr[4] !== "o" && arr[4] !== "x" )
+      // const action = []
+      // action.push(( )=> cell_click(4))
+      // for ( let i = 0 ; i<cond.length; i++ ){
+      //   if (cond[i] () ){
+      //      acshn[i]()
+      //      break 
+      //   }
+      // }
     switch (true) {
         case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4)
         break;
@@ -519,7 +527,6 @@ function medium_bot(){
         break;           
         case (arr[0] === "x" && arr[1] === "x" && arr[2] === -1):cell_click(2)
         break; 
-    
         case (arr[0] === "x" && arr[2] === "x" && arr[1] === -1):cell_click(1)
         break;  
         case (arr[0] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
