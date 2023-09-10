@@ -62,10 +62,8 @@ function Hard_last_game(){ //  פןקציה זו מופעלת על ידי בחי
 function Hard(){ // פוקציה זו מופעלת על ידי בחירה שהמחשב יתחיל ראשון ברמה הקשה ומפעילה מספר פוקציות
     hide_button()
     Hide_select()
-    setTimeout(function () {cell_click(4);}, 1300);
-
-     
-    on_rotation_for_pattern() // צעד ראשון שהמחשב תופס את המרכז
+    setTimeout(function () {cell_click(4);}, 1300);      // צעד ראשון שהמחשב תופס את המרכז
+    on_rotation_for_pattern()
         return game_type=3;   // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
 }
 
@@ -93,17 +91,15 @@ function hide_button(){
         div3.style.display = div3.style.display === "none" ? "block" : "none";
     const div4 = document.getElementById("exit");
         div4.style.display = div4.style.display === "block" ? "none" : "block";  
-
-}                           
+}
+                           
 
 function Cleaning_results(){// מתאפס כל הנתונים וגם הלוח מפסיק להסתובב  reset בעת לחיצה על כפתור  
     rounds =0, win_x=0, win_o=0
     document.getElementById("c-5").textContent = win_x,
     document.getElementById("c-6").textContent = rounds,
     document.getElementById("c-7").textContent = win_o;
-    return arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1],
-    off_rotation_for_pattern()
-
+    return arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
 }
 
 
@@ -114,17 +110,16 @@ function Hide_divs(){  // תאי הלוח מוסתרים ומוצגים בהתא
     }
 }
 
-function off_rotation_for_pattern(){  //O מכבה אור מהבב של ה        
-
-    const div1 = document.querySelector("#rotation");
-    div1.id="pattern";
-}
-
+function rotation_for_pattern() {
+    const div2 = document.querySelector('#pattern');
+    div2.id = div2.id === 'rotation' ? 'pattern' : 'rotation';
+  }
 function on_rotation_for_pattern(){ // פוקציה זו גורמת ללוח להסתובב
     const div2 = document.querySelector('#pattern');
         div2.id="rotation"; 
 }
 function off_rotation_for_pattern(){ // פוקציה זו גורמת ללוח להפסיק להסתובב
+    
     const div2 = document.querySelector('#rotation');
         div2.id="pattern"; 
 }

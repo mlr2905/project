@@ -40,7 +40,7 @@
         <br/><br/>
         <div class="form-row body">
             <div class="cells1 text-center"  style="display:none"  id="c-2"><B><img src="imgs/x.png"></B></div>
-            <div class="cells1 text-center" style="display:none" id="c-3"><B class="img"><img src="imgs/round.png"></B></div>
+            <div class="cells1 text-center" style="display:none" id="c-3" onclick="off_rotation_for_pattern()"><B class="img"><img src="imgs/round.png"></B></div>
             <div class="cells1 text-center"  style="display:none"  id="c-4"><B><img src="imgs/o.png"></B></div>
         </div>
         <div class="form-row body text-white ">
@@ -51,8 +51,8 @@
     </div>
     <br/>
     <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off>
-    <button type="button" id="reset" style="display:none" class="btn button reset "  onclick=" Cleaning_results()" value="">reset</button>
-    <button type="button" id="exit" style="display:none" class="btn button exit "  onclick=" exit()" value="">Exit</button>
+    <button type="button" id="reset" style="display:none" class="btn reset button  "  onclick=" Cleaning_results()" value="">reset</button>
+    <button type="button" id="exit" style="display:none" class="btn  exit button  "  onclick=" exit()" value="">Exit</button>
     <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick=" o_or_x_first()" value="">Two Player</button><br/><br/>
     <button type="button" id="bot"  class="btn button  bot"  onclick=" Hide_select()" value="">Player VS  Bot</button><br/><br/>
     <select  onchange="select()" id="select" class="  button   select text-center" style="display:none" required>
