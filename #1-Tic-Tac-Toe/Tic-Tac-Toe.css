@@ -390,3 +390,25 @@ img{
     text-align: left;
     margin-bottom: 8px;
 }
+#rotation { 
+    animation: rotate 4s infinite; 
+  } 
+   
+  @keyframes rotate { 
+    0%{ 
+      transform: rotate(0deg); 
+    } 
+   
+    30% { 
+      transform: rotate(90deg); 
+    }
+    70%{
+        transform: rotate(180deg); 
+
+    }
+    100% {
+        transform: rotate(360deg); 
+
+    }
+   
+  } 

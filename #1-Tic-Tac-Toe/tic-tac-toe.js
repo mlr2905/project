@@ -56,12 +56,16 @@ document.getElementById('x_or_o').style.display="block";  // מציג את הא�
 function Hard_last_game(){ //  פןקציה זו מופעלת על ידי בחירה ששחקן יתחיל ראשון בעת משחק נגד מחשב ברשמה קשה ומפעילה מספר פוקציות
     hide_button() 
     Hide_select()
+    on_rotation_for_pattern() 
         return game_type=3;  // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
 }
 function Hard(){ // פוקציה זו מופעלת על ידי בחירה שהמחשב יתחיל ראשון ברמה הקשה ומפעילה מספר פוקציות
     hide_button()
     Hide_select()
-    cell_click(4) // צעד ראשון שהמחשב תופס את המרכז
+    setTimeout(function () {cell_click(4);}, 1300);
+
+     
+    on_rotation_for_pattern() // צעד ראשון שהמחשב תופס את המרכז
         return game_type=3;   // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
 }
 
@@ -90,15 +94,15 @@ function hide_button(){
     const div4 = document.getElementById("exit");
         div4.style.display = div4.style.display === "block" ? "none" : "block";  
 
-}
-                           
+}                           
 
-function Cleaning_results(){//מתבצע מחקה של הנצחונות וסיבובים reset  בעת לחיצה על כפתור 
+function Cleaning_results(){// מתאפס כל הנתונים וגם הלוח מפסיק להסתובב  reset בעת לחיצה על כפתור  
     rounds =0, win_x=0, win_o=0
     document.getElementById("c-5").textContent = win_x,
     document.getElementById("c-6").textContent = rounds,
     document.getElementById("c-7").textContent = win_o;
-    return arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
+    return arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1],
+    off_rotation_for_pattern()
 
 }
 
@@ -108,7 +112,21 @@ function Hide_divs(){  // תאי הלוח מוסתרים ומוצגים בהתא
         const div1 = document.getElementById(`cell-${index}`);
         div1.style.display = div1.style.display === "block" ? "none" : "block";
     }
-    
+}
+
+function off_rotation_for_pattern(){  //O מכבה אור מהבב של ה        
+
+    const div1 = document.querySelector("#rotation");
+    div1.id="pattern";
+}
+
+function on_rotation_for_pattern(){ // פוקציה זו גורמת ללוח להסתובב
+    const div2 = document.querySelector('#pattern');
+        div2.id="rotation"; 
+}
+function off_rotation_for_pattern(){ // פוקציה זו גורמת ללוח להפסיק להסתובב
+    const div2 = document.querySelector('#rotation');
+        div2.id="pattern"; 
 }
 function Hide_pattern(){ // מסתיר או מציג את החלק התחתון של הלוח
     for (let index = 1; index <8; index++) {
@@ -292,7 +310,7 @@ function finish2(){  // פונקציה בודקת אם המשחק  הסתיים 
         xo=1
         }
         else{
-            return Check_full_arr2(arr) 
+            return Check_full_arr2(arr)
         }
     }    
 }
@@ -315,7 +333,7 @@ function finish1(){  // פונקציה בודקת אם המשחק  הסתיים 
 
         }else{
             xo=0                
-            return Check_full_arr(arr) 
+            return Check_full_arr(arr)
         }
     }
 }
@@ -378,10 +396,20 @@ function easy_bot() { //  זה בעצם הרמה הקלה  היא יכולה ל�
     
 function Hard_bot(){ // הרמה הקשה לא ניתן לנצח אותה
     const cond = [arr[4] !== "o" && arr[4] !== "x",arr[4] === "x" && arr[8] === -1,arr[0] === "o" && arr[1] === "o" && arr[2] === -1,
-    arr[4] === "o" && arr[5] === "x" && arr[8] === -1,arr[4] === "o" && arr[7] === "x" && arr[8] === -1,
-    arr[4] === "o" && arr[3] === "x" && arr[8] === -1,arr[4] === "o" && arr[2] === "x" && arr[8] === -1,
-    arr[4] === "o" && arr[0] === "x" && arr[5] === -1,arr[4] === "o" && arr[2] === "x" && arr[5] === -1,
-    arr[4] === "o" && arr[6] === "x" && arr[5] === -1,arr[4] === "o" && arr[8] === "x" && arr[5] === -1,
+    arr[4] === "o" && arr[5] === "x" && arr[8] === -1 && arr[0] === -1 && arr[1] === -1 && arr[2] === -1 && arr[3] === -1 
+    && arr[4] === -1 && arr[6] === -1 && arr[7] === -1,
+    arr[4] === "o" && arr[7] === "x" && arr[8] === -1 && arr[0] === -1 && arr[1] === -1 && arr[2] === -1 && arr[3] === -1 
+    && arr[4] === -1 && arr[6] === -1 && arr[5] === -1,
+    arr[4] === "o" && arr[3] === "x" && arr[8] === -1 && arr[0] === -1 && arr[1] === -1 && arr[7] === -1 && arr[2] === -1 
+    && arr[4] === -1 && arr[6] === -1 && arr[5] === -1,
+    arr[4] === "o" && arr[2] === "x" && arr[8] === -1 && arr[0] === -1 && arr[1] === -1 && arr[7] === -1 && arr[3] === -1 
+    && arr[4] === -1 && arr[6] === -1 && arr[5] === -1,
+    arr[4] === "o" && arr[0] === "x" && arr[8] === -1 && arr[2] === -1 && arr[1] === -1 && arr[7] === -1 && arr[3] === -1 
+    && arr[4] === -1 && arr[6] === -1 && arr[5] === -1,
+    arr[4] === "o" && arr[1] === "x" && arr[8] === -1 && arr[2] === -1 && arr[0] === -1 && arr[7] === -1 && arr[3] === -1 
+    && arr[4] === -1 && arr[6] === -1 && arr[5] === -1,
+    arr[4] === "o" && arr[8] === "x" && arr[0] === -1 && arr[2] === -1 && arr[1] === -1 && arr[7] === -1 && arr[3] === -1 
+    && arr[4] === -1 && arr[6] === -1 && arr[5] === -1,
     arr[7] === "o" && arr[5] === "o" && arr[8] === -1,arr[0] === "o" && arr[2] === "o" && arr[1] === -1,
     arr[2] === "o" && arr[6] === "o" && arr[1] === -1,arr[0] === "o" && arr[8] === "o" && arr[7] === -1,
     arr[1] === "o" && arr[3] === "o" && arr[0] === -1,arr[1] === "o" && arr[2] === "o" && arr[0] === -1,
@@ -411,13 +439,11 @@ function Hard_bot(){ // הרמה הקשה לא ניתן לנצח אותה
     arr[7] === "x" && arr[4] === "x" && arr[1] === -1,arr[7] === "x" && arr[5] === "x" && arr[8] === -1,
     arr[2] === "x" && arr[6] === "x" && arr[1] === -1,arr[5] === "x" && arr[1] === "x" && arr[8] === -1]
   
-    const action = [4,8,2,8,8,8,8,8,5,5,
-                    5,5,1,1,7,0,6,0,3,0,
-                    8,4,0,6,4,2,8,5,2,5,
-                    8,4,3,8,7,6,7,4,1,2,
-                    1,4,0,6,3,0,8,4,0,6,
-                    4,2,8,5,2,5,4,3,8,7,
-                    6,7,4,1,8,1,8] 
+    const action = [4,8,2,8,8,8,8,8,8,5,8,1,1,
+                    7,0,0,6,3,0,8,4,0,6,4,2,8,
+                    5,2,5,8,4,3,8,7,6,7,4,1,2,
+                    1,4,0,6,3,0,8,4,0,6,4,2,8,
+                    5,2,5,4,3,8,7,6,7,4,1,8,1,8] 
 
     for ( let i = 0 ; i<cond.length; i++ ){
         if (cond[i] === true){
