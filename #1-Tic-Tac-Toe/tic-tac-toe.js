@@ -355,182 +355,81 @@ function Check_full_arr2(arr) { // בודקת אם נישאר תא פנוי או
     }
 
 function easy_bot() { //  זה בעצם הרמה הקלה  היא יכולה לנצח וגם נתן לנצח אותה
-
-    switch (true) {
-        case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4)
-        break;
-        case (arr[4] === "x" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[0] === "x" && arr[1] === "x" && arr[2] === -1):cell_click(2)
-        break; 
-        case (arr[0] === "x" && arr[2] === "x" && arr[1] === -1):cell_click(1)
-        break; 
-        case (arr[1] === "x" && arr[2] === "x" && arr[0] === -1):cell_click(0) 
-        break;
-        case (arr[0] === "x" && arr[3] === "x" && arr[6] === -1):cell_click(6)
-        break; 
-        case (arr[0] === "x" && arr[6] === "x" && arr[3] === -1):cell_click(3)
-        break; 
-        case (arr[3] === "x" && arr[6] === "x" && arr[0] === -1):cell_click(0)
-        break;
-        case (arr[0] === "x" && arr[4] === "x" && arr[8] === -1):cell_click(8) 
-        break;
-        case (arr[0] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[3] === "x" && arr[4] === "x" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[1] === "x" && arr[7] === "x" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[7] === "x" && arr[4] === "x" && arr[1] === -1):cell_click(1)
-        break;     
-        case (arr[0] === "o" && arr[1] === "o" && arr[2] === -1):cell_click(2)
-        break; 
-        case (arr[7] === "o" && arr[5] === "o" && arr[8] === -1):cell_click(8)
-        break; 
-        case (arr[0] === "o" && arr[2] === "o" && arr[1] === -1):cell_click(1)
-        break; 
-        case (arr[2] === "o" && arr[6] === "o" && arr[1] === -1):cell_click(1)
-        break; 
-        case (arr[0] === "o" && arr[8] === "o" && arr[7] === -1):cell_click(7)
-        break; 
-        case (arr[1] === "o" && arr[3] === "o" && arr[0] === -1):cell_click(0)
-        break; 
-        case (arr[1] === "o" && arr[2] === "o" && arr[0] === -1):cell_click(0) 
-        break;
-        case (arr[0] === "o" && arr[3] === "o" && arr[6] === -1):cell_click(6)
-        break; 
-        case (arr[0] === "o" && arr[6] === "o" && arr[3] === -1):cell_click(3)  
-        break; 
-   
-        default: return default1()
+    const cond =[arr[4] !== "o" && arr[4] !== "x",arr[4] === "x" && arr[8] === -1,
+    arr[0] === "x" && arr[1] === "x" && arr[2] === -1,arr[0] === "x" && arr[2] === "x" && arr[1] === -1,
+    arr[1] === "x" && arr[2] === "x" && arr[0] === -1,arr[0] === "x" && arr[3] === "x" && arr[6] === -1,
+    arr[0] === "x" && arr[6] === "x" && arr[3] === -1,arr[3] === "x" && arr[6] === "x" && arr[0] === -1,
+    arr[0] === "x" && arr[4] === "x" && arr[8] === -1,arr[0] === "x" && arr[8] === "x" && arr[4] === -1,
+    arr[3] === "x" && arr[4] === "x" && arr[5] === -1,arr[1] === "x" && arr[7] === "x" && arr[4] === -1,
+    arr[7] === "x" && arr[4] === "x" && arr[1] === -1,arr[0] === "o" && arr[1] === "o" && arr[2] === -1,
+    arr[7] === "o" && arr[5] === "o" && arr[8] === -1,arr[0] === "o" && arr[2] === "o" && arr[1] === -1,
+    arr[2] === "o" && arr[6] === "o" && arr[1] === -1,arr[0] === "o" && arr[8] === "o" && arr[7] === -1,
+    arr[1] === "o" && arr[3] === "o" && arr[0] === -1,arr[1] === "o" && arr[2] === "o" && arr[0] === -1,
+    arr[0] === "o" && arr[3] === "o" && arr[6] === -1,arr[0] === "o" && arr[6] === "o" && arr[3] === -1]
+    const action =[4,8,2,1,0,6,3,0,8,4,5,4,1,2,8,1,1,7,0,0,6,3]
+    for ( let i = 0 ; i<cond.length; i++ ){
+        if (cond[i] === true){
+            action[i]  
+            return cell_click(action[i] )
+        }
     }
+    return default1() 
 }
     
-function Hard_bot(){ // הרמה הקשה לא ניתן לנמח אותה
+function Hard_bot(){ // הרמה הקשה לא ניתן לנצח אותה
+    const cond = [arr[4] !== "o" && arr[4] !== "x",arr[4] === "x" && arr[8] === -1,arr[0] === "o" && arr[1] === "o" && arr[2] === -1,
+    arr[4] === "o" && arr[5] === "x" && arr[8] === -1,arr[4] === "o" && arr[7] === "x" && arr[8] === -1,
+    arr[4] === "o" && arr[3] === "x" && arr[8] === -1,arr[4] === "o" && arr[2] === "x" && arr[8] === -1,
+    arr[4] === "o" && arr[0] === "x" && arr[5] === -1,arr[4] === "o" && arr[2] === "x" && arr[5] === -1,
+    arr[4] === "o" && arr[6] === "x" && arr[5] === -1,arr[4] === "o" && arr[8] === "x" && arr[5] === -1,
+    arr[7] === "o" && arr[5] === "o" && arr[8] === -1,arr[0] === "o" && arr[2] === "o" && arr[1] === -1,
+    arr[2] === "o" && arr[6] === "o" && arr[1] === -1,arr[0] === "o" && arr[8] === "o" && arr[7] === -1,
+    arr[1] === "o" && arr[3] === "o" && arr[0] === -1,arr[1] === "o" && arr[2] === "o" && arr[0] === -1,
+    arr[0] === "o" && arr[3] === "o" && arr[6] === -1,arr[0] === "o" && arr[6] === "o" && arr[3] === -1,
+    arr[3] === "o" && arr[6] === "o" && arr[0] === -1,arr[0] === "o" && arr[4] === "o" && arr[8] === -1,
+    arr[0] === "o" && arr[8] === "o" && arr[4] === -1,arr[8] === "o" && arr[4] === "o" && arr[0] === -1,
+    arr[2] === "o" && arr[4] === "o" && arr[6] === -1,arr[2] === "o" && arr[6] === "o" && arr[4] === -1,
+    arr[6] === "o" && arr[4] === "o" && arr[2] === -1,arr[2] === "o" && arr[5] === "o" && arr[8] === -1,
+    arr[2] === "o" && arr[8] === "o" && arr[5] === -1,arr[8] === "o" && arr[5] === "o" && arr[2] === -1,
+    arr[3] === "o" && arr[4] === "o" && arr[5] === -1,arr[5] === "o" && arr[1] === "o" && arr[8] === -1,
+    arr[3] === "o" && arr[5] === "o" && arr[4] === -1,arr[5] === "o" && arr[4] === "o" && arr[3] === -1,
+    arr[6] === "o" && arr[7] === "o" && arr[8] === -1,arr[6] === "o" && arr[8] === "o" && arr[7] === -1,
+    arr[8] === "o" && arr[7] === "o" && arr[6] === -1,arr[1] === "o" && arr[4] === "o" && arr[7] === -1,
+    arr[1] === "o" && arr[7] === "o" && arr[4] === -1,arr[7] === "o" && arr[4] === "o" && arr[1] === -1,
+    arr[0] === "x" && arr[1] === "x" && arr[2] === -1,arr[0] === "x" && arr[2] === "x" && arr[1] === -1,
+    arr[0] === "x" && arr[8] === "x" && arr[4] === -1,arr[1] === "x" && arr[2] === "x" && arr[0] === -1,
+    arr[0] === "x" && arr[3] === "x" && arr[6] === -1,arr[0] === "x" && arr[6] === "x" && arr[3] === -1,
+    arr[3] === "x" && arr[6] === "x" && arr[0] === -1,arr[0] === "x" && arr[4] === "x" && arr[8] === -1,
+    arr[0] === "x" && arr[8] === "x" && arr[4] === -1,arr[8] === "x" && arr[4] === "x" && arr[0] === -1,
+    arr[2] === "x" && arr[4] === "x" && arr[6] === -1,arr[2] === "x" && arr[6] === "x" && arr[4] === -1,
+    arr[6] === "x" && arr[4] === "x" && arr[2] === -1,arr[2] === "x" && arr[5] === "x" && arr[8] === -1,
+    arr[2] === "x" && arr[8] === "x" && arr[5] === -1,arr[8] === "x" && arr[5] === "x" && arr[2] === -1,
+    arr[3] === "x" && arr[4] === "x" && arr[5] === -1,arr[3] === "x" && arr[5] === "x" && arr[4] === -1,
+    arr[5] === "x" && arr[4] === "x" && arr[3] === -1,arr[6] === "x" && arr[7] === "x" && arr[8] === -1,
+    arr[6] === "x" && arr[8] === "x" && arr[7] === -1,arr[8] === "x" && arr[7] === "x" && arr[6] === -1,
+    arr[1] === "x" && arr[4] === "x" && arr[7] === -1,arr[1] === "x" && arr[7] === "x" && arr[4] === -1,
+    arr[7] === "x" && arr[4] === "x" && arr[1] === -1,arr[7] === "x" && arr[5] === "x" && arr[8] === -1,
+    arr[2] === "x" && arr[6] === "x" && arr[1] === -1,arr[5] === "x" && arr[1] === "x" && arr[8] === -1]
+  
+    const action = [4,8,2,8,8,8,8,8,5,5,
+                    5,5,1,1,7,0,6,0,3,0,
+                    8,4,0,6,4,2,8,5,2,5,
+                    8,4,3,8,7,6,7,4,1,2,
+                    1,4,0,6,3,0,8,4,0,6,
+                    4,2,8,5,2,5,4,3,8,7,
+                    6,7,4,1,8,1,8] 
 
-    switch (true) {
-        case (arr[4] !== "o" && arr[4] !== "x"):cell_click(4)
-        break;
-        case (arr[4] === "x" && arr[8] === -1):cell_click(8)
-        break; 
-        case (arr[1] === "o" && arr[3] === "o" && arr[0] === -1):cell_click(0)
-        break; 
-        case (arr[1] === "o" && arr[2] === "o" && arr[0] === -1):cell_click(0) 
-        break;
-        case (arr[3] === "o" && arr[6] === "o" && arr[0] === -1):cell_click(0)
-        break;
-        case (arr[8] === "o" && arr[4] === "o" && arr[0] === -1):cell_click(0) 
-        break;
-        case (arr[2] === "o" && arr[6] === "o" && arr[1] === -1):cell_click(1)
-        break;
-        case (arr[0] === "o" && arr[2] === "o" && arr[1] === -1):cell_click(1)
-        break;
-        case (arr[7] === "o" && arr[4] === "o" && arr[1] === -1):cell_click(1)
-        break;        
-        case (arr[6] === "o" && arr[4] === "o" && arr[2] === -1):cell_click(2)
-        break;
-        case (arr[0] === "o" && arr[1] === "o" && arr[2] === -1):cell_click(2)
-        break; 
-        case (arr[8] === "o" && arr[5] === "o" && arr[2] === -1):cell_click(2)
-        break;
-        case (arr[0] === "o" && arr[6] === "o" && arr[3] === -1):cell_click(3)
-        break; 
-        case (arr[5] === "o" && arr[4] === "o" && arr[3] === -1):cell_click(3)
-        break;
-        case (arr[0] === "o" && arr[8] === "o" && arr[4] === -1):cell_click(4)
-        break; 
-        case (arr[2] === "o" && arr[6] === "o" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[3] === "o" && arr[5] === "o" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[1] === "o" && arr[7] === "o" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[2] === "o" && arr[8] === "o" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[3] === "o" && arr[4] === "o" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[0] === "o" && arr[3] === "o" && arr[6] === -1):cell_click(6)
-        break; 
-        case (arr[2] === "o" && arr[4] === "o" && arr[6] === -1):cell_click(6)
-        break;
-        case (arr[8] === "o" && arr[7] === "o" && arr[6] === -1):cell_click(6)
-        break;
-        case (arr[1] === "o" && arr[4] === "o" && arr[7] === -1):cell_click(7)
-        break;
-        case (arr[0] === "o" && arr[8] === "o" && arr[7] === -1):cell_click(7)
-        break; 
-        case (arr[6] === "o" && arr[8] === "o" && arr[7] === -1):cell_click(7)
-        break;
-        case (arr[0] === "o" && arr[4] === "o" && arr[8] === -1):cell_click(8) 
-        break;
-        case (arr[7] === "o" && arr[5] === "o" && arr[8] === -1):cell_click(8)
-        break; 
-        case (arr[2] === "o" && arr[5] === "o" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[5] === "o" && arr[1] === "o" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[6] === "o" && arr[7] === "o" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[3] === "x" && arr[6] === "x" && arr[0] === -1):cell_click(0)
-        break;
-        case (arr[1] === "x" && arr[2] === "x" && arr[0] === -1):cell_click(0)
-        break;
-        case (arr[8] === "x" && arr[4] === "x" && arr[0] === -1):cell_click(0) 
-        break;
-        case (arr[0] === "x" && arr[2] === "x" && arr[1] === -1):cell_click(1)
-        break;
-        case (arr[7] === "x" && arr[4] === "x" && arr[1] === -1):cell_click(1)
-        break;
-        case (arr[2] === "x" && arr[6] === "x" && arr[1] === -1):cell_click(1)
-        break;
-        case (arr[0] === "x" && arr[1] === "x" && arr[2] === -1):cell_click(2)
-        break;
-        case (arr[6] === "x" && arr[4] === "x" && arr[2] === -1):cell_click(2)
-        break;
-        case (arr[8] === "x" && arr[5] === "x" && arr[2] === -1):cell_click(2)
-        break;
-        case (arr[5] === "x" && arr[4] === "x" && arr[3] === -1):cell_click(3)
-        break;
-        case (arr[0] === "x" && arr[6] === "x" && arr[3] === -1):cell_click(3)
-        break;
-        case (arr[0] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[0] === "x" && arr[8] === "x" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[2] === "x" && arr[6] === "x" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[1] === "x" && arr[7] === "x" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[3] === "x" && arr[5] === "x" && arr[4] === -1):cell_click(4)
-        break;
-        case (arr[2] === "x" && arr[8] === "x" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[3] === "x" && arr[4] === "x" && arr[5] === -1):cell_click(5)
-        break;
-        case (arr[0] === "x" && arr[3] === "x" && arr[6] === -1):cell_click(6)
-        break; 
-        case (arr[2] === "x" && arr[4] === "x" && arr[6] === -1):cell_click(6)
-        break;
-        case (arr[8] === "x" && arr[7] === "x" && arr[6] === -1):cell_click(6)
-        break;
-        case (arr[6] === "x" && arr[8] === "x" && arr[7] === -1):cell_click(7)
-        break;
-        case (arr[1] === "x" && arr[4] === "x" && arr[7] === -1):cell_click(7)
-        break;
-        case (arr[6] === "x" && arr[7] === "x" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[2] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[0] === "x" && arr[4] === "x" && arr[8] === -1):cell_click(8) 
-        break;
-        case (arr[7] === "x" && arr[5] === "x" && arr[8] === -1):cell_click(8)
-        break;
-        case (arr[5] === "x" && arr[1] === "x" && arr[8] === -1):cell_click(8)
-        break;
-        
-        default: return default1()   
+    for ( let i = 0 ; i<cond.length; i++ ){
+        if (cond[i] === true){
+            action[i]  
+            return cell_click(action[i] )
+        }
     }
+    return default1() 
 }
+    
+
+ 
 
 function default1(){ //פונקציה שנתונת תא אקראי
     while (true) {
