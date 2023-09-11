@@ -3,6 +3,7 @@ let xo = "1" // ו0 שווה לעיגול xכדי לשנות  בין איקס ל
 let rounds =0   // כדי לדעת כמות סבבים
 let win_x=0 // כדי לדעת כמות נצחונות של איקס
 let win_o=0// כדי לדעת כמות נצחונות של עיגול
+let on_or_off_rotation = 1 //  בלבד הי מופעלת שלוחצים על הסמל של הסיבויםon_or_off_rotation_for_pattern() להדלק ולכבות את הסיבוב זה רלוונטי לפונקציה הזו 
 
 // בהתחלה אני מגדיר מחרוזת עם 9 מספרים שכולם מוגדרים -1 זחשוב להמשך המשחק
 let arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
@@ -57,7 +58,7 @@ document.getElementById('x_or_o').style.display="block";  // מציג את הא�
 function Hard_last_game(){ //  פןקציה זו מופעלת על ידי בחירה ששחקן יתחיל ראשון בעת משחק נגד מחשב ברשמה קשה ומפעילה מספר פוקציות
     hide_button() 
     Hide_select()
-    on_rotation_for_pattern()
+    on_or_off_rotation_for_pattern()
     on_blink_for_x()
  
         return game_type=3;  // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
@@ -67,7 +68,7 @@ function Hard(){ // פוקציה זו מופעלת על ידי בחירה שהמ
     hide_button()
     Hide_select()
     setTimeout(function () {on_blink_for_o(),cell_click(4);}, 1300);      // צעד ראשון שהמחשב תופס את המרכז
-    on_rotation_for_pattern()
+    on_or_off_rotation_for_pattern()
     
         return game_type=3;   // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
 }
@@ -115,18 +116,24 @@ function Hide_divs(){  // תאי הלוח מוסתרים ומוצגים בהתא
     }
 }
 
-function rotation_for_pattern() {
-    const div2 = document.querySelector('#pattern');
-    div2.id = div2.id === 'rotation' ? 'pattern' : 'rotation';
-  }
-function on_rotation_for_pattern(){ // פוקציה זו גורמת ללוח להסתובב
-    const div2 = document.querySelector('#pattern');
-        div2.id="rotation"; 
-}
-function off_rotation_for_pattern(){ // פוקציה זו גורמת ללוח להפסיק להסתובב
+
+
+function on_or_off_rotation_for_pattern() {
+  const div2 = document.querySelector('#pattern');
+  const div3 = document.querySelector('#rotation');
+
+
+ switch (on_or_off_rotation) {
+    case 0 : div3.id = "pattern",on_or_off_rotation = 1
+        break;
+    case 1:
+        return div2.id = "rotation",on_or_off_rotation = 0
+        break;
+  
     
-    const div2 = document.querySelector('#rotation');
-        div2.id="pattern"; 
+    
+
+  }
 }
 function Hide_pattern(){ // מסתיר או מציג את החלק התחתון של הלוח
     for (let index = 1; index <8; index++) {
