@@ -45,7 +45,8 @@ h3{
     rgb(18, 135, 178) 0px 0px 0px 5px, 
     rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
     rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;    
+    rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+    margin-top: 1%;    
     }
 .cells1{
     border-radius: 16px;
@@ -123,7 +124,7 @@ h3{
         background: rgb(random(255), random(255), random(255));
       }
       
-@media only screen and (max-width: 550px){
+@media only screen and (max-width: 650px){
 h3{
     width: 250px;
     }
