@@ -100,14 +100,17 @@ function hide_button(){
 }
                            
 
-function Cleaning_results(){// מתאפס כל הנתונים וגם הלוח מפסיק להסתובב  reset בעת לחיצה על כפתור  
+function Cleaning_results(){//  מתאפס כל הנתונים וגם הלוח מתנקה reset בעת לחיצה על כפתור  
     rounds =0, win_x=0, win_o=0
     document.getElementById("c-5").textContent = win_x,
     document.getElementById("c-6").textContent = rounds,
     document.getElementById("c-7").textContent = win_o;
-    return arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
+    for (let index = 0; index <arr.length; index++) {
+        document.getElementById(`cell-${index}`).textContent = null; 
 }
+return arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
 
+}
 
 function Hide_divs(){  // תאי הלוח מוסתרים ומוצגים בהתאם  
     for (let index = 0; index <arr.length; index++) {
