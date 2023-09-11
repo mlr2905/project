@@ -84,17 +84,32 @@ h3{
 
     }   @keyframes blinking {
         0% {
-          background-color: #06c3d1;
+          background-color: #d10676d3;
           border: 3px solid #666;
         }
-        100% {
-          background-color: #0d8aa6;
+        25% {
+          background-color: #a60d21;
         }
+        
+        50% {
+            background-color: #06d16cd3;
+            border: 3px solid #666;         
+        }
+        
+        75% {
+            background-color: #0da657;
+        }
+            
+        100% {
+            background-color: #d10676d3;
+            border: 3px solid #666;          }
+        
+        
       }
       *[id^="blink-"]{
          width: 91px;
         height: 89px;
-        animation: blinking 1.5s ;
+        animation: blinking 2.0s ;
       }
 @media only screen and (max-width: 550px){
 h3{
@@ -444,3 +459,6 @@ img{
      opacity: 0.2;
     }
    }
+   #c-3 title {
+    display: block;
+  }
