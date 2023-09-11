@@ -23,6 +23,7 @@ function select(){
 function Easy(){
     Hide_select() //  מסתיר את הרדימה הנפתחת
     hide_button() // מסתירה את הכפתורים
+    on_blink_for_x()
         return game_type=2;
 }
 function bot_or_you(){  // #2   פוקציה זו מציג בפניה המשתמש שתי אופציות 1 שהוא מתחיל והשניה שהמחשב מתחיל
@@ -43,11 +44,11 @@ document.getElementById('x_or_o').style.display="none";   // זה הגדרתי �
 document.getElementById('bot_or_you').style.display="none"; // זה הגדרתי שם במידה התחרט ורוצה לשחק נגד שחקן אחר
 document.getElementById('x_or_o').style.display="block";  // מציג את האפשרויות 
         document.getElementById('x_first').onclick = function(){ // מתחיל  X אפשרות ראשון ה
-            return xo=1, Two_Player(),document.getElementById('x_or_o').style.display="none";  //
+            return xo=1, Two_Player(),on_blink_for_x(),document.getElementById('x_or_o').style.display="none";  //
 
         };
         document.getElementById('o_first').onclick = function(){ //מתחיל  X אפשרות שני ה
-           return  xo=0,Two_Player(),document.getElementById('x_or_o').style.display="none";
+           return  xo=0,Two_Player(),on_blink_for_o(),document.getElementById('x_or_o').style.display="none";
 
         };
         } 
@@ -56,14 +57,18 @@ document.getElementById('x_or_o').style.display="block";  // מציג את הא�
 function Hard_last_game(){ //  פןקציה זו מופעלת על ידי בחירה ששחקן יתחיל ראשון בעת משחק נגד מחשב ברשמה קשה ומפעילה מספר פוקציות
     hide_button() 
     Hide_select()
-    on_rotation_for_pattern() 
+    on_rotation_for_pattern()
+    on_blink_for_x()
+ 
         return game_type=3;  // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
 }
 function Hard(){ // פוקציה זו מופעלת על ידי בחירה שהמחשב יתחיל ראשון ברמה הקשה ומפעילה מספר פוקציות
+    
     hide_button()
     Hide_select()
-    setTimeout(function () {cell_click(4);}, 1300);      // צעד ראשון שהמחשב תופס את המרכז
+    setTimeout(function () {on_blink_for_o(),cell_click(4);}, 1300);      // צעד ראשון שהמחשב תופס את המרכז
     on_rotation_for_pattern()
+    
         return game_type=3;   // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
 }
 
@@ -144,7 +149,7 @@ function cell_click(cell_number){ //  פוקציה אשר בודקת תורמי 
     }
 
     if (arr[cell_number] !="x" && xo == "1" && arr[cell_number] !="o") { // מפניה לפוקציות נוספות X בודק עם התא הנבחר פנוי ואם זה תור של 
-        on_blink_for_x() //
+         //
         const img = document.createElement("img");
         img.src = "imgs/x.png"; 
         const src = document.getElementById(`cell-${cell_number}`);
@@ -154,11 +159,10 @@ function cell_click(cell_number){ //  פוקציה אשר בודקת תורמי 
         win() // מפנה לפוקציה בדיקת ניצחון
         xo=3 // נועל את האפשרות ללחוץ על הלוקח
         //X פוקציה זו מחכה שהסתיים בדיקה של הנצחון ואז מפנה לבדיקה של סיום משחק וכיבוי האור המהבב מעל ה
-        setTimeout(function () {finish1(),off_blink_for_x();}, 1300); 
+        setTimeout(function () {finish1(),off_blink_for_x(),on_blink_for_o();}, 1300); 
           
     }
     if (arr[cell_number] !="o" && xo == "0" && arr[cell_number] !="x") { //O כנל בהקשר של 
-        on_blink_for_o()
         const img = document.createElement("img");
         img.src = "imgs/o.png";
         const src = document.getElementById(`cell-${cell_number}`);
@@ -167,7 +171,7 @@ function cell_click(cell_number){ //  פוקציה אשר בודקת תורמי 
         xo=3
         win()
         xo=
-        setTimeout(function () {finish2(),off_blink_for_o();}, 1300);
+        setTimeout(function () {finish2(),off_blink_for_o(),on_blink_for_x();}, 1300);
     }
 }
 
