@@ -85,6 +85,12 @@ h3{
     
     } 
   
+    *[id^="blink-"]{
+        width: 91px;
+       height: 89px;
+       animation: blinking 2.0s infinite ;
+     }
+
     @keyframes blinking {
         0% {
           background-color:  teal;
@@ -110,16 +116,7 @@ h3{
         100% {
                 background-color:teal;
             }
-            
-        
-        
       }
-      *[id^="blink-"]{
-         width: 91px;
-        height: 89px;
-        animation: blinking 2.0s infinite ;
-      }
-
        random-bgr{
         background: rgb(random(255), random(255), random(255));
       }
