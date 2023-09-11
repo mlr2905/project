@@ -431,16 +431,16 @@ img{
     margin-right: 40%;
   }
   .mr{
-    animation: blink-animation 2s steps(5, start) infinite;
-    -webkit-animation: blink-animation 2s steps(5, start) infinite;
-  }
-  @keyframes blink-animation {
-    to {
-      visibility: hidden;
+    animation: blinkMe 5s linear infinite;
+   }
+   @keyframes blinkMe {
+    0% {
+     opacity: 0.2;
     }
-  }
-  @-webkit-keyframes blink-animation {
-    to {
-      visibility: hidden;
+    50% {
+     opacity: 1;
     }
-  }
+    100% {
+     opacity: 0.2;
+    }
+   }
