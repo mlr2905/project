@@ -208,6 +208,13 @@ img{
     position: unset;
     top: 60%;
     }
+    .mr{
+        position: relative;
+        margin: 0;
+        position: absolute;
+        margin-left: 20%;
+        margin-right: 20%;
+      }
 } 
 
 .top { 
