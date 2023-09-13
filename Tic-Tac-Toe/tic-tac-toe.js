@@ -180,9 +180,9 @@ function cell_click(cell_number){ //  פוקציה אשר בודקת תורמי 
         const src = document.getElementById(`cell-${cell_number}`);
         src.appendChild(img); //בתא הנבחר X  שם תמונה של 
         arr[cell_number] = "x"//זהה למספר התא indexב  X מגדיר מחרוזת 
-        xo=3 // נועל את האפשרות ללחוץ על הלוקח
+        xo=3 // נועל את האפשרות ללחוץ על הלוח
         win() // מפנה לפוקציה בדיקת ניצחון
-        xo=3 // נועל את האפשרות ללחוץ על הלוקח
+        xo=3 // נועל את האפשרות ללחוץ על הלוח
         //X פוקציה זו מחכה שהסתיים בדיקה של הנצחון ואז מפנה לבדיקה של סיום משחק וכיבוי האור המהבב מעל ה
         setTimeout(function () {finish1(),off_blink_for_x(),on_blink_for_o();}, 1300); 
           
