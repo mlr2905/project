@@ -8,6 +8,21 @@ let on_or_off_rotation = 1 //  בלבד הי מופעלת שלוחצים על ה
 // בהתחלה אני מגדיר מחרוזת עם 9 מספרים שכולם מוגדרים -1 זחשוב להמשך המשחק
 let arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
 
+// div פונקציה שיצורת את כל 
+//function createDivs() {  
+ //   const divs = [];
+ //   for (let i = 0; i < 8; i++) {
+//const div = document.createElement("div");
+ //     div.className = "cell";
+  //    div.id = `cell-${i}`;
+  //    div.style.display = "none";
+   //   div.onclick = `cell_click(${i})`;
+   //   divs.push(div);
+   /// }
+  //  return divs;
+  //}
+
+
 // פונקציה שאחראית לנתב לפוקציה רצוי ברגע שבוחרים באחד מאפשרויות
 function select(){
             
