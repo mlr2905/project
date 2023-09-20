@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+    *[class~="board"]{
+    background: linear-gradient(to right, #fc6767, #ec008c);
+    border-radius: 10px;
+    box-shadow: 0 0 10px;
+}
+
+   .board1{
+    height: 500px;
+    width: 500px;
+    padding: 20px;
+
+   }
+   .board2{
+    padding: 10px;
+
+    height: 700px;
+    width: 700px;
+   }
+   .board3{
+    padding: 5px;
+
+    height: 1000px;
+    width: 1000px;
+   }
+   .board4{
+    height: 1100px;
+    width: 1100px;
+   }
+  
+    
+
+*[id^="cell-"]{
+    border: 5px solid  rgb(15, 106, 138);
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    border-radius: 10px;
+    margin-left: 10%;
+
+    }
+    img{
+        width: 100px;
+    height: 100px;
+    background: linear-gradient(to right, #fc6767, #ec008c);
+    border-radius: 9px;
+    box-shadow: 0 0 9px;
+    border: 5px solid  rgb(15, 106, 138);
+    margin-right: 4%;
+    margin-top: 3%;
+    }
+    .card .front-view span{
+    font-size: 40px;
+    color: #6563ff;
+}
+.front .back-view{
+
+    transform: rotateY(-180deg);
+}
+
+.front.flip .back-view{
+    transform: rotateY(0);
+}
+.front.flip .front-view{
+    transform: rotateY(180deg);
+}
+.card.shake{
+    animation: shake 0.35s ease-in-out;
+}
+@keyframes shake {
+    0%, 100%{
+        transform: translateX(0);
+    }
+    20%{
+        transform: translateX(-13px);
+    }
+    40%{
+        transform: translateX(13px);
+    }
+    60%{
+        transform: translateX(-8px);
+    }
+    80%{
+        transform: translateX(8px);
+    }
+}
+*[id^="cell-"] {
+  visibility: hidden;
+}
+*[class~="front"]{
+
+    background-image: url(images/card_back.png);
+    background-size: 100% 100%;
+    border: 5px solid  rgb(15, 106, 138);
+    border-radius: 20px;
+    margin: 1px;
+}
+.row{
+    margin: 2px;
+
+}
+
+</style>
+<body>
+    
+    <select  onchange="select()" id="select" class="  button   select text-center" required>
+        <option class="button" value="">  </option>
+        <option class="button" value="1" id=""><b>4X4</b></option>
+        <option value="2" id=""><B>6X6</B></option>
+        <option value="3" id=""><B>8X8</B></option>
+        <option value="4" id=""><B>10X10</B></option>
+
+
+        </select>
+    <button type="button" onclick="end()">h</button>
+<div class="board" id="board"></div>
+
+
+    <script>
+        let hide_and_show_img =-1
+        let boardDiv = document.getElementById("board");
+        let id =0
+        let cellnumber="0"
+        let maxarr=0
+        const doubled =[]
+        const arr = [];
+        const arr2 =[]
+
+            function random_number_arr(){
+
+            for (let i = 0; i < maxarr; i++) {
+            arr.push(i, i);
+            }
+            for (let j = 0; j < maxarr*2; j++) {
+            arr2.push(j);
+
+            }
+        }
+
+            
+        
+           
+        
+     function select(){
+            
+        let option = document.getElementById('select').value;  
+        switch(option){
+            case "1":maxarr=8,createCols(4, 4)
+            break;
+            case "2":maxarr=18 ,createCols(6, 6) 
+            break;
+            case "3":maxarr=32 ,createCols(8, 8)
+            break;
+            case "4":maxarr=50,createCols(10, 10)
+            break;
+        }
+    }
+    
+function css(rows){
+    if(rows === 4){
+  return  1;
+}
+if(rows === 6){
+ return 2
+}
+if(rows === 8){
+  return  3
+}
+if(rows === 10){
+  return  4;
+}
+}
+    function cell_click(a) {
+    const div= document.querySelector(`#cell-${a}`)
+    div.id =`card-${a}`;
+
+
+    addCellClick2(`front-${a}`,a)
+
+  
+
+      
+
+    }
+    function cell_click2(a) {
+    const div= document.querySelector(`#card-${a}`)
+    div.id =`cell-${a}`;
+    addCellClick(`front-${a}`,a)
+
+  
+
+      
+
+    }
+
+
+  
+
+
+
+ 
+
+
+
+
+    function createCols(rows, cols) {
+        random_number_arr()
+        const a =  css(rows)
+        const parentDiv = document.getElementById("board");
+        parentDiv.classList.add(`board${a}`);
+        const firstRowDiv = document.createElement("div");
+        firstRowDiv.classList.add("from-row");
+        parentDiv.appendChild(firstRowDiv);
+
+  for (let i = 0; i < rows; i++) {
+
+    const rowDiv = document.createElement("div");
+    rowDiv.classList.add("row");
+    parentDiv.appendChild(rowDiv);
+
+
+    for (let j = 0; j < cols; j++) {
+        const fnun =get_random_div()
+        const imgN= arr[fnun]
+
+    const parentDiv = document.getElementById("board");
+    const frontDiv = document.createElement("div");
+    frontDiv.classList.add("front");
+    frontDiv.id = `front-${fnun}`
+    rowDiv.appendChild(frontDiv);
+
+    addCellClick(`front-${fnun}`,fnun)
+
+
+    
+      const cellDiv = document.createElement("div");
+      cellDiv.classList.add("cell");
+      cellDiv.id = `cell-${fnun}`
+const childDivs = parentDiv.querySelectorAll("cell");
+        frontDiv.appendChild(cellDiv);
+      const img = document.createElement("img");
+      const src = document.getElementById(`cell-${fnun}`);
+        img.src = `images/img-${imgN}.png`; 
+        src.appendChild(img);
+        
+      
+        id++
+    }
+  }
+
+  hide_and_show_img =0
+
+  parentDiv.classList.add("flex");
+  parentDiv.style.display = "flex";
+  parentDiv.style.flexDirection = "row";
+
+  // Set the flexbox properties for the rows.
+  for (let i = 0; i < rows; i++) {
+    const rowDiv = document.querySelector(`.row:nth-child(${i + 1})`);
+    rowDiv.classList.add("flex");
+    rowDiv.style.flexDirection = "column";
+  }
+}
+
+function addCellClick(divId,fnun) {
+  // מצא את הדיב
+  const div = document.getElementById(divId);
+
+  // הוסף את הפונקציה `cell_click()` לאירוע `click` של כל תמונה
+    div.addEventListener("click", function() {
+      // קריאה לפונקציה `cell_click()` עם מספר התמונה
+      cell_click(fnun);
+    });
+  
+}
+function addCellClick2(divId,fnun) {
+  // מצא את הדיב
+  const div = document.getElementById(divId);
+
+  // הוסף את הפונקציה `cell_click()` לאירוע `click` של כל תמונה
+    div.addEventListener("click", function() {
+      // קריאה לפונקציה `cell_click()` עם מספר התמונה
+      cell_click2(fnun);
+    });
+  
+}
+
+
+function random_number(){
+    const index = Math.floor(Math.random() * arr2.length);
+    return index
+}
+
+function get_random_div(arr2) {
+    while(true) {
+    const index =  random_number();
+   
+    if (doubled.filter((doubled) => doubled === index).length < 1){
+      return  doubled.push(index),index;
+    break;
+    }
+    else{
+            continue;
+        }
+    
+  }
+}
+
+
+
+
+
+function kk(){
+    for (let i = 0; i <= id; i++){
+    const img = document.createElement("img");
+    const src = document.getElementById(`cell-${i}`);
+        img.src = `images/img-${i}.png`; 
+        src.appendChild(img);
+   
+
+}
+}
+
+function end(){ // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
+    
+    window.setTimeout( function() {window.location.reload();}, 0.1);
+}
+    </script>
+</body>
+</html>
