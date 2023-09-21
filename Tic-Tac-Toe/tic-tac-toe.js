@@ -197,7 +197,7 @@ function cell_click(cell_number){ //  פוקציה אשר בודקת תורמי 
         arr[cell_number] = "o"
         xo=3
         win()
-        xo=
+        xo=3
         setTimeout(function () {finish2(),off_blink_for_o(),on_blink_for_x();}, 1300);
     }
 }
