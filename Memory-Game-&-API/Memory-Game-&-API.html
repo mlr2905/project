@@ -75,18 +75,18 @@
     font-size: 40px;
     color: #6563ff;
 }
-.front .back-view{
+*[id^="card-"]{
 
     transform: rotateY(-180deg);
 }
 
-.front.flip .back-view{
+*[id^="card-"]{
     transform: rotateY(0);
 }
-.front.flip .front-view{
+*[id^="card-"]{
     transform: rotateY(180deg);
 }
-.card.shake{
+.shake{
     animation: shake 0.35s ease-in-out;
 }
 @keyframes shake {
@@ -109,6 +109,12 @@
 *[id^="cell-"] {
   visibility: hidden;
 }
+*[class~="front"]:hover {
+  background-color: #fff;
+  opacity: 0.5;
+  /* מוסיף תמונה ל-div כאשר העכבר מרחף מעליו */
+  background-image: url("images/loader.gif");
+}
 *[class~="front"]{
 
     background-image: url(images/card_back.png);
@@ -122,6 +128,10 @@
 
 }
 
+.Hide{
+    visibility: hidden;
+
+    }
 </style>
 <body>
     
@@ -139,41 +149,87 @@
 
 
     <script>
-        let hide_and_show_img =-1
-        let boardDiv = document.getElementById("board");
-        let id =0
-        let cellnumber="0"
-        let maxarr=0
-        const doubled =[]
-        const arr = [];
-        const arr2 =[]
+
+
+class Board {
+  constructor(_pairs,_maxarr,_doubled,_freeze,_arr,_arr2,_arr3,_arr4) {
+    this.pairs = _pairs;
+    this.maxarr = _maxarr;
+    this.doubled = _doubled;
+    this.freeze = _freeze
+    this.arr = _arr;
+    this.arr2 = _arr2;
+    this.arr3 = _arr3;
+    this.arr4 = _arr4;
+  }
+    set_pairs(_pairs) {
+        this.pairs = _pairs;
+    }
+    set_maxarr(_maxarr) {
+        this.maxarr = _maxarr;
+    }
+    set_doubled(_doubled) {
+        this.doubled = _doubled;
+    }
+    set_arr(_arr) {
+        this.arr = _arr;
+    }
+    set_arr2(_arr2) {
+        this.arr2 = _arr2;
+    }
+    set_arr3(_arr3) {
+        this.arr3 = _arr3;
+    }
+    set_arr4(_arr4) {
+        this.arr4 = _arr4;
+    }
+    
+}
+
+function createPairs() {
+    Board._pairs = [];
+
+  for (let i = 0; i <  Board._maxarr*2; i++) {
+    Board._pairs.push([i, i + 1]);
+  }
+
+  return Board._pairs;
+}
+
+function deDefinition_of_properties(){
+    Board._arr = [];
+    Board._arr2 = [];
+    Board._arr3 = [];
+    Board._arr4 = [];
+    Board._doubled = [];
+    Board._freeze = 0
+}
+
+
 
             function random_number_arr(){
-
-            for (let i = 0; i < maxarr; i++) {
-            arr.push(i, i);
+               
+            for (let i = 0; i < Board._maxarr; i++) {
+                Board._arr.push(i, i);
             }
-            for (let j = 0; j < maxarr*2; j++) {
-            arr2.push(j);
+            for (let j = 0; j < Board._maxarr*2; j++) {
+                Board._arr2.push(j);
 
             }
         }
 
-            
-        
-           
-        
+             
      function select(){
             
         let option = document.getElementById('select').value;  
         switch(option){
-            case "1":maxarr=8,createCols(4, 4)
+            case "1":Board._maxarr=8,createCols(4, 4)
             break;
-            case "2":maxarr=18 ,createCols(6, 6) 
+            case "2":Board._maxarr=18 ,createCols(6, 6) 
             break;
-            case "3":maxarr=32 ,createCols(8, 8)
+            case "3":Board._maxarr=32 ,createCols(8, 8)
             break;
-            case "4":maxarr=50,createCols(10, 10)
+            case "4":Board._maxarr=50,createCols(10, 10)
             break;
         }
     }
@@ -193,39 +249,94 @@ if(rows === 10){
 }
 }
     function cell_click(a) {
+        if( Board._freeze === 0){
     const div= document.querySelector(`#cell-${a}`)
     div.id =`card-${a}`;
-
-
+    Board._arr3.push(a);
     addCellClick2(`front-${a}`,a)
-
-  
-
-      
+    checkWin(Board._arr3,Board._pairs)
+        }
 
     }
+
     function cell_click2(a) {
     const div= document.querySelector(`#card-${a}`)
     div.id =`cell-${a}`;
     addCellClick(`front-${a}`,a)
-
-  
-
-      
+    pop_arr3(a)
 
     }
 
+    function pop_arr3(pop){
+        Board._arr3.pop(pop)
 
+    }
+
+    function checkWin(_arr3, _pairs) {
+
+        Board._arr3.sort();
+        const a =Board._arr3[0]
+        const b =Board._arr3[1]
+        Board._arr4.push(a);
+        Board._arr4.push(b);
+        let d =-1
+
+        if( a >= 0 && b >= 0){
+            for (let i = 0; i < _pairs.length; ++i) {
+                d++
+            const c=Board._pairs[i] 
+                
+            if (c[0] === a && c[1] ===b) {
+                alert("win");
+                
+                    const div1= document.querySelector(`#front-${a}`)
+                    div1.classList.add("Hide");
+                    const div2= document.querySelector(`#front-${b}`)
+                    div2.classList.add("Hide");
+                    return cleaning(a),cleaning(b)
+                    break;
+                }
+                
+            if (c[0] !== a && c[1] !== b && d === Board._maxarr*2-1){
+                    
+                        freeze()
+                        const div3= document.querySelector(`#front-${a}`)
+                        div3.classList.add("shake");
+                        const div4=document.querySelector(`#front-${b}`)
+                        div4.classList.add("shake");
+                        setTimeout(function () {RemoveClass(a,b),cell_click2(a),cell_click2(b),freeze();}, 1100);
+                        
+                    }
+                   
+            }
+        }
+
+    }
+            
+
+       function cleaning(a){
+        pop_arr3(a)
+
+       }
+        
+    function freeze(){
+        if (Board._freeze === 0) { 
+            return Board._freeze = 1; 
+        } 
+        else { 
+            return Board._freeze = 0; }
+    }
   
-
-
-
- 
-
-
-
+ function RemoveClass(a,b){
+    const div1= document.querySelector(`#front-${a}`)
+    div1.classList.remove("shake");
+    const div2= document.querySelector(`#front-${b}`)
+    div2.classList.remove("shake");
+ }
 
     function createCols(rows, cols) {
+        deDefinition_of_properties()
+        createPairs()
         random_number_arr()
         const a =  css(rows)
         const parentDiv = document.getElementById("board");
@@ -243,7 +354,7 @@ if(rows === 10){
 
     for (let j = 0; j < cols; j++) {
         const fnun =get_random_div()
-        const imgN= arr[fnun]
+        const imgN= Board._arr[fnun]
 
     const parentDiv = document.getElementById("board");
     const frontDiv = document.createElement("div");
@@ -262,15 +373,13 @@ const childDivs = parentDiv.querySelectorAll("cell");
         frontDiv.appendChild(cellDiv);
       const img = document.createElement("img");
       const src = document.getElementById(`cell-${fnun}`);
-        img.src = `images/img-${imgN}.png`; 
+        img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${imgN}.png`; 
         src.appendChild(img);
         
       
-        id++
     }
   }
 
-  hide_and_show_img =0
 
   parentDiv.classList.add("flex");
   parentDiv.style.display = "flex";
@@ -309,16 +418,20 @@ function addCellClick2(divId,fnun) {
 
 
 function random_number(){
-    const index = Math.floor(Math.random() * arr2.length);
+    const index = Math.floor(Math.random() * Board._arr2.length);
     return index
 }
 
-function get_random_div(arr2) {
+function get_random_div() {
     while(true) {
     const index =  random_number();
    
-    if (doubled.filter((doubled) => doubled === index).length < 1){
-      return  doubled.push(index),index;
+    const indexExistsInDoubled = Board._doubled.includes(index);
+
+if (!indexExistsInDoubled) {
+   return Board._doubled.push(index),index;;
+
+
     break;
     }
     else{
@@ -332,16 +445,7 @@ function get_random_div(arr2) {
 
 
 
-function kk(){
-    for (let i = 0; i <= id; i++){
-    const img = document.createElement("img");
-    const src = document.getElementById(`cell-${i}`);
-        img.src = `images/img-${i}.png`; 
-        src.appendChild(img);
-   
 
-}
-}
 
 function end(){ // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
     
