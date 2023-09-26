@@ -18,6 +18,8 @@
     justify-content: center;
     min-height: 100vh;
     background-image: url(images/poketheme.jpg);
+    background-repeat: no-repeat;
+
 }
     *[class~="board"]{
     background: linear-gradient(to right, #fc6767af, #ec008ebf);
@@ -156,10 +158,50 @@
     <button type="button" onclick="end()">h</button>
 <div class="board" id="board"></div>
 
+<audio id="Play">
+    <source src="pokemon.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="Play1">
+    <source src="new.mp3" type="audio/mpeg">
+  </audio>
 
     <script>
+fetchKantoPokemon()
 
+function fetchKantoPokemon(){
+fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+  .then(response => response.json())
+  .then(function(allpokemon){
+  allpokemon.results.forEach(function(pokemon){
+    fetchPokemonData(pokemon);
+  })
+})
+}
 
+function playAudio() {
+    let x = document.getElementById("Play"); 
+ 
+  x.play(); 
+} 
+
+function pauseAudio() { 
+    let x = document.getElementById("Play"); 
+
+    
+  x.pause(); 
+} 
+
+function playAudio1() { 
+    let v = document.getElementById("Play1"); 
+
+  v.play(); 
+} 
+
+function pauseAudio1() {
+    let v = document.getElementById("Play1"); 
+ 
+  v.pause(); 
+} 
 class Board {
   constructor(_pairs,_maxarr,_doubled,_freeze,_arr,_arr2,_arr3,_arr4) {
     this.pairs = _pairs;
@@ -259,10 +301,12 @@ if(rows === 10){
 }
 
     function cell_click(a) {
+       
+    
         if( Board._freeze === 0){
     const div1 = document.querySelector(`#front-${a}`);
     const div2 = document.querySelector(`#Hide-${a}`);
-
+    
     while (true){
         if ( div2 == null && div1 !== null){
             aa(a)
@@ -273,7 +317,6 @@ if(rows === 10){
             break;
         }
     }
-
     Board._arr3.push(a);
     checkWin(Board._arr3,Board._pairs)
         }
@@ -298,10 +341,7 @@ function bb(a){
 }
 
 
-    function pop_arr3(pop){
-        Board._arr3.pop(pop)
-
-    }
+  
 
     function checkWin(_arr3, _pairs) {
 
@@ -367,6 +407,8 @@ function bb(a){
         createPairs()
         random_number_arr()
         const a =  css(rows)
+        const audio = document.getElementById('Audio');
+
         const parentDiv = document.getElementById("board");
         parentDiv.classList.add(`board${a}`);
         const firstRowDiv = document.createElement("div");
