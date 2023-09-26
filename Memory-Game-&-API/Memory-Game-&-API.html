@@ -17,9 +17,10 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    background-image: url(images/poketheme.jpg);
 }
     *[class~="board"]{
-    background: linear-gradient(to right, #fc6767, #ec008c);
+    background: linear-gradient(to right, #fc6767af, #ec008ebf);
     border-radius: 10px;
     box-shadow: 0 0 10px;
 }
@@ -62,9 +63,9 @@
 
     }
     img{
-        width: 100px;
+    width: 100px;
     height: 100px;
-    background: linear-gradient(to right, #fc6767, #ec008c);
+    background: linear-gradient(to right, #fc6767af, #ec008ebf);
     border-radius: 9px;
     box-shadow: 0 0 9px;
     border: 5px solid  rgb(15, 106, 138);
@@ -85,6 +86,15 @@
 }
 *[id^="card-"]{
     transform: rotateY(180deg);
+}
+*[id^="cell-"] {
+  visibility: hidden;
+}
+*[id^="Hide-"] {
+  visibility: hidden;
+}
+*[id^="card-"] {
+    visibility: visible
 }
 .shake{
     animation: shake 0.35s ease-in-out;
@@ -123,6 +133,7 @@
 }
 .row{
     margin: 2px;
+    background: linear-gradient(to right, #fc6767af, #ec008ebf);
 
 }
 
@@ -246,24 +257,46 @@ if(rows === 10){
   return  4;
 }
 }
+
     function cell_click(a) {
         if( Board._freeze === 0){
-    const div= document.querySelector(`#cell-${a}`)
-    div.id =`card-${a}`;
+    const div1 = document.querySelector(`#front-${a}`);
+    const div2 = document.querySelector(`#Hide-${a}`);
+
+    while (true){
+        if ( div2 == null && div1 !== null){
+            aa(a)
+            break;
+        }
+        if ( div1 == null && div2 !== null){
+            bb(a)
+            break;
+        }
+    }
+
     Board._arr3.push(a);
-    addCellClick2(`front-${a}`,a)
     checkWin(Board._arr3,Board._pairs)
         }
 
     }
 
-    function cell_click2(a) {
-    const div= document.querySelector(`#card-${a}`)
-    div.id =`cell-${a}`;
-    addCellClick(`front-${a}`,a)
-    pop_arr3(a)
+function aa(a){
+    const div = document.querySelector(`#front-${a}`);
+    div.id =  `Hide-${a}`
+    const div1 = document.querySelector(`#cell-${a}`);
+    div1.id = `card-${a}`
 
-    }
+
+}
+
+function bb(a){
+    const div = document.querySelector(`#Hide-${a}`);
+    div.id =  `front-${a}`
+    const div1 = document.querySelector(`#card-${a}`);
+    div1.id = `cell-${a}`;
+
+}
+
 
     function pop_arr3(pop){
         Board._arr3.pop(pop)
@@ -286,23 +319,23 @@ if(rows === 10){
                 
             if (c[0] === a && c[1] ===b) {
                 alert("win");
-                pop_arr3(a)
-                    const div1= document.querySelector(`#front-${a}`)
+                    const div1= document.querySelector(`#card-${a}`)
                     div1.classList.add("Hide");
-                    const div2= document.querySelector(`#front-${b}`)
+                    const div2= document.querySelector(`#card-${b}`)
                     div2.classList.add("Hide");
-                    cleaning(b)
+                    Board._arr3=[]
                     break;
                 }
                 
             if (c[0] !== a && c[1] !== b && d === Board._maxarr*2-1){
                     
                         freeze()
-                        const div3= document.querySelector(`#front-${a}`)
+                        const div3= document.querySelector(`#Hide-${a}`)
                         div3.classList.add("shake");
-                        const div4=document.querySelector(`#front-${b}`)
+                        const div4=document.querySelector(`#Hide-${b}`)
                         div4.classList.add("shake");
-                        setTimeout(function () {RemoveClass(a,b),cell_click2(a),cell_click2(b),freeze();}, 1100);
+                        Board._arr3=[]
+                        setTimeout(function () {RemoveClass(a,b),bb(a),bb(b),freeze();}, 1100);
                         
                     }
                    
@@ -312,10 +345,7 @@ if(rows === 10){
     }
             
 
-       function cleaning(a){
-        pop_arr3(a)
-
-       }
+       
         
     function freeze(){
         if (Board._freeze === 0) { 
@@ -324,11 +354,11 @@ if(rows === 10){
         else { 
             return Board._freeze = 0; }
     }
-  
+   
  function RemoveClass(a,b){
-    const div1= document.querySelector(`#front-${a}`)
+    const div1= document.querySelector(`#Hide-${a}`)
     div1.classList.remove("shake");
-    const div2= document.querySelector(`#front-${b}`)
+    const div2= document.querySelector(`#Hide-${b}`)
     div2.classList.remove("shake");
  }
 
@@ -359,11 +389,7 @@ if(rows === 10){
     frontDiv.classList.add("front");
     frontDiv.id = `front-${fnun}`
     rowDiv.appendChild(frontDiv);
-
     addCellClick(`front-${fnun}`,fnun)
-
-
-    
       const cellDiv = document.createElement("div");
       cellDiv.classList.add("cell");
       cellDiv.id = `cell-${fnun}`
@@ -373,17 +399,12 @@ const childDivs = parentDiv.querySelectorAll("cell");
       const src = document.getElementById(`cell-${fnun}`);
         img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${imgN}.png`; 
         src.appendChild(img);
-        
-      
     }
   }
-
-
   parentDiv.classList.add("flex");
   parentDiv.style.display = "flex";
   parentDiv.style.flexDirection = "row";
 
-  // Set the flexbox properties for the rows.
   for (let i = 0; i < rows; i++) {
     const rowDiv = document.querySelector(`.row:nth-child(${i + 1})`);
     rowDiv.classList.add("flex");
@@ -402,18 +423,6 @@ function addCellClick(divId,fnun) {
     });
   
 }
-function addCellClick2(divId,fnun) {
-  // מצא את הדיב
-  const div = document.getElementById(divId);
-
-  // הוסף את הפונקציה `cell_click()` לאירוע `click` של כל תמונה
-    div.addEventListener("click", function() {
-      // קריאה לפונקציה `cell_click()` עם מספר התמונה
-      cell_click2(fnun);
-    });
-  
-}
-
 
 function random_number(){
     const index = Math.floor(Math.random() * Board._arr2.length);
@@ -438,11 +447,6 @@ if (!indexExistsInDoubled) {
     
   }
 }
-
-
-
-
-
 
 
 function end(){ // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
