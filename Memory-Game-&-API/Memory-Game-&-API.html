@@ -106,9 +106,7 @@
         transform: translateX(8px);
     }
 }
-*[id^="cell-"] {
-  visibility: hidden;
-}
+
 *[class~="front"]:hover {
   background-color: #fff;
   opacity: 0.5;
@@ -288,12 +286,12 @@ if(rows === 10){
                 
             if (c[0] === a && c[1] ===b) {
                 alert("win");
-                
+                pop_arr3(a)
                     const div1= document.querySelector(`#front-${a}`)
                     div1.classList.add("Hide");
                     const div2= document.querySelector(`#front-${b}`)
                     div2.classList.add("Hide");
-                    return cleaning(a),cleaning(b)
+                    cleaning(b)
                     break;
                 }
                 
