@@ -78,14 +78,7 @@
     font-size: 40px;
     color: #6563ff;
 }
-*[id^="card-"]{
 
-    transform: rotateY(-180deg);
-}
-
-*[id^="card-"]{
-    transform: rotateY(0);
-}
 *[id^="card-"]{
     transform: rotateY(180deg);
 }
@@ -122,7 +115,6 @@
 *[class~="front"]:hover {
   background-color: #fff;
   opacity: 0.5;
-  /* מוסיף תמונה ל-div כאשר העכבר מרחף מעליו */
   background-image: url("images/loader.gif");
 }
 *[class~="front"]{
@@ -203,15 +195,15 @@ function pauseAudio1() {
   v.pause(); 
 } 
 class Board {
-  constructor(_pairs,_maxarr,_doubled,_freeze,_arr,_arr2,_arr3,_arr4) {
+  constructor(_pairs,_maxarr,_doubled,_freeze,_arr,_Creating_a_div,_Two_numbers_use,_bot_or_player) {
     this.pairs = _pairs;
     this.maxarr = _maxarr;
     this.doubled = _doubled;
     this.freeze = _freeze
     this.arr = _arr;
-    this.arr2 = _arr2;
-    this.arr3 = _arr3;
-    this.arr4 = _arr4;
+    this.Creating_a_div = _Creating_a_div; // מערך זה משמש ליצרת כמות הקלפים שמופיעים בלוח
+    this.Two_numbers_use = _Two_numbers_use;//יצרת מערך שמשמש לבדיקת התאמה של הקלפים הפתוחים
+    this.bot_or_player = _bot_or_player
   }
     set_pairs(_pairs) {
         this.pairs = _pairs;
@@ -225,46 +217,62 @@ class Board {
     set_arr(_arr) {
         this.arr = _arr;
     }
-    set_arr2(_arr2) {
-        this.arr2 = _arr2;
+    set_Creating_a_div(_Creating_a_div) {
+        this.Creating_a_div = _Creating_a_div;
     }
-    set_arr3(_arr3) {
-        this.arr3 = _arr3;
+    set_Two_numbers_use(_Two_numbers_use) {
+        this.Two_numbers_use = _Two_numbers_use;
     }
-    set_arr4(_arr4) {
-        this.arr4 = _arr4;
-    }
+   
     
 }
-
+// יצירת זוגות לפי גודל הלוח
 function createPairs() {
     Board._pairs = [];
+ let a =-1
+  for (let i = 0; i <  Board._maxarr; i++) {
+    a += 2
+    if(i === 0){
+    Board._pairs.push([0, a]); 
+    }
+    if(i !== 0){
+        Board._pairs.push([a-1, a]);
 
-  for (let i = 0; i <  Board._maxarr*2; i++) {
-    Board._pairs.push([i, i + 1]);
+    }
   }
 
   return Board._pairs;
+  
 }
 
+// הגדרת בררת מחדל של מאפיינים
 function deDefinition_of_properties(){
     Board._arr = [];
-    Board._arr2 = [];
-    Board._arr3 = [];
-    Board._arr4 = [];
+    Board._Creating_a_div = [];
+    Board._Two_numbers_use = [];
     Board._doubled = [];
     Board._freeze = 0
+    Board.bot_or_player = 0
 }
 
+function getRandomNumber() {
+  // יוצר מספר אקראי בין 0 ל-999
+  const randomNumber = Math.floor(Math.random() * 900) + 2;
 
+  // מחזיר את המספר
+  return randomNumber;
+}
 
+  // יצירת מערך של מספרים לפי גודל הלוח
             function random_number_arr(){
-               
+              let min =getRandomNumber()
             for (let i = 0; i < Board._maxarr; i++) {
-                Board._arr.push(i, i);
+                Board._arr.push(min, min);
+                min+=1
+
             }
             for (let j = 0; j < Board._maxarr*2; j++) {
-                Board._arr2.push(j);
+                Board._Creating_a_div.push(j);
 
             }
         }
@@ -309,21 +317,21 @@ if(rows === 10){
     
     while (true){
         if ( div2 == null && div1 !== null){
-            aa(a)
+            hide_div_father_and_display_the_son(a)
             break;
         }
         if ( div1 == null && div2 !== null){
-            bb(a)
+            Hide_div_the_son_and_show_the_father_div(a)
             break;
         }
     }
-    Board._arr3.push(a);
-    checkWin(Board._arr3,Board._pairs)
+    Board._Two_numbers_use.push(a);
+    checkWin()
         }
 
     }
 
-function aa(a){
+function hide_div_father_and_display_the_son(a){
     const div = document.querySelector(`#front-${a}`);
     div.id =  `Hide-${a}`
     const div1 = document.querySelector(`#cell-${a}`);
@@ -332,7 +340,7 @@ function aa(a){
 
 }
 
-function bb(a){
+function Hide_div_the_son_and_show_the_father_div(a){
     const div = document.querySelector(`#Hide-${a}`);
     div.id =  `front-${a}`
     const div1 = document.querySelector(`#card-${a}`);
@@ -343,48 +351,71 @@ function bb(a){
 
   
 
-    function checkWin(_arr3, _pairs) {
+    function checkWin() {
 
-        Board._arr3.sort();
-        const a =Board._arr3[0]
-        const b =Board._arr3[1]
-        Board._arr4.push(a);
-        Board._arr4.push(b);
-        let d =-1
+        Board._Two_numbers_use.sort();
+        const first_card =Board._Two_numbers_use[0]
+        const Second_card =Board._Two_numbers_use[1]
+        let for_ended =-1
 
-        if( a >= 0 && b >= 0){
-            for (let i = 0; i < _pairs.length; ++i) {
-                d++
-            const c=Board._pairs[i] 
-                
-            if (c[0] === a && c[1] ===b) {
-                alert("win");
-                    const div1= document.querySelector(`#card-${a}`)
-                    div1.classList.add("Hide");
-                    const div2= document.querySelector(`#card-${b}`)
-                    div2.classList.add("Hide");
-                    Board._arr3=[]
-                    break;
-                }
-                
-            if (c[0] !== a && c[1] !== b && d === Board._maxarr*2-1){
+        if( first_card >= 0 && Second_card >= 0){
+            for (let i = 0; i < Board._pairs.length; ++i) {
+                for_ended++
+                const index=Board._pairs[i] 
                     
-                        freeze()
-                        const div3= document.querySelector(`#Hide-${a}`)
-                        div3.classList.add("shake");
-                        const div4=document.querySelector(`#Hide-${b}`)
-                        div4.classList.add("shake");
-                        Board._arr3=[]
-                        setTimeout(function () {RemoveClass(a,b),bb(a),bb(b),freeze();}, 1100);
-                        
+                if (index[0] === first_card && index[1] ===Second_card) {
+                    Board._Two_numbers_use=[]
+                    setTimeout(function () {HideDiv(first_card,Second_card);}, 1100);
+
+                    for (let i = 0; i < Board._pairs.length; i++) {
+                            const b =Board._pairs[i]
+                            const arrv =[first_card,Second_card] 
+                            if(b[0] === arrv[0] && b[1] === arrv[1] ){
+                            Board._pairs.splice(i, 1);
+                            }
                     }
-                   
+                            
+                        setTimeout(function () {bot_or_player();}, 2500);
+                        break;
+                        
+
+                    }
+                    
+                if (index[0] !== first_card && index[1] !== Second_card && for_ended === Board._pairs.length-1){
+                        
+                            freeze()
+                            ShakeDiv(first_card,Second_card)
+                            Board._Two_numbers_use=[]
+                            setTimeout(function () {RemoveClass(first_card,Second_card),
+                                Hide_div_the_son_and_show_the_father_div(first_card)
+                                ,Hide_div_the_son_and_show_the_father_div(Second_card),freeze();}, 1100);
+                            setTimeout(function () {bot_or_player();}, 2500);
+
+                    
+                                
+                }
+                    
+                }
             }
-        }
 
+    }         
+    function bot_or_player(){
+        switch (Board.bot_or_player) {
+                            case 0:
+                                bot_random_number(),Board.bot_or_player = 1
+                                break;
+                            case 1:
+                                Board.bot_or_player = 0;
+                                break;
+                            
+                   }              
     }
-            
+    function bot_random_number(){
+    const index = Math.floor(Math.random() * Board._pairs.length);
+    const i=Board._pairs[index] 
 
+    return cell_click(i[1]),cell_click(i[0]),Board.bot_or_player= 0
+}
        
         
     function freeze(){
@@ -395,6 +426,21 @@ function bb(a){
             return Board._freeze = 0; }
     }
    
+    function HideDiv(a,b){
+        const div1= document.querySelector(`#card-${a}`)
+        div1.classList.add("Hide");
+        const div2= document.querySelector(`#card-${b}`)
+        div2.classList.add("Hide");
+    }
+
+    function ShakeDiv(a,b){
+        const div3= document.querySelector(`#Hide-${a}`)
+        div3.classList.add("shake");
+        const div4=document.querySelector(`#Hide-${b}`)
+        div4.classList.add("shake");
+    }
+
+
  function RemoveClass(a,b){
     const div1= document.querySelector(`#Hide-${a}`)
     div1.classList.remove("shake");
@@ -467,7 +513,7 @@ function addCellClick(divId,fnun) {
 }
 
 function random_number(){
-    const index = Math.floor(Math.random() * Board._arr2.length);
+    const index = Math.floor(Math.random() * Board._Creating_a_div.length);
     return index
 }
 
