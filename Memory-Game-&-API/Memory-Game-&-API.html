@@ -173,7 +173,7 @@
   <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off>
     <button type="button" id="reset" style="display:none" class="btn reset button  "  onclick="" value="">reset</button>
     <button type="button" id="exit" style="display:none" class="btn  exit button"  onclick=" end()" value="">Exit</button>
-    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick=" " value="">Two Player</button>
+    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick="" value="">Two Player</button>
     <button type="button" id="bot"  class="btn button  bot"  onclick=" " value="">Player VS  Bot</button>
     <select  onchange="" id="" class="  button   select text-center" style="display:none" required>
         <option class="button" value="">Difficulty  </option>
@@ -520,6 +520,7 @@
       const div2 = document.querySelector(`#Hide-${b}`)
       div2.classList.remove("shake");
     }
+
    
 
     function createCols(rows, cols) {
@@ -548,22 +549,20 @@
           card_back =0
           catd_front=0
           card_over =0
-          ap = 1
+          ap = 4
           document.body.style.backgroundRepeat = "no-repeat";
             document.body.style.display = "flex";
             document.body.style.backgroundSize = "100% 100%";
+            const audio = document.querySelector("audio");
+
+
         if (ap === 1){
           document.body.style.backgroundImage = "url('images/HarryPotter.gif')";
           card_back =api._data1[imgN].image
           card_front = "images/ari_front.jpg"
             card_over = "images/ari_over.gif"
-            const audio = document.querySelector("audio");
             audio.src = "images/Harry Potter.mp3";
             audio.play();
-
-            
-
-          
           }
           if(ap  === 2){
             
@@ -575,12 +574,16 @@
             card_back=  api._data3[imgN].img
             card_front = "images/dig_front.jpg"
             card_over = "images/digimon.gif"
+            audio.src = "images/Digimon.mp3";
+            audio.play();
           }
           if(ap === 4){
             document.body.style.backgroundImage = "url('images/poketheme.jpg')";
             card_back= api._data4[imgN]
             card_front = "images/poke_front.png"
             card_over = "images/poke_over.gif"
+            audio.src = "images/Pokémon.mp3";
+            audio.play();
 
           }
           const parentDiv = document.getElementById("board");
