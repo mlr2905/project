@@ -1,59 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script> 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
-   
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script> 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+
+  <title>Document</title>
+
 </head>
 <style>
-    body {
+  body {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background-image: url(images/poketheme.jpg);
+
     background-repeat: no-repeat;
 
-}
-    *[class~="board"]{
-    background: linear-gradient(to right, #fc6767af, #ec008ebf);
+  }
+
+  *[class~="board"] {
+    background: linear-gradient(to right, #2e2222af, #1d161bbf);
     border-radius: 10px;
     box-shadow: 0 0 10px;
-}
+  }
 
-   .board1{
+  .board1 {
     height: 500px;
     width: 500px;
     padding: 20px;
 
-   }
-   .board2{
+  }
+
+  .board2 {
     padding: 10px;
 
     height: 700px;
     width: 700px;
-   }
-   .board3{
+  }
+
+  .board3 {
     padding: 5px;
 
     height: 1000px;
     width: 1000px;
-   }
-   .board4{
+  }
+
+  .board4 {
     height: 1100px;
     width: 1100px;
-   }
-  
-    
+  }
 
-*[id^="cell-"]{
-    border: 5px solid  rgb(15, 106, 138);
+
+
+  *[id^="cell-"] {
+    border: 5px solid rgb(15, 106, 138);
     width: 100px;
     height: 100px;
     cursor: pointer;
@@ -63,484 +82,588 @@
     border-radius: 10px;
     margin-left: 10%;
 
-    }
-    img{
+  }
+
+  img {
     width: 100px;
     height: 100px;
-    background: linear-gradient(to right, #fc6767af, #ec008ebf);
+    background: linear-gradient(to right, #2e2222af, #1d161bbf);
     border-radius: 9px;
     box-shadow: 0 0 9px;
-    border: 5px solid  rgb(15, 106, 138);
+    border: 5px solid rgb(15, 106, 138);
     margin-right: 4%;
     margin-top: 3%;
-    }
-    .card .front-view span{
+  }
+
+  .card .front-view span {
     font-size: 40px;
     color: #6563ff;
-}
+  }
 
-*[id^="card-"]{
+  *[id^="card-"] {
     transform: rotateY(180deg);
-}
-*[id^="cell-"] {
-  visibility: hidden;
-}
-*[id^="Hide-"] {
-  visibility: hidden;
-}
-*[id^="card-"] {
-    visibility: visible
-}
-.shake{
-    animation: shake 0.35s ease-in-out;
-}
-@keyframes shake {
-    0%, 100%{
-        transform: translateX(0);
-    }
-    20%{
-        transform: translateX(-13px);
-    }
-    40%{
-        transform: translateX(13px);
-    }
-    60%{
-        transform: translateX(-8px);
-    }
-    80%{
-        transform: translateX(8px);
-    }
-}
+  }
 
-*[class~="front"]:hover {
-  background-color: #fff;
-  opacity: 0.5;
-  background-image: url("images/loader.gif");
+  *[id^="cell-"] {
+    visibility: hidden;
+  }
+
+  *[id^="Hide-"] {
+    visibility: hidden;
+  }
+
+  *[id^="card-"] {
+    visibility: visible
+  }
+
+  .shake {
+    animation: shake 0.35s ease-in-out;
+  }
+
+  @keyframes shake {
+
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    20% {
+      transform: translateX(-13px);
+    }
+
+    40% {
+      transform: translateX(13px);
+    }
+
+    60% {
+      transform: translateX(-8px);
+    }
+
+    80% {
+      transform: translateX(8px);
+    }
+  }
+
+  *[class~="front"]:hover {
+    background-color: #fff;
+    opacity: 0.5;  background-image: url(images/loader.gif);
 }
 *[class~="front"]{
 
-    background-image: url(images/card_back.png);
     background-size: 100% 100%;
-    border: 5px solid  rgb(15, 106, 138);
+    border: 5px solid rgb(15, 106, 138);
     border-radius: 20px;
     margin: 1px;
-}
-.row{
+  }
+
+  .row {
     margin: 2px;
-    background: linear-gradient(to right, #fc6767af, #ec008ebf);
+    background: linear-gradient(to right, #2e2222af, #1d161bbf);
 
-}
+  }
 
-.Hide{
+  .Hide {
     visibility: hidden;
 
-    }
+  }
+ 
 </style>
+
 <body>
-    
-    <select  onchange="select()" id="select" class="  button   select text-center" required>
-        <option class="button" value="">  </option>
-        <option class="button" value="1" id=""><b>4X4</b></option>
-        <option value="2" id=""><B>6X6</B></option>
-        <option value="3" id=""><B>8X8</B></option>
-        <option value="4" id=""><B>10X10</B></option>
-
-
+  <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off>
+    <button type="button" id="reset" style="display:none" class="btn reset button  "  onclick="" value="">reset</button>
+    <button type="button" id="exit" style="display:none" class="btn  exit button"  onclick=" end()" value="">Exit</button>
+    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick=" " value="">Two Player</button>
+    <button type="button" id="bot"  class="btn button  bot"  onclick=" " value="">Player VS  Bot</button>
+    <select  onchange="" id="" class="  button   select text-center" style="display:none" required>
+        <option class="button" value="">Difficulty  </option>
+        <option class="button" value="3" id="Easy"><b>Easy</b></option>
+        <option value="4" id="Medium"><B>Hard</B></option>
         </select>
-    <button type="button" onclick="end()">h</button>
-<div class="board" id="board"></div>
+  <select onchange="select()" id="select" class="  button   select text-center" required>
+    <option class="button" value=""> </option>
+    <option class="button" value="1" id=""><b>4X4</b></option>
+    <option value="2" id=""><B>6X6</B></option>
+    <option value="3" id=""><B>8X8</B></option>
+    <option value="4" id=""><B>10X10</B></option>
+  </select>
+  <div class="board" id="board"></div>
 
-<audio id="Play">
+  <audio id="Play">
     <source src="pokemon.mp3" type="audio/mpeg">
   </audio>
   <audio id="Play1">
     <source src="new.mp3" type="audio/mpeg">
   </audio>
 
-    <script>
-fetchKantoPokemon()
+  <script>
 
-function fetchKantoPokemon(){
-fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-  .then(response => response.json())
-  .then(function(allpokemon){
-  allpokemon.results.forEach(function(pokemon){
-    fetchPokemonData(pokemon);
-  })
-})
-}
+// טען את הסרטון
 
-function playAudio() {
-    let x = document.getElementById("Play"); 
- 
-  x.play(); 
-} 
 
-function pauseAudio() { 
-    let x = document.getElementById("Play"); 
-
-    
-  x.pause(); 
-} 
-
-function playAudio1() { 
-    let v = document.getElementById("Play1"); 
-
-  v.play(); 
-} 
-
-function pauseAudio1() {
-    let v = document.getElementById("Play1"); 
- 
-  v.pause(); 
-} 
-class Board {
-  constructor(_pairs,_maxarr,_doubled,_freeze,_arr,_Creating_a_div,_Two_numbers_use,_bot_or_player) {
-    this.pairs = _pairs;
-    this.maxarr = _maxarr;
-    this.doubled = _doubled;
-    this.freeze = _freeze
-    this.arr = _arr;
-    this.Creating_a_div = _Creating_a_div; // מערך זה משמש ליצרת כמות הקלפים שמופיעים בלוח
-    this.Two_numbers_use = _Two_numbers_use;//יצרת מערך שמשמש לבדיקת התאמה של הקלפים הפתוחים
-    this.bot_or_player = _bot_or_player
-  }
-    set_pairs(_pairs) {
+    class Board {
+      constructor(_pairs, _maxarr, _doubled, _freeze, _arr, _Creating_a_div, _Two_numbers_use, _bot_or_player) {
         this.pairs = _pairs;
-    }
-    set_maxarr(_maxarr) {
         this.maxarr = _maxarr;
-    }
-    set_doubled(_doubled) {
         this.doubled = _doubled;
-    }
-    set_arr(_arr) {
+        this.freeze = _freeze
         this.arr = _arr;
+        this.Creating_a_div = _Creating_a_div; // מערך זה משמש ליצרת כמות הקלפים שמופיעים בלוח
+        this.Two_numbers_use = _Two_numbers_use;//יצרת מערך שמשמש לבדיקת התאמה של הקלפים הפתוחים
+        this.bot_or_player = _bot_or_player
+
+      }
     }
-    set_Creating_a_div(_Creating_a_div) {
-        this.Creating_a_div = _Creating_a_div;
+    class api {
+      constructor(_data1, _data2, _data3,_data4) {
+
+        this.data1 = _data1
+        this.data2 = _data2
+        this.data3 = _data3
+        this.data4 = _data4
+
+
+      }
+
+
+
+      set_data1(_data1) {
+        this.data1 = _data1;
+      }
+      set_data2(_data2) {
+        this.data2 = _data2;
+      }
+      set_data3(_data3) {
+        this.data3 = _data3;
+      }
+      set_data3(_data4) {
+        this.data4 = _data4;
+      }
+
     }
-    set_Two_numbers_use(_Two_numbers_use) {
-        this.Two_numbers_use = _Two_numbers_use;
-    }
+    // Fetch the data from the API
+    fetch("https://hp-api.onrender.com/api/characters")  // 25 cards
+      .then(res => res.json())
+      .then(data => {
+        // Save the data in localStorage
+        localStorage.setItem("data1", JSON.stringify(data));
+      })
+      .catch(err => console.error(err));
+    api._data1 = JSON.parse(localStorage.getItem("data1"));
    
-    
-}
-// יצירת זוגות לפי גודל הלוח
-function createPairs() {
-    Board._pairs = [];
- let a =-1
-  for (let i = 0; i <  Board._maxarr; i++) {
-    a += 2
-    if(i === 0){
-    Board._pairs.push([0, a]); 
-    }
-    if(i !== 0){
-        Board._pairs.push([a-1, a]);
+
+
+    fetch("https://dog.ceo/api/breeds/image/random/50") // 50 cards
+      .then(res => res.json())
+      .then(data => {
+        // Save the data in localStorage
+        localStorage.setItem("data2", JSON.stringify(data));
+      })
+      .catch(err => console.error(err));
+    api._data2 = JSON.parse(localStorage.getItem("data2"));
+
+    fetch("https://digimon-api.vercel.app/api/digimon") // 208 cards
+      .then(res => res.json())
+      .then(data => {
+        // Save the data in localStorage
+        localStorage.setItem("data3", JSON.stringify(data));
+      })
+      .catch(err => console.error(err));
+    api._data3 = JSON.parse(localStorage.getItem("data3"))
+
+
+    function puse_PokeAPI_data4() {   // 1000 cards
+      let deta4 = []
+      for (let i = 1; i < 1000; i++) {
+        let a = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i}.svg`
+
+        deta4.push(a)
+      }
+
+      return deta4
 
     }
-  }
 
-  return Board._pairs;
+    api._data4 = puse_PokeAPI_data4()
+
+ 
   
-}
 
-// הגדרת בררת מחדל של מאפיינים
-function deDefinition_of_properties(){
-    Board._arr = [];
-    Board._Creating_a_div = [];
-    Board._Two_numbers_use = [];
-    Board._doubled = [];
-    Board._freeze = 0
-    Board.bot_or_player = 0
-}
 
-function getRandomNumber() {
-  // יוצר מספר אקראי בין 0 ל-999
-  const randomNumber = Math.floor(Math.random() * 900) + 2;
 
-  // מחזיר את המספר
-  return randomNumber;
-}
 
-  // יצירת מערך של מספרים לפי גודל הלוח
-            function random_number_arr(){
-              let min =getRandomNumber()
-            for (let i = 0; i < Board._maxarr; i++) {
-                Board._arr.push(min, min);
-                min+=1
 
-            }
-            for (let j = 0; j < Board._maxarr*2; j++) {
-                Board._Creating_a_div.push(j);
-
-            }
+    // יצירת זוגות לפי גודל הלוח
+    function createPairs() {
+      Board._pairs = [];
+      let a = -1
+      for (let i = 0; i < Board._maxarr; i++) {
+        a += 2
+        if (i === 0) {
+          Board._pairs.push([0, a]);
         }
+        if (i !== 0) {
+          Board._pairs.push([a - 1, a]);
 
-             
-     function select(){
-            
-        let option = document.getElementById('select').value;  
-        switch(option){
-            case "1":Board._maxarr=8,createCols(4, 4)
-            break;
-            case "2":Board._maxarr=18 ,createCols(6, 6) 
-            break;
-            case "3":Board._maxarr=32 ,createCols(8, 8)
-            break;
-            case "4":Board._maxarr=50,createCols(10, 10)
-            break;
         }
+      }
+
+      return Board._pairs;
+
     }
-    
-function css(rows){
-    if(rows === 4){
-  return  1;
-}
-if(rows === 6){
- return 2
-}
-if(rows === 8){
-  return  3
-}
-if(rows === 10){
-  return  4;
-}
-}
+
+    // הגדרת בררת מחדל של מאפיינים
+    function deDefinition_of_properties() {
+      Board._arr = [];
+      Board._Creating_a_div = [];
+      Board._Two_numbers_use = [];
+      Board._doubled = [];
+      Board._freeze = 0
+      Board.bot_or_player = 0
+
+    }
+
+
+
+    function getRandomNumber() {
+      // יוצר מספר אקראי בין 0 ל-999
+      const randomNumber = Math.floor(Math.random() * 900) + 2;
+
+      // מחזיר את המספר
+      return randomNumber;
+    }
+
+    // יצירת מערך של מספרים לפי גודל הלוח
+    function random_number_arr() {
+      let min = getRandomNumber()
+      for (let i = 0; i < Board._maxarr; i++) {
+        Board._arr.push(i, i);
+        //min+=1
+
+      }
+      for (let j = 0; j < Board._maxarr * 2; j++) {
+        Board._Creating_a_div.push(j);
+
+      }
+    }
+
+
+    function select() {
+
+      let option = document.getElementById('select').value;
+      switch (option) {
+        case "1": Board._maxarr = 8, createCols(4, 4)
+          break;
+        case "2": Board._maxarr = 18, createCols(6, 6)
+          break;
+        case "3": Board._maxarr = 32, createCols(8, 8)
+          break;
+        case "4": Board._maxarr = 50, createCols(10, 10)
+          break;
+      }
+    }
+
+    function css(rows) {
+      if (rows === 4) {
+        return 1;
+      }
+      if (rows === 6) {
+        return 2
+      }
+      if (rows === 8) {
+        return 3
+      }
+      if (rows === 10) {
+        return 4;
+      }
+    }
 
     function cell_click(a) {
-       
-    
-        if( Board._freeze === 0){
-    const div1 = document.querySelector(`#front-${a}`);
-    const div2 = document.querySelector(`#Hide-${a}`);
-    
-    while (true){
-        if ( div2 == null && div1 !== null){
-            hide_div_father_and_display_the_son(a)
+
+
+      if (Board._freeze === 0) {
+        const div1 = document.querySelector(`#front-${a}`);
+        const div2 = document.querySelector(`#Hide-${a}`);
+
+        while (true) {
+          if (div2 == null && div1 !== null) {
+            hide_div_father_show_son(a)
             break;
-        }
-        if ( div1 == null && div2 !== null){
-            Hide_div_the_son_and_show_the_father_div(a)
+          }
+          if (div1 == null && div2 !== null) {
+            Hide_div_son_show_father(a)
             break;
+          }
         }
-    }
-    Board._Two_numbers_use.push(a);
-    checkWin()
-        }
+        Board._Two_numbers_use.push(a);
+        checkWin()
+      }
 
     }
 
-function hide_div_father_and_display_the_son(a){
-    const div = document.querySelector(`#front-${a}`);
-    div.id =  `Hide-${a}`
-    const div1 = document.querySelector(`#cell-${a}`);
-    div1.id = `card-${a}`
+    function hide_div_father_show_son(a) {
+      const div = document.querySelector(`#front-${a}`);
+      div.id = `Hide-${a}`
+      const div1 = document.querySelector(`#cell-${a}`);
+      div1.id = `card-${a}`
 
 
-}
+    }
 
-function Hide_div_the_son_and_show_the_father_div(a){
-    const div = document.querySelector(`#Hide-${a}`);
-    div.id =  `front-${a}`
-    const div1 = document.querySelector(`#card-${a}`);
-    div1.id = `cell-${a}`;
+    function Hide_div_son_show_father(a) {
+      const div = document.querySelector(`#Hide-${a}`);
+      div.id = `front-${a}`
+      const div1 = document.querySelector(`#card-${a}`);
+      div1.id = `cell-${a}`;
 
-}
+    }
 
 
-  
+
 
     function checkWin() {
 
-        Board._Two_numbers_use.sort();
-        const first_card =Board._Two_numbers_use[0]
-        const Second_card =Board._Two_numbers_use[1]
-        let for_ended =-1
+      Board._Two_numbers_use.sort();
+      const first_card = Board._Two_numbers_use[0]
+      const Second_card = Board._Two_numbers_use[1]
+      let for_ended = -1
 
-        if( first_card >= 0 && Second_card >= 0){
-            for (let i = 0; i < Board._pairs.length; ++i) {
-                for_ended++
-                const index=Board._pairs[i] 
-                    
-                if (index[0] === first_card && index[1] ===Second_card) {
-                    Board._Two_numbers_use=[]
-                    setTimeout(function () {HideDiv(first_card,Second_card);}, 1100);
+      if (first_card >= 0 && Second_card >= 0) {
+        for (let i = 0; i < Board._pairs.length; ++i) {
+          for_ended++
+          const index = Board._pairs[i]
 
-                    for (let i = 0; i < Board._pairs.length; i++) {
-                            const b =Board._pairs[i]
-                            const arrv =[first_card,Second_card] 
-                            if(b[0] === arrv[0] && b[1] === arrv[1] ){
-                            Board._pairs.splice(i, 1);
-                            }
-                    }
-                            
-                        setTimeout(function () {bot_or_player();}, 2500);
-                        break;
-                        
+          if (index[0] === first_card && index[1] === Second_card) {
+            Board._Two_numbers_use = []
+            setTimeout(function () { HideDiv(first_card, Second_card); }, 1100);
 
-                    }
-                    
-                if (index[0] !== first_card && index[1] !== Second_card && for_ended === Board._pairs.length-1){
-                        
-                            freeze()
-                            ShakeDiv(first_card,Second_card)
-                            Board._Two_numbers_use=[]
-                            setTimeout(function () {RemoveClass(first_card,Second_card),
-                                Hide_div_the_son_and_show_the_father_div(first_card)
-                                ,Hide_div_the_son_and_show_the_father_div(Second_card),freeze();}, 1100);
-                            setTimeout(function () {bot_or_player();}, 2500);
-
-                    
-                                
-                }
-                    
-                }
+            for (let i = 0; i < Board._pairs.length; i++) {
+              const b = Board._pairs[i]
+              const arrv = [first_card, Second_card]
+              if (b[0] === arrv[0] && b[1] === arrv[1]) {
+                Board._pairs.splice(i, 1);
+              }
             }
 
-    }         
-    function bot_or_player(){
-        switch (Board.bot_or_player) {
-                            case 0:
-                                bot_random_number(),Board.bot_or_player = 1
-                                break;
-                            case 1:
-                                Board.bot_or_player = 0;
-                                break;
-                            
-                   }              
-    }
-    function bot_random_number(){
-    const index = Math.floor(Math.random() * Board._pairs.length);
-    const i=Board._pairs[index] 
+            setTimeout(function () { bot_or_player(); }, 2500);
+            break;
 
-    return cell_click(i[1]),cell_click(i[0]),Board.bot_or_player= 0
-}
-       
-        
-    function freeze(){
-        if (Board._freeze === 0) { 
-            return Board._freeze = 1; 
-        } 
-        else { 
-            return Board._freeze = 0; }
+
+          }
+
+          if (index[0] !== first_card && index[1] !== Second_card && for_ended === Board._pairs.length - 1) {
+
+            freeze()
+            ShakeDiv(first_card, Second_card)
+            Board._Two_numbers_use = []
+            setTimeout(function () {
+              RemoveClass(first_card, Second_card),
+              Hide_div_son_show_father(first_card)
+              , Hide_div_son_show_father(Second_card), freeze();
+            }, 1100);
+            setTimeout(function () { bot_or_player(); }, 2500);
+
+
+
+          }
+
+        }
+      }
+
+    }
+    function bot_or_player() {
+      switch (Board.bot_or_player) {
+        case 0:
+          bot_random_number(), Board.bot_or_player = 1
+          break;
+        case 1:
+          Board.bot_or_player = 0;
+          break;
+
+      }
+    }
+    function bot_random_number() {
+      const index = Math.floor(Math.random() * Board._pairs.length);
+      const i = Board._pairs[index]
+
+      return cell_click(i[1]), cell_click(i[0]), Board.bot_or_player = 0
+    }
+
+
+    function freeze() {
+      if (Board._freeze === 0) {
+        return Board._freeze = 1;
+      }
+      else {
+        return Board._freeze = 0;
+      }
+    }
+
+    function HideDiv(a, b) {
+      const div1 = document.querySelector(`#card-${a}`)
+      div1.classList.add("Hide");
+      const div2 = document.querySelector(`#card-${b}`)
+      div2.classList.add("Hide");
+    }
+
+    function ShakeDiv(a, b) {
+      const div3 = document.querySelector(`#Hide-${a}`)
+      div3.classList.add("shake");
+      const div4 = document.querySelector(`#Hide-${b}`)
+      div4.classList.add("shake");
+    }
+
+
+    function RemoveClass(a, b) {
+      const div1 = document.querySelector(`#Hide-${a}`)
+      div1.classList.remove("shake");
+      const div2 = document.querySelector(`#Hide-${b}`)
+      div2.classList.remove("shake");
     }
    
-    function HideDiv(a,b){
-        const div1= document.querySelector(`#card-${a}`)
-        div1.classList.add("Hide");
-        const div2= document.querySelector(`#card-${b}`)
-        div2.classList.add("Hide");
-    }
-
-    function ShakeDiv(a,b){
-        const div3= document.querySelector(`#Hide-${a}`)
-        div3.classList.add("shake");
-        const div4=document.querySelector(`#Hide-${b}`)
-        div4.classList.add("shake");
-    }
-
-
- function RemoveClass(a,b){
-    const div1= document.querySelector(`#Hide-${a}`)
-    div1.classList.remove("shake");
-    const div2= document.querySelector(`#Hide-${b}`)
-    div2.classList.remove("shake");
- }
 
     function createCols(rows, cols) {
-        deDefinition_of_properties()
-        createPairs()
-        random_number_arr()
-        const a =  css(rows)
-        const audio = document.getElementById('Audio');
+      deDefinition_of_properties()
+      createPairs()
+      random_number_arr()
+      const a = css(rows)
+      const audio = document.getElementById('Audio');
 
-        const parentDiv = document.getElementById("board");
-        parentDiv.classList.add(`board${a}`);
-        const firstRowDiv = document.createElement("div");
-        firstRowDiv.classList.add("from-row");
-        parentDiv.appendChild(firstRowDiv);
+      const parentDiv = document.getElementById("board");
+      parentDiv.classList.add(`board${a}`);
+      const firstRowDiv = document.createElement("div");
+      firstRowDiv.classList.add("from-row");
+      parentDiv.appendChild(firstRowDiv);
+ 
+          
+      for (let i = 0; i < rows; i++) {
 
-  for (let i = 0; i < rows; i++) {
+        const rowDiv = document.createElement("div");
+        rowDiv.classList.add("row");
+        parentDiv.appendChild(rowDiv);
+       
+        for (let j = 0; j < cols; j++) {
+          const fnun = get_random_div()
+          let imgN = Board._arr[fnun]
+          card_back =0
+          catd_front=0
+          card_over =0
+          ap = 1
+          document.body.style.backgroundRepeat = "no-repeat";
+            document.body.style.display = "flex";
+            document.body.style.backgroundSize = "100% 100%";
+        if (ap === 1){
+          document.body.style.backgroundImage = "url('images/HarryPotter.gif')";
+          card_back =api._data1[imgN].image
+          card_front = "images/ari_front.jpg"
+            card_over = "images/ari_over.gif"
+            const audio = document.querySelector("audio");
+            audio.src = "images/Harry Potter.mp3";
+            audio.play();
 
-    const rowDiv = document.createElement("div");
-    rowDiv.classList.add("row");
-    parentDiv.appendChild(rowDiv);
+            
 
+          
+          }
+          if(ap  === 2){
+            
+            card_back= api._data2.message[imgN]
+          }
+          if(ap === 3){
+            document.body.style.backgroundImage = "url('images/digimon.png')";
+           
+            card_back=  api._data3[imgN].img
+            card_front = "images/dig_front.jpg"
+            card_over = "images/digimon.gif"
+          }
+          if(ap === 4){
+            document.body.style.backgroundImage = "url('images/poketheme.jpg')";
+            card_back= api._data4[imgN]
+            card_front = "images/poke_front.png"
+            card_over = "images/poke_over.gif"
 
-    for (let j = 0; j < cols; j++) {
-        const fnun =get_random_div()
-        const imgN= Board._arr[fnun]
+          }
+          const parentDiv = document.getElementById("board");
+          const frontDiv = document.createElement("div");
+          frontDiv.classList.add("front");
+          frontDiv.id = `front-${fnun}`
+          rowDiv.appendChild(frontDiv);
+          addCellClick(`front-${fnun}`, fnun)
+          document.getElementById(`front-${fnun}`).style.backgroundImage = `url(${card_front})`;
+          const myDiv = document.querySelector(`#front-${fnun}`);
 
-    const parentDiv = document.getElementById("board");
-    const frontDiv = document.createElement("div");
-    frontDiv.classList.add("front");
-    frontDiv.id = `front-${fnun}`
-    rowDiv.appendChild(frontDiv);
-    addCellClick(`front-${fnun}`,fnun)
-      const cellDiv = document.createElement("div");
-      cellDiv.classList.add("cell");
-      cellDiv.id = `cell-${fnun}`
-const childDivs = parentDiv.querySelectorAll("cell");
-        frontDiv.appendChild(cellDiv);
-      const img = document.createElement("img");
-      const src = document.getElementById(`cell-${fnun}`);
-        img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${imgN}.png`; 
-        src.appendChild(img);
-    }
-  }
-  parentDiv.classList.add("flex");
-  parentDiv.style.display = "flex";
-  parentDiv.style.flexDirection = "row";
+          myDiv.addEventListener("mouseover", function() 
+          {myDiv.style.backgroundImage = `url(${card_over})`;});
 
-  for (let i = 0; i < rows; i++) {
-    const rowDiv = document.querySelector(`.row:nth-child(${i + 1})`);
-    rowDiv.classList.add("flex");
-    rowDiv.style.flexDirection = "column";
-  }
-}
-
-function addCellClick(divId,fnun) {
-  // מצא את הדיב
-  const div = document.getElementById(divId);
-
-  // הוסף את הפונקציה `cell_click()` לאירוע `click` של כל תמונה
-    div.addEventListener("click", function() {
-      // קריאה לפונקציה `cell_click()` עם מספר התמונה
-      cell_click(fnun);
-    });
-  
-}
-
-function random_number(){
-    const index = Math.floor(Math.random() * Board._Creating_a_div.length);
-    return index
-}
-
-function get_random_div() {
-    while(true) {
-    const index =  random_number();
-   
-    const indexExistsInDoubled = Board._doubled.includes(index);
-
-if (!indexExistsInDoubled) {
-   return Board._doubled.push(index),index;;
-
-
-    break;
-    }
-    else{
-            continue;
+          myDiv.addEventListener("mouseout", function() 
+          {myDiv.style.backgroundImage = `url(${card_front})`;});
+          const cellDiv = document.createElement("div");
+          cellDiv.classList.add("cell");
+          cellDiv.id = `cell-${fnun}`
+          const childDivs = parentDiv.querySelectorAll("cell");
+          frontDiv.appendChild(cellDiv);
+          const img = document.createElement("img");
+          const src = document.getElementById(`cell-${fnun}`);
+          img.src = card_back
+          src.appendChild(img);
         }
-    
-  }
-}
+      }
+
+      parentDiv.classList.add("flex");
+      parentDiv.style.display = "flex";
+      parentDiv.style.flexDirection = "row";
+
+      for (let i = 0; i < rows; i++) {
+        const rowDiv = document.querySelector(`.row:nth-child(${i + 1})`);
+        rowDiv.classList.add("flex");
+        rowDiv.style.flexDirection = "column";
+      }
+
+    }
+
+    function addCellClick(divId, fnun) {
+      // מצא את הדיב
+      const div = document.getElementById(divId);
+
+      // הוסף את הפונקציה `cell_click()` לאירוע `click` של כל תמונה
+      div.addEventListener("click", function () {
+        // קריאה לפונקציה `cell_click()` עם מספר התמונה
+        cell_click(fnun);
+      });
+
+    }
+
+    function random_number() {
+      const index = Math.floor(Math.random() * Board._Creating_a_div.length);
+      return index
+    }
+
+    function get_random_div() {
+      while (true) {
+        const index = random_number();
+
+        const indexExistsInDoubled = Board._doubled.includes(index);
+
+        if (!indexExistsInDoubled) {
+          return Board._doubled.push(index), index;;
 
 
-function end(){ // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
-    
-    window.setTimeout( function() {window.location.reload();}, 0.1);
-}
-    </script>
+          break;
+        }
+        else {
+          continue;
+        }
+
+      }
+    }
+
+
+    function end() { // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
+
+      window.setTimeout(function () { window.location.reload(); }, 0.1);
+    }
+
+  </script>
 </body>
+
 </html>
