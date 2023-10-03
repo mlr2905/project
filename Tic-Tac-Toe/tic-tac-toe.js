@@ -129,7 +129,7 @@ return arr =[-1,-1,-1,-1,-1,-1,-1,-1,-1]
 
 function Hide_divs(){  // תאי הלוח מוסתרים ומוצגים בהתאם  
     for (let index = 0; index <arr.length; index++) {
-        const div1 = document.getElementById(`#cell-${index}`);
+        let div1 = document.getElementById(`cell-${index}`);
         div1.style.display = div1.style.display === "block" ? "none" : "block";
     }
 }
@@ -140,7 +140,6 @@ function Hide_divs(){  // תאי הלוח מוסתרים ומוצגים בהתא
 function on_or_off_rotation_for_pattern() {
   const div2 = document.querySelector('#pattern');
   const div3 = document.querySelector('#rotation');
-        div1.style.display = div1.style.display === "block" ? "none" : "block";
 
 
  switch (on_or_off_rotation) {
