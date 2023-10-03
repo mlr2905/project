@@ -182,8 +182,8 @@
     onDrag="return false" onDrop="return false" autocomplete=off>
     <button type="button" id="exit" style="display:none" class="btn  exit button" onclick=" end()"
       value="">Exit</button>
-    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer" onclick="player_vs_player()" value="">Two Player</button>
-    <button type="button" id="bot" class="btn button  bot" onclick="player_vs_bot()" value="">Player VS Bot</button>
+    <button type="button" id="TwoPlayer" style="display:block" class="btn button  TwoPlayer" onclick="player_vs_player()" value="">Two Player</button>
+    <button type="button" id="bot" style="display:block" class="btn button  bot" onclick="player_vs_bot()" value="">Player VS Bot</button>
     <select onchange="select1()" id="select1" style="display:none" class="  button   select text-center" required>
       <option class="button" value="">Select a photo style type </option>
       <option class="button" value="1" id=""><b>Harry Potter</b></option>
@@ -295,13 +295,22 @@
       
 function player_vs_player(){
   
-   Board._game_type = 2, Hide_select1()
+   Board._game_type = 2, Hide_select1(),hide_button()
 }
 function player_vs_bot(){
 
-   Board._game_type = 0, Hide_select1()
+   Board._game_type = 0, Hide_select1(),hide_button()
 }
 
+function hide_button(){
+    
+    const div2 = document.getElementById("TwoPlayer");
+        div2.style.display = div2.style.display === "none" ? "block" : "none";
+    const div3 = document.getElementById("bot");
+        div3.style.display = div3.style.display === "none" ? "block" : "none";
+    const div4 = document.getElementById("exit");
+        div4.style.display = div4.style.display === "block" ? "none" : "block";  
+}
 
 
 function changeBackground() {
@@ -387,7 +396,7 @@ clearInterval(intervalId);
             break;
           case "4": Board._style = 4 ,Hide_select1(),Hide_select()
             break;
-          case "5": Board._style = Math.floor(Math.random() * 4) + 1,Hide_select1(),Hide_select() 
+          case "5": Board._style = Math.floor(Math.random() * 4) + 1,Hide_select1(),Hide_select()
             break;
         }
 }
