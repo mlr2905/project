@@ -17,10 +17,18 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script> 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
   <title>Document</title>
 
@@ -31,11 +39,13 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-image: url(images/poketheme.jpg);
-
+    background-size: 100% 100%;
     background-repeat: no-repeat;
+    background-image: url("images/poketheme.jpg");
 
   }
+
+  
 
   *[class~="board"] {
     background: linear-gradient(to right, #2e2222af, #1d161bbf);
@@ -69,8 +79,6 @@
     width: 1100px;
   }
 
-
-
   *[id^="cell-"] {
     border: 5px solid rgb(15, 106, 138);
     width: 100px;
@@ -81,7 +89,6 @@
     font-size: 25px;
     border-radius: 10px;
     margin-left: 10%;
-
   }
 
   img {
@@ -128,11 +135,11 @@
     }
 
     20% {
-      transform: translateX(-13px);
+      transform: translateX(-20px);
     }
 
     40% {
-      transform: translateX(13px);
+      transform: translateX(20px);
     }
 
     60% {
@@ -146,9 +153,11 @@
 
   *[class~="front"]:hover {
     background-color: #fff;
-    opacity: 0.5;  background-image: url(images/loader.gif);
-}
-*[class~="front"]{
+    opacity: 0.5;
+    background-image: url(images/loader.gif);
+  }
+
+  *[class~="front"] {
 
     background-size: 100% 100%;
     border: 5px solid rgb(15, 106, 138);
@@ -158,7 +167,6 @@
 
   .row {
     margin: 2px;
-    background: linear-gradient(to right, #2e2222af, #1d161bbf);
 
   }
 
@@ -166,507 +174,567 @@
     visibility: hidden;
 
   }
- 
 </style>
 
-<body>
-  <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off>
-    <button type="button" id="reset" style="display:none" class="btn reset button  "  onclick="" value="">reset</button>
-    <button type="button" id="exit" style="display:none" class="btn  exit button"  onclick=" end()" value="">Exit</button>
-    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer"  onclick="" value="">Two Player</button>
-    <button type="button" id="bot"  class="btn button  bot"  onclick=" " value="">Player VS  Bot</button>
-    <select  onchange="" id="" class="  button   select text-center" style="display:none" required>
-        <option class="button" value="">Difficulty  </option>
-        <option class="button" value="3" id="Easy"><b>Easy</b></option>
-        <option value="4" id="Medium"><B>Hard</B></option>
-        </select>
-  <select onchange="select()" id="select" class="  button   select text-center" required>
-    <option class="button" value=""> </option>
-    <option class="button" value="1" id=""><b>4X4</b></option>
-    <option value="2" id=""><B>6X6</B></option>
-    <option value="3" id=""><B>8X8</B></option>
-    <option value="4" id=""><B>10X10</B></option>
-  </select>
-  <div class="board" id="board"></div>
+<body>   
 
-  <audio id="Play">
-    <source src="pokemon.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="Play1">
-    <source src="new.mp3" type="audio/mpeg">
-  </audio>
+  <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
+    onDrag="return false" onDrop="return false" autocomplete=off>
+    <button type="button" id="exit" style="display:none" class="btn  exit button" onclick=" end()"
+      value="">Exit</button>
+    <button type="button" id="TwoPlayer" class="btn button  TwoPlayer" onclick="player_vs_player()" value="">Two Player</button>
+    <button type="button" id="bot" class="btn button  bot" onclick="player_vs_bot()" value="">Player VS Bot</button>
+    <select onchange="select1()" id="select1" style="display:none" class="  button   select text-center" required>
+      <option class="button" value="">Select a photo style type </option>
+      <option class="button" value="1" id=""><b>Harry Potter</b></option>
+      <option value="2" id=""><B>Dogs</B></option>
+      <option value="3" id=""><B>Digimon</B></option>
+      <option value="4" id=""><B>Pokémon</B></option>
+      <option value="5" id=""><B>Random</B></option>
 
-  <script>
+    </select>
+    <select onchange="select()" id="select" style="display:none" class="  button   select text-center" required>
+      <option class="button" value=""> board size</option>
+      <option class="button" value="1" id=""><b>4X4</b></option>
+      <option value="2" id=""><B>6X6</B></option>
+      <option value="3" id=""><B>8X8</B></option>
+      <option value="4" id=""><B>10X10</B></option>
+    </select>
+    <div class="board" id="board"></div>
 
-// טען את הסרטון
-
-
-    class Board {
-      constructor(_pairs, _maxarr, _doubled, _freeze, _arr, _Creating_a_div, _Two_numbers_use, _bot_or_player) {
-        this.pairs = _pairs;
-        this.maxarr = _maxarr;
-        this.doubled = _doubled;
-        this.freeze = _freeze
-        this.arr = _arr;
-        this.Creating_a_div = _Creating_a_div; // מערך זה משמש ליצרת כמות הקלפים שמופיעים בלוח
-        this.Two_numbers_use = _Two_numbers_use;//יצרת מערך שמשמש לבדיקת התאמה של הקלפים הפתוחים
-        this.bot_or_player = _bot_or_player
-
-      }
-    }
-    class api {
-      constructor(_data1, _data2, _data3,_data4) {
-
-        this.data1 = _data1
-        this.data2 = _data2
-        this.data3 = _data3
-        this.data4 = _data4
-
-
-      }
-
-
-
-      set_data1(_data1) {
-        this.data1 = _data1;
-      }
-      set_data2(_data2) {
-        this.data2 = _data2;
-      }
-      set_data3(_data3) {
-        this.data3 = _data3;
-      }
-      set_data3(_data4) {
-        this.data4 = _data4;
-      }
-
-    }
-    // Fetch the data from the API
-    fetch("https://hp-api.onrender.com/api/characters")  // 25 cards
-      .then(res => res.json())
-      .then(data => {
-        // Save the data in localStorage
-        localStorage.setItem("data1", JSON.stringify(data));
-      })
-      .catch(err => console.error(err));
-    api._data1 = JSON.parse(localStorage.getItem("data1"));
-   
-
-
-    fetch("https://dog.ceo/api/breeds/image/random/50") // 50 cards
-      .then(res => res.json())
-      .then(data => {
-        // Save the data in localStorage
-        localStorage.setItem("data2", JSON.stringify(data));
-      })
-      .catch(err => console.error(err));
-    api._data2 = JSON.parse(localStorage.getItem("data2"));
-
-    fetch("https://digimon-api.vercel.app/api/digimon") // 208 cards
-      .then(res => res.json())
-      .then(data => {
-        // Save the data in localStorage
-        localStorage.setItem("data3", JSON.stringify(data));
-      })
-      .catch(err => console.error(err));
-    api._data3 = JSON.parse(localStorage.getItem("data3"))
-
-
-    function puse_PokeAPI_data4() {   // 1000 cards
-      let deta4 = []
-      for (let i = 1; i < 1000; i++) {
-        let a = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i}.svg`
-
-        deta4.push(a)
-      }
-
-      return deta4
-
-    }
-
-    api._data4 = puse_PokeAPI_data4()
-
- 
   
+    <audio ></audio>
+
+    <script>
 
 
+      class Board {
+        constructor(_pairs, _maxarr, _doubled, _freeze, _arr, _Creating_a_div, _Two_numbers_use,_game_type,_style) {
+          this.pairs = _pairs;
+          this.maxarr = _maxarr;
+          this.doubled = _doubled;
+          this.freeze = _freeze
+          this.arr = _arr;
+          this.Creating_a_div = _Creating_a_div; // מערך זה משמש ליצרת כמות הקלפים שמופיעים בלוח
+          this.Two_numbers_use = _Two_numbers_use;//יצרת מערך שמשמש לבדיקת התאמה של הקלפים הפתוחים
+          this.game_type = _game_type
+          this.style =_style
 
-
-
-    // יצירת זוגות לפי גודל הלוח
-    function createPairs() {
-      Board._pairs = [];
-      let a = -1
-      for (let i = 0; i < Board._maxarr; i++) {
-        a += 2
-        if (i === 0) {
-          Board._pairs.push([0, a]);
         }
-        if (i !== 0) {
-          Board._pairs.push([a - 1, a]);
+      }
+      class api {
+        constructor(_data1, _data2, _data3, _data4) {
+
+          this.data1 = _data1
+          this.data2 = _data2
+          this.data3 = _data3
+          this.data4 = _data4
+
 
         }
-      }
-
-      return Board._pairs;
-
-    }
-
-    // הגדרת בררת מחדל של מאפיינים
-    function deDefinition_of_properties() {
-      Board._arr = [];
-      Board._Creating_a_div = [];
-      Board._Two_numbers_use = [];
-      Board._doubled = [];
-      Board._freeze = 0
-      Board.bot_or_player = 0
-
-    }
 
 
 
-    function getRandomNumber() {
-      // יוצר מספר אקראי בין 0 ל-999
-      const randomNumber = Math.floor(Math.random() * 900) + 2;
-
-      // מחזיר את המספר
-      return randomNumber;
-    }
-
-    // יצירת מערך של מספרים לפי גודל הלוח
-    function random_number_arr() {
-      let min = getRandomNumber()
-      for (let i = 0; i < Board._maxarr; i++) {
-        Board._arr.push(i, i);
-        //min+=1
+        set_data1(_data1) {
+          this.data1 = _data1;
+        }
+        set_data2(_data2) {
+          this.data2 = _data2;
+        }
+        set_data3(_data3) {
+          this.data3 = _data3;
+        }
+        set_data3(_data4) {
+          this.data4 = _data4;
+        }
 
       }
-      for (let j = 0; j < Board._maxarr * 2; j++) {
-        Board._Creating_a_div.push(j);
+      // Fetch the data from the API
+      fetch("https://hp-api.onrender.com/api/characters")  // 25 cards
+        .then(res => res.json())
+        .then(data => {
+          // Save the data in localStorage
+          localStorage.setItem("data1", JSON.stringify(data));
+        })
+        .catch(err => console.error(err));
+      api._data1 = JSON.parse(localStorage.getItem("data1"));
+
+
+
+      fetch("https://dog.ceo/api/breeds/image/random/50") // 50 cards
+        .then(res => res.json())
+        .then(data => {
+          // Save the data in localStorage
+          localStorage.setItem("data2", JSON.stringify(data));
+        })
+        .catch(err => console.error(err));
+      api._data2 = JSON.parse(localStorage.getItem("data2"));
+
+      fetch("https://digimon-api.vercel.app/api/digimon") // 208 cards
+        .then(res => res.json())
+        .then(data => {
+          // Save the data in localStorage
+          localStorage.setItem("data3", JSON.stringify(data));
+        })
+        .catch(err => console.error(err));
+      api._data3 = JSON.parse(localStorage.getItem("data3"))
+
+
+      function puse_PokeAPI_data4() {   // 1000 cards
+        let deta4 = []
+        for (let i = 1; i < 1000; i++) {
+          let a = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i}.svg`
+
+          deta4.push(a)
+        }
+
+        return deta4
 
       }
-    }
+      Board._game_type = -2
+      
+function player_vs_player(){
+  
+   Board._game_type = 2, Hide_select1()
+}
+function player_vs_bot(){
+
+   Board._game_type = 0, Hide_select1()
+}
 
 
-    function select() {
 
-      let option = document.getElementById('select').value;
-      switch (option) {
-        case "1": Board._maxarr = 8, createCols(4, 4)
-          break;
-        case "2": Board._maxarr = 18, createCols(6, 6)
-          break;
-        case "3": Board._maxarr = 32, createCols(8, 8)
-          break;
-        case "4": Board._maxarr = 50, createCols(10, 10)
-          break;
-      }
-    }
+function changeBackground() {
+const images = ["images/poketheme.jpg", "images/digimon.png", "images/HarryPotter.gif", "images/dog-.jpg"];
 
-    function css(rows) {
-      if (rows === 4) {
-        return 1;
-      }
-      if (rows === 6) {
-        return 2
-      }
-      if (rows === 8) {
-        return 3
-      }
-      if (rows === 10) {
-        return 4;
-      }
-    }
-
-    function cell_click(a) {
+const index = Math.floor(Math.random() * images.length);
+document.querySelector("body").style.backgroundImage = `url(${images[index]})`;
+}
+intervalId = setInterval(changeBackground, 5000);
 
 
-      if (Board._freeze === 0) {
-        const div1 = document.querySelector(`#front-${a}`);
-        const div2 = document.querySelector(`#Hide-${a}`);
 
-        while (true) {
-          if (div2 == null && div1 !== null) {
-            hide_div_father_show_son(a)
-            break;
+function stopBackgroundChange() {
+clearInterval(intervalId);
+}
+
+      // יצירת זוגות לפי גודל הלוח
+      function createPairs() {
+        Board._pairs = [];
+        let a = -1
+        for (let i = 0; i < Board._maxarr; i++) {
+          a += 2
+          if (i === 0) {
+            Board._pairs.push([0, a]);
           }
-          if (div1 == null && div2 !== null) {
-            Hide_div_son_show_father(a)
-            break;
+          if (i !== 0) {
+            Board._pairs.push([a - 1, a]);
+
           }
         }
-        Board._Two_numbers_use.push(a);
-        checkWin()
+
+        return Board._pairs;
+
       }
 
-    }
+      // הגדרת בררת מחדל של מאפיינים
+      function deDefinition_of_properties() {
+        Board._arr = [];
+        Board._Creating_a_div = [];
+        Board._Two_numbers_use = [];
+        Board._doubled = [];
+        Board._freeze = 0
+        api._data4 = puse_PokeAPI_data4()
 
-    function hide_div_father_show_son(a) {
-      const div = document.querySelector(`#front-${a}`);
-      div.id = `Hide-${a}`
-      const div1 = document.querySelector(`#cell-${a}`);
-      div1.id = `card-${a}`
 
-
-    }
-
-    function Hide_div_son_show_father(a) {
-      const div = document.querySelector(`#Hide-${a}`);
-      div.id = `front-${a}`
-      const div1 = document.querySelector(`#card-${a}`);
-      div1.id = `cell-${a}`;
-
-    }
+      }
 
 
 
+      function getRandomNumber() {
+        // יוצר מספר אקראי בין 0 ל-999
+        const randomNumber = Math.floor(Math.random() * 900) + 2;
 
-    function checkWin() {
+        // מחזיר את המספר
+        return randomNumber;
+      }
 
-      Board._Two_numbers_use.sort();
-      const first_card = Board._Two_numbers_use[0]
-      const Second_card = Board._Two_numbers_use[1]
-      let for_ended = -1
+      // יצירת מערך של מספרים לפי גודל הלוח
+      function random_number_arr() {
+        let min = getRandomNumber()
+        for (let i = 0; i < Board._maxarr; i++) {
+          Board._arr.push(i, i);
+          //min+=1
 
-      if (first_card >= 0 && Second_card >= 0) {
-        for (let i = 0; i < Board._pairs.length; ++i) {
-          for_ended++
-          const index = Board._pairs[i]
+        }
+        for (let j = 0; j < Board._maxarr * 2; j++) {
+          Board._Creating_a_div.push(j);
 
-          if (index[0] === first_card && index[1] === Second_card) {
-            Board._Two_numbers_use = []
-            setTimeout(function () { HideDiv(first_card, Second_card); }, 1100);
+        }
+      }
 
-            for (let i = 0; i < Board._pairs.length; i++) {
-              const b = Board._pairs[i]
-              const arrv = [first_card, Second_card]
-              if (b[0] === arrv[0] && b[1] === arrv[1]) {
+      
+      function select1() {
+
+        let option = document.getElementById('select1').value;
+        switch (option) {
+          case "1": Board._style = 1,Hide_select1(),Hide_select()
+      
+            break;
+          case "2": Board._style = 2 ,Hide_select1(),Hide_select()
+            break;
+          case "3": Board._style = 3 ,Hide_select1(),Hide_select()
+            break;
+          case "4": Board._style = 4 ,Hide_select1(),Hide_select()
+            break;
+          case "5": Board._style = Math.floor(Math.random() * 4) + 1,Hide_select1(),Hide_select() 
+            break;
+        }
+}
+
+
+
+
+      function select() {
+
+        let option = document.getElementById('select').value;
+        switch (option) {
+          case "1": Hide_select(),Board._maxarr = 8, createCols(4, 4)
+            break;
+          case "2": Hide_select(),Board._maxarr = 18, createCols(6, 6)
+            break;
+          case "3": Hide_select(),Board._maxarr = 32, createCols(8, 8)
+            break;
+          case "4": Hide_select(),Board._maxarr = 50, createCols(10, 10)
+            break;
+        }
+      }
+
+      function css(rows) {
+        if (rows === 4) {
+          return 1;
+        }
+        if (rows === 6) {
+          return 2
+        }
+        if (rows === 8) {
+          return 3
+        }
+        if (rows === 10) {
+          return 4;
+        }
+      }
+
+      function cell_click(a) {
+
+
+        if (Board._freeze === 0) {
+          const div1 = document.querySelector(`#front-${a}`);
+          const div2 = document.querySelector(`#Hide-${a}`);
+
+          while (true) {
+            if (div2 == null && div1 !== null) {
+              hide_div_father_show_son(a)
+              break;
+            }
+            if (div1 == null && div2 !== null) {
+              Hide_div_son_show_father(a)
+              break;
+            }
+          }
+          Board._Two_numbers_use.push(a);
+          checkWin()
+        }
+
+      }
+
+      function hide_div_father_show_son(a) {
+        const div = document.querySelector(`#front-${a}`);
+        div.id = `Hide-${a}`
+        const div1 = document.querySelector(`#cell-${a}`);
+        div1.id = `card-${a}`
+
+
+      }
+
+      function Hide_div_son_show_father(a) {
+        const div = document.querySelector(`#Hide-${a}`);
+        div.id = `front-${a}`
+        const div1 = document.querySelector(`#card-${a}`);
+        div1.id = `cell-${a}`;
+
+      }
+     
+
+
+      function Hide_select(){ // מסתיר או מציג בהתאם את הרשימה הנפתחת
+    const div1 = document.getElementById("select");
+        div1.style.display = div1.style.display === "none" ? "block" : "none";
+}
+function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימה הנפתחת
+    const div1 = document.getElementById("select1");
+        div1.style.display = div1.style.display === "none" ? "block" : "none";
+}
+
+      function checkWin() {
+
+        Board._Two_numbers_use.sort();
+        const first_card = Board._Two_numbers_use[0]
+        const Second_card = Board._Two_numbers_use[1]
+        let for_ended = -1
+
+        if (first_card >= 0 && Second_card >= 0) {
+          for (let i = 0; i < Board._pairs.length; ++i) {
+            for_ended++
+            const index = Board._pairs[i]
+
+            if (index[0] === first_card && index[1] === Second_card) {
+              Board._Two_numbers_use = []
+              setTimeout(function () { HideDiv(first_card, Second_card); }, 1100);
+
+              for (let i = 0; i < Board._pairs.length; i++) {
+                const b = Board._pairs[i]
+                const arrv = [first_card, Second_card]
+                if (b[0] === arrv[0] && b[1] === arrv[1] && Board._game_type === 2) {
+                  Board._pairs.splice(i, 1);
+                }
+              }
+              
+              if (b[0] === arrv[0] && b[1] === arrv[1] && Board._game_type === 0) {
                 Board._pairs.splice(i, 1);
+                setTimeout(function () { player_or_bot(); }, 2500);
+              break;
               }
             }
 
-            setTimeout(function () { bot_or_player(); }, 2500);
+            if (index[0] !== first_card && index[1] !== Second_card && for_ended === Board._pairs.length - 1) {
+
+              freeze()
+              ShakeDiv(first_card, Second_card)
+              Board._Two_numbers_use = []
+              if(Board._game_type === 2){
+              setTimeout(function () {
+                RemoveClass(first_card, Second_card),
+                  Hide_div_son_show_father(first_card)
+                  , Hide_div_son_show_father(Second_card), freeze();
+              }, 1100);
+            
+              }
+              if (Board._game_type === 0){
+                setTimeout(function () {
+                RemoveClass(first_card, Second_card),
+                  Hide_div_son_show_father(first_card)
+                  , Hide_div_son_show_father(Second_card), freeze();
+              }, 1100);
+                setTimeout(function () { player_or_bot(); }, 2500);
+              break;
+              }
+
+            }
+
+          }
+        }
+
+      }
+      function player_or_bot() {
+        switch (Board._game_type) {
+          case 0:
+            bot_random_number(), Board._game_type = 1
             break;
-
-
-          }
-
-          if (index[0] !== first_card && index[1] !== Second_card && for_ended === Board._pairs.length - 1) {
-
-            freeze()
-            ShakeDiv(first_card, Second_card)
-            Board._Two_numbers_use = []
-            setTimeout(function () {
-              RemoveClass(first_card, Second_card),
-              Hide_div_son_show_father(first_card)
-              , Hide_div_son_show_father(Second_card), freeze();
-            }, 1100);
-            setTimeout(function () { bot_or_player(); }, 2500);
-
-
-
-          }
+          case 1:
+          Board._game_type = 0;
+            break;
 
         }
       }
+      function bot_random_number() {
+        const index = Math.floor(Math.random() * Board._pairs.length);
+        const i = Board._pairs[index]
 
-    }
-    function bot_or_player() {
-      switch (Board.bot_or_player) {
-        case 0:
-          bot_random_number(), Board.bot_or_player = 1
-          break;
-        case 1:
-          Board.bot_or_player = 0;
-          break;
-
+        return cell_click(i[1]), cell_click(i[0]), Board.bot_or_player = 0
       }
-    }
-    function bot_random_number() {
-      const index = Math.floor(Math.random() * Board._pairs.length);
-      const i = Board._pairs[index]
-
-      return cell_click(i[1]), cell_click(i[0]), Board.bot_or_player = 0
-    }
 
 
-    function freeze() {
-      if (Board._freeze === 0) {
-        return Board._freeze = 1;
+      function freeze() {
+        if (Board._freeze === 0) {
+          return Board._freeze = 1;
+        }
+        else {
+          return Board._freeze = 0;
+        }
       }
-      else {
-        return Board._freeze = 0;
+
+      function HideDiv(a, b) {
+        const div1 = document.querySelector(`#card-${a}`)
+        div1.classList.add("Hide");
+        const div2 = document.querySelector(`#card-${b}`)
+        div2.classList.add("Hide");
       }
-    }
 
-    function HideDiv(a, b) {
-      const div1 = document.querySelector(`#card-${a}`)
-      div1.classList.add("Hide");
-      const div2 = document.querySelector(`#card-${b}`)
-      div2.classList.add("Hide");
-    }
-
-    function ShakeDiv(a, b) {
-      const div3 = document.querySelector(`#Hide-${a}`)
-      div3.classList.add("shake");
-      const div4 = document.querySelector(`#Hide-${b}`)
-      div4.classList.add("shake");
-    }
+      function ShakeDiv(a, b) {
+        const div3 = document.querySelector(`#Hide-${a}`)
+        div3.classList.add("shake");
+        const div4 = document.querySelector(`#Hide-${b}`)
+        div4.classList.add("shake");
+      }
 
 
-    function RemoveClass(a, b) {
-      const div1 = document.querySelector(`#Hide-${a}`)
-      div1.classList.remove("shake");
-      const div2 = document.querySelector(`#Hide-${b}`)
-      div2.classList.remove("shake");
-    }
+      function RemoveClass(a, b) {
+        const div1 = document.querySelector(`#Hide-${a}`)
+        div1.classList.remove("shake");
+        const div2 = document.querySelector(`#Hide-${b}`)
+        div2.classList.remove("shake");
+      }
 
-   
 
-    function createCols(rows, cols) {
-      deDefinition_of_properties()
-      createPairs()
-      random_number_arr()
-      const a = css(rows)
-      const audio = document.getElementById('Audio');
 
-      const parentDiv = document.getElementById("board");
-      parentDiv.classList.add(`board${a}`);
-      const firstRowDiv = document.createElement("div");
-      firstRowDiv.classList.add("from-row");
-      parentDiv.appendChild(firstRowDiv);
- 
-          
-      for (let i = 0; i < rows; i++) {
+      function createCols(rows, cols) {
+        deDefinition_of_properties()
+        createPairs()
+        random_number_arr()
+        const a = css(rows)
+        const audio = document.getElementById('Audio');
 
-        const rowDiv = document.createElement("div");
-        rowDiv.classList.add("row");
-        parentDiv.appendChild(rowDiv);
-       
-        for (let j = 0; j < cols; j++) {
-          const fnun = get_random_div()
-          let imgN = Board._arr[fnun]
-          card_back =0
-          catd_front=0
-          card_over =0
-          ap = 4
-          document.body.style.backgroundRepeat = "no-repeat";
+        const parentDiv = document.getElementById("board");
+        parentDiv.classList.add(`board${a}`);
+        const firstRowDiv = document.createElement("div");
+        firstRowDiv.classList.add("from-row");
+        parentDiv.appendChild(firstRowDiv);
+
+
+        for (let i = 0; i < rows; i++) {
+
+          const rowDiv = document.createElement("div");
+          rowDiv.classList.add("row");
+          parentDiv.appendChild(rowDiv);
+
+          for (let j = 0; j < cols; j++) {
+            const fnun = get_random_div()
+            let imgN = Board._arr[fnun]
+            card_back = 0
+            catd_front = 0
+            card_over = 0
+           
+            document.body.style.backgroundRepeat = "no-repeat";
             document.body.style.display = "flex";
             document.body.style.backgroundSize = "100% 100%";
             const audio = document.querySelector("audio");
+            stopBackgroundChange()
 
 
-        if (ap === 1){
-          document.body.style.backgroundImage = "url('images/HarryPotter.gif')";
-          card_back =api._data1[imgN].image
-          card_front = "images/ari_front.jpg"
-            card_over = "images/ari_over.gif"
-            audio.src = "images/Harry Potter.mp3";
-            audio.play();
+
+            if (Board._style === 1) {
+              document.body.style.backgroundImage = "url('images/ari.gif')";
+              card_back = api._data1[imgN].image
+              card_front = "images/ari_front.jpg"
+              card_over = "images/ari_over.gif"
+              audio.src = "audio-mp4/HarryPotter.mp3";
+              audio.play();
+            }
+            if (Board._style === 2) {
+              document.body.style.backgroundImage = "url('images/dog-.jpg')";
+
+              card_back = api._data2.message[imgN]
+              card_front = "images/dog.jpg"
+              card_over = "images/dog-over.gif"
+            }
+            if (Board._style === 3) {
+              document.body.style.backgroundImage = "url('images/digimon.png')";
+
+              card_back = api._data3[imgN].img
+              card_front = "images/dig_front.jpg"
+              card_over = "images/digimon.gif"
+              audio.src = "audio-mp4/Digimon.mp3";
+              audio.play();
+            }
+            if (Board._style === 4) {
+              document.body.style.backgroundImage = "url('images/poketheme.jpg')";
+              card_back = api._data4[imgN]
+              card_front = "images/poke_front.png"
+              card_over = "images/poke_over.gif"
+              audio.src = "audio-mp4/Pokémon.mp3";
+              audio.play();
+
+            }
+            const parentDiv = document.getElementById("board");
+            const frontDiv = document.createElement("div");
+            frontDiv.classList.add("front");
+            frontDiv.id = `front-${fnun}`
+            rowDiv.appendChild(frontDiv);
+            addCellClick(`front-${fnun}`, fnun)
+            document.getElementById(`front-${fnun}`).style.backgroundImage = `url(${card_front})`;
+            const myDiv = document.querySelector(`#front-${fnun}`);
+
+            myDiv.addEventListener("mouseover", function () { myDiv.style.backgroundImage = `url(${card_over})`; });
+
+            myDiv.addEventListener("mouseout", function () { myDiv.style.backgroundImage = `url(${card_front})`; });
+            const cellDiv = document.createElement("div");
+            cellDiv.classList.add("cell");
+            cellDiv.id = `cell-${fnun}`
+            const childDivs = parentDiv.querySelectorAll("cell");
+            frontDiv.appendChild(cellDiv);
+            const img = document.createElement("img");
+            const src = document.getElementById(`cell-${fnun}`);
+            img.src = card_back
+            src.appendChild(img);
           }
-          if(ap  === 2){
-            
-            card_back= api._data2.message[imgN]
-          }
-          if(ap === 3){
-            document.body.style.backgroundImage = "url('images/digimon.png')";
-           
-            card_back=  api._data3[imgN].img
-            card_front = "images/dig_front.jpg"
-            card_over = "images/digimon.gif"
-            audio.src = "images/Digimon.mp3";
-            audio.play();
-          }
-          if(ap === 4){
-            document.body.style.backgroundImage = "url('images/poketheme.jpg')";
-            card_back= api._data4[imgN]
-            card_front = "images/poke_front.png"
-            card_over = "images/poke_over.gif"
-            audio.src = "images/Pokémon.mp3";
-            audio.play();
-
-          }
-          const parentDiv = document.getElementById("board");
-          const frontDiv = document.createElement("div");
-          frontDiv.classList.add("front");
-          frontDiv.id = `front-${fnun}`
-          rowDiv.appendChild(frontDiv);
-          addCellClick(`front-${fnun}`, fnun)
-          document.getElementById(`front-${fnun}`).style.backgroundImage = `url(${card_front})`;
-          const myDiv = document.querySelector(`#front-${fnun}`);
-
-          myDiv.addEventListener("mouseover", function() 
-          {myDiv.style.backgroundImage = `url(${card_over})`;});
-
-          myDiv.addEventListener("mouseout", function() 
-          {myDiv.style.backgroundImage = `url(${card_front})`;});
-          const cellDiv = document.createElement("div");
-          cellDiv.classList.add("cell");
-          cellDiv.id = `cell-${fnun}`
-          const childDivs = parentDiv.querySelectorAll("cell");
-          frontDiv.appendChild(cellDiv);
-          const img = document.createElement("img");
-          const src = document.getElementById(`cell-${fnun}`);
-          img.src = card_back
-          src.appendChild(img);
         }
-      }
 
-      parentDiv.classList.add("flex");
-      parentDiv.style.display = "flex";
-      parentDiv.style.flexDirection = "row";
+        parentDiv.classList.add("flex");
+        parentDiv.style.display = "flex";
+        parentDiv.style.flexDirection = "row";
 
-      for (let i = 0; i < rows; i++) {
-        const rowDiv = document.querySelector(`.row:nth-child(${i + 1})`);
-        rowDiv.classList.add("flex");
-        rowDiv.style.flexDirection = "column";
-      }
-
-    }
-
-    function addCellClick(divId, fnun) {
-      // מצא את הדיב
-      const div = document.getElementById(divId);
-
-      // הוסף את הפונקציה `cell_click()` לאירוע `click` של כל תמונה
-      div.addEventListener("click", function () {
-        // קריאה לפונקציה `cell_click()` עם מספר התמונה
-        cell_click(fnun);
-      });
-
-    }
-
-    function random_number() {
-      const index = Math.floor(Math.random() * Board._Creating_a_div.length);
-      return index
-    }
-
-    function get_random_div() {
-      while (true) {
-        const index = random_number();
-
-        const indexExistsInDoubled = Board._doubled.includes(index);
-
-        if (!indexExistsInDoubled) {
-          return Board._doubled.push(index), index;;
-
-
-          break;
-        }
-        else {
-          continue;
+        for (let i = 0; i < rows; i++) {
+          const rowDiv = document.querySelector(`.row:nth-child(${i + 1})`);
+          rowDiv.classList.add("flex");
+          rowDiv.style.flexDirection = "column";
         }
 
       }
-    }
+
+      function addCellClick(divId, fnun) {
+        // מצא את הדיב
+        const div = document.getElementById(divId);
+
+        // הוסף את הפונקציה `cell_click()` לאירוע `click` של כל תמונה
+        div.addEventListener("click", function () {
+          // קריאה לפונקציה `cell_click()` עם מספר התמונה
+          cell_click(fnun);
+        });
+
+      }
+
+      function random_number() {
+        const index = Math.floor(Math.random() * Board._Creating_a_div.length);
+        return index
+      }
+
+      function get_random_div() {
+        while (true) {
+          const index = random_number();
+
+          const indexExistsInDoubled = Board._doubled.includes(index);
+
+          if (!indexExistsInDoubled) {
+            return Board._doubled.push(index), index;;
 
 
-    function end() { // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
+            break;
+          }
+          else {
+            continue;
+          }
 
-      window.setTimeout(function () { window.location.reload(); }, 0.1);
-    }
+        }
+      }
 
-  </script>
+
+      function end() { // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
+
+        window.setTimeout(function () { window.location.reload(); }, 0.1);
+      }
+
+    </script>
 </body>
 
 </html>
