@@ -2,19 +2,6 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -29,6 +16,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+  <script src="Board.js"></script>
+  <script src="Api.js"></script>
 
   <title>Document</title>
 
@@ -45,8 +34,6 @@
 
   }
 
-  
-
   *[class~="board"] {
     background: linear-gradient(to right, #2e2222af, #1d161bbf);
     border-radius: 10px;
@@ -57,26 +44,32 @@
     height: 500px;
     width: 500px;
     padding: 20px;
+    margin-top: 15%;
+
 
   }
 
   .board2 {
     padding: 10px;
-
     height: 700px;
     width: 700px;
+    margin-top: 15%;
+
   }
 
   .board3 {
     padding: 5px;
+    height: 1100px;
+    width: 1100px;
+    margin-top: 15%;
 
-    height: 1000px;
-    width: 1000px;
   }
 
   .board4 {
-    height: 1100px;
-    width: 1100px;
+    height: 1300px;
+    width: 1300px;
+    margin-top: 8%;
+
   }
 
   *[id^="cell-"] {
@@ -174,81 +167,122 @@
     visibility: hidden;
 
   }
+
+  #exit {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 5%;
+    right: 25%;
+  }
+
+  #TwoPlayer {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 25%;
+    left: 45.5%;
+  }
+
+  #bot {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 45%;
+  }
+
+
+  #select {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 45.5%;
+  }
+
+  #select1 {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 40%;
+  }
+
+  .button {
+
+    border: 5px solid rgb(74, 68, 68);
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 15px;
+    font-size: 18px;
+    color: #fff;
+    background-color: rgb(29, 36, 67);
+    border-radius: 20px;
+    box-shadow:
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+      rgb(18, 135, 178) 0px 0px 0px 5px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+  }
+
+  .button:hover {
+    background-color: rgb(84 105 212 / 0.5)
+  }
+
+  #bot:active {
+    background-color: rgb(84 105 212 / 0.5);
+    box-shadow: 0 5px #666;
+
+  }
+
+  #TwoPlayer:active {
+    background-color: rgb(84 105 212 / 0.5);
+    box-shadow: 0 5px #666;
+  }
+
+  #exit:active {
+    background-color: rgb(84 105 212 / 0.5);
+    box-shadow: 0 5px #666;
+  }
 </style>
 
-<body>   
+<body>
 
   <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
     onDrag="return false" onDrop="return false" autocomplete=off>
     <button type="button" id="exit" style="display:none" class="btn  exit button" onclick=" end()"
       value="">Exit</button>
-    <button type="button" id="TwoPlayer" style="display:block" class="btn button  TwoPlayer" onclick="player_vs_player()" value="">Two Player</button>
-    <button type="button" id="bot" style="display:block" class="btn button  bot" onclick="player_vs_bot()" value="">Player VS Bot</button>
-    <select onchange="select1()" id="select1" style="display:none" class="  button   select text-center" required>
-      <option class="button" value="">Select a photo style type </option>
-      <option class="button" value="1" id=""><b>Harry Potter</b></option>
-      <option value="2" id=""><B>Dogs</B></option>
-      <option value="3" id=""><B>Digimon</B></option>
-      <option value="4" id=""><B>Pokémon</B></option>
-      <option value="5" id=""><B>Random</B></option>
+    <div id="audio"></div>
+    <button type="button" id="TwoPlayer" style="display:block" class="btn button" onclick="player_vs_player()"
+      value=""><b>Two Player</b></button>
+    <button type="button" id="bot" style="display:block" class="btn button " onclick="player_vs_bot()"
+      value=""><b>Player VS Bot</b></button>
+    <select onchange="select1()" id="select1" style="display:none" class="button select text-center" required>
+      <option class="button" value=""><b>Select a photo style type</b></option>
+      <option value="1" id=""><b>Harry Potter</b></option>
+      <option value="2" id=""><b>Dogs</b></option>
+      <option value="3" id=""><b>Digimon</b></option>
+      <option value="4" id=""><b>Pokémon</b></option>
+      <option value="5" id=""><b>Random</b></option>
 
     </select>
-    <select onchange="select()" id="select" style="display:none" class="  button   select text-center" required>
+    <select onchange="select()" id="select" style="display:none" class="button select text-center" required>
       <option class="button" value=""> board size</option>
-      <option class="button" value="1" id=""><b>4X4</b></option>
-      <option value="2" id=""><B>6X6</B></option>
-      <option value="3" id=""><B>8X8</B></option>
-      <option value="4" id=""><B>10X10</B></option>
+      <option value="1"><b>4X4</b></option>
+      <option value="2"><b>6X6</b></option>
+      <option value="3"><b>8X8</b></option>
+      <option value="4"><b>10X10</b></option>
     </select>
     <div class="board" id="board"></div>
-
-  
-    <audio ></audio>
+    <audio></audio>
 
     <script>
 
 
-      class Board {
-        constructor(_pairs, _maxarr, _doubled, _freeze, _arr, _Creating_a_div, _Two_numbers_use,_game_type,_style) {
-          this.pairs = _pairs;
-          this.maxarr = _maxarr;
-          this.doubled = _doubled;
-          this.freeze = _freeze
-          this.arr = _arr;
-          this.Creating_a_div = _Creating_a_div; // מערך זה משמש ליצרת כמות הקלפים שמופיעים בלוח
-          this.Two_numbers_use = _Two_numbers_use;//יצרת מערך שמשמש לבדיקת התאמה של הקלפים הפתוחים
-          this.game_type = _game_type
-          this.style =_style
 
-        }
-      }
-      class api {
-        constructor(_data1, _data2, _data3, _data4) {
-
-          this.data1 = _data1
-          this.data2 = _data2
-          this.data3 = _data3
-          this.data4 = _data4
-
-
-        }
-
-
-
-        set_data1(_data1) {
-          this.data1 = _data1;
-        }
-        set_data2(_data2) {
-          this.data2 = _data2;
-        }
-        set_data3(_data3) {
-          this.data3 = _data3;
-        }
-        set_data3(_data4) {
-          this.data4 = _data4;
-        }
-
-      }
       // Fetch the data from the API
       fetch("https://hp-api.onrender.com/api/characters")  // 25 cards
         .then(res => res.json())
@@ -257,7 +291,7 @@
           localStorage.setItem("data1", JSON.stringify(data));
         })
         .catch(err => console.error(err));
-      api._data1 = JSON.parse(localStorage.getItem("data1"));
+      Api._data1 = JSON.parse(localStorage.getItem("data1"));
 
 
 
@@ -268,7 +302,7 @@
           localStorage.setItem("data2", JSON.stringify(data));
         })
         .catch(err => console.error(err));
-      api._data2 = JSON.parse(localStorage.getItem("data2"));
+      Api._data2 = JSON.parse(localStorage.getItem("data2"));
 
       fetch("https://digimon-api.vercel.app/api/digimon") // 208 cards
         .then(res => res.json())
@@ -277,12 +311,12 @@
           localStorage.setItem("data3", JSON.stringify(data));
         })
         .catch(err => console.error(err));
-      api._data3 = JSON.parse(localStorage.getItem("data3"))
+      Api._data3 = JSON.parse(localStorage.getItem("data3"))
 
 
-      function puse_PokeAPI_data4() {   // 1000 cards
+      function puse_PokeAPI_data4() {   // 648 cards
         let deta4 = []
-        for (let i = 1; i < 1000; i++) {
+        for (let i = 1; i < 648; i++) {
           let a = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i}.svg`
 
           deta4.push(a)
@@ -292,40 +326,40 @@
 
       }
       Board._game_type = -2
-      
-function player_vs_player(){
-  
-   Board._game_type = 2, Hide_select1(),hide_button()
-}
-function player_vs_bot(){
 
-   Board._game_type = 0, Hide_select1(),hide_button()
-}
+      function player_vs_player() {
 
-function hide_button(){
-    
-    const div2 = document.getElementById("TwoPlayer");
+        Board._game_type = 2, Hide_select1(), hide_button()
+      }
+      function player_vs_bot() {
+
+        Board._game_type = 0, Hide_select1(), hide_button()
+      }
+
+      function hide_button() {
+
+        const div2 = document.getElementById("TwoPlayer");
         div2.style.display = div2.style.display === "none" ? "block" : "none";
-    const div3 = document.getElementById("bot");
+        const div3 = document.getElementById("bot");
         div3.style.display = div3.style.display === "none" ? "block" : "none";
-    const div4 = document.getElementById("exit");
-        div4.style.display = div4.style.display === "block" ? "none" : "block";  
-}
+        const div4 = document.getElementById("exit");
+        div4.style.display = div4.style.display === "block" ? "none" : "block";
+      }
 
 
-function changeBackground() {
-const images = ["images/poketheme.jpg", "images/digimon.png", "images/HarryPotter.gif", "images/dog-.jpg"];
+      function changeBackground() {
+        const images = ["images/poketheme.jpg", "images/digimon.png", "images/HarryPotter.gif", "images/dog-.jpg"];
 
-const index = Math.floor(Math.random() * images.length);
-document.querySelector("body").style.backgroundImage = `url(${images[index]})`;
-}
-intervalId = setInterval(changeBackground, 5000);
+        const index = Math.floor(Math.random() * images.length);
+        document.querySelector("body").style.backgroundImage = `url(${images[index]})`;
+      }
+      intervalId = setInterval(changeBackground, 5000);
 
 
 
-function stopBackgroundChange() {
-clearInterval(intervalId);
-}
+      function stopBackgroundChange() {
+        clearInterval(intervalId);
+      }
 
       // יצירת זוגות לפי גודל הלוח
       function createPairs() {
@@ -353,16 +387,56 @@ clearInterval(intervalId);
         Board._Two_numbers_use = [];
         Board._doubled = [];
         Board._freeze = 0
-        api._data4 = puse_PokeAPI_data4()
+        Api._data4 = puse_PokeAPI_data4()
 
 
       }
 
+      function select1() {
 
+        let option = document.getElementById('select1').value;
+        switch (option) {
+          case "1": Board._style = 1, Hide_select1(), Hide_select(), HideOptions()
+            break;
+          case "2": Board._style = 2, Hide_select1(), Hide_select(), HideOptions()
+            break;
+          case "3": Board._style = 3, Hide_select1(), Hide_select(), HideOptions()
+            break;
+          case "4": Board._style = 4, Hide_select1(), Hide_select()
+            break;
+          case "5": Board._style = Math.floor(Math.random() * 4) + 1, Hide_select1(), Hide_select(), HideOptions()
+            break;
+        }
+      }
 
+      function HideOptions() {
+        if (Board._style === 1 || Board._style === 2) {
+
+          const select = document.getElementById("select");
+          const options = select.querySelectorAll("option");
+
+          options[3].style.display = "none";
+          options[4].style.display = "none";
+        }
+      }
+
+      function select() {
+
+        let option = document.getElementById('select').value;
+        switch (option) {
+          case "1": Hide_select(), Board._maxarr = 8, createCols(4, 4)
+            break;
+          case "2": Hide_select(), Board._maxarr = 18, createCols(6, 6)
+            break;
+          case "3": Hide_select(), Board._maxarr = 32, createCols(8, 8)
+            break;
+          case "4": Hide_select(), Board._maxarr = 50, createCols(10, 10)
+            break;
+        }
+      }
       function getRandomNumber() {
-        // יוצר מספר אקראי בין 0 ל-999
-        const randomNumber = Math.floor(Math.random() * 900) + 2;
+        //    יוצר מספר אקראי בין 2 ל- 480 
+        const randomNumber = Math.floor(Math.random() * 548) + 2;
 
         // מחזיר את המספר
         return randomNumber;
@@ -370,11 +444,21 @@ clearInterval(intervalId);
 
       // יצירת מערך של מספרים לפי גודל הלוח
       function random_number_arr() {
+        Board._arr = []
         let min = getRandomNumber()
-        for (let i = 0; i < Board._maxarr; i++) {
-          Board._arr.push(i, i);
-          //min+=1
 
+        if (Board._style === 4) {
+          for (let i = 0; i < Board._maxarr; i++) {
+            Board._arr.push(min, min);
+            min += 1
+
+          }
+        }
+        if (Board._style !== 4) {
+          for (let i = 0; i < Board._maxarr; i++) {
+            Board._arr.push(i, i);
+
+          }
         }
         for (let j = 0; j < Board._maxarr * 2; j++) {
           Board._Creating_a_div.push(j);
@@ -382,42 +466,6 @@ clearInterval(intervalId);
         }
       }
 
-      
-      function select1() {
-
-        let option = document.getElementById('select1').value;
-        switch (option) {
-          case "1": Board._style = 1,Hide_select1(),Hide_select()
-      
-            break;
-          case "2": Board._style = 2 ,Hide_select1(),Hide_select()
-            break;
-          case "3": Board._style = 3 ,Hide_select1(),Hide_select()
-            break;
-          case "4": Board._style = 4 ,Hide_select1(),Hide_select()
-            break;
-          case "5": Board._style = Math.floor(Math.random() * 4) + 1,Hide_select1(),Hide_select()
-            break;
-        }
-}
-
-
-
-
-      function select() {
-
-        let option = document.getElementById('select').value;
-        switch (option) {
-          case "1": Hide_select(),Board._maxarr = 8, createCols(4, 4)
-            break;
-          case "2": Hide_select(),Board._maxarr = 18, createCols(6, 6)
-            break;
-          case "3": Hide_select(),Board._maxarr = 32, createCols(8, 8)
-            break;
-          case "4": Hide_select(),Board._maxarr = 50, createCols(10, 10)
-            break;
-        }
-      }
 
       function css(rows) {
         if (rows === 4) {
@@ -473,17 +521,17 @@ clearInterval(intervalId);
         div1.id = `cell-${a}`;
 
       }
-     
 
 
-      function Hide_select(){ // מסתיר או מציג בהתאם את הרשימה הנפתחת
-    const div1 = document.getElementById("select");
+
+      function Hide_select() { // מסתיר או מציג בהתאם את הרשימה הנפתחת
+        const div1 = document.getElementById("select");
         div1.style.display = div1.style.display === "none" ? "block" : "none";
-}
-function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימה הנפתחת
-    const div1 = document.getElementById("select1");
+      }
+      function Hide_select1() { // מסתיר או מציג בהתאם את הרשימה הנפתחת
+        const div1 = document.getElementById("select1");
         div1.style.display = div1.style.display === "none" ? "block" : "none";
-}
+      }
 
       function checkWin() {
 
@@ -508,11 +556,11 @@ function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימ�
                   Board._pairs.splice(i, 1);
                 }
               }
-              
+
               if (b[0] === arrv[0] && b[1] === arrv[1] && Board._game_type === 0) {
                 Board._pairs.splice(i, 1);
                 setTimeout(function () { player_or_bot(); }, 2500);
-              break;
+                break;
               }
             }
 
@@ -521,22 +569,22 @@ function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימ�
               freeze()
               ShakeDiv(first_card, Second_card)
               Board._Two_numbers_use = []
-              if(Board._game_type === 2){
-              setTimeout(function () {
-                RemoveClass(first_card, Second_card),
-                  Hide_div_son_show_father(first_card)
-                  , Hide_div_son_show_father(Second_card), freeze();
-              }, 1100);
-            
-              }
-              if (Board._game_type === 0){
+              if (Board._game_type === 2) {
                 setTimeout(function () {
-                RemoveClass(first_card, Second_card),
-                  Hide_div_son_show_father(first_card)
-                  , Hide_div_son_show_father(Second_card), freeze();
-              }, 1100);
+                  RemoveClass(first_card, Second_card),
+                    Hide_div_son_show_father(first_card)
+                    , Hide_div_son_show_father(Second_card), freeze();
+                }, 1100);
+
+              }
+              if (Board._game_type === 0) {
+                setTimeout(function () {
+                  RemoveClass(first_card, Second_card),
+                    Hide_div_son_show_father(first_card)
+                    , Hide_div_son_show_father(Second_card), freeze();
+                }, 1100);
                 setTimeout(function () { player_or_bot(); }, 2500);
-              break;
+                break;
               }
 
             }
@@ -551,7 +599,7 @@ function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימ�
             bot_random_number(), Board._game_type = 1
             break;
           case 1:
-          Board._game_type = 0;
+            Board._game_type = 0;
             break;
 
         }
@@ -596,8 +644,54 @@ function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימ�
       }
 
 
+      function sound() {
+        const parentDiv = document.getElementById("audio")
+        const cellDiv = document.createElement("div");
+        cellDiv.classList.add("sound");
+        cellDiv.id = "sound"
+        parentDiv.appendChild(cellDiv);
+        const img = document.createElement("img");
+        const src = document.getElementById("sound");
+        img.src = "images/on.png"
+        src.appendChild(img);
+        const div = document.getElementById("sound");
+        div.addEventListener("click", function () {
+          on_or_off_sound();
+        });
+
+      }
+
+      function on_or_off_sound() {
+        const audio = document.querySelector("audio");
+        if (Board._style === 1) {
+           
+              audio.src = "audio-mp4/HarryPotter.mp3";
+              audio.play();
+            }
+            if (Board._style === 2) {
+             
+              card_over = "images/dog-over.gif"
+            }
+            if (Board._style === 3) {
+          
+              audio.src = "audio-mp4/Digimon.mp3";
+              audio.play();
+            }
+            if (Board._style === 4) {
+              document.body.style.backgroundImage = "url('images/poketheme.jpg')";
+              card_back = Api._data4[imgN]
+              card_front = "images/poke_front.png"
+              card_over = "images/poke_over.gif"
+              audio.src = "audio-mp4/Pokémon.mp3";
+              audio.play();
+
+audio.paused = !audio.paused;
+
+
+      }
 
       function createCols(rows, cols) {
+        sound()
         deDefinition_of_properties()
         createPairs()
         random_number_arr()
@@ -623,7 +717,7 @@ function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימ�
             card_back = 0
             catd_front = 0
             card_over = 0
-           
+
             document.body.style.backgroundRepeat = "no-repeat";
             document.body.style.display = "flex";
             document.body.style.backgroundSize = "100% 100%";
@@ -634,7 +728,7 @@ function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימ�
 
             if (Board._style === 1) {
               document.body.style.backgroundImage = "url('images/ari.gif')";
-              card_back = api._data1[imgN].image
+              card_back = Api._data1[imgN].image
               card_front = "images/ari_front.jpg"
               card_over = "images/ari_over.gif"
               audio.src = "audio-mp4/HarryPotter.mp3";
@@ -643,14 +737,14 @@ function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימ�
             if (Board._style === 2) {
               document.body.style.backgroundImage = "url('images/dog-.jpg')";
 
-              card_back = api._data2.message[imgN]
+              card_back = Api._data2.message[imgN]
               card_front = "images/dog.jpg"
               card_over = "images/dog-over.gif"
             }
             if (Board._style === 3) {
               document.body.style.backgroundImage = "url('images/digimon.png')";
 
-              card_back = api._data3[imgN].img
+              card_back = Api._data3[imgN].img
               card_front = "images/dig_front.jpg"
               card_over = "images/digimon.gif"
               audio.src = "audio-mp4/Digimon.mp3";
@@ -658,7 +752,7 @@ function Hide_select1(){ // מסתיר או מציג בהתאם את הרשימ�
             }
             if (Board._style === 4) {
               document.body.style.backgroundImage = "url('images/poketheme.jpg')";
-              card_back = api._data4[imgN]
+              card_back = Api._data4[imgN]
               card_front = "images/poke_front.png"
               card_over = "images/poke_over.gif"
               audio.src = "audio-mp4/Pokémon.mp3";
