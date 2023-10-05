@@ -666,28 +666,26 @@
         if (Board._style === 1) {
            
               audio.src = "audio-mp4/HarryPotter.mp3";
-              audio.play();
+              audio.paused = audio.play;
+
             }
             if (Board._style === 2) {
              
               card_over = "images/dog-over.gif"
+              audio.paused = !audio.paused;
+
             }
             if (Board._style === 3) {
           
               audio.src = "audio-mp4/Digimon.mp3";
-              audio.play();
+              audio.paused = !audio.paused;
+
             }
             if (Board._style === 4) {
-              document.body.style.backgroundImage = "url('images/poketheme.jpg')";
-              card_back = Api._data4[imgN]
-              card_front = "images/poke_front.png"
-              card_over = "images/poke_over.gif"
+          
               audio.src = "audio-mp4/Pokémon.mp3";
-              audio.play();
-
-audio.paused = !audio.paused;
-
-
+              audio.paused = !audio.paused;
+}
       }
 
       function createCols(rows, cols) {
