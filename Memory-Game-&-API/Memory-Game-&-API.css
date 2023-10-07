@@ -1,0 +1,260 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url("images/poketheme.jpg");
+
+  }
+
+  *[class~="board"] {
+    background: linear-gradient(to right, #2e2222af, #1d161bbf);
+    border-radius: 10px;
+    box-shadow: 0 0 10px;
+  }
+
+  .board1 {
+    height: 500px;
+    width: 500px;
+    padding: 20px;
+    margin-top: 15%;
+
+
+  }
+
+  .board2 {
+    padding: 10px;
+    height: 700px;
+    width: 700px;
+    margin-top: 15%;
+
+  }
+
+  .board3 {
+    padding: 5px;
+    height: 1100px;
+    width: 1100px;
+    margin-top: 15%;
+
+  }
+
+  .board4 {
+    height: 1300px;
+    width: 1300px;
+    margin-top: 8%;
+
+  }
+
+  *[id^="cell-"] {
+    border: 5px solid rgb(15, 106, 138);
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    border-radius: 10px;
+    margin-left: 10%;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(to right, #2e2222af, #1d161bbf);
+    border-radius: 9px;
+    box-shadow: 0 0 9px;
+    border: 5px solid rgb(15, 106, 138);
+    margin-right: 4%;
+    margin-top: 3%;
+  }
+
+  *[class~="blink"] {
+    width: 91px;
+    height: 89px;
+    animation: blinking 2.0s infinite;
+  }
+
+
+
+
+  *[id^="cell-"] {
+    visibility: hidden;
+  }
+
+  *[id^="Hide-"] {
+    visibility: hidden;
+  }
+
+  *[id^="card-"] {
+    visibility: visible
+  }
+
+  .out {
+
+    animation: out 1.65s ease-in-out;
+  }
+
+  @keyframes out {
+
+    0% {
+      transform: translateX(0);
+    }
+
+    20% {
+      transform: translateX(290px);
+    }
+
+    40% {
+      transform: translateX(500px);
+    }
+
+    60% {
+      transform: translateX(800px);
+    }
+
+    80% {
+      transform: translateX(1200px);
+    }
+
+    100% {
+      transform: translateX(8000px);
+    }
+
+
+  }
+
+
+
+  .shake {
+    animation: shake 0.35s ease-in-out;
+  }
+
+  @keyframes shake {
+
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    20% {
+      transform: translateX(-20px);
+    }
+
+    40% {
+      transform: translateX(20px);
+    }
+
+    60% {
+      transform: translateX(-8px);
+    }
+
+    80% {
+      transform: translateX(8px);
+    }
+  }
+
+  *[class~="front"]:hover {
+    background-color: #fff;
+    opacity: 0.5;
+    background-image: url(images/loader.gif);
+  }
+
+  *[class~="front"] {
+
+    background-size: 100% 100%;
+    border: 5px solid rgb(15, 106, 138);
+    border-radius: 20px;
+    margin: 1px;
+  }
+
+  .row {
+    margin: 2px;
+
+  }
+
+  .Hide {
+    visibility: hidden;
+
+  }
+
+  #exit {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 5%;
+    right: 25%;
+  }
+
+  #TwoPlayer {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 25%;
+    left: 45.5%;
+  }
+
+  #bot {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 45%;
+  }
+
+
+  #select_two {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 45.5%;
+  }
+
+  #select_first {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 40%;
+  }
+
+  .button {
+
+    border: 5px solid rgb(74, 68, 68);
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 15px;
+    font-size: 18px;
+    color: #fff;
+    background-color: rgb(29, 36, 67);
+    border-radius: 20px;
+    box-shadow:
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+      rgb(18, 135, 178) 0px 0px 0px 5px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+  }
+
+  .button:hover {
+    background-color: rgb(84 105 212 / 0.5)
+  }
+
+  #bot:active {
+    background-color: rgb(84 105 212 / 0.5);
+    box-shadow: 0 5px #666;
+
+  }
+
+  #TwoPlayer:active {
+    background-color: rgb(84 105 212 / 0.5);
+    box-shadow: 0 5px #666;
+  }
+
+  #exit:active {
+    background-color: rgb(84 105 212 / 0.5);
+    box-shadow: 0 5px #666;
+  }
