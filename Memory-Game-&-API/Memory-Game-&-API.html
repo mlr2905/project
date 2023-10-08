@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,12 +15,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-    <script src="calss/Api.js"></script>
-    <script src="calss/Board.js"></script>
-    <script src="calss/data_all.js"></script>
-    <script src="calss/Style_cards.js"></script>
-    <script src="Memory-Game-&-API.js"></script>
-    <link rel="stylesheet" href="Memory-Game-&-API.css">
+  <script src="calss/Api.js"></script>
+  <script src="calss/Board.js"></script>
+  <script src="calss/data_all.js"></script>
+  <script src="calss/Style_cards.js"></script>
+  <script src="Memory-Game-&-API.js"></script>
+  <link rel="stylesheet" href="Memory-Game-&-API.css">
 
 
   <title>Memory-Game-&-API</title>
@@ -30,8 +31,8 @@
 
   <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
     onDrag="return false" onDrop="return false" autocomplete=off>
- 
-   
+
+
     <select onchange="select_first()" id="select_first" style="display:none" class="button select text-center" required>
       <option class="button" value=""><b>Select a photo style type</b></option>
       <option value="1" id=""><b>Harry Potter</b></option>
@@ -48,35 +49,48 @@
       <option value="3"><b>8X8</b></option>
       <option value="4"><b>10X10</b></option>
     </select>
-    
     <div id="audio"></div>
+    <br />
 
+    <div class="col btn button" style="display: none;">
+      <samp id="player1"><b>player1</b></samp>
+      <samp id="round"><b>round</b></samp>
+      <samp id="player2" style="display: none;"><b>player2</b></samp>
+      <samp id="bot2" style="display: none;"><b>bot</b></samp>
+    </div>
     <div class="board" id="board"></div>
     <audio></audio>
   </div>
-  
 
- 
+
+
 </body>
 <script>
-  Create_authorized_buttons()
-  function Create_authorized_buttons(){
-  
-const buttons = [
-  { id: "exit", text: "Exit", classes: ["btn", "exit", "button"] ,onClick:end },
-  { id: "TwoPlayer", text: "Two Player", classes: ["btn", "TwoPlayer", "button"] ,onClick:player_vs_player},
-  { id: "bot", text: "Player VS Bot", classes: ["btn", "bot", "button"],onClick:player_vs_bot }
-];
 
-buttons.forEach((button) => {
-  const buttonElement = document.createElement("button");
-  buttonElement.id = button.id;
-  buttonElement.textContent = button.text;
-  buttonElement.classList.add(...button.classes);
-  buttonElement.addEventListener("click", button.onClick);
-  buttonElement.style.display = button.display;
-  document.body.appendChild(buttonElement);
-});
+  Board._player_one = 0, Board._rounds = 0, Board._player_two = 0, Board._player_bot = 0
+  document.getElementById("player1").textContent = `Player1: ${Board._player_one} ||`,
+  document.getElementById("round").textContent = `Round: ${Board._rounds} ||`,
+  document.getElementById("player2").textContent = ` Player2: ${Board._player_two}`;
+  document.getElementById("bot2").textContent = `Bot: ${Board._player_bot}`;
+
+  Create_authorized_buttons()
+  function Create_authorized_buttons() {
+
+    const buttons = [
+      { id: "exit", text: "Exit", classes: ["btn", "exit", "button"], onClick: end },
+      { id: "TwoPlayer", text: "Two Player", classes: ["btn", "TwoPlayer", "button"], onClick: player_vs_player },
+      { id: "bot", text: "Player VS Bot", classes: ["btn", "bot", "button"], onClick: player_vs_bot }
+    ];
+
+    buttons.forEach((button) => {
+      const buttonElement = document.createElement("button");
+      buttonElement.id = button.id;
+      buttonElement.textContent = button.text;
+      buttonElement.classList.add(...button.classes);
+      buttonElement.addEventListener("click", button.onClick);
+      buttonElement.style.display = button.display;
+      document.body.appendChild(buttonElement);
+    });
   }
 
 

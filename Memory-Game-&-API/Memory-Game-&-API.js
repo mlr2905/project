@@ -65,7 +65,7 @@ function select_first() {
   switch (option) {
     case "1": Board._style = 1, Hide_select_first(), Hide_select_two(), HideOptions()
       break;
-    case "2": Board._style = 2, Hide_select_first(), Hide_select_two(), HideOptions()
+    case "2": Board._style = 2, Hide_select_first(), Hide_select_two()
       break;
     case "3": Board._style = 3, Hide_select_first(), Hide_select_two()
       break;
@@ -133,11 +133,7 @@ function main_function(rows, cols) {
   Board._parentDiv.style.display = "flex";
   Board._parentDiv.style.flexDirection = "row";
 
-  for (let i = 0; i < rows; i++) {
-    const rowDiv = document.querySelector(`.row:nth-child(${i + 1})`);
-    rowDiv.classList.add("flex");
-    rowDiv.style.flexDirection = "column";
-  }
+ 
   
 }
 
