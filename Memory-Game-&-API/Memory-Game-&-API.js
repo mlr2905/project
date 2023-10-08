@@ -82,7 +82,7 @@ function select_first() {
 }
 
 function HideOptions() {
-  if (Board._style === 1 || Board._style === 2) {
+  if (Board._style === 1 ) {
 
     const select = document.getElementById("select_two");
     const options = select.querySelectorAll("option");
@@ -167,6 +167,7 @@ function createCols(rows, cols) {
   }
 
 }
+
 function sound() {
   const parentDiv = document.getElementById("audio")
   const cellDiv = document.createElement("div");
@@ -176,9 +177,7 @@ function sound() {
   img.src = "images/on.png"
   src.appendChild(img);
   const div = document.getElementById("audio");
-  div.addEventListener("click", function () {
-    on_or_off_sound();
-  });
+  div.addEventListener("click", on_or_off_sound);
 
 }
 
@@ -211,7 +210,9 @@ function on_or_off_sound() {
       audio.play();
       Board._on_or_off = "ON"
 
-    } else {
+    }
+
+    else {
       const img = document.createElement("img");
       const src = document.getElementById("audio");
       img.src = "images/off.png"
@@ -219,7 +220,6 @@ function on_or_off_sound() {
       audio.pause();
       Board._on_or_off = "OFF"
     }
-
   }
 }
 
@@ -234,7 +234,6 @@ function createPairs() {
     }
     if (i !== 0) {
       Board._pairs.push([a - 1, a]);
-
     }
   }
 
@@ -243,6 +242,7 @@ function createPairs() {
 }
 
 function getRandomNumber() {
+  
   //    יוצר מספר אקראי בין 2 ל- 548 
   const randomNumber = Math.floor(Math.random() * 548) + 2;
 
@@ -311,9 +311,9 @@ function get_random_div() {
   while (true) {
     const index = random_number();
 
-    const indexExistsInDoubled = Board._doubled.includes(index);
+    const Doubled = Board._doubled.includes(index);
 
-    if (!indexExistsInDoubled) {
+    if (!Doubled) {
       return Board._doubled.push(index), index;;
     }
     else {
@@ -322,6 +322,8 @@ function get_random_div() {
 
   }
 }
+
+
 function style_cards() {
   if (Board._style === 1) {
     document.body.style.backgroundImage = "url('images/ari.gif')";
@@ -332,14 +334,12 @@ function style_cards() {
   }
   if (Board._style === 2) {
     document.body.style.backgroundImage = "url('images/dog-.jpg')";
-
     Style_cards._card_back = Api._data2.message[Style_cards._imgN]
     Style_cards._card_front = "images/dog.jpg"
     Style_cards._card_over = "images/dog-over.gif"
   }
   if (Board._style === 3) {
     document.body.style.backgroundImage = "url('images/digimon.png')";
-
     Style_cards._card_back = Api._data3[Style_cards._imgN].img
     Style_cards._card_front = "images/dig_front.jpg"
     Style_cards._card_over = "images/digimon.gif"
@@ -393,19 +393,19 @@ function Hide_div_son_show_father(a) {
 
 }
 
-
-
 function checkWin() {
 
   Board._Two_numbers_use.sort();
   const first_card = Board._Two_numbers_use[0]
   const Second_card = Board._Two_numbers_use[1]
   let for_ended = -1
+  let memory = null
+  let memory_arr = null 
 
   if (first_card >= 0 && Second_card >= 0) {
-    for (let i = 0; i < Board._pairs.length; ++i) {
+    for (let a = 0; a < Board._pairs.length; a++) {
       for_ended++
-      const Index = Board._pairs[i]
+      let Index = Board._pairs[a]
 
       if (Index[0] === first_card && Index[1] === Second_card) {
         Board._Two_numbers_use = []
@@ -415,22 +415,22 @@ function checkWin() {
         }, 1600);
         setTimeout(function () { HideDiv(first_card, Second_card); }, 1500);
 
-        for (let i = 0; i < Board._pairs.length; i++) {
-          const b = Board._pairs[i]
-          const arrv = [first_card, Second_card]
-          if (b[0] === arrv[0] && b[1] === arrv[1] && Board._game_type === 2) {
-            Board._pairs.splice(i, 1);
+        for (let c = 0; c < Board._pairs.length; c++) {
+           memory = Board._pairs[c]
+           memory_arr = [first_card, Second_card]
+          if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 2) {
+            Board._pairs.splice(c, 1);
           }
         }
 
-        if (b[0] === arrv[0] && b[1] === arrv[1] && Board._game_type === 0) {
-          Board._pairs.splice(i, 1);
+        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 0) {
+          Board._pairs.splice(c, 1);
           setTimeout(function () { player_or_bot(); }, 2500);
           break;
         }
       }
       // שאין התמאה
-      if (Index[0] !== first_card && Index[1] !== Second_card && for_ended === Board._pairs.length-1) {
+      if (Index[0] !== first_card && Index[1] !== Second_card && for_ended === Board._pairs.length - 1) {
 
         freeze()
         ShakeDiv(first_card, Second_card)

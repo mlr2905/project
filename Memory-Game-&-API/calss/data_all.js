@@ -7,9 +7,7 @@
    })
    .catch(err => console.error(err));
  Api._data1 = JSON.parse(localStorage.getItem("data1"));
-
-
-
+ 
  fetch("https://dog.ceo/api/breeds/image/random/50") // 50 cards
    .then(res => res.json())
    .then(data => {
@@ -28,7 +26,6 @@
    .catch(err => console.error(err));
  Api._data3 = JSON.parse(localStorage.getItem("data3"))
 
-
  function puse_PokeAPI_data4() {   // 648 cards
    let deta4 = []
    for (let i = 1; i < 648; i++) {
@@ -36,7 +33,6 @@
 
      deta4.push(a)
    }
-
    return deta4
 
  }
