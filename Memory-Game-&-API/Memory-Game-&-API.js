@@ -1,8 +1,4 @@
 
-// window.localStorage.clear();
-
-
-
 
 Definition_of_properties()
 // הגדרת בררת מחדל של מאפיינים
@@ -19,6 +15,9 @@ function Definition_of_properties() {
 }
 
 function changeBackground() {
+  document.body.style.backgroundRepeat = "no-repeat";
+  document.body.style.display = "flex";
+  document.body.style.backgroundSize = "100% 100%";
   const images = ["images/poketheme.jpg", "images/digimon.png", "images/HarryPotter.gif", "images/dog-.jpg"];
 
   const index = Math.floor(Math.random() * images.length);
@@ -32,8 +31,6 @@ function stopBackgroundChange() {
   clearInterval(intervalId);
 }
 
-
-
 function player_vs_player() {
 
   Board._game_type = 2, Hide_select_first(), hide_button()
@@ -41,11 +38,9 @@ function player_vs_player() {
 function player_vs_bot() {
 
   Board._game_type = 0, Hide_select_first(), hide_button()
-
 }
 
 function hide_button() {
-
   const div2 = document.getElementById("TwoPlayer");
   div2.style.display = div2.style.display === "none" ? "block" : "none";
   const div3 = document.getElementById("bot");
@@ -82,7 +77,7 @@ function select_first() {
 }
 
 function HideOptions() {
-  if (Board._style === 1 ) {
+  if (Board._style === 1) {
 
     const select = document.getElementById("select_two");
     const options = select.querySelectorAll("option");
@@ -96,76 +91,54 @@ function select_two() {
 
   let option = document.getElementById('select_two').value;
   switch (option) {
-    case "1": Hide_select_two(), Board._maxarr = 8, createCols(4, 4)
+    case "1": Hide_select_two(), Board._maxarr = 8, main_function(4, 4)
       break;
-    case "2": Hide_select_two(), Board._maxarr = 18, createCols(6, 6)
+    case "2": Hide_select_two(), Board._maxarr = 18, main_function(6, 6)
       break;
-    case "3": Hide_select_two(), Board._maxarr = 32, createCols(8, 8)
+    case "3": Hide_select_two(), Board._maxarr = 32, main_function(8, 8)
       break;
-    case "4": Hide_select_two(), Board._maxarr = 50, createCols(10, 10)
+    case "4": Hide_select_two(), Board._maxarr = 50, main_function(10, 10)
       break;
   }
 }
 
 
-
-function createCols(rows, cols) {
+function main_function(rows, cols) {
   sound()
   createPairs()
   random_number_arr()
   on_or_off_sound()
-  const size = board_size(rows)
-  const parentDiv = document.getElementById("board");
-  parentDiv.classList.add(`board${size}`);
-  const firstRowDiv = document.createElement("div");
-  firstRowDiv.classList.add("from-row");
-  parentDiv.appendChild(firstRowDiv);
+  Board._size = board_size(rows)
+  Create_a_board()
 
   for (let i = 0; i < rows; i++) {
 
-    const rowDiv = document.createElement("div");
-    rowDiv.classList.add("row");
-    parentDiv.appendChild(rowDiv);
+    Board._rowDiv = document.createElement("div");
+    Board._rowDiv.classList.add("row");
+    Board._parentDiv.appendChild(Board._rowDiv);
 
     for (let j = 0; j < cols; j++) {
-      let random = get_random_div()
-      Style_cards._imgN = Board._arr[random]
-      document.body.style.backgroundRepeat = "no-repeat";
-      document.body.style.display = "flex";
-      document.body.style.backgroundSize = "100% 100%";
+      Board._random = get_random_div()
+      Style_cards._imgN = Board._arr[Board._random]
+
       stopBackgroundChange()
       style_cards()
-      const frontDiv = document.createElement("div");
-      frontDiv.classList.add("front");
-      frontDiv.id = `front-${random}`
-      rowDiv.appendChild(frontDiv);
-      addCellClick(`front-${random}`, random)
-      document.getElementById(`front-${random}`).style.backgroundImage = `url(${Style_cards._card_front})`;
-      const myDiv = document.querySelector(`#front-${random}`);
-      myDiv.addEventListener("mouseover", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_over})`; });
-      myDiv.addEventListener("mouseout", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_front})`; });
-      const cellDiv = document.createElement("div");
-      cellDiv.classList.add("cell");
-      cellDiv.id = `cell-${random}`
-      const childDivs = parentDiv.querySelectorAll("cell");
-      frontDiv.appendChild(cellDiv);
-      const img = document.createElement("img");
-      const src = document.getElementById(`cell-${random}`);
-      img.src = Style_cards._card_back
-      src.appendChild(img);
+      Create_a_parent_div()
+      card_front_and_over()
+      Creating_a_Child_div()
     }
   }
 
-  parentDiv.classList.add("flex");
-  parentDiv.style.display = "flex";
-  parentDiv.style.flexDirection = "row";
+  Board._parentDiv.classList.add("flex");
+  Board._parentDiv.style.display = "flex";
+  Board._parentDiv.style.flexDirection = "row";
 
   for (let i = 0; i < rows; i++) {
     const rowDiv = document.querySelector(`.row:nth-child(${i + 1})`);
     rowDiv.classList.add("flex");
     rowDiv.style.flexDirection = "column";
   }
-
+  
 }
 
 function sound() {
@@ -242,12 +215,12 @@ function createPairs() {
 }
 
 function getRandomNumber() {
-  
+
   //    יוצר מספר אקראי בין 2 ל- 548 
-  const randomNumber = Math.floor(Math.random() * 548) + 2;
+  const Number = Math.floor(Math.random() * 548) + 2;
 
   // מחזיר את המספר
-  return randomNumber;
+  return Number;
 }
 
 // יצירת מערך של מספרים לפי גודל הלוח
@@ -323,6 +296,15 @@ function get_random_div() {
   }
 }
 
+function Create_a_board() {
+  Board._parentDiv = document.getElementById("board");
+  Board._parentDiv.classList.add(`board${Board._size}`);
+  const firstRowDiv = document.createElement("div");
+  firstRowDiv.classList.add("from-row");
+  Board._parentDiv.appendChild(firstRowDiv);
+}
+
+
 
 function style_cards() {
   if (Board._style === 1) {
@@ -353,6 +335,32 @@ function style_cards() {
 
   }
 }
+function card_front_and_over() {
+  const myDiv = document.querySelector(`#front-${Board._random}`);
+  myDiv.addEventListener("mouseover", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_over})`; });
+  myDiv.addEventListener("mouseout", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_front})`; });
+}
+
+function Create_a_parent_div() {
+  Board.frontDiv = document.createElement("div");
+  Board.frontDiv.classList.add("front");
+  Board.frontDiv.id = `front-${Board._random}`
+  Board._rowDiv.appendChild(Board.frontDiv);
+  addCellClick(`front-${Board._random}`, Board._random)
+  document.getElementById(`front-${Board._random}`).style.backgroundImage = `url(${Style_cards._card_front})`;
+}
+
+function Creating_a_Child_div() {
+  const cellDiv = document.createElement("div");
+  cellDiv.classList.add("cell");
+  cellDiv.id = `cell-${Board._random}`
+  Board.frontDiv.appendChild(cellDiv);
+  const img = document.createElement("img");
+  const src = document.getElementById(`cell-${Board._random}`);
+  img.src = Style_cards._card_back
+  src.appendChild(img);
+}
+
 function cell_click(a) {
 
 
@@ -400,7 +408,7 @@ function checkWin() {
   const Second_card = Board._Two_numbers_use[1]
   let for_ended = -1
   let memory = null
-  let memory_arr = null 
+  let memory_arr = null
 
   if (first_card >= 0 && Second_card >= 0) {
     for (let a = 0; a < Board._pairs.length; a++) {
@@ -416,8 +424,8 @@ function checkWin() {
         setTimeout(function () { HideDiv(first_card, Second_card); }, 1500);
 
         for (let c = 0; c < Board._pairs.length; c++) {
-           memory = Board._pairs[c]
-           memory_arr = [first_card, Second_card]
+          memory = Board._pairs[c]
+          memory_arr = [first_card, Second_card]
           if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 2) {
             Board._pairs.splice(c, 1);
           }
