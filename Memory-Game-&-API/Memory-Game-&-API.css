@@ -93,7 +93,7 @@ body {
 
   .out {
 
-    animation: out 1.7s ease-in-out;
+    animation: out 1.6s ease-in-out;
   }
 
   @keyframes out {

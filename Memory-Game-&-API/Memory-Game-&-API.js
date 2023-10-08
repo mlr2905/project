@@ -407,9 +407,9 @@ function checkEqual() {
   let memory_arr = null
 
   if (first_card >= 0 && Second_card >= 0) {
-    for (let a = 0; a < Board._pairs.length; a++) {
+    for (let i = 0; i < Board._pairs.length; i++) {
       for_ended++
-      let Index = Board._pairs[a]
+      let Index = Board._pairs[i]
 
       if (Index[0] === first_card && Index[1] === Second_card) {
         Board._Two_numbers_use = []
@@ -418,17 +418,18 @@ function checkEqual() {
           RemoveClass_blink(first_card, Second_card)
         }, 1600);
         setTimeout(function () { HideDiv(first_card, Second_card); }, 1500);
+        break;
 
-        for (let c = 0; c < Board._pairs.length; c++) {
-          memory = Board._pairs[c]
+        for (let i = 0; i < Board._pairs.length; i++) {
+          memory = Board._pairs[i]
           memory_arr = [first_card, Second_card]
           if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 2) {
-            Board._pairs.splice(c, 1);
+            Board._pairs.splice(i, 1);
           }
         }
 
         if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 0) {
-          Board._pairs.splice(c, 1);
+          Board._pairs.splice(i, 1);
           setTimeout(function () { player_or_bot(); }, 2500);
           break;
         }
@@ -500,15 +501,15 @@ function HideDiv(a, b) {
 
 
 function blinkDiv(a, b) {
-  const div3 = document.querySelector(`#Hide-${a}`)
+  const div3 = document.querySelector(`#card-${a}`)
   div3.classList.add("out");
-  const div4 = document.querySelector(`#Hide-${b}`)
+  const div4 = document.querySelector(`#card-${b}`)
   div4.classList.add("out");
 }
 function RemoveClass_blink(a, b) {
-  const div1 = document.querySelector(`#Hide-${a}`)
+  const div1 = document.querySelector(`#card-${a}`)
   div1.classList.remove("out");
-  const div2 = document.querySelector(`#Hide-${b}`)
+  const div2 = document.querySelector(`#card-${b}`)
   div2.classList.remove("out");
 }
 
