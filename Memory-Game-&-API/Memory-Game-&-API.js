@@ -375,7 +375,7 @@ function cell_click(a) {
       }
     }
     Board._Two_numbers_use.push(a);
-    checkWin()
+    checkEqual()
   }
 
 }
@@ -396,8 +396,8 @@ function Hide_div_son_show_father(a) {
   div1.id = `cell-${a}`;
 
 }
-
-function checkWin() {
+ 
+function checkEqual() {
 
   Board._Two_numbers_use.sort();
   const first_card = Board._Two_numbers_use[0]
