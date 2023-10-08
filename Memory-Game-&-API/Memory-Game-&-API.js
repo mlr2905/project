@@ -113,14 +113,13 @@ function createCols(rows, cols) {
   sound()
   createPairs()
   random_number_arr()
-  const a = css(rows)
-  const audio = document.getElementById('Audio');
+  on_or_off_sound()
+  const size = board_size(rows)
   const parentDiv = document.getElementById("board");
-  parentDiv.classList.add(`board${a}`);
+  parentDiv.classList.add(`board${size}`);
   const firstRowDiv = document.createElement("div");
   firstRowDiv.classList.add("from-row");
   parentDiv.appendChild(firstRowDiv);
-  on_or_off_sound()
 
   for (let i = 0; i < rows; i++) {
 
@@ -129,31 +128,29 @@ function createCols(rows, cols) {
     parentDiv.appendChild(rowDiv);
 
     for (let j = 0; j < cols; j++) {
-      const fnun = get_random_div()
-      Style_cards._imgN = Board._arr[fnun]
+      let random = get_random_div()
+      Style_cards._imgN = Board._arr[random]
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.display = "flex";
       document.body.style.backgroundSize = "100% 100%";
-      const audio = document.querySelector("audio");
       stopBackgroundChange()
       style_cards()
-      const parentDiv = document.getElementById("board");
       const frontDiv = document.createElement("div");
       frontDiv.classList.add("front");
-      frontDiv.id = `front-${fnun}`
+      frontDiv.id = `front-${random}`
       rowDiv.appendChild(frontDiv);
-      addCellClick(`front-${fnun}`, fnun)
-      document.getElementById(`front-${fnun}`).style.backgroundImage = `url(${Style_cards._card_front})`;
-      const myDiv = document.querySelector(`#front-${fnun}`);
+      addCellClick(`front-${random}`, random)
+      document.getElementById(`front-${random}`).style.backgroundImage = `url(${Style_cards._card_front})`;
+      const myDiv = document.querySelector(`#front-${random}`);
       myDiv.addEventListener("mouseover", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_over})`; });
       myDiv.addEventListener("mouseout", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_front})`; });
       const cellDiv = document.createElement("div");
       cellDiv.classList.add("cell");
-      cellDiv.id = `cell-${fnun}`
+      cellDiv.id = `cell-${random}`
       const childDivs = parentDiv.querySelectorAll("cell");
       frontDiv.appendChild(cellDiv);
       const img = document.createElement("img");
-      const src = document.getElementById(`cell-${fnun}`);
+      const src = document.getElementById(`cell-${random}`);
       img.src = Style_cards._card_back
       src.appendChild(img);
     }
@@ -173,14 +170,12 @@ function createCols(rows, cols) {
 function sound() {
   const parentDiv = document.getElementById("audio")
   const cellDiv = document.createElement("div");
-  cellDiv.classList.add("sound");
-  cellDiv.id = "sound"
   parentDiv.appendChild(cellDiv);
   const img = document.createElement("img");
-  const src = document.getElementById("sound");
+  const src = document.getElementById("audio");
   img.src = "images/on.png"
   src.appendChild(img);
-  const div = document.getElementById("sound");
+  const div = document.getElementById("audio");
   div.addEventListener("click", function () {
     on_or_off_sound();
   });
@@ -189,30 +184,44 @@ function sound() {
 
 function on_or_off_sound() {
   const audio = document.querySelector("audio");
-  if (Board._style === 1) {
+  const div = document.querySelector('#audio');
+  const img = div.querySelector('img');
+  div.removeChild(img);
 
-    audio.src = "audio-mp4/HarryPotter.mp3";
-  }
+  if (Board._style !== 2) {
+    if (Board._style === 1) {
 
-  if (Board._style === 3) {
+      audio.src = "audio-mp4/HarryPotter.mp3";
+    }
 
-    audio.src = "audio-mp4/Digimon.mp3";
-  }
-  if (Board._style === 4) {
+    if (Board._style === 3) {
 
-    audio.src = "audio-mp4/Pokémon.mp3";
-  }
-  if (Board._on_or_off === "OFF") {
-    audio.play();
-    Board._on_or_off = "ON"
+      audio.src = "audio-mp4/Digimon.mp3";
+    }
+    if (Board._style === 4) {
 
-  } else {
-    audio.pause();
-    Board._on_or_off = "OFF"
+      audio.src = "audio-mp4/Pokémon.mp3";
+    }
+
+    if (Board._on_or_off === "OFF") {
+      const img = document.createElement("img");
+      const src = document.getElementById("audio");
+      img.src = "images/on.png"
+      src.appendChild(img);
+      audio.play();
+      Board._on_or_off = "ON"
+
+    } else {
+      const img = document.createElement("img");
+      const src = document.getElementById("audio");
+      img.src = "images/off.png"
+      src.appendChild(img);
+      audio.pause();
+      Board._on_or_off = "OFF"
+    }
+
   }
 }
-
-
 
 // יצירת זוגות לפי גודל הלוח
 function createPairs() {
@@ -234,7 +243,7 @@ function createPairs() {
 }
 
 function getRandomNumber() {
-  //    יוצר מספר אקראי בין 2 ל- 480 
+  //    יוצר מספר אקראי בין 2 ל- 548 
   const randomNumber = Math.floor(Math.random() * 548) + 2;
 
   // מחזיר את המספר
@@ -244,9 +253,9 @@ function getRandomNumber() {
 // יצירת מערך של מספרים לפי גודל הלוח
 function random_number_arr() {
   Board._arr = []
-  let min = getRandomNumber()
 
   if (Board._style === 4) {
+    let min = getRandomNumber()
     for (let i = 0; i < Board._maxarr; i++) {
       Board._arr.push(min, min);
       min += 1
@@ -266,7 +275,7 @@ function random_number_arr() {
 }
 
 
-function css(rows) {
+function board_size(rows) {
   if (rows === 4) {
     return 1;
   }
@@ -281,19 +290,14 @@ function css(rows) {
   }
 }
 
-
-
-
-
-
-function addCellClick(divId, fnun) {
+function addCellClick(divId, number) {
   // מצא את הדיב
   const div = document.getElementById(divId);
 
   // הוסף את הפונקציה `cell_click()` לאירוע `click` של כל תמונה
   div.addEventListener("click", function () {
     // קריאה לפונקציה `cell_click()` עם מספר התמונה
-    cell_click(fnun);
+    cell_click(number);
   });
 
 }
@@ -311,9 +315,6 @@ function get_random_div() {
 
     if (!indexExistsInDoubled) {
       return Board._doubled.push(index), index;;
-
-
-      break;
     }
     else {
       continue;
@@ -404,9 +405,9 @@ function checkWin() {
   if (first_card >= 0 && Second_card >= 0) {
     for (let i = 0; i < Board._pairs.length; ++i) {
       for_ended++
-      const index = Board._pairs[i]
+      const Index = Board._pairs[i]
 
-      if (index[0] === first_card && index[1] === Second_card) {
+      if (Index[0] === first_card && Index[1] === Second_card) {
         Board._Two_numbers_use = []
         blinkDiv(first_card, Second_card)
         setTimeout(function () {
@@ -429,7 +430,7 @@ function checkWin() {
         }
       }
       // שאין התמאה
-      if (index[0] !== first_card && index[1] !== Second_card && for_ended === Board._pairs.length - 1) {
+      if (Index[0] !== first_card && Index[1] !== Second_card && for_ended === Board._pairs.length-1) {
 
         freeze()
         ShakeDiv(first_card, Second_card)
