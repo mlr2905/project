@@ -22,6 +22,7 @@ class Board {
       this.rounds =_rounds
       this.player_two = _player_two
       this.player_bot = _player_bot
+      this.Out_of_cards =_Out_of_cards
 
 
     }

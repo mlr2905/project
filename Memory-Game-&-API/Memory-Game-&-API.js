@@ -400,11 +400,16 @@ function Hide_div_son_show_father(a) {
 function checkEqual() {
 
   Board._Two_numbers_use.sort();
-  const first_card = Board._Two_numbers_use[0]
-  const Second_card = Board._Two_numbers_use[1]
+  let first_card = Board._Two_numbers_use[0]
+  let Second_card = Board._Two_numbers_use[1]
   let for_ended = -1
   let memory = null
   let memory_arr = null
+  if(first_card === Second_card){
+     first_card = -1 ,Second_card = -1
+     Board._Two_numbers_use=[]
+
+  }
 
   if (first_card >= 0 && Second_card >= 0) {
     for (let i = 0; i < Board._pairs.length; i++) {
@@ -412,30 +417,45 @@ function checkEqual() {
       let Index = Board._pairs[i]
 
       if (Index[0] === first_card && Index[1] === Second_card) {
+        freeze()
         Board._Two_numbers_use = []
         blinkDiv(first_card, Second_card)
         setTimeout(function () {
           RemoveClass_blink(first_card, Second_card)
         }, 1600);
         setTimeout(function () { HideDiv(first_card, Second_card); }, 1500);
-        break;
-
-        for (let i = 0; i < Board._pairs.length; i++) {
+      
           memory = Board._pairs[i]
           memory_arr = [first_card, Second_card]
-          if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 2) {
+         
+        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 2) {
             Board._pairs.splice(i, 1);
+            if(Board._pairs.length === 0){
+              alert("a")
+              break;
+            }
+            freeze()
+            break;
+
           }
-        }
+        
 
         if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 0) {
           Board._pairs.splice(i, 1);
-          setTimeout(function () { player_or_bot(); }, 2500);
+          if(Board._pairs.length === 0){
+            alert("a")
+            break;
+          }
+          setTimeout(function () { freeze(),player_or_bot(); }, 2500);
           break;
         }
       }
+    
+      
+      
       // שאין התמאה
-      if (Index[0] !== first_card && Index[1] !== Second_card && for_ended === Board._pairs.length - 1) {
+      if (for_ended === Board._pairs.length - 1) {
+        if(Index[0] !== first_card && Index[1] !== Second_card ){
 
         freeze()
         ShakeDiv(first_card, Second_card)
@@ -448,6 +468,8 @@ function checkEqual() {
           }, 1100);
 
         }
+      }
+      
         if (Board._game_type === 0) {
           setTimeout(function () {
             RemoveClass(first_card, Second_card),
@@ -464,6 +486,7 @@ function checkEqual() {
   }
 
 }
+
 function player_or_bot() {
   switch (Board._game_type) {
     case 0:
