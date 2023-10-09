@@ -133,8 +133,8 @@ function main_function(rows, cols) {
   Board._parentDiv.style.display = "flex";
   Board._parentDiv.style.flexDirection = "row";
 
- 
-  
+
+
 }
 
 function sound() {
@@ -396,96 +396,105 @@ function Hide_div_son_show_father(a) {
   div1.id = `cell-${a}`;
 
 }
- 
+
 function checkEqual() {
 
   Board._Two_numbers_use.sort();
-  let first_card = Board._Two_numbers_use[0]
-  let Second_card = Board._Two_numbers_use[1]
-  let for_ended = -1
+  Board._first_card = Board._Two_numbers_use[0]
+  Board._Second_card = Board._Two_numbers_use[1]
   let memory = null
   let memory_arr = null
-  if(first_card === Second_card){
-     first_card = -1 ,Second_card = -1
-     Board._Two_numbers_use=[]
+  Board._for_ended = -1
+  if (Board._first_card === Board._Second_card) {
+    Board._first_card = -1, Board._Second_card = -1
+    Board._Two_numbers_use = []
 
   }
 
-  if (first_card >= 0 && Second_card >= 0) {
+  if (Board._first_card >= 0 && Board._Second_card >= 0) {
     for (let i = 0; i < Board._pairs.length; i++) {
-      for_ended++
+
+      Board._for_ended++
       let Index = Board._pairs[i]
 
-      if (Index[0] === first_card && Index[1] === Second_card) {
+      if (Index[0] === Board._first_card && Index[1] === Board._Second_card) {
         freeze()
         Board._Two_numbers_use = []
-        blinkDiv(first_card, Second_card)
+        blinkDiv(Board._first_card, Board._Second_card)
         setTimeout(function () {
-          RemoveClass_blink(first_card, Second_card)
+          RemoveClass_blink(Board._first_card, Board._Second_card)
         }, 1600);
-        setTimeout(function () { HideDiv(first_card, Second_card); }, 1500);
-      
-          memory = Board._pairs[i]
-          memory_arr = [first_card, Second_card]
-         
+        setTimeout(function () { HideDiv(Board._first_card, Board._Second_card), freeze(); }, 1500);
+
+        memory = Board._pairs[i]
+        memory_arr = [Board._first_card, Board._Second_card]
+
         if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 2) {
-            Board._pairs.splice(i, 1);
-            if(Board._pairs.length === 0){
-              alert("a")
-              break;
-            }
+          Board._pairs.splice(i, 1);
+          if (Board._pairs.length === 0) {
+            freeze()
+            Removal_of_children()
+            Definition_of_properties()
+            Board._game_type = 0
+            Board._style = Math.floor(Math.random() * 4) + 1
+            Board._maxarr = 8
+            main_function(4, 4)
             freeze()
             break;
-
           }
-        
+
+        }
+
 
         if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 0) {
           Board._pairs.splice(i, 1);
-          if(Board._pairs.length === 0){
-            alert("a")
+          if (Board._pairs.length === 0) {
+            Definition_of_properties()
+            Removal_of_children()
+            Board._game_type = 0
+            Board._style = Math.floor(Math.random() * 4) + 1
+            Board._maxarr = 8
+            main_function(4, 4)
             break;
           }
-          setTimeout(function () { freeze(),player_or_bot(); }, 2500);
+          setTimeout(function () { freeze(), player_or_bot(); }, 2500);
           break;
         }
-      }
-    
-      
-      
-      // שאין התמאה
-      if (for_ended === Board._pairs.length - 1) {
-        if(Index[0] !== first_card && Index[1] !== Second_card ){
-
-        freeze()
-        ShakeDiv(first_card, Second_card)
-        Board._Two_numbers_use = []
-        if (Board._game_type === 2) {
-          setTimeout(function () {
-            RemoveClass(first_card, Second_card),
-              Hide_div_son_show_father(first_card)
-              , Hide_div_son_show_father(Second_card), freeze();
-          }, 1100);
-
-        }
-      }
-      
-        if (Board._game_type === 0) {
-          setTimeout(function () {
-            RemoveClass(first_card, Second_card),
-              Hide_div_son_show_father(first_card)
-              , Hide_div_son_show_father(Second_card), freeze();
-          }, 1100);
-          setTimeout(function () { player_or_bot(); }, 2500);
-          break;
-        }
-
       }
 
     }
-  }
 
+    // שאין התמאה
+    if (Board._for_ended === Board._pairs.length - 1) {
+
+      freeze()
+      ShakeDiv(Board._first_card, Board._Second_card)
+      Board._Two_numbers_use = []
+
+      if (Board._game_type === 2) {
+        setTimeout(function () {
+          RemoveClass(Board._first_card, Board._Second_card),
+            Hide_div_son_show_father(Board._first_card)
+            , Hide_div_son_show_father(Board._Second_card), freeze();
+        }, 1100)
+      }
+
+      if (Board._game_type === 0) {
+        setTimeout(function () {
+          RemoveClass(Board._first_card, Board._Second_card),
+            Hide_div_son_show_father(Board._first_card)
+            , Hide_div_son_show_father(Board._Second_card)
+        }, 1100);
+        setTimeout(function () { freeze(),player_or_bot(),freeze(); }, 2500);
+      }
+
+    }
+
+  }
 }
+
+
+
 
 function player_or_bot() {
   switch (Board._game_type) {
@@ -552,6 +561,18 @@ function RemoveClass(a, b) {
   div2.classList.remove("shake");
 }
 
+function Removal_of_children() {
+  let parent = document.getElementById("board");
+
+  // מחיקת כל הילדים
+  parent.innerHTML = "";
+  Board._parentDiv.classList.remove(`board${Board._size}`);
+
+
+
+
+
+}
 
 function end() { // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
 

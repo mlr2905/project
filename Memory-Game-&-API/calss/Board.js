@@ -1,7 +1,7 @@
 class Board {
     constructor(_pairs, _maxarr, _doubled, _freeze, _arr, _Creating_a_div,
        _Two_numbers_use,_game_type, _style,_on_or_off,_random,_frontDiv,
-       _rowDiv,_size,_parentDiv,_player_one,_rounds,_player_two,_player_bot) 
+       _rowDiv,_size,_parentDiv,_player_one,_rounds,_player_two,_player_bot,_for_ended,_first_card) 
        {
       this.pairs = _pairs;
       this.maxarr = _maxarr;
@@ -23,6 +23,9 @@ class Board {
       this.player_two = _player_two
       this.player_bot = _player_bot
       this.Out_of_cards =_Out_of_cards
+      this.for_ended = _for_ended
+      this.first_card =_first_card
+      this.Second_card =_Second_card
 
 
     }
