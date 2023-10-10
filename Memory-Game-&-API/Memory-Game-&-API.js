@@ -104,6 +104,7 @@ function select_two() {
 
 
 function main_function(rows, cols) {
+  bar_default()
   sound()
   createPairs()
   random_number_arr()
@@ -136,6 +137,23 @@ function main_function(rows, cols) {
 
 
 }
+
+function bar_default() {
+  const div1 = document.getElementById("bar");
+  div1.style.display = "block"
+
+  Board._player_one = 0, Board._rounds = 0, Board._player_two = 0, Board._player_bot = 0
+  if (Board._game_type === 2) {
+    document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Player2: ${Board._player_two}`,
+      document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
+  }
+  if (Board._game_type === 0) {
+    document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Bot: ${Board._player_bot}`,
+      document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
+  }
+}
+
+
 
 function sound() {
   const parentDiv = document.getElementById("audio")
@@ -415,10 +433,12 @@ function checkEqual() {
     for (let i = 0; i < Board._pairs.length; i++) {
 
       Board._for_ended++
-      let Index = Board._pairs[i]
+       Board._check = Board._pairs[i]
 
-      if (Index[0] === Board._first_card && Index[1] === Board._Second_card) {
+      if (Board._check[0] === Board._first_card && Board._check[1] === Board._Second_card) {
         freeze()
+        Board._check[0] = -1
+        Board._check[1] = -1
         Board._Two_numbers_use = []
         blinkDiv(Board._first_card, Board._Second_card)
         setTimeout(function () {
@@ -429,35 +449,35 @@ function checkEqual() {
         memory = Board._pairs[i]
         memory_arr = [Board._first_card, Board._Second_card]
 
-        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 2) {
+        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 2 || Board._game_type === 3) {
           Board._pairs.splice(i, 1);
-          if (Board._pairs.length === 0) {
-            freeze()
-            Removal_of_children()
-            Definition_of_properties()
-            Board._game_type = 0
-            Board._style = Math.floor(Math.random() * 4) + 1
-            Board._maxarr = 8
-            main_function(4, 4)
-            freeze()
-            break;
-          }
-
+          card_matches()
+          TwoPlayer()
+          bar_update()
+          break;
+         
+        }
+        if (Board._pairs.length === 0) {
+          freeze()
+          Removal_of_children()
+          Definition_of_properties()
+          Board._game_type = 0
+          Board._style = Math.floor(Math.random() * 4) + 1
+          Board._maxarr = 8
+          main_function(4, 4)
+          freeze()
+          break;
         }
 
 
-        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 0) {
+
+        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 0 || Board._game_type === 1) {
           Board._pairs.splice(i, 1);
-          if (Board._pairs.length === 0) {
-            Definition_of_properties()
-            Removal_of_children()
-            Board._game_type = 0
-            Board._style = Math.floor(Math.random() * 4) + 1
-            Board._maxarr = 8
-            main_function(4, 4)
-            break;
-          }
+          card_matches()
+          bar_update()
           setTimeout(function () { freeze(), player_or_bot(); }, 2500);
+
+         
           break;
         }
       }
@@ -467,25 +487,31 @@ function checkEqual() {
     // שאין התמאה
     if (Board._for_ended === Board._pairs.length - 1) {
 
-      freeze()
-      ShakeDiv(Board._first_card, Board._Second_card)
-      Board._Two_numbers_use = []
 
-      if (Board._game_type === 2) {
-        setTimeout(function () {
-          RemoveClass(Board._first_card, Board._Second_card),
-            Hide_div_son_show_father(Board._first_card)
-            , Hide_div_son_show_father(Board._Second_card), freeze();
-        }, 1100)
-      }
+      if (Board._check[0] !== Board._check[1] ) {
 
-      if (Board._game_type === 0) {
-        setTimeout(function () {
-          RemoveClass(Board._first_card, Board._Second_card),
-            Hide_div_son_show_father(Board._first_card)
-            , Hide_div_son_show_father(Board._Second_card)
-        }, 1100);
-        setTimeout(function () { freeze(),player_or_bot(),freeze(); }, 2500);
+
+        freeze()
+        ShakeDiv(Board._first_card, Board._Second_card)
+        Board._Two_numbers_use = []
+
+        if (Board._game_type === 2 || Board._game_type === 3) {
+          TwoPlayer()
+          setTimeout(function () {
+            RemoveClass(Board._first_card, Board._Second_card),
+              Hide_div_son_show_father(Board._first_card)
+              , Hide_div_son_show_father(Board._Second_card), freeze();
+          }, 1100)
+        }
+
+        if (Board._game_type === 0) {
+          setTimeout(function () {
+            RemoveClass(Board._first_card, Board._Second_card),
+              Hide_div_son_show_father(Board._first_card)
+              , Hide_div_son_show_father(Board._Second_card)
+          }, 1100);
+          setTimeout(function () { freeze(), player_or_bot(), freeze(); }, 2500);
+        }
       }
 
     }
@@ -493,6 +519,40 @@ function checkEqual() {
   }
 }
 
+function card_matches() {
+
+  if (Board._game_type === 1 || Board._game_type === 2) {
+    Board._player_one++
+  }
+  if (Board._game_type === 0) {
+    Board._player_bot++
+  }
+  if (Board._game_type === 3) {
+    Board._player_two++
+  }
+}
+function bar_update() {
+  if (Board._game_type === 2 || Board._game_type === 3 ) {
+    document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Player2: ${Board._player_two}`,
+      document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
+  }
+  if (Board._game_type === 0 || Board._game_type === 1) {
+    document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Bot: ${Board._player_bot}`,
+      document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
+  }
+}
+
+function TwoPlayer() {
+  switch (Board._game_type) {
+    case 3:
+      Board._game_type = 2
+      break;
+    case 2:
+      Board._game_type = 3;
+      break;
+
+  }
+}
 
 
 

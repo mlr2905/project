@@ -249,3 +249,6 @@ body {
     background-color: rgb(84 105 212 / 0.5);
     box-shadow: 0 5px #666;
   }
+  .col {
+      font-weight: bold;
+    }  

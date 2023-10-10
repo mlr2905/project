@@ -52,11 +52,9 @@
     <div id="audio"></div>
     <br />
 
-    <div class="col btn button" style="display: none;">
-      <samp id="player1"><b>player1</b></samp>
-      <samp id="round"><b>round</b></samp>
-      <samp id="player2" style="display: none;"><b>player2</b></samp>
-      <samp id="bot2" style="display: none;"><b>bot</b></samp>
+    <div class="col btn button" id="bar" style="display: none;">
+      <div id="round"></div>
+      <div id="player1"></div>
     </div>
     <div class="board" id="board"></div>
     <audio></audio>
@@ -66,13 +64,7 @@
 
 </body>
 <script>
-
-  Board._player_one = 0, Board._rounds = 0, Board._player_two = 0, Board._player_bot = 0
-  document.getElementById("player1").textContent = `Player1: ${Board._player_one} ||`,
-  document.getElementById("round").textContent = `Round: ${Board._rounds} ||`,
-  document.getElementById("player2").textContent = ` Player2: ${Board._player_two}`;
-  document.getElementById("bot2").textContent = `Bot: ${Board._player_bot}`;
-
+ 
   Create_authorized_buttons()
   function Create_authorized_buttons() {
 
