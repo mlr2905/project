@@ -11,7 +11,10 @@ function Definition_of_properties() {
   Board._freeze = 0
   Api._data4 = puse_PokeAPI_data4()
   Board._on_or_off = "OFF"
-  Board._game_type = -2
+}
+rounds_default()
+function  rounds_default(){
+  Board._rounds = 0
 }
 
 function changeBackground() {
@@ -142,7 +145,7 @@ function bar_default() {
   const div1 = document.getElementById("bar");
   div1.style.display = "block"
 
-  Board._player_one = 0, Board._rounds = 0, Board._player_two = 0, Board._player_bot = 0
+  Board._player_one = 0, Board._player_two = 0, Board._player_bot = 0
   if (Board._game_type === 2) {
     document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Player2: ${Board._player_two}`,
       document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
@@ -169,24 +172,25 @@ function sound() {
 }
 
 function on_or_off_sound() {
-  const audio = document.querySelector("audio");
+   Board._audio = document.querySelector("audio");
   const div = document.querySelector('#audio');
   const img = div.querySelector('img');
   div.removeChild(img);
 
+
   if (Board._style !== 2) {
     if (Board._style === 1) {
 
-      audio.src = "audio-mp4/HarryPotter.mp3";
+      Board._audio.src = "audio-mp4/HarryPotter.mp3";
     }
 
     if (Board._style === 3) {
 
-      audio.src = "audio-mp4/Digimon.mp3";
+      Board._audio.src = "audio-mp4/Digimon.mp3";
     }
     if (Board._style === 4) {
 
-      audio.src = "audio-mp4/Pokémon.mp3";
+      Board._audio.src = "audio-mp4/Pokémon.mp3";
     }
 
     if (Board._on_or_off === "OFF") {
@@ -194,7 +198,7 @@ function on_or_off_sound() {
       const src = document.getElementById("audio");
       img.src = "images/on.png"
       src.appendChild(img);
-      audio.play();
+      Board._audio.play();
       Board._on_or_off = "ON"
 
     }
@@ -204,7 +208,7 @@ function on_or_off_sound() {
       const src = document.getElementById("audio");
       img.src = "images/off.png"
       src.appendChild(img);
-      audio.pause();
+      Board._audio.pause();
       Board._on_or_off = "OFF"
     }
   }
@@ -437,8 +441,7 @@ function checkEqual() {
 
       if (Board._check[0] === Board._first_card && Board._check[1] === Board._Second_card) {
         freeze()
-        Board._check[0] = -1
-        Board._check[1] = -1
+     
         Board._Two_numbers_use = []
         blinkDiv(Board._first_card, Board._Second_card)
         setTimeout(function () {
@@ -449,36 +452,51 @@ function checkEqual() {
         memory = Board._pairs[i]
         memory_arr = [Board._first_card, Board._Second_card]
 
-        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 2 || Board._game_type === 3) {
+        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1]) {
+          Board._check[0] = -1
+          Board._check[1] = -1
+          if( Board._game_type === 2 || Board._game_type === 3){
           Board._pairs.splice(i, 1);
           card_matches()
           TwoPlayer()
           bar_update()
+          if (Board._pairs.length === 0) {
+            
+            Removal_of_children()
+            Definition_of_properties()
+            if( Board._game_type === 2 || Board._game_type === 3){
+            Board._game_type = 2
+            }
+            if( Board._game_type === 0 || Board._game_type === 1){
+              Board._game_type = 0
+              }
+            Board._style = Math.floor(Math.random() * 4) + 1
+            Board._maxarr = 8
+          
+            Board._audio.pause();
+            on_or_off_sound()
+            main_function(4, 4)
+            Board._rounds++
+            bar_update()
+
+            break;
+          }
           break;
+          }
          
         }
-        if (Board._pairs.length === 0) {
-          freeze()
-          Removal_of_children()
-          Definition_of_properties()
-          Board._game_type = 0
-          Board._style = Math.floor(Math.random() * 4) + 1
-          Board._maxarr = 8
-          main_function(4, 4)
-          freeze()
-          break;
-        }
+       
 
 
 
-        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] && Board._game_type === 0 || Board._game_type === 1) {
+        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] ) {
+          if(Board._game_type === 0 || Board._game_type === 1){
           Board._pairs.splice(i, 1);
           card_matches()
           bar_update()
           setTimeout(function () { freeze(), player_or_bot(); }, 2500);
-
-         
           break;
+          }
         }
       }
 
@@ -518,6 +536,7 @@ function checkEqual() {
 
   }
 }
+
 
 function card_matches() {
 
