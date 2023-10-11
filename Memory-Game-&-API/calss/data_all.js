@@ -5,8 +5,8 @@
      // Save the data in localStorage
      localStorage.setItem("data1", JSON.stringify(data));
    })
-   .catch(err => console.error(err));
- Api._data1 = JSON.parse(localStorage.getItem("data1"));
+   .catch(err => alert("בגלל שאין אינטרנט לא יוצגו התמונות"),alert("אין חיבור לאינטרנט"));
+   Api._data1 = JSON.parse(localStorage.getItem("data1"));
  
  fetch("https://dog.ceo/api/breeds/image/random/50") // 50 cards
    .then(res => res.json())
@@ -14,8 +14,8 @@
      // Save the data in localStorage
      localStorage.setItem("data2", JSON.stringify(data));
    })
-   .catch(err => console.error(err));
- Api._data2 = JSON.parse(localStorage.getItem("data2"));
+   .catch(err => alert("בגלל שאין אינטרנט לא יוצגו התמונות"),alert("אין חיבור לאינטרנט"));
+   Api._data2 = JSON.parse(localStorage.getItem("data2"));
 
  fetch("https://digimon-api.vercel.app/api/digimon") // 208 cards
    .then(res => res.json())
@@ -23,8 +23,8 @@
      // Save the data in localStorage
      localStorage.setItem("data3", JSON.stringify(data));
    })
-   .catch(err => console.error(err));
- Api._data3 = JSON.parse(localStorage.getItem("data3"))
+   .catch(err => alert("בגלל שאין אינטרנט לא יוצגו התמונות"),alert("אין חיבור לאינטרנט"));
+   Api._data3 = JSON.parse(localStorage.getItem("data3"))
 
  function puse_PokeAPI_data4() {   // 648 cards
    let deta4 = []
