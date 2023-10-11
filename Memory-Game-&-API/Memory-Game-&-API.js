@@ -407,8 +407,6 @@ function hide_div_father_show_son(a) {
   div.id = `Hide-${a}`
   const div1 = document.querySelector(`#cell-${a}`);
   div1.id = `card-${a}`
-
-
 }
 
 function Hide_div_son_show_father(a) {
@@ -420,6 +418,7 @@ function Hide_div_son_show_father(a) {
 }
 
 function checkEqual() {
+  swal({title: "Dead heat!!",text: "",timer: 1000})
 
   Board._Two_numbers_use.sort();
   Board._first_card = Board._Two_numbers_use[0]
@@ -537,7 +536,6 @@ function checkEqual() {
   }
 }
 
-
 function card_matches() {
 
   if (Board._game_type === 1 || Board._game_type === 2) {
@@ -550,6 +548,7 @@ function card_matches() {
     Board._player_two++
   }
 }
+
 function bar_update() {
   if (Board._game_type === 2 || Board._game_type === 3 ) {
     document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Player2: ${Board._player_two}`,
@@ -573,8 +572,6 @@ function TwoPlayer() {
   }
 }
 
-
-
 function player_or_bot() {
   switch (Board._game_type) {
     case 0:
@@ -593,7 +590,6 @@ function bot_random_number() {
   return cell_click(i[1]), cell_click(i[0]), Board.bot_or_player = 0
 }
 
-
 function freeze() {
   if (Board._freeze === 0) {
     return Board._freeze = 1;
@@ -609,7 +605,6 @@ function HideDiv(a, b) {
   const div2 = document.querySelector(`#card-${b}`)
   div2.classList.add("Hide");
 }
-
 
 function blinkDiv(a, b) {
   const div3 = document.querySelector(`#card-${a}`)
@@ -646,11 +641,6 @@ function Removal_of_children() {
   // מחיקת כל הילדים
   parent.innerHTML = "";
   Board._parentDiv.classList.remove(`board${Board._size}`);
-
-
-
-
-
 }
 
 function end() { // exit פונקציה שמופעלת בעת לחיצה על הכפתור 

@@ -21,6 +21,11 @@
   <script src="calss/Style_cards.js"></script>
   <script src="Memory-Game-&-API.js"></script>
   <link rel="stylesheet" href="Memory-Game-&-API.css">
+  <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+  <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+
+
+
 
 
   <title>Memory-Game-&-API</title>
@@ -64,6 +69,14 @@
 
 </body>
 <script>
+  
+if (navigator.onLine) {
+
+} else {
+  // אין חיבור לאינטרנט
+  alert("Unable to connect to api"),
+  alert("You may not be able to see images")
+}
 
   Create_authorized_buttons()
   function Create_authorized_buttons() {
