@@ -13,7 +13,7 @@ function Definition_of_properties() {
   Board._on_or_off = "OFF"
 }
 rounds_default()
-function  rounds_default(){
+function rounds_default() {
   Board._rounds = 0
 }
 
@@ -35,10 +35,12 @@ function stopBackgroundChange() {
 }
 
 function player_vs_player() {
+  Board._One_time = 1
 
   Board._game_type = 2, Hide_select_first(), hide_button()
 }
 function player_vs_bot() {
+  Board._One_time = 1
 
   Board._game_type = 0, Hide_select_first(), hide_button()
 }
@@ -107,8 +109,11 @@ function select_two() {
 
 
 function main_function(rows, cols) {
+  if (Board._One_time = 1) {
+    sound()
+  }
+  Board._One_time = 0
   bar_default()
-  sound()
   createPairs()
   random_number_arr()
   on_or_off_sound()
@@ -159,60 +164,67 @@ function bar_default() {
 
 
 function sound() {
-  const parentDiv = document.getElementById("audio")
+  Board._audio = document.querySelector("audio");
   const cellDiv = document.createElement("div");
-  parentDiv.appendChild(cellDiv);
-  const img = document.createElement("img");
-  const src = document.getElementById("audio");
-  img.src = "images/on.png"
-  src.appendChild(img);
-  const div = document.getElementById("audio");
-  div.addEventListener("click", on_or_off_sound);
+  Board._audio.appendChild(cellDiv);
+  Board._img = document.createElement("img");
+  Board._src = document.getElementById("audio");
+  Board._img.src = "images/on.png"
+  Board._src.appendChild(Board._img);
+  Board._src.addEventListener("click", on_or_off_sound);
 
 }
+
 
 function on_or_off_sound() {
-   Board._audio = document.querySelector("audio");
-  const div = document.querySelector('#audio');
-  const img = div.querySelector('img');
-  div.removeChild(img);
+
+  Board._audio = document.querySelector("audio");
 
 
-  if (Board._style !== 2) {
-    if (Board._style === 1) {
 
-      Board._audio.src = "audio-mp4/HarryPotter.mp3";
-    }
+  if (Board._style === 1) {
 
-    if (Board._style === 3) {
+    Board._audio.src = "audio/HarryPotter.mp3";
+  }
+  if (Board._style === 2) {
 
-      Board._audio.src = "audio-mp4/Digimon.mp3";
-    }
-    if (Board._style === 4) {
+    Board._audio.src = "audio/default.mp3";
+  }
 
-      Board._audio.src = "audio-mp4/Pokémon.mp3";
-    }
 
-    if (Board._on_or_off === "OFF") {
-      const img = document.createElement("img");
-      const src = document.getElementById("audio");
-      img.src = "images/on.png"
-      src.appendChild(img);
-      Board._audio.play();
-      Board._on_or_off = "ON"
+  if (Board._style === 3) {
 
-    }
+    Board._audio.src = "audio/Digimon.mp3";
+  }
+  if (Board._style === 4) {
 
-    else {
-      const img = document.createElement("img");
-      const src = document.getElementById("audio");
-      img.src = "images/off.png"
-      src.appendChild(img);
-      Board._audio.pause();
-      Board._on_or_off = "OFF"
-    }
+    Board._audio.src = "audio/Pokémon.mp3";
+  }
+
+  if (Board._on_or_off === "OFF") {
+
+    Board._src.removeChild(Board._img);
+
+    Board._img = document.createElement("img");
+    Board.src = document.getElementById("audio");
+    Board._img.src = "images/on.png"
+    Board._src.appendChild(Board._img);
+    Board._audio.play();
+    Board._on_or_off = "ON"
+
+  }
+
+  else {
+    Board.src.removeChild(Board._img);
+    Board._img = document.createElement("img");
+    Board._src = document.getElementById("audio");
+    Board._img.src = "images/off.png"
+    Board._src.appendChild(Board._img);
+    Board._audio.pause();
+    Board._on_or_off = "OFF"
   }
 }
+
 
 // יצירת זוגות לפי גודל הלוח
 function createPairs() {
@@ -418,7 +430,6 @@ function Hide_div_son_show_father(a) {
 }
 
 function checkEqual() {
-  swal({title: "Dead heat!!",text: "",timer: 1000})
 
   Board._Two_numbers_use.sort();
   Board._first_card = Board._Two_numbers_use[0]
@@ -436,11 +447,11 @@ function checkEqual() {
     for (let i = 0; i < Board._pairs.length; i++) {
 
       Board._for_ended++
-       Board._check = Board._pairs[i]
+      Board._check = Board._pairs[i]
 
       if (Board._check[0] === Board._first_card && Board._check[1] === Board._Second_card) {
         freeze()
-     
+
         Board._Two_numbers_use = []
         blinkDiv(Board._first_card, Board._Second_card)
         setTimeout(function () {
@@ -454,47 +465,46 @@ function checkEqual() {
         if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1]) {
           Board._check[0] = -1
           Board._check[1] = -1
-          if( Board._game_type === 2 || Board._game_type === 3){
-          Board._pairs.splice(i, 1);
-          card_matches()
-          TwoPlayer()
-          bar_update()
-          if (Board._pairs.length === 0) {
-            
-            Removal_of_children()
-            Definition_of_properties()
-            if( Board._game_type === 2 || Board._game_type === 3){
-            Board._game_type = 2
-            }
-            if( Board._game_type === 0 || Board._game_type === 1){
-              Board._game_type = 0
-              }
-            Board._style = Math.floor(Math.random() * 4) + 1
-            Board._maxarr = 8
-          
-            Board._audio.pause();
-            on_or_off_sound()
-            main_function(4, 4)
-            Board._rounds++
+          if (Board._game_type === 2 || Board._game_type === 3) {
+            Board._pairs.splice(i, 1);
+            card_matches()
+            TwoPlayer()
             bar_update()
 
+
+
+            if (Board._pairs.length === 0) {
+
+              Check_who_won()
+              Removal_of_children()
+              Definition_of_properties()
+              if (Board._game_type === 2 || Board._game_type === 3) {
+                Board._game_type = 2
+              }
+              if (Board._game_type === 0 || Board._game_type === 1) {
+                Board._game_type = 0
+              }
+              Board._style = Math.floor(Math.random() * 4) + 1
+              Board._maxarr = 8
+
+              main_function(4, 4)
+              Board._rounds++
+              bar_update()
+
+              break;
+            }
             break;
           }
-          break;
-          }
-         
+
         }
-       
 
-
-
-        if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1] ) {
-          if(Board._game_type === 0 || Board._game_type === 1){
-          Board._pairs.splice(i, 1);
-          card_matches()
-          bar_update()
-          setTimeout(function () { freeze(), player_or_bot(); }, 2500);
-          break;
+        if (memory[0] ===  memory[1]) {
+          if (Board._game_type === 0 || Board._game_type === 1) {
+            Board._pairs.splice(i, 1);
+            card_matches()
+            bar_update()
+            setTimeout(function () {  player_or_bot() ,freeze()}, 2500);
+            break;
           }
         }
       }
@@ -505,7 +515,7 @@ function checkEqual() {
     if (Board._for_ended === Board._pairs.length - 1) {
 
 
-      if (Board._check[0] !== Board._check[1] ) {
+      if (Board._check[0] !== Board._check[1]) {
 
 
         freeze()
@@ -527,11 +537,29 @@ function checkEqual() {
               Hide_div_son_show_father(Board._first_card)
               , Hide_div_son_show_father(Board._Second_card)
           }, 1100);
-          setTimeout(function () { freeze(), player_or_bot(), freeze(); }, 2500);
+          setTimeout(function () { freeze(), player_or_bot() }, 2500);
         }
       }
 
     }
+
+  }
+}
+
+function Check_who_won() {
+  if (Board._player_one === Board._player_two || Board._player_one === Board._player_bot) {
+    swal({ title: "Dead heat!!", text: "", timer: 1000 })
+
+  }
+  if (Board._player_one < Board._player_two) {
+    swal({ title: "Player Two Win!!", text: "", timer: 1000 })
+
+  }
+  if (Board._player_one < Board._player_bot) {
+    swal({ title: "Bot Win!!", text: "", timer: 1000 })
+  }
+  if (Board._player_one > Board._player_bot && Board._player_one > Board._player_two) {
+    swal({ title: "Player One Win!!", text: "", timer: 1000 })
 
   }
 }
@@ -550,7 +578,7 @@ function card_matches() {
 }
 
 function bar_update() {
-  if (Board._game_type === 2 || Board._game_type === 3 ) {
+  if (Board._game_type === 2 || Board._game_type === 3) {
     document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Player2: ${Board._player_two}`,
       document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
   }
@@ -641,6 +669,11 @@ function Removal_of_children() {
   // מחיקת כל הילדים
   parent.innerHTML = "";
   Board._parentDiv.classList.remove(`board${Board._size}`);
+
+  let audio = document.getElementById("audio");
+
+  audio.innerHTML = "";
+
 }
 
 function end() { // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
