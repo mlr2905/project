@@ -32,7 +32,6 @@ class Board {
       this.One_time = _One_time
       this.src = _src
       this.img =_img
-=
 
     }
   }
