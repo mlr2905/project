@@ -147,16 +147,17 @@ function main_function(rows, cols) {
 }
 
 function bar_default() {
+  const a = `    `
   const div1 = document.getElementById("bar");
   div1.style.display = "block"
 
   Board._player_one = 0, Board._player_two = 0, Board._player_bot = 0
   if (Board._game_type === 2) {
-    document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Player2: ${Board._player_two}`,
+    document.getElementById("player1").textContent = `Player1: ${Board._player_one} ------- VS ------- Player2: ${Board._player_two}`,
       document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
   }
   if (Board._game_type === 0) {
-    document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Bot: ${Board._player_bot}`,
+    document.getElementById("player1").textContent = `Player1: ${Board._player_one} ------- VS ------- Bot: ${Board._player_bot}`,
       document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
   }
 }
@@ -366,10 +367,11 @@ function style_cards() {
   }
 }
 function card_front_and_over() {
-  const myDiv = document.querySelector(`#front-${Board._random}`);
+  let myDiv = document.querySelector(`#front-${Board._random}`);
   myDiv.addEventListener("mouseover", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_over})`; });
-  myDiv.addEventListener("mouseout", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_front})`; });
-}
+  myDiv.addEventListener("mouseout", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_front})`; }); 
+ }
+
 
 function Create_a_parent_div() {
   Board.frontDiv = document.createElement("div");
@@ -388,7 +390,7 @@ function Creating_a_Child_div() {
   const img = document.createElement("img");
   const src = document.getElementById(`cell-${Board._random}`);
   img.src = Style_cards._card_back
-  src.appendChild(img);
+  src.appendChild(img); 
 }
 
 function cell_click(a) {
@@ -579,11 +581,11 @@ function card_matches() {
 
 function bar_update() {
   if (Board._game_type === 2 || Board._game_type === 3) {
-    document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Player2: ${Board._player_two}`,
+    document.getElementById("player1").textContent = `Player1: ${Board._player_one} ------- VS ------- Player2: ${Board._player_two}`,
       document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
   }
   if (Board._game_type === 0 || Board._game_type === 1) {
-    document.getElementById("player1").textContent = `Player1: ${Board._player_one} VS Bot: ${Board._player_bot}`,
+    document.getElementById("player1").textContent = `Player1: ${Board._player_one} ------- VS ------- Bot: ${Board._player_bot}`,
       document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
   }
 }
