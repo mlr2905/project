@@ -1,23 +1,22 @@
 
 
 Definition_of_properties()
-// הגדרת בררת מחדל של מאפיינים
+// Setting default properties
 function Definition_of_properties() {
 
-  Board._arr = [];
-  Board._Creating_a_div = [];
+  Board._arr = [];   
+  Board._Creating_a_div = []; 
   Board._Two_numbers_use = [];
   Board._doubled = [];
   Board._freeze = 0
   Api._data4 = puse_PokeAPI_data4()
   Board._on_or_off = "OFF"
-}
-rounds_default()
-function rounds_default() {
   Board._rounds = 0
 }
 
-function changeBackground() {
+
+//  Sets a background and also that it changes every 5 seconds
+function changeBackground() {  
   document.body.style.backgroundRepeat = "no-repeat";
   document.body.style.display = "flex";
   document.body.style.backgroundSize = "100% 100%";
@@ -26,45 +25,45 @@ function changeBackground() {
   const index = Math.floor(Math.random() * images.length);
   document.querySelector("body").style.backgroundImage = `url(${images[index]})`;
 }
-intervalId = setInterval(changeBackground, 5000);
+intervalId = setInterval(changeBackground, 5000); 
 
 
 
-function stopBackgroundChange() {
-  clearInterval(intervalId);
-}
 
+// Player vs player. The function is activated as soon as the button is pressed
 function player_vs_player() {
   Board._One_time = 1
 
   Board._game_type = 2, Hide_select_first(), hide_button()
 }
+// Player vs bot . The function is activated as soon as the button is pressed
 function player_vs_bot() {
   Board._One_time = 1
 
   Board._game_type = 0, Hide_select_first(), hide_button()
 }
 
-function hide_button() {
+function hide_button() { 
   const div2 = document.getElementById("TwoPlayer");
   div2.style.display = div2.style.display === "none" ? "block" : "none";
   const div3 = document.getElementById("bot");
   div3.style.display = div3.style.display === "none" ? "block" : "none";
-  const div4 = document.getElementById("exit");
-  div4.style.display = div4.style.display === "block" ? "none" : "block";
+
 }
 
-function Hide_select_two() { // מסתיר או מציג בהתאם את הרשימה הנפתחת
-  const div1 = document.getElementById("select_two");
-  div1.style.display = div1.style.display === "none" ? "block" : "none";
-}
-function Hide_select_first() { // מסתיר או מציג בהתאם את הרשימה הנפתחת
+function Hide_select_first() { 
   const div1 = document.getElementById("select_first");
   div1.style.display = div1.style.display === "none" ? "block" : "none";
 }
 
 
-function select_first() {
+function Hide_select_two() {
+  const div1 = document.getElementById("select_two");
+  div1.style.display = div1.style.display === "none" ? "block" : "none";
+}
+
+
+function select_first() {  //  Board._style =  Game style (image type)
 
   let option = document.getElementById('select_first').value;
   switch (option) {
@@ -81,7 +80,7 @@ function select_first() {
   }
 }
 
-function HideOptions() {
+function HideOptions() { //In the Ari Potter game, the board is limited to 6x6
   if (Board._style === 1) {
 
     const select = document.getElementById("select_two");
@@ -92,7 +91,7 @@ function HideOptions() {
   }
 }
 
-function select_two() {
+function select_two() { //  Board._maxarr = With it the size of the board is determined (And it is relevant in other functions)
 
   let option = document.getElementById('select_two').value;
   switch (option) {
@@ -107,42 +106,36 @@ function select_two() {
   }
 }
 
-
-function main_function(rows, cols) {
-  if (Board._One_time = 1) {
-    sound()
-  }
-  Board._One_time = 0
-  bar_default()
-  createPairs()
+// The main function that builds the board with all the divs and images, 
+// background music and more with the help of activating additional functions
+function main_function(rows, cols) { //  receives two values
+  clearInterval(intervalId); // Stops the changing moment (Line 28)
+  sound() //A function that configures the icon of the music with the option to click
+  bar_default() 
+  createPairs() // // Create pairs according to board size
   random_number_arr()
-  on_or_off_sound()
-  Board._size = board_size(rows)
-  Create_a_board()
+  
+  on_or_off_sound() // Defines the type of music according to the style of play and 
+  // turns the music on if it is off or turns it off when it is on
 
-  for (let i = 0; i < rows; i++) {
+  Board._size = board_size(rows) // For function Create_a_board
+  Create_a_board() // Adds calss to the size of the selected board. The calss causes the board to change size with css
+
+  for (let i = 0; i < rows; i++) {  // The loop each time creates one div with class "row" child of div board
 
     Board._rowDiv = document.createElement("div");
     Board._rowDiv.classList.add("row");
     Board._parentDiv.appendChild(Board._rowDiv);
 
-    for (let j = 0; j < cols; j++) {
-      Board._random = get_random_div()
+    for (let j = 0; j < cols; j++) { // A loop that adds children to the parent div "row"
+      Board._random = get_random_div() //  causes the images and divs to scatter randomly
       Style_cards._imgN = Board._arr[Board._random]
-
-      stopBackgroundChange()
-      style_cards()
+      style_cards() 
       Create_a_parent_div()
       card_front_and_over()
       Creating_a_Child_div()
     }
   }
-
-  Board._parentDiv.classList.add("flex");
-  Board._parentDiv.style.display = "flex";
-  Board._parentDiv.style.flexDirection = "row";
-
-
 
 }
 
@@ -177,8 +170,7 @@ function sound() {
 }
 
 
-function on_or_off_sound() {
-
+function on_or_off_sound() { 
   Board._audio = document.querySelector("audio");
 
 
@@ -258,7 +250,7 @@ function getRandomNumber() {
 function random_number_arr() {
   Board._arr = []
 
-  if (Board._style === 4) {
+  if (Board._style === 4) { // Chooses images randomly
     let min = getRandomNumber()
     for (let i = 0; i < Board._maxarr; i++) {
       Board._arr.push(min, min);
@@ -330,9 +322,7 @@ function get_random_div() {
 function Create_a_board() {
   Board._parentDiv = document.getElementById("board");
   Board._parentDiv.classList.add(`board${Board._size}`);
-  const firstRowDiv = document.createElement("div");
-  firstRowDiv.classList.add("from-row");
-  Board._parentDiv.appendChild(firstRowDiv);
+
 }
 
 
@@ -477,7 +467,7 @@ function checkEqual() {
 
             if (Board._pairs.length === 0) {
 
-              Check_who_won()
+              Check_who_win()
               Removal_of_children()
               Definition_of_properties()
               if (Board._game_type === 2 || Board._game_type === 3) {
@@ -548,7 +538,7 @@ function checkEqual() {
   }
 }
 
-function Check_who_won() {
+function Check_who_win() {
   if (Board._player_one === Board._player_two || Board._player_one === Board._player_bot) {
     swal({ title: "Dead heat!!", text: "", timer: 1000 })
 
