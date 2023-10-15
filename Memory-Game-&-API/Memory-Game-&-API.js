@@ -45,6 +45,7 @@ function player_vs_player() {
 function player_vs_bot() {
 
   Board._game_type = 0, Hide_select_first(), hide_button()
+}
 
 function hide_button() {
   const div2 = document.getElementById("TwoPlayer");
@@ -661,6 +662,7 @@ function bot_random_number() {
 
   return cell_click(i[1]), cell_click(i[0]), Board.bot_or_player = 0
 }
+
 
 
 

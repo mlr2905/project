@@ -196,15 +196,6 @@ body {
     top: 35%;
     left: 45%;
   }
- 
-  #select_two {
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 35%;
-    left: 45.5%;
-  }
-
   #select_first {
     position: relative;
     margin: 0;
@@ -212,6 +203,23 @@ body {
     top: 35%;
     left: 40%;
   }
+  #select_two {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 42%;
+  }
+  #select_Third {
+    position: relative;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 43.5%;
+  }
+
+  
+  
 
   .button {
 
