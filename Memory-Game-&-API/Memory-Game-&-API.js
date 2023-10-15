@@ -94,7 +94,7 @@ function select_first() {  //  Board._style =  Game style (image type)
 function HideOptions() { //In the Ari Potter game, the board is limited to 6x6
   if (Board._style === 1) {
 
-    const select = document.getElementById("select_two");
+    const select = document.getElementById("select_Third");
     const options = select.querySelectorAll("option");
 
     options[3].style.display = "none";
