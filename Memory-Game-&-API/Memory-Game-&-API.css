@@ -189,15 +189,14 @@ body {
     left: 45.5%;
   }
 
-  #bot {
+  #bot{
     position: relative;
     margin: 0;
     position: absolute;
     top: 35%;
     left: 45%;
   }
-
-
+ 
   #select_two {
     position: relative;
     margin: 0;

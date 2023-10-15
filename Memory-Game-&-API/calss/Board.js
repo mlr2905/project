@@ -3,7 +3,7 @@ class Board {
        _Two_numbers_use,_game_type, _style,_on_or_off,_random,_frontDiv,
        _rowDiv,_size,_parentDiv,_player_one,_rounds,_player_two,_player_bot,
        _for_ended,_first_card,_Second_card,_check,_audio,_src,_img,_max_rounds,
-       _win_player_one,_win_player_two, _win_player_bot) 
+       _win_player_one,_win_player_two, _win_player_bot,_max_round) 
        {
       this.pairs = _pairs;
       this.maxarr = _maxarr;
@@ -36,6 +36,6 @@ class Board {
       this.win_player_two = _win_player_two
       this.win._player_bot = _win_player_bot
       this.max_rounds = _max_rounds
-
+             
     }
   }
