@@ -48,18 +48,26 @@
 
     </select>
     <select onchange="select_two()" id="select_two" style="display:none" class="button select text-center" required>
+      <option class="button" value=""> Amount of Rounds</option>
+      <option value="1"><b>3</b></option>
+      <option value="2"><b>5</b></option>
+      <option value="3"><b>Unlimited</b></option>
+    </select>
+    <select onchange="select_Third()" id="select_Third" style="display:none" class="button select text-center" required>
       <option class="button" value=""> board size</option>
       <option value="1"><b>4X4</b></option>
       <option value="2"><b>6X6</b></option>
       <option value="3"><b>8X8</b></option>
       <option value="4"><b>10X10</b></option>
     </select>
+   
     <div id="audio"></div>
     <br />
 
     <div class="col btn button" id="bar" style="display: none;">
       <div id="round"></div>
       <div id="player1"></div>
+      <div id="win"></div>
     </div>
     <div class="board" id="board"></div>
     <audio></audio>
