@@ -562,7 +562,7 @@ function checkEqual() {
               Hide_div_son_show_father(Board._first_card)
               , Hide_div_son_show_father(Board._Second_card)
           }, 1100);
-          setTimeout(function () { freeze(), player_or_bot() }, 2500);
+          setTimeout(function () { freeze(), player_or_bot(),freeze() }, 2500);
         }
       }
 
