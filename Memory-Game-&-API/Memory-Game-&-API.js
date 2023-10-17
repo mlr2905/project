@@ -493,10 +493,7 @@ function checkEqual() {
 
             if (Board._pairs.length === 0) {
 
-              if(Board._game_type === 5){
-
-                Board._win_player_one++
-              }
+             
 
               Check_who_win_rounds()
               Board._rounds++
@@ -532,7 +529,7 @@ function checkEqual() {
             Board._pairs.splice(i, 1);
             card_matches()
             bar_update()
-            setTimeout(function () { freeze(),player_or_bot(), freeze() }, 2500);
+            setTimeout(function () { freeze(),player_or_bot() }, 2500);
             break;
           }
         }
