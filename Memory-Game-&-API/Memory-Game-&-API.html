@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,21 +22,11 @@
   <link rel="stylesheet" href="Memory-Game-&-API.css">
   <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
   <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
-
   <title>Memory-Game-&-API</title>
-
 </head>
-
 <body>
- 
-  
-  
   <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
-  
     onDrag="return false" onDrop="return false" autocomplete=off>
-    
-
-
     <select onchange="select_first()" id="select_first" style="display:none" class="button select text-center" required>
       <option class="button" value=""><b>Select a photo style type</b></option>
       <option value="1" id=""><b>Harry Potter</b></option>
@@ -45,7 +34,6 @@
       <option value="3" id=""><b>Digimon</b></option>
       <option value="4" id=""><b>Pokémon</b></option>
       <option value="5" id=""><b>Random</b></option>
-
     </select>
     <select onchange="select_two()" id="select_two" style="display:none" class="button select text-center" required>
       <option class="button" value=""> Amount of Rounds</option>
@@ -60,40 +48,28 @@
       <option value="3"><b>8X8 &nbsp; (64 cards)</b></option>
       <option value="4"><b>10X10 &nbsp; (100 cards)</b></option>
     </select>
-    <div class="mr"><footer   style="color: rgba(4, 54, 4, 0.693);"><b> Michael Rozental 2023</b>&copy;</footer></div>
-
-    <div id="audio"> </div>  
+    <div class="mr">
+      <footer style="color: rgba(4, 54, 4, 0.693);"><b> Michael Rozental 2023</b>&copy;</footer>
+    </div>
+    <div id="audio"> </div>
     <br />
-
     <div class="col btn button" id="bar" style="display: none;">
-     
       <div id="round"></div>
-
       <div id="player1"></div>
- 
       <div id="win"></div>
     </div>
-   
     <div class="board" id="board"></div>
     <audio></audio>
-
   </div>
-
-
-
 </body>
 <script>
-  
-
   Create_authorized_buttons()
   function Create_authorized_buttons() {
-
     const buttons = [
       { id: "exit", text: "Exit", classes: ["btn", "exit", "button"], onClick: end },
-      { id: "Oneplayer", text: "One player", classes: ["btn", "bot", "button"], onClick:one_player },
+      { id: "Oneplayer", text: "One player", classes: ["btn", "bot", "button"], onClick: one_player },
       { id: "TwoPlayer", text: "Two Player", classes: ["btn", "TwoPlayer", "button"], onClick: player_vs_player },
       { id: "bot", text: "Player VS Bot", classes: ["btn", "bot", "button"], onClick: player_vs_bot },
-
     ];
 
     buttons.forEach((button) => {
@@ -106,8 +82,5 @@
       document.body.appendChild(buttonElement);
     });
   }
-
-
 </script>
-
 </html>
