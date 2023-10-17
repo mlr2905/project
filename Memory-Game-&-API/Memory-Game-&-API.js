@@ -1,5 +1,3 @@
-
-
 Definition_of_properties()
 // Setting default properties
 function Definition_of_properties() {
@@ -10,9 +8,8 @@ function Definition_of_properties() {
   Board._freeze = 0
   Api._data4 = puse_PokeAPI_data4()
   Board._on_or_off = "OFF"
-
-
 }
+
 default_value()
 function default_value() {
   Board._win_player_one = 0
@@ -24,17 +21,12 @@ function default_value() {
   Board._rounds = 1
 }
 
-
-
-
-
 //  Sets a background and also that it changes every 5 seconds
 function changeBackground() {
   document.body.style.backgroundRepeat = "no-repeat";
   document.body.style.display = "flex";
   document.body.style.backgroundSize = "100% 100%";
   const images = ["images/poketheme.jpg", "images/digimon.png", "images/HarryPotter.gif", "images/dog-.jpg"];
-
   const index = Math.floor(Math.random() * images.length);
   document.querySelector("body").style.backgroundImage = `url(${images[index]})`;
 }
@@ -43,35 +35,31 @@ intervalId = setInterval(changeBackground, 5000);
 
 function one_player() {
   Board._game_type = 5, Hide_select_first(), hide_button()
-
 }
 
 // Player vs player. The function is activated as soon as the button is pressed
 function player_vs_player() {
-
   Board._game_type = 2, Hide_select_first(), hide_button()
 }
+
 // Player vs bot . The function is activated as soon as the button is pressed
 function player_vs_bot() {
-
   Board._game_type = 0, Hide_select_first(), hide_button()
 }
 
 function hide_button() {
-  const div2 = document.getElementById("TwoPlayer");
+  const div1 = document.getElementById("TwoPlayer");
+  div1.style.display = div1.style.display === "none" ? "block" : "none";
+  const div2 = document.getElementById("bot");
   div2.style.display = div2.style.display === "none" ? "block" : "none";
-  const div3 = document.getElementById("bot");
+  const div3 = document.getElementById("Oneplayer");
   div3.style.display = div3.style.display === "none" ? "block" : "none";
-  const div4 = document.getElementById("Oneplayer");
-  div4.style.display = div4.style.display === "none" ? "block" : "none";
-
 }
 
 function Hide_select_first() {
   const div1 = document.getElementById("select_first");
   div1.style.display = div1.style.display === "none" ? "block" : "none";
 }
-
 
 function Hide_select_two() {
   const div1 = document.getElementById("select_two");
@@ -81,7 +69,6 @@ function Hide_select_Third() {
   const div1 = document.getElementById("select_Third");
   div1.style.display = div1.style.display === "none" ? "block" : "none";
 }
-
 
 function select_first() {  //  Board._style =  Game style (image type)
 
@@ -111,8 +98,7 @@ function HideOptions() { //In the Ari Potter game, the board is limited to 6x6
   }
 }
 
-
-function select_two() { 
+function select_two() {
 
   let option = document.getElementById('select_two').value;
   switch (option) {
@@ -122,7 +108,6 @@ function select_two() {
       break;
     case "3": Hide_select_two(), Hide_select_Third()
       break;
-
   }
 }
 
@@ -144,20 +129,21 @@ function select_Third() { //  Board._maxarr = With it the size of the board is d
 // The main function that builds the board with all the divs and images, 
 // background music and more with the help of activating additional functions
 function main_function(rows, cols) { //  receives two values
+
   if (Board._One_time === 0) {// One-time setting to save the board size
     Board._board_size = Board._maxarr
     Board._rows = rows
     Board._cols = cols
-
   }
+
   Board._One_time = 1
   clearInterval(intervalId); // Stops the changing moment (Line 28)
-  bar_default() 
+  bar_default()
   createPairs()
   sound()
   random_number_arr()
   on_or_off_sound()
-  Create_a_board(rows) 
+  Create_a_board(rows)
 
   for (let i = 0; i < rows; i++) {  // The loop each time creates one div with class "row" child of div board
 
@@ -174,25 +160,27 @@ function main_function(rows, cols) { //  receives two values
       Creating_a_Child_div()
     }
   }
-
 }
 
-function bar_default() { 
+function bar_default() {
   const div1 = document.getElementById("bar");
   div1.style.display = "block"
 
-  Board._player_one_Guess = 0, Board._player_two_Guess = 0, Board._player_bot_Guess = 0,Board._player_one_moves = 0
+  Board._player_one_Guess = 0, Board._player_two_Guess = 0, Board._player_bot_Guess = 0, Board._player_one_moves = 0
+
   if (Board._game_type === 2) {
     document.getElementById("player1").textContent = `Player-1: ${Board._player_one_Guess}------- VS ------- Player-2: ${Board._player_two_Guess}`,
       document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
   }
+
   if (Board._game_type === 0) {
     document.getElementById("player1").textContent = `Player-1: ${Board._player_one_Guess} ------- VS -------Player-Bot: ${Board._player_bot_Guess}`,
       document.getElementById("round").textContent = `  Round: ${Board._rounds} `;
   }
+
   if (Board._game_type === 5) {
     document.getElementById("round").textContent = `ROUND: ${Board._rounds} `,
-    document.getElementById("player1").textContent = `WIN: ${Board._win_player_one} --- Guess: ${Board._player_one_Guess} --- Moves: ${Board._player_one_moves}`
+      document.getElementById("player1").textContent = `WIN: ${Board._win_player_one} --- Guess: ${Board._player_one_Guess} --- Moves: ${Board._player_one_moves}`
   }
 }
 
@@ -210,13 +198,13 @@ function sound() { //A function that configures the icon of the music with the o
 
 // Defines the type of music according to the style of play and 
 // turns the music on if it is off or turns it off when it is on
-function on_or_off_sound() {  
+function on_or_off_sound() {
   Board._audio = document.querySelector("audio");
   if (Board._style === 1) {
 
     Board._audio.src = "audio/HarryPotter.mp3";
   }
-  
+
   if (Board._style === 2) {
 
     Board._audio.src = "audio/default.mp3";
@@ -276,7 +264,7 @@ function createPairs() { // Create pairs according to board size
 function getRandomNumber() {// Generates a random number between 2 and 548
 
 
-// Generates a random number between 2 and 548
+  // Generates a random number between 2 and 548
   const Number = Math.floor(Math.random() * 548) + 2;
 
   return Number;
@@ -314,10 +302,10 @@ function Create_a_board(rows) { // Adds calss to the size of the selected board.
     Board._size = 2
   }
   if (rows === 8) {
-    Board._size =  3
+    Board._size = 3
   }
   if (rows === 10) {
-    Board._size =  4;
+    Board._size = 4;
   }
   Board._parentDiv = document.getElementById("board");
   Board._parentDiv.classList.add(`board${Board._size}`);
@@ -346,7 +334,7 @@ function get_random_div() {
 
     if (!Doubled) {
       Board._doubled.push(index)
-      return  index;;
+      return index;;
     }
     else {
       continue;
@@ -361,27 +349,27 @@ function style_cards() {//Defines the images on the board according to the selec
     Style_cards._card_back = Api._data1[Style_cards._imgN].image
     Style_cards._card_front = "images/ari_front.jpg"
     Style_cards._card_over = "images/ari_over.gif"
-
   }
+
   if (Board._style === 2) {
     document.body.style.backgroundImage = "url('images/dog-.jpg')";
     Style_cards._card_back = Api._data2.message[Style_cards._imgN]
     Style_cards._card_front = "images/dog.jpg"
     Style_cards._card_over = "images/dog-over.gif"
   }
+
   if (Board._style === 3) {
     document.body.style.backgroundImage = "url('images/digimon.png')";
     Style_cards._card_back = Api._data3[Style_cards._imgN].img
     Style_cards._card_front = "images/dig_front.jpg"
     Style_cards._card_over = "images/digimon.gif"
-
   }
+
   if (Board._style === 4) {
     document.body.style.backgroundImage = "url('images/poketheme.jpg')";
     Style_cards._card_back = Api._data4[Style_cards._imgN]
     Style_cards._card_front = "images/poke_front.png"
     Style_cards._card_over = "images/poke_over.gif"
-
   }
 }
 
@@ -422,7 +410,6 @@ function cell_click(a) { // The function works when the card is clicked
       if (div2 == null && div1 !== null) {
         hide_div_father_show_son(a)
         Board._Two_numbers_use.push(a);
-
         break;
       }
       if (div1 == null && div2 !== null) {
@@ -432,7 +419,6 @@ function cell_click(a) { // The function works when the card is clicked
     }
     checkEqual()
   }
-
 }
 
 function hide_div_father_show_son(a) {
@@ -449,7 +435,9 @@ function Hide_div_son_show_father(a) {
   div1.id = `cell-${a}`;
 
 }
-
+//A function that checks: 
+//1. Whether there is a cell or not
+//2. If the game the games
 function checkEqual() {
 
   Board._Two_numbers_use.sort();
@@ -464,6 +452,7 @@ function checkEqual() {
   }
 
   if (Board._first_card >= 0 && Board._Second_card >= 0) {
+
     for (let i = 0; i < Board._pairs.length; i++) {
 
       Board._for_ended++
@@ -473,9 +462,9 @@ function checkEqual() {
         freeze()
 
         Board._Two_numbers_use = []
-        blinkDiv(Board._first_card, Board._Second_card)
+        outDiv(Board._first_card, Board._Second_card)
         setTimeout(function () {
-          RemoveClass_blink(Board._first_card, Board._Second_card)
+          RemoveClass_out(Board._first_card, Board._Second_card)
         }, 1600);
         setTimeout(function () { HideDiv(Board._first_card, Board._Second_card), freeze(); }, 1500);
 
@@ -492,11 +481,9 @@ function checkEqual() {
             bar_update()
 
             if (Board._pairs.length === 0) {
-
-             
-
               Check_who_win_rounds()
               Board._rounds++
+
               if (Board.max_rounds === Board._rounds) {
                 Check_who_win()
                 setTimeout(function () { end(); }, 2000);
@@ -511,16 +498,14 @@ function checkEqual() {
               if (Board._game_type === 0 || Board._game_type === 1) {
                 Board._game_type = 0
               }
-              style_type()
-
+              style_type_random()
               Board._maxarr = Board._board_size
-              main_function(Board._rows,Board._cols)
+              main_function(Board._rows, Board._cols)
               bar_update()
               break;
             }
             break;
           }
-
         }
 
         if (memory[0] === memory[1]) {
@@ -529,12 +514,11 @@ function checkEqual() {
             Board._pairs.splice(i, 1);
             card_matches()
             bar_update()
-            setTimeout(function () { freeze(),player_or_bot() }, 2500);
+            setTimeout(function () { freeze(), player_or_bot() }, 2500);
             break;
           }
         }
       }
-
     }
 
     // שאין התמאה
@@ -547,6 +531,7 @@ function checkEqual() {
         Board._Two_numbers_use = []
 
         if (Board._game_type !== 0 || Board._game_type !== 1) {
+
           if (Board._game_type === 5) {
 
             Board._player_one_moves++
@@ -554,21 +539,21 @@ function checkEqual() {
 
           }
         }
-          TwoPlayer()
-          setTimeout(function () {
-            RemoveClass(Board._first_card, Board._Second_card),
-              Hide_div_son_show_father(Board._first_card)
-              , Hide_div_son_show_father(Board._Second_card), freeze();
-          }, 1100)
-          
+        TwoPlayer()
+        setTimeout(function () {
+          RemoveClass_Shake(Board._first_card, Board._Second_card),
+            Hide_div_son_show_father(Board._first_card)
+            , Hide_div_son_show_father(Board._Second_card), freeze();
+        }, 1100)
+
 
         if (Board._game_type === 0) {
           setTimeout(function () {
-            RemoveClass(Board._first_card, Board._Second_card),
+            RemoveClass_Shake(Board._first_card, Board._Second_card),
               Hide_div_son_show_father(Board._first_card)
               , Hide_div_son_show_father(Board._Second_card)
           }, 1100);
-          setTimeout(function () {  player_or_bot(), freeze() }, 2500);
+          setTimeout(function () { player_or_bot(), freeze() }, 2500);
         }
       }
 
@@ -577,21 +562,25 @@ function checkEqual() {
   }
 }
 
-function style_type() {
+function style_type_random() {
 
   Board._style = Math.floor(Math.random() * 4) + 1
 
   if (Board._board_size === 32 || Board._board_size === 50) {
+
     if (Board._style === 1) {
       Board._style = 4
     }
   }
 }
+
 function Check_who_win_rounds() {
+
   if (Board._game_type === 5) {
     swal({ title: "Well done, you have completed a round!!", text: "", timer: 2000 })
     Board._win_player_one++
   }
+
   if (Board._game_type !== 5) {
 
     if (Board._player_one_Guess === Board._player_two_Guess || Board._player_one_Guess === Board._player_bot_Guess) {
@@ -613,22 +602,26 @@ function Check_who_win_rounds() {
     }
   }
 }
+
 function Check_who_win() {
   if (Board._game_type === 5) {
     swal({ title: "Well done, game over!!", text: "", timer: 2000 })
-
   }
+
   if (Board._game_type !== 5) {
 
     if (Board._win_player_one === Board._win_player_two || Board._win_player_one === Board._win_player_bot) {
       swal({ title: "Dead heat!! - The game is over!!", text: "", timer: 2000 })
     }
+
     if (Board._win_player_one < Board._win_player_two) {
       swal({ title: 'Player 2 Win!! - The game is over!!', text: "", timer: 2000 })
     }
+
     if (Board._win_player_one < Board._win_player_bot) {
       swal({ title: 'Bot Win!! - The game is over!!', text: "", timer: 2000 })
     }
+
     if (Board._win_player_one > Board._win_player_two) {
       swal({ title: 'Player 1 Win!! -The game is over!!', text: "", timer: 2000 })
 
@@ -664,60 +657,55 @@ function bar_update() {
 
   if (Board._game_type === 2 || Board._game_type === 3) {
     document.getElementById("round").textContent = ` Player-1 -- ROUND: ${Board._rounds} -- Player-2 `,
-      document.getElementById("player1").textContent = `Guess: ${Board._player_one_Guess} --- VS --- Guess: ${Board._player_two_Guess}`,
-      document.getElementById("win").textContent = ` WIN: ${Board._win_player_one} --- VS ---  WIN: ${Board._win_player_two}`;
-
+    document.getElementById("player1").textContent = `Guess: ${Board._player_one_Guess} --- VS --- Guess: ${Board._player_two_Guess}`,
+    document.getElementById("win").textContent = ` WIN: ${Board._win_player_one} --- VS ---  WIN: ${Board._win_player_two}`;
   }
+
   if (Board._game_type === 0 || Board._game_type === 1) {
     document.getElementById("round").textContent = `Player-1 - ROUND: ${Board._rounds} - Player-BOT`,
       document.getElementById("player1").textContent = `Guess: ${Board._player_one_Guess} --- VS --- Guess: ${Board._player_bot_Guess}`,
       document.getElementById("win").textContent = ` WIN: ${Board._win_player_one} --- VS --- WIN: ${Board._win_player_two}`;
-
   }
 }
 
 function TwoPlayer() {
+
   switch (Board._game_type) {
     case 3:
-      Board._game_type = 2
+      Board._game_type = 2 //player_one
       break;
     case 2:
-      Board._game_type = 3;
+      Board._game_type = 3;//player_two
       break;
 
   }
 }
 
-function player_or_bot() {
+function player_or_bot() {//Board._game_type = 1 = player one ,Board._game_type = 0 =  player bot 
+  
   switch (Board._game_type) {
     case 0:
-      bot_random_number(), Board._game_type = 1
+      bot_random_number(), Board._game_type = 1 
       break;
     case 1:
       Board._game_type = 0;
       break;
-
   }
 }
 
-function bot_random_number() {
+function bot_random_number() { // Chooses moves for the bot 
   const index = Math.floor(Math.random() * Board._pairs.length);
   const i = Board._pairs[index]
 
-  return cell_click(i[1]), cell_click(i[0]),Board._game_type = 1
+  return cell_click(i[1]), cell_click(i[0]), Board._game_type = 1
 }
 
-
-
-
-
-
-function freeze() {
+function freeze() { // Locks and unlocks the board
   if (Board._freeze === 0) {
-    return Board._freeze = 1;
+    return Board._freeze = 1; //Locks
   }
   else {
-    return Board._freeze = 0;
+    return Board._freeze = 0; //unlocks
   }
 }
 
@@ -728,13 +716,13 @@ function HideDiv(a, b) {
   div2.classList.add("Hide");
 }
 
-function blinkDiv(a, b) {
+function outDiv(a, b) {
   const div3 = document.querySelector(`#card-${a}`)
   div3.classList.add("out");
   const div4 = document.querySelector(`#card-${b}`)
   div4.classList.add("out");
 }
-function RemoveClass_blink(a, b) {
+function RemoveClass_out(a, b) {
   const div1 = document.querySelector(`#card-${a}`)
   div1.classList.remove("out");
   const div2 = document.querySelector(`#card-${b}`)
@@ -750,7 +738,7 @@ function ShakeDiv(a, b) {
 }
 
 
-function RemoveClass(a, b) {
+function RemoveClass_Shake(a, b) {
   const div1 = document.querySelector(`#Hide-${a}`)
   div1.classList.remove("shake");
   const div2 = document.querySelector(`#Hide-${b}`)
@@ -760,17 +748,13 @@ function RemoveClass(a, b) {
 function Removal_of_children() {
   let parent = document.getElementById("board");
 
-  // מחיקת כל הילדים
+// Delete all children
   parent.innerHTML = "";
   Board._parentDiv.classList.remove(`board${Board._size}`);
-
   let audio = document.getElementById("audio");
-
   audio.innerHTML = "";
-
 }
 
-function end() { // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
-
-  window.setTimeout(function () { window.location.reload(); }, 0.1);
+function end() { // exit function that is activated when the button is clicked
+    window.setTimeout(function () { window.location.reload(); }, 0.1);
 }
