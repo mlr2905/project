@@ -532,7 +532,7 @@ function checkEqual() {
             Board._pairs.splice(i, 1);
             card_matches()
             bar_update()
-            setTimeout(function () { player_or_bot(), freeze() }, 2500);
+            setTimeout(function () { freeze(),player_or_bot(), freeze() }, 2500);
             break;
           }
         }
@@ -571,7 +571,7 @@ function checkEqual() {
               Hide_div_son_show_father(Board._first_card)
               , Hide_div_son_show_father(Board._Second_card)
           }, 1100);
-          setTimeout(function () { freeze(), player_or_bot(), freeze() }, 2500);
+          setTimeout(function () {  player_or_bot(), freeze() }, 2500);
         }
       }
 
@@ -593,7 +593,7 @@ function style_type() {
 function Check_who_win_rounds() {
   if (Board._game_type === 5) {
     swal({ title: "Well done, you have completed a round!!", text: "", timer: 2000 })
-    Board.win_player_one++
+    Board._win_player_one++
   }
   if (Board._game_type !== 5) {
 
@@ -603,16 +603,16 @@ function Check_who_win_rounds() {
     }
     if (Board._player_one_Guess < Board._player_two_Guess) {
       swal({ title: "Player 2 Win!! (Won the current round)", text: "", timer: 2000 })
-      Board.win_player_two++
+      Board._win_player_two++
 
     }
     if (Board._player_one_Guess < Board._player_bot_Guess) {
       swal({ title: "Bot Win!! (Won the current round)", text: "", timer: 2000 })
-      Board.win_player_bot++
+      Board._win_player_bot++
     }
     if (Board._player_one_Guess > Board._player_bot_Guess && Board._player_one_Guess > Board._player_two_Guess) {
       swal({ title: "Player 1 Win!!(Won the current round)", text: "", timer: 2000 })
-      Board.win_player_one++
+      Board._win_player_one++
     }
   }
 }
@@ -623,20 +623,20 @@ function Check_who_win() {
   }
   if (Board._game_type !== 5) {
 
-    if (Board.win_player_one === Board.win_player_two || Board.win_player_one === Board.win_player_bot) {
+    if (Board._win_player_one === Board._win_player_two || Board._win_player_one === Board._win_player_bot) {
       swal({ title: "Dead heat!! - The game is over!!", text: "", timer: 2000 })
     }
-    if (Board.win_player_one < Board.win_player_two) {
+    if (Board._win_player_one < Board._win_player_two) {
       swal({ title: 'Player 2 Win!! - The game is over!!', text: "", timer: 2000 })
     }
-    if (Board.win_player_one < Board.win_player_bot) {
+    if (Board._win_player_one < Board._win_player_bot) {
       swal({ title: 'Bot Win!! - The game is over!!', text: "", timer: 2000 })
     }
-    if (Board.win_player_one > Board.win_player_two) {
+    if (Board._win_player_one > Board._win_player_two) {
       swal({ title: 'Player 1 Win!! -The game is over!!', text: "", timer: 2000 })
 
     }
-    if (Board.win_player_one > Board.win_player_bot) {
+    if (Board._win_player_one > Board._win_player_bot) {
       swal({ title: 'Player One Win!! - The game is over!!', text: "", timer: 2000 })
 
     }
@@ -667,7 +667,7 @@ function bar_update() {
 
   if (Board._game_type === 2 || Board._game_type === 3) {
     document.getElementById("round").textContent = ` Player-1 -- ROUND: ${Board._rounds} -- Player-2 `,
-      document.getElementById("player1").textContent = `Guess: ${Board._player_one} --- VS --- Guess: ${Board._player_two_Guess}`,
+      document.getElementById("player1").textContent = `Guess: ${Board._player_one_Guess} --- VS --- Guess: ${Board._player_two_Guess}`,
       document.getElementById("win").textContent = ` WIN: ${Board._win_player_one} --- VS ---  WIN: ${Board._win_player_two}`;
 
   }
@@ -707,7 +707,7 @@ function bot_random_number() {
   const index = Math.floor(Math.random() * Board._pairs.length);
   const i = Board._pairs[index]
 
-  return cell_click(i[1]), cell_click(i[0])
+  return cell_click(i[1]), cell_click(i[0]),Board._game_type = 1
 }
 
 
