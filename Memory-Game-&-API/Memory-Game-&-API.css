@@ -1,302 +1,289 @@
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-image: url("images/poketheme.jpg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-image: url("images/poketheme.jpg");
+}
 
+*[class~="board"] {
+  background: linear-gradient(to right, #2e2222af, #1d161bbf);
+  border-radius: 10px;
+  box-shadow: 0 0 10px;
+}
+
+.board1 {
+  height: 500px;
+  width: 600px;
+  margin-top: 5%;
+  padding-left: 3%;
+  padding-top: 3%;
+  margin-bottom: 3%;
+}
+
+.board2 {
+  padding: 10px;
+  height: 700px;
+  width: 700px;
+  margin-top: 5%;
+  margin-bottom: 3%;
+}
+
+.board3 {
+  height: 950px;
+  width: 950px;
+  margin-top: 5%;
+  padding-left: 3%;
+  padding-top: 3%;
+  margin-bottom: 3%;
+}
+
+.board4 {
+  height: 1240px;
+  width: 1240px;
+  margin-top: 5%;
+  padding-left: 5%;
+  padding-top: 5%;
+  margin-bottom: 3%;
+}
+
+*[id^="cell-"] {
+  border: 5px solid rgb(15, 106, 138);
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  border-radius: 10px;
+  margin-left: 10%;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(to right, #2e2222af, #1d161bbf);
+  border-radius: 9px;
+  box-shadow: 0 0 9px;
+  border: 5px solid rgb(15, 106, 138);
+  margin-right: 4%;
+  margin-top: 3%;
+}
+
+
+*[class~="blink"] {
+  width: 91px;
+  height: 89px;
+  animation: blinking 2.0s infinite;
+}
+
+*[id^="cell-"] {
+  visibility: hidden;
+}
+
+*[id^="Hide-"] {
+  visibility: hidden;
+}
+
+*[id^="card-"] {
+  visibility: visible
+}
+
+.out {
+  animation: out 1.6s ease-in-out;
+}
+
+@keyframes out {
+
+  0% {
+    transform: translateX(0);
   }
 
-  *[class~="board"] {
-    background: linear-gradient(to right, #2e2222af, #1d161bbf);
-    border-radius: 10px;
-    box-shadow: 0 0 10px;
+  30% {
+    transform: translateX(290px);
   }
 
-  .board1 {
-    height: 500px;
-    width: 600px;
-    margin-top: 5%;
-    padding-left: 3%;
-    padding-top: 3%;
-    margin-bottom: 3%;
-
-
-
+  50% {
+    transform: translateX(400px);
   }
 
-  .board2 {
-    padding: 10px;
-    height: 700px;
-    width: 700px;
-    margin-top: 5%;
-    margin-bottom: 3%;
-
-
+  70% {
+    transform: translateX(600px);
   }
 
-  .board3 {
-    height: 950px;
-    width: 950px;
-    margin-top: 5%;
-    padding-left: 3%;
-    padding-top: 3%;
-    margin-bottom: 3%;
+  100% {
+    transform: translateX(750px);
+  }
+}
+
+.shake {
+  animation: shake 0.35s ease-in-out;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
   }
 
-  .board4 {
-    height: 1240px;
-    width: 1240px;
-    margin-top: 5%;
-    padding-left: 5%;
-    padding-top: 5%;
-    margin-bottom: 3%;
-
-
+  20% {
+    transform: translateX(-20px);
   }
 
-  *[id^="cell-"] {
-    border: 5px solid rgb(15, 106, 138);
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
-    font-size: 25px;
-    border-radius: 10px;
-    margin-left: 10%;
+  40% {
+    transform: translateX(20px);
   }
 
-  img {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(to right, #2e2222af, #1d161bbf);
-    border-radius: 9px;
-    box-shadow: 0 0 9px;
-    border: 5px solid rgb(15, 106, 138);
-    margin-right: 4%;
-    margin-top: 3%;
-  }
- 
-
-  *[class~="blink"] {
-    width: 91px;
-    height: 89px;
-    animation: blinking 2.0s infinite;
+  60% {
+    transform: translateX(-8px);
   }
 
+  80% {
+    transform: translateX(8px);
+  }
+}
 
+*[class~="front"] {
+  background-size: 100% 100%;
+  border: 5px solid rgb(15, 106, 138);
+  border-radius: 20px;
+  margin: 1px;
+  width: 110px;
+  height: 110px;
+}
 
+.row {
+  margin: 2px;
+}
 
-  *[id^="cell-"] {
-    visibility: hidden;
+.Hide {
+  visibility: hidden;
+}
+
+#exit {
+  position: relative;
+  margin: 0;
+  position: absolute;
+  top: 5%;
+  right: 25%;
+}
+
+#Oneplayer {
+  position: relative;
+  margin: 0;
+  position: absolute;
+  top: 25%;
+  left: 45.5%;
+}
+
+#TwoPlayer {
+  position: relative;
+  margin: 0;
+  position: absolute;
+  top: 35%;
+  left: 45.5%;
+}
+
+#bot {
+  position: relative;
+  margin: 0;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
+
+#select_first {
+  position: relative;
+  margin: 0;
+  position: absolute;
+  top: 35%;
+  left: 40%;
+}
+
+#select_two {
+  position: relative;
+  margin: 0;
+  position: absolute;
+  top: 35%;
+  left: 42%;
+}
+
+#select_Third {
+  position: relative;
+  margin: 0;
+  position: absolute;
+  top: 35%;
+  left: 42%;
+}
+
+.mr {
+  position: relative;
+  margin: 0;
+  position: absolute;
+  margin-right: 90%;
+  margin-left: 18%;
+  margin-top: 2%;
+}
+
+.mr {
+  animation: blinkMe 5s linear infinite;
+}
+
+@keyframes blinkMe {
+  0% {
+    opacity: 0.2;
   }
 
-  *[id^="Hide-"] {
-    visibility: hidden;
+  50% {
+    opacity: 1;
   }
 
-  *[id^="card-"] {
-    visibility: visible
+  100% {
+    opacity: 0.2;
   }
+}
 
-  .out {
+.button {
 
-    animation: out 1.6s ease-in-out;
-  }
+  border: 5px solid rgb(74, 68, 68);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px 15px;
+  font-size: 18px;
+  color: #fff;
+  background-color: rgb(29, 36, 67);
+  border-radius: 20px;
+  box-shadow:
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+    rgb(18, 135, 178) 0px 0px 0px 5px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+}
 
-  @keyframes out {
+.button:hover {
+  background-color: rgb(84 105 212 / 0.5)
+}
 
-    0% {
-      transform: translateX(0);
-    }
+#bot:active {
+  background-color: rgb(84 105 212 / 0.5);
+  box-shadow: 0 5px #666;
+}
 
-    30% {
-      transform: translateX(290px);
-    }
+#TwoPlayer:active {
+  background-color: rgb(84 105 212 / 0.5);
+  box-shadow: 0 5px #666;
+}
 
-    50% {
-      transform: translateX(400px);
-    }
+#exit:active {
+  background-color: rgb(84 105 212 / 0.5);
+  box-shadow: 0 5px #666;
+}
 
-    70% {
-      transform: translateX(600px);
-    }
-    100% {
-      transform: translateX(750px);
-    }
-
-
-  }
-
-
-
-  .shake {
-    animation: shake 0.35s ease-in-out;
-  }
-
-  @keyframes shake {
-
-    0%,
-    100% {
-      transform: translateX(0);
-    }
-
-    20% {
-      transform: translateX(-20px);
-    }
-
-    40% {
-      transform: translateX(20px);
-    }
-
-    60% {
-      transform: translateX(-8px);
-    }
-
-    80% {
-      transform: translateX(8px);
-    }
-  }
-
-
-
-  *[class~="front"] {
-
-    background-size: 100% 100%;
-    border: 5px solid rgb(15, 106, 138);
-    border-radius: 20px;
-    margin: 1px;
-    width: 110px;
-    height: 110px;
-  }
-
-  .row {
-    margin: 2px;
-
-  }
-
-  .Hide {
-    visibility: hidden;
-
-  }
-
-  #exit {
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 5%;
-    right: 25%;
-  }
-  #Oneplayer {
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 25%;
-    left: 45.5%;
-  }
-  #TwoPlayer {
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 35%;
-    left: 45.5%;
-  }
-
-  #bot{
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 45%;
-    left: 45%;
-  }
-  #select_first {
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 35%;
-    left: 40%;
-  }
-  #select_two {
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 35%;
-    left: 42%;
-  }
-  #select_Third {
-    position: relative;
-    margin: 0;
-    position: absolute;
-    top: 35%;
-    left: 42%;
-  }
-  .mr{
-    position: relative;
-    margin: 0;
-    position: absolute;
-    margin-right: 90%;
-    margin-left: 18%;
-    margin-top: 2%;
-    
-  }
-  .mr{
-    animation: blinkMe 5s linear infinite;
-   }
-   @keyframes blinkMe {
-    0% {
-     opacity: 0.2;
-    }
-    50% {
-     opacity: 1;
-    }
-    100% {
-     opacity: 0.2;
-    }
-   }
-  
-  
-
-  .button {
-
-    border: 5px solid rgb(74, 68, 68);
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 10px 15px;
-    font-size: 18px;
-    color: #fff;
-    background-color: rgb(29, 36, 67);
-    border-radius: 20px;
-    box-shadow:
-      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
-      rgb(18, 135, 178) 0px 0px 0px 5px,
-      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-      rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
-  }
-
-  .button:hover {
-    background-color: rgb(84 105 212 / 0.5)
-  }
-
-  #bot:active {
-    background-color: rgb(84 105 212 / 0.5);
-    box-shadow: 0 5px #666;
-
-  }
-
-  #TwoPlayer:active {
-    background-color: rgb(84 105 212 / 0.5);
-    box-shadow: 0 5px #666;
-  }
-
-  #exit:active {
-    background-color: rgb(84 105 212 / 0.5);
-    box-shadow: 0 5px #666;
-  }
-  .col {
-      font-weight: bold;
-    }  
+.col {
+  font-weight: bold;
+}
