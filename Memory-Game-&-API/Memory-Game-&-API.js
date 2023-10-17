@@ -112,7 +112,7 @@ function HideOptions() { //In the Ari Potter game, the board is limited to 6x6
 }
 
 
-function select_two() {
+function select_two() { 
 
   let option = document.getElementById('select_two').value;
   switch (option) {
@@ -144,7 +144,7 @@ function select_Third() { //  Board._maxarr = With it the size of the board is d
 // The main function that builds the board with all the divs and images, 
 // background music and more with the help of activating additional functions
 function main_function(rows, cols) { //  receives two values
-  if (Board._One_time === 0) {
+  if (Board._One_time === 0) {// One-time setting to save the board size
     Board._board_size = Board._maxarr
     Board._rows = rows
     Board._cols = cols
@@ -152,16 +152,12 @@ function main_function(rows, cols) { //  receives two values
   }
   Board._One_time = 1
   clearInterval(intervalId); // Stops the changing moment (Line 28)
-  sound() //A function that configures the icon of the music with the option to click
-  bar_default()
-  createPairs() // // Create pairs according to board size
+  bar_default() 
+  createPairs()
+  sound()
   random_number_arr()
-
-  on_or_off_sound() // Defines the type of music according to the style of play and 
-  // turns the music on if it is off or turns it off when it is on
-
-  Board._size = board_size(Board._rows) // For function Create_a_board
-  Create_a_board() // Adds calss to the size of the selected board. The calss causes the board to change size with css
+  on_or_off_sound()
+  Create_a_board(rows) 
 
   for (let i = 0; i < rows; i++) {  // The loop each time creates one div with class "row" child of div board
 
@@ -181,7 +177,7 @@ function main_function(rows, cols) { //  receives two values
 
 }
 
-function bar_default() {
+function bar_default() { 
   const div1 = document.getElementById("bar");
   div1.style.display = "block"
 
@@ -200,9 +196,7 @@ function bar_default() {
   }
 }
 
-
-
-function sound() {
+function sound() { //A function that configures the icon of the music with the option to click
   Board._audio = document.querySelector("audio");
   const cellDiv = document.createElement("div");
   Board._audio.appendChild(cellDiv);
@@ -214,21 +208,19 @@ function sound() {
 
 }
 
-
-function on_or_off_sound() {
+// Defines the type of music according to the style of play and 
+// turns the music on if it is off or turns it off when it is on
+function on_or_off_sound() {  
   Board._audio = document.querySelector("audio");
-
-
-
   if (Board._style === 1) {
 
     Board._audio.src = "audio/HarryPotter.mp3";
   }
+  
   if (Board._style === 2) {
 
     Board._audio.src = "audio/default.mp3";
   }
-
 
   if (Board._style === 3) {
 
@@ -264,8 +256,7 @@ function on_or_off_sound() {
 }
 
 
-// יצירת זוגות לפי גודל הלוח
-function createPairs() {
+function createPairs() { // Create pairs according to board size
   Board._pairs = [];
   let a = -1
   for (let i = 0; i < Board._maxarr; i++) {
@@ -282,16 +273,16 @@ function createPairs() {
 
 }
 
-function getRandomNumber() {
+function getRandomNumber() {// Generates a random number between 2 and 548
 
-  //    יוצר מספר אקראי בין 2 ל- 548 
+
+// Generates a random number between 2 and 548
   const Number = Math.floor(Math.random() * 548) + 2;
 
-  // מחזיר את המספר
   return Number;
 }
 
-// יצירת מערך של מספרים לפי גודל הלוח
+// Creating an array of numbers according to the size of the board
 function random_number_arr() {
   Board._arr = []
 
@@ -315,27 +306,26 @@ function random_number_arr() {
   }
 }
 
-
-function board_size(rows) {
+function Create_a_board(rows) { // Adds calss to the size of the selected board. The calss causes the board to change size with css
   if (rows === 4) {
-    return 1;
+    Board._size = 1;
   }
   if (rows === 6) {
-    return 2
+    Board._size = 2
   }
   if (rows === 8) {
-    return 3
+    Board._size =  3
   }
   if (rows === 10) {
-    return 4;
+    Board._size =  4;
   }
+  Board._parentDiv = document.getElementById("board");
+  Board._parentDiv.classList.add(`board${Board._size}`);
+
 }
 
-function addCellClick(divId, number) {
-  // מצא את הדיב
+function addCellClick(divId, number) { //Adds onClick to this div
   const div = document.getElementById(divId);
-
-  // הוסף את הפונקציה `cell_click()` לאירוע `click` של כל תמונה
   div.addEventListener("click", function () {
     // קריאה לפונקציה `cell_click()` עם מספר התמונה
     cell_click(number);
@@ -343,7 +333,7 @@ function addCellClick(divId, number) {
 
 }
 
-function random_number() {
+function random_number() { // Gets a random number from an array of id's of the div
   const index = Math.floor(Math.random() * Board._Creating_a_div.length);
   return index
 }
@@ -352,10 +342,11 @@ function get_random_div() {
   while (true) {
     const index = random_number();
 
-    const Doubled = Board._doubled.includes(index);
+    const Doubled = Board._doubled.includes(index); //Checking that the number does not repeat itself
 
     if (!Doubled) {
-      return Board._doubled.push(index), index;;
+      Board._doubled.push(index)
+      return  index;;
     }
     else {
       continue;
@@ -364,13 +355,7 @@ function get_random_div() {
   }
 }
 
-function Create_a_board() {
-  Board._parentDiv = document.getElementById("board");
-  Board._parentDiv.classList.add(`board${Board._size}`);
-
-}
-
-function style_cards() {
+function style_cards() {//Defines the images on the board according to the selected game style
   if (Board._style === 1) {
     document.body.style.backgroundImage = "url('images/ari.gif')";
     Style_cards._card_back = Api._data1[Style_cards._imgN].image
@@ -399,7 +384,8 @@ function style_cards() {
 
   }
 }
-function card_front_and_over() {
+
+function card_front_and_over() {//Defines an image on the front of the card and also the transfer on top of the card
   let myDiv = document.querySelector(`#front-${Board._random}`);
   myDiv.addEventListener("mouseover", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_over})`; });
   myDiv.addEventListener("mouseout", function () { myDiv.style.backgroundImage = `url(${Style_cards._card_front})`; });
@@ -426,8 +412,7 @@ function Creating_a_Child_div() {
   src.appendChild(img);
 }
 
-function cell_click(a) {
-
+function cell_click(a) { // The function works when the card is clicked
 
   if (Board._freeze === 0) {
     const div1 = document.querySelector(`#front-${a}`);
@@ -436,14 +421,15 @@ function cell_click(a) {
     while (true) {
       if (div2 == null && div1 !== null) {
         hide_div_father_show_son(a)
+        Board._Two_numbers_use.push(a);
+
         break;
       }
       if (div1 == null && div2 !== null) {
-        Hide_div_son_show_father(a)
+        swal({ title: "A card cannot be turned over, another card must be clicked !!", text: "", timer: 2000 })
         break;
       }
     }
-    Board._Two_numbers_use.push(a);
     checkEqual()
   }
 
@@ -602,7 +588,7 @@ function style_type() {
 }
 function Check_who_win_rounds() {
   if (Board._game_type === 5) {
-    swal({ title: "Well done, you have completed a round!!", text: "", timer: 1500 })
+    swal({ title: "Well done, you have completed a round!!", text: "", timer: 2000 })
     Board.win_player_one++
   }
   if (Board._game_type !== 5) {
@@ -612,42 +598,42 @@ function Check_who_win_rounds() {
 
     }
     if (Board._player_one_Guess < Board._player_two_Guess) {
-      swal({ title: "Player 2 Win!! (Won the current round)", text: "", timer: 1500 })
+      swal({ title: "Player 2 Win!! (Won the current round)", text: "", timer: 2000 })
       Board.win_player_two++
 
     }
     if (Board._player_one_Guess < Board._player_bot_Guess) {
-      swal({ title: "Bot Win!! (Won the current round)", text: "", timer: 1500 })
+      swal({ title: "Bot Win!! (Won the current round)", text: "", timer: 2000 })
       Board.win_player_bot++
     }
     if (Board._player_one_Guess > Board._player_bot_Guess && Board._player_one_Guess > Board._player_two_Guess) {
-      swal({ title: "Player 1 Win!!(Won the current round)", text: "", timer: 1500 })
+      swal({ title: "Player 1 Win!!(Won the current round)", text: "", timer: 2000 })
       Board.win_player_one++
     }
   }
 }
 function Check_who_win() {
   if (Board._game_type === 5) {
-    swal({ title: "Well done, game over!!", text: "", timer: 1500 })
+    swal({ title: "Well done, game over!!", text: "", timer: 2000 })
 
   }
   if (Board._game_type !== 5) {
 
     if (Board.win_player_one === Board.win_player_two || Board.win_player_one === Board.win_player_bot) {
-      swal({ title: "Dead heat!! - The game is over!!", text: "", timer: 1500 })
+      swal({ title: "Dead heat!! - The game is over!!", text: "", timer: 2000 })
     }
     if (Board.win_player_one < Board.win_player_two) {
-      swal({ title: 'Player 2 Win!! - The game is over!!', text: "", timer: 1500 })
+      swal({ title: 'Player 2 Win!! - The game is over!!', text: "", timer: 2000 })
     }
     if (Board.win_player_one < Board.win_player_bot) {
-      swal({ title: 'Bot Win!! - The game is over!!', text: "", timer: 1500 })
+      swal({ title: 'Bot Win!! - The game is over!!', text: "", timer: 2000 })
     }
     if (Board.win_player_one > Board.win_player_two) {
-      swal({ title: 'Player 1 Win!! -The game is over!!', text: "", timer: 1500 })
+      swal({ title: 'Player 1 Win!! -The game is over!!', text: "", timer: 2000 })
 
     }
     if (Board.win_player_one > Board.win_player_bot) {
-      swal({ title: 'Player One Win!! - The game is over!!', text: "", timer: 1500 })
+      swal({ title: 'Player One Win!! - The game is over!!', text: "", timer: 2000 })
 
     }
   }
