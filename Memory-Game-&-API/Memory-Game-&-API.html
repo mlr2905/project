@@ -51,10 +51,10 @@
     </select>
     <select onchange="select_Third()" id="select_Third" style="display:none" class="button select text-center" required>
       <option class="button" value=""> board size</option>
-      <option value="1"><b>4X4</b></option>
-      <option value="2"><b>6X6</b></option>
-      <option value="3"><b>8X8</b></option>
-      <option value="4"><b>10X10</b></option>
+      <option value="1"><b>4X4 &nbsp; (16 cards)</b></option>
+      <option value="2"><b>6X6 &nbsp; (32 cards)</b></option>
+      <option value="3"><b>8X8 &nbsp; (64 cards)</b></option>
+      <option value="4"><b>10X10 &nbsp; (100 cards)</b></option>
     </select>
    
     <div id="audio"></div>
@@ -80,6 +80,7 @@
 
     const buttons = [
       { id: "exit", text: "Exit", classes: ["btn", "exit", "button"], onClick: end },
+      { id: "Oneplayer", text: "One player", classes: ["btn", "bot", "button"], onClick:one_player },
       { id: "TwoPlayer", text: "Two Player", classes: ["btn", "TwoPlayer", "button"], onClick: player_vs_player },
       { id: "bot", text: "Player VS Bot", classes: ["btn", "bot", "button"], onClick: player_vs_bot },
 

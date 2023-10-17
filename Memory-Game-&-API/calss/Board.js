@@ -3,7 +3,7 @@ class Board {
        _Two_numbers_use,_game_type, _style,_on_or_off,_random,_frontDiv,
        _rowDiv,_size,_parentDiv,_player_one,_rounds,_player_two,_player_bot,
        _for_ended,_first_card,_Second_card,_check,_audio,_src,_img,_max_rounds,
-       _win_player_one,_win_player_two, _win_player_bot,_max_round) 
+       _win_player_one,_win_player_two, _win_player_bot,_max_round,_One_time,_board_size,_rows,_cols,_player_one_moves) 
        {
       this.pairs = _pairs;
       this.maxarr = _maxarr;
@@ -20,10 +20,10 @@ class Board {
       this.rowDiv =_rowDiv
       this.size = _size
       this.parentDiv = _parentDiv
-      this.player_one = _player_one
+      this.player_one = _player_one_Guess
       this.rounds =_rounds
-      this.player_two = _player_two
-      this.player_bot = _player_bot
+      this.player_two = _player_two_Guess
+      this.player_bot = _player_bot_Guess
       this.Out_of_cards =_Out_of_cards
       this.for_ended = _for_ended
       this.first_card =_first_card
@@ -36,6 +36,11 @@ class Board {
       this.win_player_two = _win_player_two
       this.win._player_bot = _win_player_bot
       this.max_rounds = _max_rounds
-             
+      this.One_time = _One_time 
+      this.board_size =_board_size 
+      this.rows = _rows
+      this.cols= _cols
+      this.player_onemoves = _player_one_moves
+
     }
   }
