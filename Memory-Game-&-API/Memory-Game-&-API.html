@@ -29,9 +29,13 @@
 </head>
 
 <body>
-
+ 
+  
+  
   <div onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false"
+  
     onDrag="return false" onDrop="return false" autocomplete=off>
+    
 
 
     <select onchange="select_first()" id="select_first" style="display:none" class="button select text-center" required>
@@ -56,17 +60,23 @@
       <option value="3"><b>8X8 &nbsp; (64 cards)</b></option>
       <option value="4"><b>10X10 &nbsp; (100 cards)</b></option>
     </select>
-   
-    <div id="audio"></div>
+    <div class="mr"><footer   style="color: rgba(4, 54, 4, 0.693);"><b> Michael Rozental 2023</b>&copy;</footer></div>
+
+    <div id="audio"> </div>  
     <br />
 
     <div class="col btn button" id="bar" style="display: none;">
+     
       <div id="round"></div>
+
       <div id="player1"></div>
+ 
       <div id="win"></div>
     </div>
+   
     <div class="board" id="board"></div>
     <audio></audio>
+
   </div>
 
 

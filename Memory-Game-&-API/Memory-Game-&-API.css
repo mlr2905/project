@@ -233,7 +233,29 @@ body {
     top: 35%;
     left: 42%;
   }
-
+  .mr{
+    position: relative;
+    margin: 0;
+    position: absolute;
+    margin-right: 90%;
+    margin-left: 18%;
+    margin-top: 2%;
+    
+  }
+  .mr{
+    animation: blinkMe 5s linear infinite;
+   }
+   @keyframes blinkMe {
+    0% {
+     opacity: 0.2;
+    }
+    50% {
+     opacity: 1;
+    }
+    100% {
+     opacity: 0.2;
+    }
+   }
   
   
 
