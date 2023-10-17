@@ -21,7 +21,7 @@ function default_value() {
   Board._board_size = 0
   Board._rows = 0
   Board._cols = 0
-  Board._rounds = 0
+  Board._rounds = 1
 }
 
 
@@ -116,9 +116,9 @@ function select_two() {
 
   let option = document.getElementById('select_two').value;
   switch (option) {
-    case "1": Hide_select_two(), Board.max_rounds = 3, Hide_select_Third()
+    case "1": Hide_select_two(), Board.max_rounds = 4, Hide_select_Third()
       break;
-    case "2": Hide_select_two(), Board.max_rounds = 5, Hide_select_Third()
+    case "2": Hide_select_two(), Board.max_rounds = 6, Hide_select_Third()
       break;
     case "3": Hide_select_two(), Hide_select_Third()
       break;
@@ -192,7 +192,7 @@ function bar_default() {
   }
   if (Board._game_type === 5) {
     document.getElementById("round").textContent = `ROUND: ${Board._rounds} `,
-    document.getElementById("player1").textContent = `WIN: ${Board._win_player_one} --- Guess: ${Board._player_one_Guess} --- Moves:${Board._player_one_moves}`
+    document.getElementById("player1").textContent = `WIN: ${Board._win_player_one} --- Guess: ${Board._player_one_Guess} --- Moves: ${Board._player_one_moves}`
   }
 }
 
@@ -490,8 +490,11 @@ function checkEqual() {
             card_matches()
             TwoPlayer()
             bar_update()
+
             if (Board._pairs.length === 0) {
+
               if(Board._game_type === 5){
+
                 Board._win_player_one++
               }
 
@@ -524,6 +527,7 @@ function checkEqual() {
         }
 
         if (memory[0] === memory[1]) {
+
           if (Board._game_type !== 2 || Board._game_type !== 3) {
             Board._pairs.splice(i, 1);
             card_matches()
@@ -703,7 +707,7 @@ function bot_random_number() {
   const index = Math.floor(Math.random() * Board._pairs.length);
   const i = Board._pairs[index]
 
-  return cell_click(i[1]), cell_click(i[0]), Board.bot_or_player = 0
+  return cell_click(i[1]), cell_click(i[0])
 }
 
 
