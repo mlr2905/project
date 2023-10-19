@@ -189,20 +189,25 @@ function bar_default() {
 
 
 
+function hide_and_show_eye(){
+  const div1 = document.getElementById("eye");
+  div1.style.display = div1.style.display === "none" ? "block" : "none";
+}
 
 function Show_all_the_cards() {
 
   if (Board._show_all_cards !== Board.max_show_all_cards) {
     
-    const newArray = [];
+    const a = [];
 
     for (const pair of Board._pairs) {
-      newArray.push(pair[0], pair[1]);
+      a.push(pair[0], pair[1]);
     }
 
-    for (let i = 0; i < newArray.length; i++) {
+    for (let i = 0; i < a.length; i++) {
 
       hide_div_father_show_son(i)
+     
     }
     Board._show_all_cards++
 
@@ -224,10 +229,7 @@ function Hide_all_the_cards() {
   }
 }
 
-function hide_and_show_eye(){
-  const div1 = document.getElementById("eye");
-  div1.style.display = div1.style.display === "none" ? "block" : "none";
-}
+
 
 function sound() { //A function that configures the icon of the music with the option to click
   Board._audio = document.querySelector("audio");
