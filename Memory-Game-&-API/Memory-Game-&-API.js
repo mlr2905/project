@@ -391,6 +391,7 @@ function get_random_div() {
 }
 
 function style_cards() {//Defines the images on the board according to the selected game style
+
   if (Board._style === 1) {
     document.body.style.backgroundImage = "url('images/ari.gif')";
     Style_cards._card_back = Api._data1[Style_cards._imgN].image
