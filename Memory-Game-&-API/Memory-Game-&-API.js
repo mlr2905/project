@@ -8,6 +8,8 @@ function Definition_of_properties() {
   Board._freeze = 0
   Api._data4 = puse_PokeAPI_data4()
   Board._on_or_off = "OFF"
+  Board._show_all_cards = 0
+  Board.max_show_all_cards = 0
 }
 
 default_value()
@@ -115,13 +117,13 @@ function select_Third() { //  Board._maxarr = With it the size of the board is d
   Board._One_time = 0
   let option = document.getElementById('select_Third').value;
   switch (option) {
-    case "1": Hide_select_Third(), Board._maxarr = 10, main_function(4, 5) //20 cards
+    case "1": Hide_select_Third(), Board._maxarr = 10, Board.max_show_all_cards = 3, main_function(4, 5) //20 cards
       break;
-    case "2": Hide_select_Third(), Board._maxarr = 18, main_function(6, 6) //32 cards
+    case "2": Hide_select_Third(), Board._maxarr = 18, Board.max_show_all_cards = 5, main_function(6, 6) //32 cards
       break;
-    case "3": Hide_select_Third(), Board._maxarr = 32, main_function(8, 8) //64 cards
+    case "3": Hide_select_Third(), Board._maxarr = 32, Board.max_show_all_cards = 10, main_function(8, 8) //64 cards
       break;
-    case "4": Hide_select_Third(), Board._maxarr = 50, main_function(10, 10) //100 cards
+    case "4": Hide_select_Third(), Board._maxarr = 50, Board.max_show_all_cards = 15, main_function(10, 10) //100 cards
       break;
   }
 }
@@ -140,6 +142,7 @@ function main_function(rows, cols) { //  receives two values
   clearInterval(intervalId); // Stops the changing moment (Line 28)
   bar_default()
   createPairs()
+  hide_and_show_eye()
   sound()
   random_number_arr()
   on_or_off_sound()
@@ -182,6 +185,48 @@ function bar_default() {
     document.getElementById("round").textContent = `ROUND: ${Board._rounds} `,
       document.getElementById("player1").textContent = `WIN: ${Board._win_player_one} --- Guess: ${Board._player_one_Guess} --- Moves: ${Board._player_one_moves}`
   }
+}
+
+
+
+
+function Show_all_the_cards() {
+
+  if (Board._show_all_cards !== Board.max_show_all_cards) {
+    
+    const newArray = [];
+
+    for (const pair of Board._pairs) {
+      newArray.push(pair[0], pair[1]);
+    }
+
+    for (let i = 0; i < newArray.length; i++) {
+
+      hide_div_father_show_son(i)
+    }
+    Board._show_all_cards++
+
+  }
+
+  else {
+    swal({ title: "It is not possible to show the cards !!", text: "", timer: 2000 })
+    hide_and_show_eye()
+  }
+  setTimeout(function () { Hide_all_the_cards() }, 3000);
+
+
+}
+
+function Hide_all_the_cards() {
+  for (let i = 0; i < Board._Creating_a_div.length; i++) {
+
+    Hide_div_son_show_father(i)
+  }
+}
+
+function hide_and_show_eye(){
+  const div1 = document.getElementById("eye");
+  div1.style.display = div1.style.display === "none" ? "block" : "none";
 }
 
 function sound() { //A function that configures the icon of the music with the option to click
@@ -439,7 +484,6 @@ function Hide_div_son_show_father(a) {
 //1. Whether there is a cell or not
 //2. If the game the games
 function checkEqual() {
-
   Board._Two_numbers_use.sort();
   Board._first_card = Board._Two_numbers_use[0]
   Board._Second_card = Board._Two_numbers_use[1]
@@ -460,7 +504,6 @@ function checkEqual() {
 
       if (Board._check[0] === Board._first_card && Board._check[1] === Board._Second_card) {
         freeze()
-
         Board._Two_numbers_use = []
         outDiv(Board._first_card, Board._Second_card)
         setTimeout(function () {
@@ -474,87 +517,68 @@ function checkEqual() {
         if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1]) {
           Board._check[0] = -1
           Board._check[1] = -1
-          if (Board._game_type === 2 || Board._game_type === 3 || Board._game_type === 5) {
-            Board._pairs.splice(i, 1);
-            card_matches()
-            TwoPlayer()
-            bar_update()
+          Board._pairs.splice(i, 1);
+          card_matches()
+          TwoPlayer()
+          bar_update()
 
-            if (Board._pairs.length === 0) {
-              Check_who_win_rounds()
-              Board._rounds++
+          if (Board._pairs.length === 0) { // A condition that is activated at the end of a round and deletes the current board and creates a new one
+            Check_who_win_rounds()
+            Board._rounds++
 
-              if (Board.max_rounds === Board._rounds) {
-                Check_who_win()
-                setTimeout(function () { end(); }, 2000);
-                break;
-              }
-              Removal_of_children()
-              Definition_of_properties()
-              if (Board._game_type === 2 || Board._game_type === 3) {
-                Board._game_type = 2
-              }
-
-              if (Board._game_type === 0 || Board._game_type === 1) {
-                Board._game_type = 0
-              }
-              style_type_random()
-              Board._maxarr = Board._board_size
-              main_function(Board._rows, Board._cols)
-              bar_update()
+            if (Board.max_rounds === Board._rounds) {//A condition that checks if the desired number of rounds has been reached
+              Check_who_win()
+              setTimeout(function () { end(); }, 2000);
               break;
             }
-            break;
-          }
-        }
+            Removal_of_children()
+            Definition_of_properties()
+            if (Board._game_type === 2 || Board._game_type === 3) {
+              Board._game_type = 2
+            }
 
-        if (memory[0] === memory[1]) {
-
-          if (Board._game_type !== 2 || Board._game_type !== 3) {
-            Board._pairs.splice(i, 1);
-            card_matches()
+            if (Board._game_type === 0 || Board._game_type === 1) {
+              Board._game_type = 0
+            }
+            style_type_random()
+            Board._maxarr = Board._board_size
+            main_function(Board._rows, Board._cols)
             bar_update()
-            setTimeout(function () { freeze(), player_or_bot() }, 2500);
             break;
+            freeze()
           }
+
+          if (Board._game_type === 0 || Board._game_type === 1) {
+            setTimeout(function () { player_or_bot(), freeze() }, 2500);
+          }
+          break;
         }
       }
-    }
 
-    // שאין התמאה
-    if (Board._for_ended === Board._pairs.length - 1) {
+      // שאין התמאה
+      if (Board._for_ended === Board._pairs.length - 1) {
 
-      if (Board._check[0] !== Board._check[1]) {
-
-        freeze()
-        ShakeDiv(Board._first_card, Board._Second_card)
-        Board._Two_numbers_use = []
-
-        if (Board._game_type !== 0 || Board._game_type !== 1) {
+        if (Board._check[0] !== Board._check[1]) {
+          freeze()
+          ShakeDiv(Board._first_card, Board._Second_card)
+          Board._Two_numbers_use = []
 
           if (Board._game_type === 5) {
 
             Board._player_one_moves++
             bar_update()
-
           }
-        }
-        TwoPlayer()
-        setTimeout(function () {
-          RemoveClass_Shake(Board._first_card, Board._Second_card),
-            Hide_div_son_show_father(Board._first_card)
-            , Hide_div_son_show_father(Board._Second_card), freeze();
-        }, 1100)
-
-
-        if (Board._game_type === 0) {
+          TwoPlayer()
           setTimeout(function () {
             RemoveClass_Shake(Board._first_card, Board._Second_card),
               Hide_div_son_show_father(Board._first_card)
-              , Hide_div_son_show_father(Board._Second_card)
-          }, 1100);
-          setTimeout(function () { player_or_bot(), freeze() }, 2500);
+              , Hide_div_son_show_father(Board._Second_card); freeze()
+          }, 1100)
+          if (Board._game_type === 0 || Board._game_type === 1) {
+            setTimeout(function () { player_or_bot(), freeze() }, 2500);
+          }
         }
+
       }
 
     }
@@ -584,50 +608,56 @@ function Check_who_win_rounds() {
   if (Board._game_type !== 5) {
 
     if (Board._player_one_Guess === Board._player_two_Guess || Board._player_one_Guess === Board._player_bot_Guess) {
-      swal({ title: "Dead heat!!", text: "", timer: 1500 })
+      swal({ title: "Dead heat!!", text: "", timer: 3000 })
 
     }
     if (Board._player_one_Guess < Board._player_two_Guess) {
-      swal({ title: "Player 2 Win!! (Won the current round)", text: "", timer: 2000 })
+      swal({ title: "Player 2 Win!! (Won the current round)", text: "", timer: 3000 })
       Board._win_player_two++
 
     }
     if (Board._player_one_Guess < Board._player_bot_Guess) {
-      swal({ title: "Bot Win!! (Won the current round)", text: "", timer: 2000 })
+      swal({ title: "Bot Win!! (Won the current round)", text: "", timer: 3000 })
       Board._win_player_bot++
     }
-    if (Board._player_one_Guess > Board._player_bot_Guess && Board._player_one_Guess > Board._player_two_Guess) {
-      swal({ title: "Player 1 Win!!(Won the current round)", text: "", timer: 2000 })
+    if (Board._player_one_Guess > Board._player_bot_Guess && Board._game_type === 0 || Board._game_type === 1) {
+      swal({ title: "Player 1 Win!!(Won the current round)", text: "", timer: 3000 })
       Board._win_player_one++
+    }
+    if (Board._player_one_Guess > Board._player_two_Guess && Board._game_type === 2 || Board._game_type === 3) {
+      swal({ title: "Player 1 Win!!(Won the current round)", text: "", timer: 3000 })
+
+      Board._win_player_one++
+
     }
   }
 }
 
 function Check_who_win() {
   if (Board._game_type === 5) {
-    swal({ title: "Well done, game over!!", text: "", timer: 2000 })
+    swal({ title: "Well done, game over!!", text: "", timer: 3000 })
   }
 
   if (Board._game_type !== 5) {
 
     if (Board._win_player_one === Board._win_player_two || Board._win_player_one === Board._win_player_bot) {
-      swal({ title: "Dead heat!! - The game is over!!", text: "", timer: 2000 })
+      swal({ title: "Dead heat!! - The game is over!!", text: "", timer: 3000 })
     }
 
     if (Board._win_player_one < Board._win_player_two) {
-      swal({ title: 'Player 2 Win!! - The game is over!!', text: "", timer: 2000 })
+      swal({ title: 'Player 2 Win!! - The game is over!!', text: "", timer: 3000 })
     }
 
     if (Board._win_player_one < Board._win_player_bot) {
-      swal({ title: 'Bot Win!! - The game is over!!', text: "", timer: 2000 })
+      swal({ title: 'Bot Win!! - The game is over!!', text: "", timer: 3000 })
     }
 
-    if (Board._win_player_one > Board._win_player_two) {
-      swal({ title: 'Player 1 Win!! -The game is over!!', text: "", timer: 2000 })
+    if (Board._win_player_one > Board._win_player_two && Board._game_type === 2 || Board._game_type === 3) {
+      swal({ title: 'Player 1 Win!! -The game is over!!', text: "", timer: 3000 })
 
     }
-    if (Board._win_player_one > Board._win_player_bot) {
-      swal({ title: 'Player One Win!! - The game is over!!', text: "", timer: 2000 })
+    if (Board._win_player_one > Board._win_player_bot && Board._game_type === 0 || Board._game_type === 1) {
+      swal({ title: 'Player One Win!! - The game is over!!', text: "", timer: 3000 })
 
     }
   }
@@ -635,10 +665,10 @@ function Check_who_win() {
 
 function card_matches() {
 
-  if (Board._game_type === 1 || Board._game_type === 2) {
+  if (Board._game_type === 0 || Board._game_type === 2) {
     Board._player_one_Guess++
   }
-  if (Board._game_type === 0) {
+  if (Board._game_type === 1) {
     Board._player_bot_Guess++
   }
   if (Board._game_type === 3) {
@@ -652,19 +682,19 @@ function card_matches() {
 function bar_update() {
   if (Board._game_type === 5) {
     document.getElementById("round").textContent = `ROUND: ${Board._rounds} `,
-    document.getElementById("player1").textContent = `WIN: ${Board._win_player_one} --- Guess: ${Board._player_one_Guess} --- Moves:${Board._player_one_moves}`
+      document.getElementById("player1").textContent = `WIN: ${Board._win_player_one} --- Guess: ${Board._player_one_Guess} --- Moves:${Board._player_one_moves}`
   }
 
   if (Board._game_type === 2 || Board._game_type === 3) {
     document.getElementById("round").textContent = ` Player-1 -- ROUND: ${Board._rounds} -- Player-2 `,
-    document.getElementById("player1").textContent = `Guess: ${Board._player_one_Guess} --- VS --- Guess: ${Board._player_two_Guess}`,
-    document.getElementById("win").textContent = ` WIN: ${Board._win_player_one} --- VS ---  WIN: ${Board._win_player_two}`;
+      document.getElementById("player1").textContent = `Guess: ${Board._player_one_Guess} --- VS --- Guess: ${Board._player_two_Guess}`,
+      document.getElementById("win").textContent = ` WIN: ${Board._win_player_one} --- VS ---  WIN: ${Board._win_player_two}`;
   }
 
   if (Board._game_type === 0 || Board._game_type === 1) {
     document.getElementById("round").textContent = `Player-1 - ROUND: ${Board._rounds} - Player-BOT`,
       document.getElementById("player1").textContent = `Guess: ${Board._player_one_Guess} --- VS --- Guess: ${Board._player_bot_Guess}`,
-      document.getElementById("win").textContent = ` WIN: ${Board._win_player_one} --- VS --- WIN: ${Board._win_player_two}`;
+      document.getElementById("win").textContent = ` WIN: ${Board._win_player_one} --- VS --- WIN: ${Board._win_player_bot}`;
   }
 }
 
@@ -682,10 +712,10 @@ function TwoPlayer() {
 }
 
 function player_or_bot() {//Board._game_type = 1 = player one ,Board._game_type = 0 =  player bot 
-  
+
   switch (Board._game_type) {
     case 0:
-      bot_random_number(), Board._game_type = 1 
+      Board._game_type = 1, bot_random_number()
       break;
     case 1:
       Board._game_type = 0;
@@ -697,7 +727,7 @@ function bot_random_number() { // Chooses moves for the bot
   const index = Math.floor(Math.random() * Board._pairs.length);
   const i = Board._pairs[index]
 
-  return cell_click(i[1]), cell_click(i[0]), Board._game_type = 1
+  return cell_click(i[1]), cell_click(i[0])
 }
 
 function freeze() { // Locks and unlocks the board
@@ -748,7 +778,7 @@ function RemoveClass_Shake(a, b) {
 function Removal_of_children() {
   let parent = document.getElementById("board");
 
-// Delete all children
+  // Delete all children
   parent.innerHTML = "";
   Board._parentDiv.classList.remove(`board${Board._size}`);
   let audio = document.getElementById("audio");
@@ -756,5 +786,5 @@ function Removal_of_children() {
 }
 
 function end() { // exit function that is activated when the button is clicked
-    window.setTimeout(function () { window.location.reload(); }, 0.1);
+  window.setTimeout(function () { window.location.reload(); }, 0.1);
 }

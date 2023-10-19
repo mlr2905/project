@@ -2,8 +2,9 @@ class Board {
     constructor(_pairs, _maxarr, _doubled, _freeze, _arr, _Creating_a_div,
        _Two_numbers_use,_game_type, _style,_on_or_off,_random,_frontDiv,
        _rowDiv,_size,_parentDiv,_player_one,_rounds,_player_two,_player_bot,
-       _for_ended,_first_card,_Second_card,_check,_audio,_src,_img,_max_rounds,
-       _win_player_one,_win_player_two, _win_player_bot,_max_round,_One_time,_board_size,_rows,_cols,_player_one_moves) 
+       _for_ended,_first_card,_Second_card,_check,_lector,_src,_img,_max_rounds,
+       _win_player_one,_win_player_two, _win_player_bot,_max_round,_One_time,
+       _board_size,_rows,_cols,_player_one_moves,_show_all_cards,_max_show_all_cards,_eye) 
        {
       this.pairs = _pairs;
       this.maxarr = _maxarr;
@@ -29,7 +30,7 @@ class Board {
       this.first_card =_first_card
       this.Second_card =_Second_card
       this.check =_check
-      this.audio =_audio
+      this.lector =_lector
       this.src = _src
       this.img =_img
       this.win_player_one = _win_player_one
@@ -41,6 +42,9 @@ class Board {
       this.rows = _rows
       this.cols= _cols
       this.player_onemoves = _player_one_moves
+      this.show_all_cards = _show_all_cards
+      this.max_show_all_cards = _max_show_all_cards
+      this.eye = _eye
 
     }
   }
