@@ -70,12 +70,10 @@
 </body>
 <script>
 
-
-
   Create_authorized_buttons()
   function Create_authorized_buttons() {
     const buttons = [
-      { id: "exit", text: "Exit", classes: ["btn", "exit", "button"], onClick: end },
+      { id: "exit", text: "Exit", classes: ["btn", "exit", "button"], onClick: exit },
       { id: "Oneplayer", text: "One player", classes: ["btn", "bot", "button"], onClick: one_player },
       { id: "TwoPlayer", text: "Two Player", classes: ["btn", "TwoPlayer", "button"], onClick: player_vs_player },
       { id: "bot", text: "Player VS Bot", classes: ["btn", "bot", "button"], onClick: player_vs_bot },

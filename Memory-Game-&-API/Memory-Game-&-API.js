@@ -525,13 +525,13 @@ function checkEqual() {
           TwoPlayer()
           bar_update()
 
-          if (Board._pairs.length === 0) { // A condition that is activated at the end of a round and deletes the current board and creates a new one
+          if (Board._pairs.length === 0) { // A condition that is activated at the exit of a round and deletes the current board and creates a new one
             Check_who_win_rounds()
             Board._rounds++
 
             if (Board.max_rounds === Board._rounds) {//A condition that checks if the desired number of rounds has been reached
               Check_who_win()
-              setTimeout(function () { end(); }, 2000);
+              setTimeout(function () { exit(); }, 2000);
               break;
             }
             Removal_of_children()
@@ -788,6 +788,6 @@ function Removal_of_children() {
   audio.innerHTML = "";
 }
 
-function end() { // exit function that is activated when the button is clicked
+function exit() { // exit function that is activated when the button is clicked
   window.setTimeout(function () { window.location.reload(); }, 0.1);
 }
