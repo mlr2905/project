@@ -206,7 +206,7 @@ function Show_all_the_cards() {
 
     for (let i = 0; i < a.length; i++) {
 
-      hide_div_father_show_son(i)
+      hide_div_father_show_son(pair[i])
      
     }
     Board._show_all_cards++
