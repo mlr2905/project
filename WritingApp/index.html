@@ -3,9 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>WritingApp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </head>
 <body>
+    <h1>WritingApp</h1>
+    <form id="posts-form">
+        <label for="user">user:</label>
+        <input type="text" id="user" required><br> <br />
+
+        <label for="text">text:</label>
+        <input type="text" id="text" required><br> <br />
+
+        <button id="post-button" onclick="post_data()">POST posts</button> <br />
+    </form>
+    <table style="width: 40%; margin-left: 30%;" id="myTable"
+        class="table table-striped table-dark mt-5 table-hover table-bordered">
+
+        <tbody id="tableBody">
+            <tr></tr>
+
+
+
+    <script>
+        function post_data() {
+
+            let new_user = document.getElementById('user').value
+          let new_text = document.getElementById('text').value
+          let new_time = time_now ()
+          
+
+            const url = 'https://db-nmn5.onrender.com/chats'
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: `{
+                            "user": "${new_user}",
+                            "text": "${new_body}",
+                            "time": "${new_time}"
+
+                        }`
+            }).then(response => {
+                if (!response.ok) {
+                    alert('failure') // 1 -- failure
+                } else {
+                    alert('created')
+                }
+            })
+        }
+   
+        function time_now (){
+  // קבל את השעה הנוכחית
+  const now = new Date();
+
+  // קבל את השעות הנוכחיות
+  const hours = now.getHours();
+
+  // קבל את הדקות הנוכחיות
+  const minutes = now.getMinutes();
+
+  // קבל את השניות הנוכחיות
+  const seconds = now.getSeconds();
+  let time  =`${hours}:${minutes}:${seconds}`
+
+
+return time
+        }
+
+           fetch("https://db-nmn5.onrender.com/chats") // 649 cards
+   .then(res => res.json())
+   .then(data => {
+     // Save the data in localStorage
+     localStorage.setItem("db-chats", JSON.stringify(data));
+   })
+
+   let db_chats = JSON.parse(localStorage.getItem("db-chats"))
+
+   let r = document.createElement("tr");
+
+let user = JSON.stringify(db_chats[0].user);
+let text =JSON.stringify(db_chats[0].text);
+let time  =time_now ()
+const postsList = document.getElementById('tableBody')
+
+const row = document.createElement('tr')
+                    row.innerHTML = `<td>${user}</td>
+                    <td>${text}</td>
+                    <td>${time}</td>`
+                    postsList.appendChild(row)
+
+
+
+
+    </script>
     
 </body>
 </html>
