@@ -225,7 +225,7 @@ function Show_all_the_cards() {
 function Hide_all_the_cards() {
   for (let i = 0; i < Board._pairs.length*2; i++) {
 
-    Hide_div_son_show_father(i)
+    Hide_div_son_show_father(Board._pairs[i])
   }
 }
 
