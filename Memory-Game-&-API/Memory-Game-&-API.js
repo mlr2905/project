@@ -312,7 +312,7 @@ function getRandomNumber() {// Generates a random number between 2 and 548
 
 
   // Generates a random number between 2 and 598
-  const Number = Math.floor(Math.random() * 598) + 0;
+  const Number = Math.floor(Math.random() * 598) + 2;
 
   return Number;
 }
