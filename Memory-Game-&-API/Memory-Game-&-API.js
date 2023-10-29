@@ -223,7 +223,7 @@ function Show_all_the_cards() {
 }
 
 function Hide_all_the_cards() {
-  for (let i = 0; i < Board._Creating_a_div.length; i++) {
+  for (let i = 0; i < Board._pairs.length; i++) {
 
     Hide_div_son_show_father(i)
   }
