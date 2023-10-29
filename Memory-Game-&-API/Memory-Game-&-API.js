@@ -212,6 +212,10 @@ function Show_all_the_cards() {
     }
     Board._show_all_cards++
   }
+  else{
+    swal({ title: "Cards cannot be shown as one card shown !!", text: "", timer: 2000 })
+
+  }
   }
 
   else {
