@@ -520,12 +520,11 @@ function checkEqual() {
 
       if (Board._check[0] === Board._first_card && Board._check[1] === Board._Second_card) {
         freeze()
-        Board._Two_numbers_use = []
         outDiv(Board._first_card, Board._Second_card)
         setTimeout(function () {
           RemoveClass_out(Board._first_card, Board._Second_card)
         }, 1600);
-        setTimeout(function () { HideDiv(Board._first_card, Board._Second_card), freeze(); }, 1500);
+        setTimeout(function () { HideDiv(Board._first_card, Board._Second_card),Board._Two_numbers_use = [] ,freeze(); }, 1500);
 
         memory = Board._pairs[i]
         memory_arr = [Board._first_card, Board._Second_card]
@@ -577,8 +576,7 @@ function checkEqual() {
         if (Board._check[0] !== Board._check[1]) {
           freeze()
           ShakeDiv(Board._first_card, Board._Second_card)
-          Board._Two_numbers_use = []
-
+          
           if (Board._game_type === 5) {
 
             Board._player_one_moves++
@@ -591,7 +589,7 @@ function checkEqual() {
               , Hide_div_son_show_father(Board._Second_card); freeze()
           }, 1100)
           if (Board._game_type === 0 || Board._game_type === 1) {
-            setTimeout(function () { player_or_bot(), freeze() }, 2500);
+            setTimeout(function () { player_or_bot(),Board._Two_numbers_use = [], freeze() }, 2500);
           }
         }
 
