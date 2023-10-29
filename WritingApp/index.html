@@ -44,25 +44,25 @@
           let new_time = time_now ()
           
 
-            const url = 'https://db-nmn5.onrender.com/chats'
-
-            const response = await  fetch(url, {
+            
+ const  url ='https://db-nmn5.onrender.com/chats'
+             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
-                            "user": "${new_user}",
-                            "text": "${new_text}",
-                            "time": "${new_time}"
+                            "user": ${new_user},
+                            "text": ${new_text},
+                            "time": ${new_time}
 
                         }`
-            }).then(response => {
+            })
                 if (!response.ok) {
                     alert('failure') // 1 -- failure
                 } else {
                     alert('created')
                 }
-            })
-        }
+            }
+        
    
         function time_now (){
   // קבל את השעה הנוכחית
