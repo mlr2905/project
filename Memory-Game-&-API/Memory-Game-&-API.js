@@ -223,10 +223,18 @@ function Show_all_the_cards() {
 }
 
 function Hide_all_the_cards() {
-  for (let i = 0; i < Board._pairs.length*2; i++) {
+  const a = [];
 
-    Hide_div_son_show_father(Board._pairs[i])
+  for (const pair of Board._pairs) {
+    a.push(pair[0], pair[1]);
   }
+
+  for (let i = 0; i < a.length; i++) {
+
+    Hide_div_son_show_father(a[i])
+   
+  }
+ 
 }
 
 
