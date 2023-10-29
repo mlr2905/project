@@ -311,8 +311,8 @@ function createPairs() { // Create pairs according to board size
 function getRandomNumber() {// Generates a random number between 2 and 548
 
 
-  // Generates a random number between 2 and 548
-  const Number = Math.floor(Math.random() * 548) + 2;
+  // Generates a random number between 2 and 598
+  const Number = Math.floor(Math.random() * 598) + 0;
 
   return Number;
 }
