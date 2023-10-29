@@ -198,6 +198,7 @@ function Show_all_the_cards() {
 
   if (Board._show_all_cards !== Board.max_show_all_cards) {
     
+    if(Board._Two_numbers_use[0]> 0){
     const a = [];
 
     for (const pair of Board._pairs) {
@@ -210,7 +211,7 @@ function Show_all_the_cards() {
      
     }
     Board._show_all_cards++
-
+  }
   }
 
   else {
