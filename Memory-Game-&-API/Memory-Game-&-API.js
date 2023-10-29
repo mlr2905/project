@@ -1,3 +1,4 @@
+
 Definition_of_properties()
 // Setting default properties
 function Definition_of_properties() {
@@ -6,7 +7,6 @@ function Definition_of_properties() {
   Board._Two_numbers_use = [];
   Board._doubled = [];
   Board._freeze = 0
-  Api._data4 = puse_PokeAPI_data4()
   Board._on_or_off = "OFF"
   Board._show_all_cards = 0
   Board.max_show_all_cards = 0
@@ -415,7 +415,7 @@ function style_cards() {//Defines the images on the board according to the selec
 
   if (Board._style === 4) {
     document.body.style.backgroundImage = "url('images/poketheme.jpg')";
-    Style_cards._card_back = Api._data4[Style_cards._imgN]
+    Style_cards._card_back = Api._data4[Style_cards._imgN].url
     Style_cards._card_front = "images/poke_front.png"
     Style_cards._card_over = "images/poke_over.gif"
   }

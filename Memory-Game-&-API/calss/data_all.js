@@ -24,16 +24,14 @@
 
    Api._data3 = JSON.parse(localStorage.getItem("data3"))
 
- function puse_PokeAPI_data4() {   // 648 cards
-   let deta4 = []
-   for (let i = 1; i < 648; i++) {
-     let a = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${i}.svg`
 
-     deta4.push(a)
-   }
-   return deta4
+   fetch("https://pokemon-8luu.onrender.com/Pokemon") // 649 cards
+   .then(res => res.json())
+   .then(data => {
+     // Save the data in localStorage
+     localStorage.setItem("data4", JSON.stringify(data));
+   })
 
- }
- //
- 
+   Api._data4 = JSON.parse(localStorage.getItem("data4"))
+
 
