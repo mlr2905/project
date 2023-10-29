@@ -37,7 +37,7 @@
 
 
     <script>
-        function post_data() {
+       async function post_data() {
 
             let new_user = document.getElementById('user').value
           let new_text = document.getElementById('text').value
@@ -46,7 +46,7 @@
 
             const url = 'https://db-nmn5.onrender.com/chats'
 
-            fetch(url, {
+            const response = await  fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
