@@ -37,7 +37,7 @@
 
 
     <script>
-       async function post_data() {
+        function post_data() {
 
             let new_user = document.getElementById('user').value
           let new_text = document.getElementById('text').value
@@ -55,13 +55,14 @@
                             "time": ${new_time}
 
                         }`
-            })
+            }).then(response => {
                 if (!response.ok) {
                     alert('failure') // 1 -- failure
                 } else {
                     alert('created')
                 }
-            }
+            })
+        }
         
    
         function time_now (){
@@ -82,27 +83,27 @@
 return time
         }
 
-           fetch("https://db-nmn5.onrender.com/chats") // 649 cards
-   .then(res => res.json())
-   .then(data => {
-     // Save the data in localStorage
-     localStorage.setItem("db-chats", JSON.stringify(data));
-   })
+//            fetch("https://db-nmn5.onrender.com/chats") // 649 cards
+//    .then(res => res.json())
+//    .then(data => {
+//      // Save the data in localStorage
+//      localStorage.setItem("db-chats", JSON.stringify(data));
+//    })
 
-   let db_chats = JSON.parse(localStorage.getItem("db-chats"))
+//    let db_chats = JSON.parse(localStorage.getItem("db-chats"))
 
-   let r = document.createElement("tr");
+//    let r = document.createElement("tr");
 
-let user = JSON.stringify(db_chats[0].user);
-let text =JSON.stringify(db_chats[0].text);
-let time  =time_now ()
-const postsList = document.getElementById('tableBody')
+// let user = JSON.stringify(db_chats[0].user);
+// let text =JSON.stringify(db_chats[0].text);
+// let time  =time_now ()
+// const postsList = document.getElementById('tableBody')
 
-const row = document.createElement('tr')
-                    row.innerHTML = `<td>${user}</td>
-                    <td>${text}</td>
-                    <td>${time}</td>`
-                    postsList.appendChild(row)
+// const row = document.createElement('tr')
+//                     row.innerHTML = `<td>${user}</td>
+//                     <td>${text}</td>
+//                     <td>${time}</td>`
+//                     postsList.appendChild(row)
 
 
 
