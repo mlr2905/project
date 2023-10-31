@@ -19,7 +19,6 @@
 </head>
 <body>
     <h1>WritingApp</h1>
-    <form id="posts-form">
         <label for="user">user:</label>
         <input type="text" id="user" required><br> <br />
 
@@ -27,7 +26,7 @@
         <input type="text" id="text" required><br> <br />
 
         <button id="post-button" onclick="post_data()">POST posts</button> <br />
-    </form>
+   
     <table style="width: 40%; margin-left: 30%;" id="myTable"
         class="table table-striped table-dark mt-5 table-hover table-bordered">
 
@@ -37,12 +36,14 @@
 
 
     <script>
+      
+
         function post_data() {
 
             let new_user = document.getElementById('user').value
           let new_text = document.getElementById('text').value
           let new_time = time_now ()
-          
+        
 
             
  const  url ='https://db-nmn5.onrender.com/chats'
@@ -50,13 +51,14 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
-                            "user": ${new_user},
-                            "text": ${new_text},
-                            "time": ${new_time}
+                            "user": "${new_user}",
+                            "text": "${new_text}",
+                            "time": "${new_time}"
 
                         }`
             }).then(response => {
                 if (!response.ok) {
+                    console.error(response)
                     alert('failure') // 1 -- failure
                 } else {
                     alert('created')
@@ -75,38 +77,48 @@
   // קבל את הדקות הנוכחיות
   const minutes = now.getMinutes();
 
+  const day = now.getDate()
+
+  const Month = now.getMonth()
+  
+  const Year = now.getFullYear()	
+
   // קבל את השניות הנוכחיות
   const seconds = now.getSeconds();
-  let time  =`${hours}:${minutes}:${seconds}`
+  let time  =`${hours}:${minutes}:${seconds}  ${day}/${Month}/${Year}`
 
 
 return time
         }
 
-//            fetch("https://db-nmn5.onrender.com/chats") // 649 cards
-//    .then(res => res.json())
-//    .then(data => {
-//      // Save the data in localStorage
-//      localStorage.setItem("db-chats", JSON.stringify(data));
-//    })
+ function get(){
+           fetch("https://db-nmn5.onrender.com/chats") // 649 cards
+   .then(res => res.json())
+   .then(data => {
+     // Save the data in localStorage
+     localStorage.setItem("db-chats", JSON.stringify(data));
+   })
 
-//    let db_chats = JSON.parse(localStorage.getItem("db-chats"))
+   let db_chats = JSON.parse(localStorage.getItem("db-chats"))
 
-//    let r = document.createElement("tr");
+   let r = document.createElement("tr");
 
-// let user = JSON.stringify(db_chats[0].user);
-// let text =JSON.stringify(db_chats[0].text);
-// let time  =time_now ()
-// const postsList = document.getElementById('tableBody')
+   
+const postsList = document.getElementById('tableBody')
+postsList.innerHTML = ""
+const row = document.createElement('tr')
 
-// const row = document.createElement('tr')
-//                     row.innerHTML = `<td>${user}</td>
-//                     <td>${text}</td>
-//                     <td>${time}</td>`
-//                     postsList.appendChild(row)
+for (let i = 0; i < db_chats.length; i++) {
+    const row = document.createElement('tr')
+                    row.innerHTML = `<td>${db_chats[i].user}</td>
+                    <td>${db_chats[i].text}</td>
+                    <td>${db_chats[i].time}</td>`
+                    postsList.appendChild(row)
+}
 
+ }
 
-
+ setInterval(get, 500)
 
     </script>
     
