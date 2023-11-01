@@ -10,12 +10,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+  
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
 </head>
 <style>
    body {
@@ -89,7 +87,7 @@
             border: none;
             color: #007bff;
             cursor: pointer;
-        }
+        } 
         .delete-button {
             background: none;
             border: none;
@@ -102,6 +100,43 @@
             color: #666;
             text-align: right;
         }
+
+
+        .conversation-compose .send {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  flex: 0 0 auto;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 0;
+  position: relative;
+  outline: none;
+}
+
+.conversation-compose .send .circle {
+  background: #008a7c;
+  border-radius: 50%;
+  color: #fff;
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.conversation-compose .send .circle i {
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+
+
+
+
+        
+        
         </style>
 <body>
     <h1>WritingApp</h1>
@@ -111,7 +146,7 @@
    
     
         <div class="chat-container" id="tableBody"></div>
-        <input type="text" id="text" required><button id="post-button" onclick="post_data()">send</button> <br />
+        <input type="text" id="text" required> <button  class="circle"  id="post-button" onclick="post_data()">send</button> <br />
 
 
 
@@ -181,7 +216,6 @@ return time
 
    let db_chats = JSON.parse(localStorage.getItem("db-chats"))
 
-   let r = document.createElement("tr");
 
    
 const postsList = document.getElementById('tableBody')
@@ -190,28 +224,123 @@ postsList.innerHTML = ""
 for (let i = 0; i < db_chats.length; i++) {
     const row = document.createElement('div')
     if(db_chats[i].user === a){
-                    row.innerHTML = `<br/><div class="message-balloon">
+                    row.innerHTML = `<br/><div class="message-balloon" id="message-su${db_chats[i].id}">
                     <div >${db_chats[i].user}:</div>
                     <div ></div>
 
                     <div>${db_chats[i].text}</div><div><sub>${db_chats[i].time}</sub></div></div>
                     `
                     postsList.appendChild(row)
+                    addCellClick(`message-su${db_chats[i].id}`, db_chats[i].id)
+
+                    
     }
     else{
-                row.innerHTML = `<br/><div class="message-balloon-received">
+                row.innerHTML = `<br/><div class="message-balloon-received" id="message-${db_chats[i].id}">
                     <div >:${db_chats[i].user}</div>
                     <div ></div>
 
                     <div>${db_chats[i].text}</div><div><sub>${db_chats[i].time}</sub></div></div>
                     `
                     postsList.appendChild(row)
+                    addCellClick(`message-${db_chats[i].id}`, db_chats[i].id)
+
     }
 }
 
  }
+ function PUT(number){
+    intervalId = setInterval(get, 500);
 
- setInterval(get, 500)
+    let new_user = a
+          let new_text = document.getElementById('text').value
+        //   document.getElementById(`message-${number}`).value
+          let new_time = time_now ()
+ const  url =`https://db-nmn5.onrender.com/chats/${number}`
+             fetch(url, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: `{
+                            "user": "${new_user}",
+                            "text": "${new_text}",
+                            "time": "${new_time}"
+
+                        }`
+            }).then(response => {
+                if (!response.ok) {
+                    console.error(response)
+                    alert('failure') // 1 -- failure
+                } else {
+                }
+            })
+        }
+        
+        function delete_(number){
+  
+ const  url =`https://db-nmn5.onrender.com/chats/${number}`
+             fetch(`https://db-nmn5.onrender.com/chats/${number}`, {
+                method: 'DELETE'
+              
+            }).then(response => {
+                if (!response.ok) {
+                    console.error(response)
+                    alert('failure') // 1 -- failure
+                } else {
+                    intervalId = setInterval(get, 500);
+
+                }
+            })
+        }
+        
+        
+
+ function edit_or_delete(number){
+    const el = document.querySelector(".message-balloon");
+const id = el.getAttribute("id");
+    
+    if(id ===  `message-su${number}`){
+
+    clearInterval(intervalId);
+
+    Swal.fire({
+  title: 'Edit or delete the message?',
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: 'edit',
+  denyButtonText: `delete`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  intervalId = setInterval(get, 500);
+
+  if (result.isConfirmed) {
+    Swal.fire('The message has been edited', '', 'success')
+    PUT(number)
+  } else if (result.isDenied) {
+    Swal.fire('The message has been deleted', '', 'info')
+    delete_(number)  }
+})
+    }
+    else{
+        Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'You are trying to edit a message that is not yours!',
+})
+    }
+
+ }
+
+ function addCellClick(divId, number) { //Adds onClick to this div
+  const div = document.getElementById(divId);
+  div.addEventListener("click", function () {
+    // קריאה לפונקציה `cell_click()` עם מספר התמונה
+    edit_or_delete(number);
+  });
+
+}
+intervalId = setInterval(get, 500);
+
+
 
     </script>
     
