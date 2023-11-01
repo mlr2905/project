@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,160 +11,203 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-  
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <style>
-   body {
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-color: #f8f9fa; /* Fallback background color */
-            margin: 0;
-            min-height: 100vh;
-            background-image: url("wallpaper-dark.jpg");
-            width: 70%;
-            margin-left: 10%;
-        }
+    body {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-color: #f8f9fa;
+        /* Fallback background color */
+        margin: 0;
+        min-height: 100vh;
+        background-image: url("wallpaper-dark.jpg");
+        width: 70%;
+        margin-left: 10%;
+    }
 
-        .chat-container {
-            background-image: url("w.jpg");
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Box shadow for a card-like appearance */
-            border: 1px solid #ccc;
-            display: flex; /* Use flexbox to control container's height */
-            flex-direction: column; /* Display latest message at the bottom */
-            overflow-y: auto;
-        }
+    .chat-container {
+        background-image: url("w.jpg");
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        /* Semi-transparent white background */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        /* Box shadow for a card-like appearance */
+        border: 1px solid #ccc;
+        display: flex;
+        /* Use flexbox to control container's height */
+        flex-direction: column;
+        /* Display latest message at the bottom */
+        overflow-y: auto;
+    }
 
-        .message-balloon {
-            background-color: #035d4c; /* Green background for sent messages */
-            color: #fff; /* Text color for sent messages */
-            padding: 10px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            clear: both;
-            float: left;
-            width: 40%;
-            text-align: left;
-        }
-        
-        .message-balloon-received {
-            background-color: #1f2c34; /* White background for received messages */
-            color: #fff; /* Text color for received messages */
-            padding: 10px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            clear: both;
-            float: right;
-            width: 40%;
-            text-align: right;
-        }
+    .message-balloon {
+        background-color: #035d4c;
+        /* Green background for sent messages */
+        color: #fff;
+        /* Text color for sent messages */
+        padding: 10px;
+        border-radius: 30px;
+        margin-bottom: 10px;
+        clear: both;
+        float: left;
+        width: auto;
+        text-align: left;
+    }
 
-        .username-column {
-            border: none;
-            width: 20%;
-        }
-        .message-column {
-            border: none;
-            width: 60%;
-        }
-        .time-column {
-            border: none;
-            width: 10%;
-        }
-        .actions-column {
-            border: none;
-            width: 10%;
-        }
-        .update-button {
-            background: none;
-            border: none;
-            color: #007bff;
-            cursor: pointer;
-        } 
-        .delete-button {
-            background: none;
-            border: none;
-            color: #dc3545;
-            cursor: pointer;
-        }
-         /* New style for time */
-         .message-time {
-            font-size: 12px;
-            color: #666;
-            text-align: right;
-        }
+    .message-balloon-received {
+        background-color: #1f2c34;
+        /* White background for received messages */
+        color: #fff;
+        /* Text color for received messages */
+        padding: 10px;
+        border-radius: 30px;
+        margin-bottom: 10px;
+        clear: both;
+        float: right;
+        width: auto;
+        text-align: right;
+    }
+
+    .username-column {
+        border: none;
+        width: 20%;
+    }
+
+    .message-column {
+        border: none;
+        width: 60%;
+    }
+
+    .time-column {
+        border: none;
+        width: 10%;
+    }
+
+    .actions-column {
+        border: none;
+        width: 10%;
+    }
+
+    .update-button {
+        background: none;
+        border: none;
+        color: #007bff;
+        cursor: pointer;
+    }
+
+    .delete-button {
+        background: none;
+        border: none;
+        color: #dc3545;
+        cursor: pointer;
+    }
+
+    /* New style for time */
+    .message-time {
+        font-size: 12px;
+        color: #666;
+        text-align: right;
+    }
 
 
-        .conversation-compose .send {
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  flex: 0 0 auto;
-  margin-left: 8px;
-  margin-right: 8px;
-  padding: 0;
-  position: relative;
-  outline: none;
+    .conversation-compose .send {
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        flex: 0 0 auto;
+        margin-left: 8px;
+        margin-right: 8px;
+        padding: 0;
+        position: relative;
+        outline: none;
+    }
+
+    .conversation-compose .send .circle {
+        background: #008a7c;
+        border-radius: 50%;
+        color: #fff;
+        position: relative;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .conversation-compose .send .circle .iconify-icon {
+        font-size: 24px;
+        margin-left: 5px;
+    }
+
+    #text {
+        border: 0;
+        flex: 1 1 auto;
+        font-size: 16px;
+        margin: 0;
+        outline: none;
+        min-width: 50px;
+        margin-left: 30%;
+    }
+    .iconify-icon {
+  height: calc(100% - 68px);
+  box-shadow: inset 0 10px 10px -10px #000000;
+  overflow-x: hidden;
+  padding: 0 16px;
+  margin-bottom: 19px;
 }
 
-.conversation-compose .send .circle {
-  background: #008a7c;
-  border-radius: 50%;
-  color: #fff;
-  position: relative;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.conversation-compose .send .circle i {
-  font-size: 24px;
-  margin-left: 5px;
-}
+    /* Small Screens */
+</style>
 
-
-
-
-
-        
-        
-        </style>
 <body>
     <h1>WritingApp</h1>
-       
 
 
-   
+
+
+
     
-        <div class="chat-container" id="tableBody"></div>
-        <input type="text" id="text" required> <button  class="circle"  id="post-button" onclick="post_data()">send</button> <br />
+    <div class="chat-container" id="tableBody"></div>
+
+    <input type="text" id="text" required>
+    <button class="send" id="post-button" onclick="post_data()">
+        <div class="circle">
+            <iconify-icon icon="zmdi:mail-send"></iconify-icon>
+        </div>
+        </div>
+    </button> 
+
 
 
 
 
     <script>
-      const a = prompt("What is your name?")
+
+
+        const a = prompt("What is your name?")
 
         function post_data() {
 
-        let new_user = a
-          let new_text = document.getElementById('text').value
-          let new_time = time_now ()
-        
+            let new_user = a
+            let new_text = document.getElementById('text').value
+            let new_time = time_now()
 
-            
- const  url ='https://db-nmn5.onrender.com/chats'
-             fetch(url, {
+            const input = document.getElementById('text')
+
+            input.value = '';
+
+            const url = 'https://db-nmn5.onrender.com/chats'
+            fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
@@ -180,84 +224,86 @@
                 }
             })
         }
-        
-   
-        function time_now (){
-  // קבל את השעה הנוכחית
-  const now = new Date();
-
-  // קבל את השעות הנוכחיות
-  const hours = now.getHours();
-
-  // קבל את הדקות הנוכחיות
-  const minutes = now.getMinutes();
-
-  const day = now.getDate()
-
-  const Month = now.getMonth()+1
-  
-  const Year = now.getFullYear()	
-
-  // קבל את השניות הנוכחיות
-  const seconds = now.getSeconds();
-  let time  =`${hours}:${minutes}:${seconds}  ${day}/${Month}/${Year}`
 
 
-return time
+        function time_now() {
+            // קבל את השעה הנוכחית
+            const now = new Date();
+
+            // קבל את השעות הנוכחיות
+            const hours = now.getHours();
+
+            // קבל את הדקות הנוכחיות
+            const minutes = now.getMinutes();
+
+            const day = now.getDate()
+
+            const Month = now.getMonth() + 1
+
+            const Year = now.getFullYear()
+
+            // קבל את השניות הנוכחיות
+            const seconds = now.getSeconds();
+            let time = `${hours}:${minutes}:${seconds}  ${day}/${Month}/${Year}`
+
+
+            return time
         }
 
- function get(){
-           fetch("https://db-nmn5.onrender.com/chats") // 649 cards
-   .then(res => res.json())
-   .then(data => {
-     // Save the data in localStorage
-     localStorage.setItem("db-chats", JSON.stringify(data));
-   })
+        function get() {
+            fetch("https://db-nmn5.onrender.com/chats") // 649 cards
+                .then(res => res.json())
+                .then(data => {
+                    // Save the data in localStorage
+                    localStorage.setItem("db-chats", JSON.stringify(data));
+                })
 
-   let db_chats = JSON.parse(localStorage.getItem("db-chats"))
+            let db_chats = JSON.parse(localStorage.getItem("db-chats"))
+
+            let r = document.createElement("tr");
 
 
-   
-const postsList = document.getElementById('tableBody')
-postsList.innerHTML = ""
+            const postsList = document.getElementById('tableBody')
+            postsList.innerHTML = ""
 
-for (let i = 0; i < db_chats.length; i++) {
-    const row = document.createElement('div')
-    if(db_chats[i].user === a){
-                    row.innerHTML = `<br/><div class="message-balloon" id="message-su${db_chats[i].id}">
+            for (let i = 0; i < db_chats.length; i++) {
+                const row = document.createElement('div')
+                let id = db_chats[i].id
+                if (db_chats[i].user === a) {
+                    row.innerHTML = `<br/><div class="message-balloon" id="message-${id}">
                     <div >${db_chats[i].user}:</div>
-                    <div ></div>
-
-                    <div>${db_chats[i].text}</div><div><sub>${db_chats[i].time}</sub></div></div>
-                    `
-                    postsList.appendChild(row)
-                    addCellClick(`message-su${db_chats[i].id}`, db_chats[i].id)
-
                     
-    }
-    else{
-                row.innerHTML = `<br/><div class="message-balloon-received" id="message-${db_chats[i].id}">
-                    <div >:${db_chats[i].user}</div>
-                    <div ></div>
 
                     <div>${db_chats[i].text}</div><div><sub>${db_chats[i].time}</sub></div></div>
                     `
                     postsList.appendChild(row)
-                    addCellClick(`message-${db_chats[i].id}`, db_chats[i].id)
+                    addCellClick(`message-${id}`, id)
 
-    }
-}
 
- }
- function PUT(number){
-    intervalId = setInterval(get, 500);
+                }
+                else {
+                    row.innerHTML = `<br/><div class="message-balloon-received" id="message-${id}">
+                    <div >:${db_chats[i].user}</div>
+                    
 
-    let new_user = a
-          let new_text = document.getElementById('text').value
-        //   document.getElementById(`message-${number}`).value
-          let new_time = time_now ()
- const  url =`https://db-nmn5.onrender.com/chats/${number}`
-             fetch(url, {
+                    <div>${db_chats[i].text}</div><div><sub>${db_chats[i].time}</sub></div></div>
+                    `
+                    postsList.appendChild(row)
+                    addCellClick(`message-${id}`, id)
+
+                }
+            }
+
+        }
+        function PUT(number) {
+            intervalId = setInterval(get, 500);
+
+            let new_user = a
+            let new_text = document.getElementById('text').value
+            //   document.getElementById(`message-${number}`).value
+            let new_time = time_now()
+            const url = `https://db-nmn5.onrender.com/chats/${number}`
+            fetch(url, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
@@ -274,13 +320,13 @@ for (let i = 0; i < db_chats.length; i++) {
                 }
             })
         }
-        
-        function delete_(number){
-  
- const  url =`https://db-nmn5.onrender.com/chats/${number}`
-             fetch(`https://db-nmn5.onrender.com/chats/${number}`, {
+
+        function delete_(number) {
+
+            const url = `https://db-nmn5.onrender.com/chats/${number}`
+            fetch(`https://db-nmn5.onrender.com/chats/${number}`, {
                 method: 'DELETE'
-              
+
             }).then(response => {
                 if (!response.ok) {
                     console.error(response)
@@ -291,58 +337,61 @@ for (let i = 0; i < db_chats.length; i++) {
                 }
             })
         }
-        
-        
 
- function edit_or_delete(number){
-    const el = document.querySelector(".message-balloon");
-const id = el.getAttribute("id");
-    
-    if(id ===  `message-su${number}`){
 
-    clearInterval(intervalId);
 
-    Swal.fire({
-  title: 'Edit or delete the message?',
-  showDenyButton: true,
-  showCancelButton: true,
-  confirmButtonText: 'edit',
-  denyButtonText: `delete`,
-}).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
-  intervalId = setInterval(get, 500);
+        function edit_or_delete(number) {
+            const element = document.getElementById(`message-${number}`);
+            const classes = element.className;
 
-  if (result.isConfirmed) {
-    Swal.fire('The message has been edited', '', 'success')
-    PUT(number)
-  } else if (result.isDenied) {
-    Swal.fire('The message has been deleted', '', 'info')
-    delete_(number)  }
-})
-    }
-    else{
-        Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'You are trying to edit a message that is not yours!',
-})
-    }
 
- }
+            if (classes === "message-balloon") {
 
- function addCellClick(divId, number) { //Adds onClick to this div
-  const div = document.getElementById(divId);
-  div.addEventListener("click", function () {
-    // קריאה לפונקציה `cell_click()` עם מספר התמונה
-    edit_or_delete(number);
-  });
+                clearInterval(intervalId);
 
-}
-intervalId = setInterval(get, 500);
+                Swal.fire({
+                    title: 'Edit or delete the message?',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'edit',
+                    denyButtonText: `delete`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    intervalId = setInterval(get, 500);
+
+                    if (result.isConfirmed) {
+                        Swal.fire('The message has been edited', '', 'success')
+                        PUT(number)
+                    } else if (result.isDenied) {
+                        Swal.fire('The message has been deleted', '', 'info')
+                        delete_(number)
+                    }
+                })
+            }
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'You are trying to edit a message that is not yours!',
+                })
+            }
+
+        }
+
+        function addCellClick(divId, number) { //Adds onClick to this div
+            const div = document.getElementById(divId);
+            div.addEventListener("click", function () {
+                // קריאה לפונקציה `cell_click()` עם מספר התמונה
+                edit_or_delete(number);
+            });
+
+        }
+        intervalId = setInterval(get, 500);
 
 
 
     </script>
-    
+
 </body>
+
 </html>
