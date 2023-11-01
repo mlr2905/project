@@ -55,7 +55,7 @@
             width: 50%;
             text-align: left;
         }
-
+        
         .message-balloon-received {
             background-color: #1f2c34; /* White background for received messages */
             color: #fff; /* Text color for received messages */
@@ -190,7 +190,7 @@ postsList.innerHTML = ""
 for (let i = 0; i < db_chats.length; i++) {
     const row = document.createElement('div')
     if(db_chats[i].user === a){
-                    row.innerHTML = `<br/><div class="message-balloon-received">
+                    row.innerHTML = `<br/><div class="message-balloon">
                     <div >:${db_chats[i].user}</div>
                     <div ></div>
 
@@ -199,7 +199,7 @@ for (let i = 0; i < db_chats.length; i++) {
                     postsList.appendChild(row)
     }
     else{
-                row.innerHTML = `<br/><div class="message-balloon">
+                row.innerHTML = `<br/><div class="message-balloon-received">
                     <div >${db_chats[i].user}:</div>
                     <div ></div>
 
