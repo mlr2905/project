@@ -16,6 +16,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+
 </head>
 <style>
     body {
@@ -157,13 +159,14 @@
         min-width: 50px;
         margin-left: 30%;
     }
+
     .iconify-icon {
-  height: calc(100% - 68px);
-  box-shadow: inset 0 10px 10px -10px #000000;
-  overflow-x: hidden;
-  padding: 0 16px;
-  margin-bottom: 19px;
-}
+        height: calc(100% - 68px);
+        box-shadow: inset 0 10px 10px -10px #000000;
+        overflow-x: hidden;
+        padding: 0 16px;
+        margin-bottom: 19px;
+    }
 
 
     /* Small Screens */
@@ -176,8 +179,11 @@
 
 
 
+    <div class="chat-container" id="tableBody">
+        <img  id="frame" style="display: none;" src="" width="0px" height="0px" />
+    </div>
     
-    <div class="chat-container" id="tableBody"></div>
+
 
     <input type="text" id="text" required>
     <button class="send" id="post-button" onclick="post_data()">
@@ -185,20 +191,71 @@
             <iconify-icon icon="zmdi:mail-send"></iconify-icon>
         </div>
         </div>
-    </button> 
+    </button>
+    <form class=" mt-5 mx-auto col-6 col-md-8 col-lg-6 was-validated ">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <input type="name" class="form-control" id="name" placeholder="Jane Doe.." value="" required>
+            </div>
 
+       
+      
+            <div class="col-md-4 mb-3">
+                <input type="number" class="form-control mb-2" id="Phone" minlength="9" maxlength="10"
+                    placeholder="050-1234567.." min="10" required><br/>
+            </div>
 
+          
+            <div class="custom-file col-md-4 mb-3">
+
+                <input type="file" onchange="add_img()" class="custom-file-input" id="file" required>
+                <label class="custom-file-label" for="file"><b>add a picture..</b></label>
+            </div>
+        </div>
+
+        <button onclick="activation()" class="btn btn-primary col" type="button">connect</button>
+        </div>
+    </form>
+    <!-- <img id="frame" src="" width="300px" height="500px" /> -->
 
 
 
     <script>
+ 
+        class M {
+    constructor(_name,_img) {
 
+      this.name = _name
+      this.img = _img
+   
 
-        const a = prompt("What is your name?")
+    }
+ 
+  }
+function activation(){
+
+M._name =document.getElementById('name').value
+    if(M._name !== ''){
+    intervalId = setInterval(get, 500);
+   
+    
+    
+    }
+    else{
+        Swal.fire('Must enter a name', '', 'success')
+
+    }
+}
+
+function add_img(){
+    frame.src = URL.createObjectURL(event.target.files[0]);
+    M._img = frame.src
+}
+
 
         function post_data() {
 
-            let new_user = a
+            let new_user = M._name
             let new_text = document.getElementById('text').value
             let new_time = time_now()
 
@@ -269,8 +326,8 @@
             for (let i = 0; i < db_chats.length; i++) {
                 const row = document.createElement('div')
                 let id = db_chats[i].id
-                if (db_chats[i].user === a) {
-                    row.innerHTML = `<br/><div class="message-balloon" id="message-${id}">
+                if (db_chats[i].user === M._name) {
+                    row.innerHTML = `<br/><img id="user-img" src="${M._img}" width="50px" height="50px" /><div class="message-balloon" id="message-${id}">
                     <div >${db_chats[i].user}:</div>
                     
 
@@ -298,7 +355,7 @@
         function PUT(number) {
             intervalId = setInterval(get, 500);
 
-            let new_user = a
+            let new_user = M._name
             let new_text = document.getElementById('text').value
             //   document.getElementById(`message-${number}`).value
             let new_time = time_now()
@@ -386,7 +443,6 @@
             });
 
         }
-        intervalId = setInterval(get, 500);
 
 
 
