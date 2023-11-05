@@ -16,7 +16,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <style>
@@ -168,6 +168,13 @@
         margin-bottom: 19px;
     }
 
+    #user-img {
+        margin-right: 10%;
+    }
+
+    #image {
+        background-color: #fff;
+    }
 
     /* Small Screens */
 </style>
@@ -178,14 +185,13 @@
 
 
 
-
     <div class="chat-container" id="tableBody">
-        <img  id="frame" style="display: none;" src="" width="0px" height="0px" />
+        <img id="frame" style="display: none;" src="" width="0px" height="0px" />
     </div>
-    
 
 
-    <input type="text" id="text" required>
+
+    <input type="text" id="text" required><i onclick="" id="image" class="fa fa-image"></i>
     <button class="send" id="post-button" onclick="post_data()">
         <div class="circle">
             <iconify-icon icon="zmdi:mail-send"></iconify-icon>
@@ -198,14 +204,14 @@
                 <input type="name" class="form-control" id="name" placeholder="Jane Doe.." value="" required>
             </div>
 
-       
-      
+
+
             <div class="col-md-4 mb-3">
                 <input type="number" class="form-control mb-2" id="Phone" minlength="9" maxlength="10"
-                    placeholder="050-1234567.." min="10" required><br/>
+                    placeholder="050-1234567.." min="10" required><br />
             </div>
 
-          
+
             <div class="custom-file col-md-4 mb-3">
 
                 <input type="file" onchange="add_img()" class="custom-file-input" id="file" required>
@@ -217,69 +223,114 @@
         </div>
     </form>
     <!-- <img id="frame" src="" width="300px" height="500px" /> -->
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ENWkkXg7UAo?si=JgWNiaQZ8tlfzPUx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 
     <script>
- 
+
         class M {
-    constructor(_name,_img) {
+            constructor(_name, _img) {
 
-      this.name = _name
-      this.img = _img
-   
+                this.name = _name
+                this.img = _img
 
-    }
- 
-  }
-function activation(){
 
-M._name =document.getElementById('name').value
-    if(M._name !== ''){
-    intervalId = setInterval(get, 500);
-   
+            }
+
+        }
+        function activation() {
+
+            M._name = document.getElementById('name').value
+            if (M._name !== '') {
+                intervalId = setInterval(get, 500);
+
+
+
+            }
+            else {
+                Swal.fire('Must enter a name', '', 'success')
+
+            }
+        }
+
+        function add_img() {
+            frame.src = URL.createObjectURL(event.target.files[0]);
+            M._img = frame.src
+        }
+
+        function isLink(text) {
+            // החזרה של `true` אם `text` הוא קישור
+            return (
+                // בדוק אם `text` מתחיל בסימן `<`
+                text.endsWith("gif") ||
+                text.endsWith("png") ||
+                text.endsWith("jpeg") ||
+                text.endsWith("svg") ||
+                text.endsWith("jpg")
+                // בדוק אם `text` מסתיים בסימן `>`
+
+            );
+        }
+        function isLink_youtube(text) {
+  // החזרה של `true` אם `text` הוא קישור
+  return (
+    // בדוק אם `text` מתחיל בסימן `<`
+    text.includes("youtube") 
+    // בדוק אם `text` מסתיים בסימן `>`
     
-    
-    }
-    else{
-        Swal.fire('Must enter a name', '', 'success')
-
-    }
+  );
 }
-
-function add_img(){
-    frame.src = URL.createObjectURL(event.target.files[0]);
-    M._img = frame.src
-}
-
 
         function post_data() {
 
             let new_user = M._name
             let new_text = document.getElementById('text').value
             let new_time = time_now()
+            let url_or_no = isLink(new_text)
+             let tube_or_no  = isLink_youtube(new_text)
 
+           
             const input = document.getElementById('text')
 
             input.value = '';
 
             const url = 'https://db-nmn5.onrender.com/chats'
-            fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: `{
+            if (url_or_on === true || tube_or_no === true) {
+                fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: `{
+                            "user": "${new_user}",
+                            "img": "${new_text}",
+                            "time": "${new_time}"
+
+                        }`
+                }).then(response => {
+                    if (!response.ok) {
+                        console.error(response)
+                        alert('failure') // 1 -- failure
+                    } else {
+                    }
+                })
+            } else {
+                fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: `{
                             "user": "${new_user}",
                             "text": "${new_text}",
                             "time": "${new_time}"
 
                         }`
-            }).then(response => {
-                if (!response.ok) {
-                    console.error(response)
-                    alert('failure') // 1 -- failure
-                } else {
-                }
-            })
+                }).then(response => {
+                    if (!response.ok) {
+                        console.error(response)
+                        alert('failure') // 1 -- failure
+                    } else {
+                    }
+                })
+            }
         }
 
 
@@ -327,16 +378,39 @@ function add_img(){
                 const row = document.createElement('div')
                 let id = db_chats[i].id
                 if (db_chats[i].user === M._name) {
-                    row.innerHTML = `<br/><img id="user-img" src="${M._img}" width="50px" height="50px" /><div class="message-balloon" id="message-${id}">
-                    <div >${db_chats[i].user}:</div>
+                    if (db_chats[i].img !== undefined) {
+                        row.innerHTML = `<br/><div>
+                    <div><img id="user-img" src="${M._img}" width="50px" height="50px" /><div >
+                        <b>${db_chats[i].user}</b></div></div>
+                        <div class="message-balloon" id="message-${id}">
+                    
                     
 
-                    <div>${db_chats[i].text}</div><div><sub>${db_chats[i].time}</sub></div></div>
+                    <img   src="${db_chats[i].img}" width="200px" height="200px" />
+                    <div><sub>${db_chats[i].time}</sub></div></div></div>
                     `
-                    postsList.appendChild(row)
-                    addCellClick(`message-${id}`, id)
+
+                        postsList.appendChild(row)
+                        addCellClick(`message-${id}`, id)
+
+                    }
+
+                    else {
+
+                        row.innerHTML = `<br/><div>
+<div><img id="user-img" src="${M._img}" width="50px" height="50px" /><div ><b>${db_chats[i].user}</b></div></div>
+    <div class="message-balloon" id="message-${id}">
 
 
+
+        <div>${db_chats[i].text}</div><div><sub>${db_chats[i].time}</sub></div></div></div>
+`
+
+                        postsList.appendChild(row)
+                        addCellClick(`message-${id}`, id)
+
+
+                    }
                 }
                 else {
                     row.innerHTML = `<br/><div class="message-balloon-received" id="message-${id}">
