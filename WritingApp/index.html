@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    
 
 
 
@@ -227,27 +228,32 @@
         <button onclick="activation()" class="btn btn-primary col" type="button">connect</button>
         </div>
     </form>
-    <!-- <img id="frame" src="" width="300px" height="500px" /> -->
+    <img id="frame" src="" width="0px" height="0px" />
     <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
 
-  
+
     <script>
 
-        class M {
-            constructor(_name, _img, _Push, _size_array) {
+        class Default_cells {
+            constructor(_name, _img, _Push, _size_array, _new_text, _new_time, _string_name) {
 
                 this.name = _name
                 this.img = _img
                 this.Push = _Push
                 this.size_array = _size_array
+                this.new_text = _new_text
+                this.new_time = _new_time
+                this.string_name = _string_name
             }
         }
+        const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ",)
+
 
         function activation() {
 
-            M._name = document.getElementById('name').value
-            if (M._name !== '') {
-                M._size_array = []
+            Cells_manager.name = document.getElementById('name').value
+            if (Cells_manager.name !== '') {
+                Cells_manager.size_array = []
             }
             else {
                 Swal.fire('Must enter a name', '', 'success')
@@ -256,71 +262,59 @@
 
         function add_img() {
             frame.src = URL.createObjectURL(event.target.files[0]);
-            M._img = frame.src
+            Cells_manager.img = frame.src
         }
 
-        function isLink_img(text) {
-            return (
-                text.endsWith("gif") || text.endsWith("png") ||
-                text.endsWith("jpg") || text.endsWith("svg") ||
-                text.endsWith("jpeg")
-            );
-        }
 
-        function isLink_youtube(text) {
-            return (text.includes("youtu") || text.includes("youtu"));
-        }
 
-        function isLink_facebook(text) {
-            return (text.includes("facebook"));
-        }
 
-        function isLink_tiktok(text) {
-            return (text.includes("tiktok"));
-        }
 
         function post_data() {
 
-            let new_user = M._name
-            let new_text = document.getElementById('text').value
-            let new_time = time_now()
-            let img_or_no = isLink_img(new_text)
-            let tube_or_no = isLink_youtube(new_text)
-            let tiktok_or_no = isLink_tiktok(new_text)
-            let facebook_or_on = isLink_facebook(new_text)
-            let string_name = "text"
-
+            let new_user = Cells_manager.name
+            Cells_manager.string_name = "text"
+            link_type()
             const input = document.getElementById('text')
             input.value = '';
 
-            
-            if (img_or_no === true) {
-                string_name = "img"
-            }
-            if (tiktok_or_no === true) {
-                string_name = "tiktok"
 
-            }
-            if (tube_or_no === true) {
-                string_name = "tube"
-            }
-            if (facebook_or_on === true) {
-                string_name = "face"
-                const url = new_text
-                const parts = url.split("=");
-                const videoId = parts[parts.length - 1];
-                new_text = videoId
-            }
+
             const url = 'https://db-nmn5.onrender.com/chats'
             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
                             "user": "${new_user}",
-                            "${string_name}": "${new_text}",
-                            "time": "${new_time}"
+                            "${Cells_manager.string_name}": "${Cells_manager.new_text}",
+                            "time": "${Cells_manager.new_time}"
                         }`})
+        }
 
+
+        function isLink_img(text) {
+            return text.includes(".gif") || text.includes(".png") || text.includes(".jpg") || text.includes(".svg") || text.includes(".jpeg");
+        }
+        function link_type() {
+            Cells_manager.new_text = document.getElementById('text').value
+            Cells_manager.new_time = time_now()
+            let img_or_no = isLink_img(Cells_manager.new_text)
+            let tube_or_no = Cells_manager.new_text.includes("youtu") || Cells_manager.new_text.includes("youtube")
+            let tiktok_or_no = Cells_manager.new_text.includes("tiktok")
+            let facebook_or_on = Cells_manager.new_text.includes("facebook")
+            let link_or_no = Cells_manager.new_text.includes("http")
+
+            Cells_manager.string_name = img_or_no ? "img" : tiktok_or_no ? "tiktok" : tube_or_no ? "tube" : "text";
+            const all_or_no = !img_or_no && !tiktok_or_no && !tube_or_no && !facebook_or_on
+            if (all_or_no) {
+                if (link_or_no) {
+                    Cells_manager.string_name = "link"
+                }
+            }
+
+            if (facebook_or_on) {
+                Cells_manager.new_text = Cells_manager.new_text.split("=")[1];
+                Cells_manager.string_name = "face";
+            }
         }
 
 
@@ -344,114 +338,197 @@
         }
 
         function Push_update() {
-            fetch("https://db-nmn5.onrender.com/chats") // 649 cards
+            fetch("https://db-nmn5.onrender.com/chats")
                 .then(res => res.json())
                 .then(data => {
                     // Save the data in localStorage
-                    localStorage.setItem("check", JSON.stringify(data));})
+                    localStorage.setItem("check", JSON.stringify(data));
+                })
 
-            M._Push = JSON.parse(localStorage.getItem("check"))
-            if (M._Push.length === M._size_array.length){
+            Cells_manager.Push = JSON.parse(localStorage.getItem("check"))
+            if (Cells_manager.Push.length === Cells_manager.size_array.length) {
 
             }
             else {
-                M._Push = 0
+                Cells_manager.Push = 0
                 get()
             }
         }
 
         function get() {
 
-            fetch("https://db-nmn5.onrender.com/chats") 
+            fetch("https://db-nmn5.onrender.com/chats")
                 .then(res => res.json())
                 .then(data => {
                     localStorage.setItem("db-chats", JSON.stringify(data));
                 })
 
-            M._size_array = JSON.parse(localStorage.getItem("db-chats"))
+            Cells_manager.size_array = JSON.parse(localStorage.getItem("db-chats"))
 
-            let r = document.createElement("tr");
 
 
             const postsList = document.getElementById('tableBody')
             postsList.innerHTML = ""
 
-            for (let i = 0; i < M._size_array.length; i++) {
+            for (let i = 0; i < Cells_manager.size_array.length; i++) {
                 const row = document.createElement('div')
-                let id = M._size_array[i].id
-                if (M._size_array[i].user === M._name) {
-                    if (M._size_array[i].text !== undefined ) {
-                        row.innerHTML = `<br/>
-                        <div>
+                let id = Cells_manager.size_array[i].id
+                if (Cells_manager.size_array[i].user === Cells_manager.name) {
+                    if (Cells_manager.size_array[i].text !== undefined) {
+                        row.innerHTML = `       <br />
                             <div>
-                                <img id="user-img" src="${M._img}" width="50px" height="50px" />
-                                    <div ><b>${M._size_array[i].user}</b></div>
+                                <div>
+                                    <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
+                                    <div><b>${Cells_manager.size_array[i].user}</b></div>
                                 </div>
-                            <div class="message-balloon" id="message-${id}">
-                                <div>${M._size_array[i].text}</div>
-                                <div><sub>${M._size_array[i].time}</sub></div>
-                            </div>
-                        </div>`
+                                <div class="message-balloon">
+                                    <div class="message-balloon" id="message-${id}">
+                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+                                    </div>
+
+                                    <div>${Cells_manager.size_array[i].text}</div>
+                                    <div><sub>${Cells_manager.size_array[i].time}</sub></div>
+                                </div>
+                            </div>`
                         postsList.appendChild(row)
                         addCellClick(`message-${id}`, id)
                     }
 
                     else {
-                        if (M._size_array[i].img !== undefined) {
+                         if (Cells_manager.size_array[i].img !== undefined) {
 
-                            row.innerHTML = `<br/><div>
-                    <div><img id="user-img" src="${M._img}" width="50px" height="50px" /><div >
-                        <b>${M._size_array[i].user}</b></div></div>
-                        <div class="message-balloon" id="message-${id}">
-                    <img   src="${M._size_array[i].img}" width="200px" height="200px" />
-                    <div><sub>${M._size_array[i].time}</sub></div></div></div>
+                            row.innerHTML = ` <br />
+                                <div>
+                                    <div><img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
+                                        <div>
+                                            <b>${Cells_manager.size_array[i].user}</b>
+                                        </div>
+                                    </div>
+                                    <div class="message-balloon">
+                                        <spam class="message-balloon" id="message-${id}">
+                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+                                    </spam> 
+                                        <img src="${Cells_manager.size_array[i].img}" width="200px" height="200px" />
+                                        <div><sub>${Cells_manager.size_array[i].time}</sub></div>
+                                    </div>
+                                    </div>
+                                </div>
                     `
                             postsList.appendChild(row)
                             addCellClick(`message-${id}`, id)
                         }
-                        if (M._size_array[i].tube !== undefined) {
+                        if (Cells_manager.size_array[i].link !== undefined) {
+
+                            row.innerHTML = `<br/>
+                            <div><img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
+                            <div>
+                                    <b>${Cells_manager.size_array[i].user}</b>
+                                </div>
+                                <div class="message-balloon">
+                                    <div class="message-balloon" id="message-${id}">
+                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+
+                                    <a href="${Cells_manager.size_array[i].link}">${Cells_manager.size_array[i].link}</a>
+                                    </br>
+                                    
+                               <sub>${Cells_manager.size_array[i].time}</sub></div>
+                                </div>
+                            </div>
+                        </div>
+                            `
+                            postsList.appendChild(row)
+                            addCellClick(`message-${id}`, id)
+                        }
+                        if (Cells_manager.size_array[i].tube !== undefined) {
                             row.innerHTML = `<br/>
                         <div>
                             <div>
-                                <img id="user-img" src="${M._img}" width="50px" height="50px" />
-                                    <div ><b>${M._size_array[i].user}</b></div>
+                                <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
+                                    <div ><b>${Cells_manager.size_array[i].user}</b></div>
                                 </div>
-                            <div class="message-balloon" id="message-${id}">
-                                <iframe width="300" height="200" src="https://www.youtube.com/embed/Vaxpu-8m4kw?${M._size_array[i].tube}"
+                                <div class="message-balloon">
+                                  
+                                <iframe width="300" height="200" src="https://www.youtube.com/embed/Vaxpu-8m4kw?${Cells_manager.size_array[i].tube}"
                                  title="YouTube video player" frameborder="0" 
                                  allow="accelerometer; autoplay; clipboard-write;
                                  encrypted-media; gyroscope; picture-in-picture; web-share" 
                                  allowfullscreen></iframe>
-                                <div><sub>${M._size_array[i].time}</sub></div>
+                                 <spam class="message-balloon" id="message-${id}">
+                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+                                    </spam> 
+                                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
                             </div>
                         </div>`
                             postsList.appendChild(row)
                             addCellClick(`message-${id}`, id)
                         }
-                        if (M._size_array[i].face !== undefined) {
+                        if (Cells_manager.size_array[i].img !== undefined) {
+
+                            row.innerHTML = `<br/><div>
+                    <div><img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" /><div >
+                        <b>${Cells_manager.size_array[i].user}</b></div></div>
+                         <div class="message-balloon">
+                                   
+                    <img src="${Cells_manager.size_array[i].img}" width="200px" height="200px" />
+                    <spam class="message-balloon" id="message-${id}">
+                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+                                    </spam> 
+                    <div><sub>${Cells_manager.size_array[i].time}</sub></div></div></div>
+                    `
+                            postsList.appendChild(row)
+                            addCellClick(`message-${id}`, id)
+                        }
+                        if (Cells_manager.size_array[i].tube !== undefined) {
+                            row.innerHTML = `<br/>
+                        <div>
+                            <div>
+                                <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
+                                    <div ><b>${Cells_manager.size_array[i].user}</b></div>
+                                </div>
+                                <div class="message-balloon">
+                                                              
+                                <iframe width="300" height="200" src="https://www.youtube.com/embed/Vaxpu-8m4kw?${Cells_manager.size_array[i].tube}"
+                                 title="YouTube video player" frameborder="0" 
+                                 allow="accelerometer; autoplay; clipboard-write;
+                                 encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                 allowfullscreen></iframe>
+                                 <spam class="message-balloon" id="message-${id}">
+                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+                                    </spam> 
+                                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
+                            </div>
+                        </div>`
+                            postsList.appendChild(row)
+                            addCellClick(`message-${id}`, id)
+                        }
+                        if (Cells_manager.size_array[i].face !== undefined) {
                             runfacebookScript()
-                          
+
                             row.innerHTML = `<br/>
                         <div>
                             <div>
-                                <img id="user-img" src="${M._img}" width="50px" height="50px" />
-                                    <div ><b>${M._size_array[i].user}</b></div>
+                                <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
+                                    <div ><b>${Cells_manager.size_array[i].user}</b></div>
                                 </div>
-                            <div class="message-balloon" id="message-${id}">
-                                <iframe width="300" height="200" src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FSirtonimInt%2Fvideos%2F${M._size_array[i].face}%2F&show_text=false&width=560&t=0"
+                                <div class="message-balloon">
+                                                                
+                                    <iframe width="300" height="200" src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FSirtonimInt%2Fvideos%2F${Cells_manager.size_array[i].face}%2F&show_text=false&width=560&t=0"
                                  title="YouTube video player" frameborder="0" 
                                  allow="accelerometer; autoplay; clipboard-write;
                                  encrypted-media; gyroscope; picture-in-picture; web-share" 
                                  allowfullscreen></iframe>
-                                <div><sub>${M._size_array[i].time}</sub></div>
+                                 <spam class="message-balloon" id="message-${id}">
+                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+                                    </spam> 
+                                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
                             </div>
                         </div>`
                             postsList.appendChild(row)
                             addCellClick(`message-${id}`, id)
                         }
-                        if (M._size_array[i].tiktok !== undefined) {
+                        if (Cells_manager.size_array[i].tiktok !== undefined) {
                             runTikTokScript()
-                            const url = M._size_array[i].tiktok
+                            const url = Cells_manager.size_array[i].tiktok
                             const parts = url.split("/");
 
                             const videoId = parts[parts.length - 1];
@@ -467,14 +544,17 @@
                             row.innerHTML = `<br/>
                         <div>
                             <div>
-                                <img id="user-img" src="${M._img}" width="50px" height="50px" />
-                                    <div ><b>${M._size_array[i].user}</b></div>
+                                <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
+                                    <div ><b>${Cells_manager.size_array[i].user}</b></div>
                                 </div>
                         </div>         
-                            <div class="message-balloon" id="message-${id}">
-                                <blockquote class="tiktok-embed" cite="${M._size_array[i].tiktok}" data-video-id="${firstPart}" style="width="300px" height="200px";" > <section> </section> </blockquote> 
-
-                                <div><sub>${M._size_array[i].time}</sub></div>
+                        <div class="message-balloon">
+                                                                 
+                                    <blockquote class="tiktok-embed" cite="${Cells_manager.size_array[i].tiktok}" data-video-id="${firstPart}" style="width="300px" height="200px";" > <section> </section> </blockquote> 
+                                    <spam class="message-balloon" id="message-${id}">
+                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+                                    </spam> 
+                                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
                             </div>`
                             postsList.appendChild(row)
                             addCellClick(`message-${id}`, id)
@@ -485,9 +565,9 @@
                 else {
                     row.innerHTML = `<br/>
                     <div class="message-balloon-received" id="message-${id}">
-                        <div >:${M._size_array[i].user}</div>
-                        <div>${M._size_array[i].text}</div>
-                        <div><sub>${M._size_array[i].time}</sub></div>
+                        <div >:${Cells_manager.size_array[i].user}</div>
+                        <div>${Cells_manager.size_array[i].text}</div>
+                        <div><sub>${Cells_manager.size_array[i].time}</sub></div>
                     </div>`
                     postsList.appendChild(row)
                     addCellClick(`message-${id}`, id)
@@ -498,18 +578,18 @@
 
         function PUT(number, value) {
 
-            let new_user = M._name
-            let new_text = value
+            let new_user = Cells_manager.name
+            Cells_manager.new_text = value
             //   document.getElementById(`message-${number}`).value
-            let new_time = time_now()
+            Cells_manager.new_time = time_now()
             const url = `https://db-nmn5.onrender.com/chats/${number}`
             fetch(url, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
                             "user": "${new_user}",
-                            "text": "${new_text}",
-                            "time": "${new_time}"
+                            "text": "${Cells_manager.new_text}",
+                            "time": "${Cells_manager.new_time}"
                         }`
             }).then(response => {
                 if (!response.ok) {
@@ -614,16 +694,9 @@
             script.async = false;
             document.body.appendChild(script);
         }
+  
 
-        function getTikTokVideoId(url) {
-            // מקבל את החלק האחרון של הקישור באמצעות Regular Expression
-            const match = new RegExp("(?<=v=).*").exec(url);
 
-            // מחזיר את מ-id של הסרטון
-            return match ? match[0] : null;
-        }
-
-      
         intervalId = setInterval(Push_update, 500)
 
 
