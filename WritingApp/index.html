@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WritingApp</title>
+    <script src="files js/Types of messages.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -12,17 +13,11 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    
-
-
+    <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </head>
 <style>
@@ -35,7 +30,7 @@
         margin: 0;
         min-height: 100vh;
         background-image: url("wallpaper-dark.jpg");
-        width: 70%;
+        width: 80%;
         margin-left: 10%;
     }
 
@@ -55,6 +50,7 @@
         flex-direction: column;
         /* Display latest message at the bottom */
         overflow-y: auto;
+        margin-left: 20%;
     }
 
     .message-balloon {
@@ -63,8 +59,8 @@
         color: #fff;
         /* Text color for sent messages */
         padding: 10px;
-        border-radius: 30px;
-        margin-bottom: 10px;
+        border-radius: 10px;
+        margin-bottom: 20px;
         clear: both;
         float: left;
         width: auto;
@@ -77,55 +73,149 @@
         color: #fff;
         /* Text color for received messages */
         padding: 10px;
-        border-radius: 30px;
-        margin-bottom: 10px;
+        border-radius: 10px;
+        margin-bottom: 20px;
         clear: both;
         float: right;
         width: auto;
         text-align: right;
+
     }
 
-    .username-column {
-        border: none;
-        width: 20%;
+
+
+
+
+    #text {
+        border: 0;
+        flex: 1 1 auto;
+        font-size: 16px;
+        margin: 0;
+        outline: none;
+        min-width: 50px;
+        margin-left: 30%;
     }
 
-    .message-column {
-        border: none;
-        width: 60%;
+    /* .iconify-icon {
+        height: calc(100% - 68px);
+        box-shadow: inset 0 10px 10px -10px #000000;
+        overflow-x: hidden;
+        padding: 0 16px;
+        margin-bottom: 19px;
+    } */
+
+    #user_img {
+        border-radius: 30px;
+        width: 50px;
+        height: 50px;
+
     }
 
-    .time-column {
-        border: none;
-        width: 10%;
-    }
-
-    .actions-column {
-        border: none;
-        width: 10%;
-    }
-
-    .update-button {
-        background: none;
-        border: none;
-        color: #007bff;
-        cursor: pointer;
-    }
-
-    .delete-button {
-        background: none;
-        border: none;
-        color: #dc3545;
-        cursor: pointer;
-    }
-
-    /* New style for time */
-    .message-time {
-        font-size: 12px;
-        color: #666;
+    #Another_user {
+        border-radius: 30px;
+        width: 50px;
+        height: 50px;
         text-align: right;
+        margin-left: 90%;
     }
 
+    .date_day {
+        background-color: #1f2c34;
+        /* Green background for sent messages */
+        color: #fff;
+        /* Text color for sent messages */
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        width: 20%;
+        text-align: center;
+        margin-left: 40%;
+        margin-right: 50%;
+
+    }
+
+    .input-msg {
+        border: 0;
+        flex: 1 1 auto;
+        font-size: 16px;
+        margin: 0;
+        outline: none;
+        min-width: 50px;
+    }
+
+
+    conversation-compose .photo:after {
+        border-width: 0px 0 10px 10px;
+        border-color: transparent transparent transparent #fff;
+        border-style: solid;
+        position: absolute;
+        width: 0;
+        height: 0;
+        content: "";
+        top: 0;
+        right: -10px;
+    }
+
+    .photo i {
+        display: block;
+        color: #7d8488;
+        font-size: 24px;
+        transform: translate(-50%, -50%);
+        position: relative;
+        top: 50%;
+        left: 50%;
+    }
+
+    .conversation-compose {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        overflow: hidden;
+        height: 50px;
+        width: 90%;
+        z-index: 2;
+    }
+
+    .conversation-compose div,
+    .conversation-compose input {
+        background: #fff;
+        height: 100%;
+    }
+
+    .conversation-compose .emoji {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border-radius: 5px 0 0 5px;
+        flex: 0 0 auto;
+        margin-left: 8px;
+        width: 48px;
+    }
+
+
+
+    .conversation-compose .photo:after {
+        border-width: 0px 0 10px 10px;
+        border-color: transparent transparent transparent #fff;
+        border-style: solid;
+        position: absolute;
+        width: 0;
+        height: 0;
+        content: "";
+        top: 0;
+        right: -10px;
+    }
+
+    .conversation-compose .photo i {
+        display: block;
+        color: #7d8488;
+        font-size: 24px;
+        transform: translate(-50%, -50%);
+        position: relative;
+        top: 50%;
+        left: 50%;
+    }
 
     .conversation-compose .send {
         background: transparent;
@@ -151,31 +241,9 @@
         justify-content: center;
     }
 
-    .conversation-compose .send .circle .iconify-icon {
+    .conversation-compose .send .circle i {
         font-size: 24px;
         margin-left: 5px;
-    }
-
-    #text {
-        border: 0;
-        flex: 1 1 auto;
-        font-size: 16px;
-        margin: 0;
-        outline: none;
-        min-width: 50px;
-        margin-left: 30%;
-    }
-
-    .iconify-icon {
-        height: calc(100% - 68px);
-        box-shadow: inset 0 10px 10px -10px #000000;
-        overflow-x: hidden;
-        padding: 0 16px;
-        margin-bottom: 19px;
-    }
-
-    #user-img {
-        margin-right: 10%;
     }
 
     #image {
@@ -186,74 +254,88 @@
 </style>
 
 <body>
+
     <h1>WritingApp</h1>
 
+    <div class="chat-container" style="display: none;" id="tableBody"></div>
 
-
-    <div class="chat-container" id="tableBody">
-
-        <img id="frame" style="display: none;" src="" width="0px" height="0px" />
-    </div>
-
-
-
-    <input type="text" id="text" required><i onclick="" id="image" class="fa fa-image"></i>
-    <button class="send" id="post-button" onclick="post_data()">
-        <div class="circle">
-            <iconify-icon icon="zmdi:mail-send"></iconify-icon>
+        <div class="conversation-compose">
+            <input type="text" id="text" placeholder="Type a message" autocomplete="off" autofocus>
+            <button class="send" id="post-button" onclick="post_data()">
+                <samp class="circle">
+                    <iconify-icon icon="zmdi:mail-send"></iconify-icon>
+                </samp>
+            </button>
         </div>
-        </div>
-    </button>
-    <form class=" mt-5 mx-auto col-6 col-md-8 col-lg-6 was-validated ">
-        <div class="form-row">
-            <div class="col-md-4 mb-3">
-                <input type="name" class="form-control" id="name" placeholder="Jane Doe.." value="" required>
+        <form class=" mt-5 mx-auto col-6 col-md-8 col-lg-6 was-validated " id="from" style="display: block;">
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <input type="name" class="form-control" id="name" placeholder="Jane Doe.." value="" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <input type="number" class="form-control mb-2" id="Phone" minlength="9" maxlength="10"
+                        placeholder="050-1234567.." min="10" required><br />
+                </div>
+                <div class="custom-file col-md-4 mb-3">
+                    <input type="file" onchange="add_img()" class="custom-file-input" id="files" required>
+                    <label class="custom-file-label" for="file"><b>add a picture..</b></label>
+                </div>
             </div>
-
-
-
-            <div class="col-md-4 mb-3">
-                <input type="number" class="form-control mb-2" id="Phone" minlength="9" maxlength="10"
-                    placeholder="050-1234567.." min="10" required><br />
-            </div>
-
-
-            <div class="custom-file col-md-4 mb-3">
-
-                <input type="file" onchange="add_img()" class="custom-file-input" id="file" required>
-                <label class="custom-file-label" for="file"><b>add a picture..</b></label>
-            </div>
-        </div>
-
-        <button onclick="activation()" class="btn btn-primary col" type="button">connect</button>
-        </div>
-    </form>
-    <img id="frame" src="" width="0px" height="0px" />
-    <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
-
+            <button onclick="activation()" class="btn btn-primary col" type="button">connect</button>
+        </form>
+    
+    <img id="frame" style="display: none;" src="" width="0px" height="0px" />
 
     <script>
 
         class Default_cells {
-            constructor(_name, _img, _Push, _size_array, _new_text, _new_time, _string_name) {
-
+            constructor(_name, _img, _img_user, _Push, _size_array, _new_text, _new_time, _string_name, _message_list, _son, _type_class, _type_id, _time_date) {
                 this.name = _name
+                this.img_user = _img_user
                 this.img = _img
                 this.Push = _Push
                 this.size_array = _size_array
                 this.new_text = _new_text
                 this.new_time = _new_time
                 this.string_name = _string_name
+                this.message_list = _message_list
+                this.son = _son
+                this.type_class = _type_class
+                this.type_id = _type_id
+                this.time_date = _time_date
+
             }
         }
-        const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ",)
-
+        const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
+        Cells_manager.son
+        function Push_update() {
+            fetch("https://db-nmn5.onrender.com/chats")
+                .then(res => res.json())
+                .then(data => {
+                    localStorage.setItem("check", JSON.stringify(data));
+                    Cells_manager.Push = JSON.parse(localStorage.getItem("check"));
+                    if (Cells_manager.name !== '') {
+                        if (Cells_manager.Push.length !== Cells_manager.size_array.length) {
+                            Cells_manager.Push = 0;
+                            get();
+                        }
+                    }
+                });
+        }
+        function Hide_div() {
+            const div1 = document.getElementById("tableBody");
+            div1.style.display = div1.style.display === "none" ? "block" : "none";
+            const div2 = document.getElementById("from");
+            div2.style.display = div2.style.display === "block" ? "none" : "none";
+        }
 
         function activation() {
-
             Cells_manager.name = document.getElementById('name').value
             if (Cells_manager.name !== '') {
+                Hide_div()
+
                 Cells_manager.size_array = []
+
             }
             else {
                 Swal.fire('Must enter a name', '', 'success')
@@ -262,29 +344,23 @@
 
         function add_img() {
             frame.src = URL.createObjectURL(event.target.files[0]);
-            Cells_manager.img = frame.src
+            Cells_manager.img_user = frame.src
         }
-
-
-
 
 
         function post_data() {
 
-            let new_user = Cells_manager.name
             Cells_manager.string_name = "text"
             link_type()
             const input = document.getElementById('text')
             input.value = '';
-
-
 
             const url = 'https://db-nmn5.onrender.com/chats'
             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
-                            "user": "${new_user}",
+                            "user": "${Cells_manager.name}",
                             "${Cells_manager.string_name}": "${Cells_manager.new_text}",
                             "time": "${Cells_manager.new_time}"
                         }`})
@@ -292,7 +368,8 @@
 
 
         function isLink_img(text) {
-            return text.includes(".gif") || text.includes(".png") || text.includes(".jpg") || text.includes(".svg") || text.includes(".jpeg");
+            return text.includes(".gif") || text.includes(".png") ||
+                text.includes(".jpg") || text.includes(".svg") || text.includes(".jpeg");
         }
         function link_type() {
             Cells_manager.new_text = document.getElementById('text').value
@@ -319,40 +396,30 @@
 
 
         function time_now() {
-            const now = new Date();
+            Cells_manager.time_date = new Date();
 
-            const hours = now.getHours();
+            const hours = Cells_manager.time_date.getHours();
 
-            const minutes = now.getMinutes();
+            const minutes = Cells_manager.time_date.getMinutes();
 
-            const day = now.getDate()
-
-            const Month = now.getMonth() + 1
-
-            const Year = now.getFullYear()
-
-            const seconds = now.getSeconds();
-            let time = `${hours}:${minutes}:${seconds}  ${day}/${Month}/${Year}`
+            const seconds = Cells_manager.time_date.getSeconds();
+            let time = `${hours}:${minutes}:${seconds}`
 
             return time
         }
 
-        function Push_update() {
-            fetch("https://db-nmn5.onrender.com/chats")
-                .then(res => res.json())
-                .then(data => {
-                    // Save the data in localStorage
-                    localStorage.setItem("check", JSON.stringify(data));
-                })
+        function date_day_now() {
+            Cells_manager.time_date = new Date();
 
-            Cells_manager.Push = JSON.parse(localStorage.getItem("check"))
-            if (Cells_manager.Push.length === Cells_manager.size_array.length) {
+            const day = Cells_manager.time_date.getDate()
 
-            }
-            else {
-                Cells_manager.Push = 0
-                get()
-            }
+            const Month = Cells_manager.time_date.getMonth() + 1
+
+            const Year = Cells_manager.time_date.getFullYear()
+
+            let Date_dey = `${day}/${Month}/${Year}`
+
+            return Date_dey
         }
 
         function get() {
@@ -365,220 +432,63 @@
 
             Cells_manager.size_array = JSON.parse(localStorage.getItem("db-chats"))
 
-
-
-            const postsList = document.getElementById('tableBody')
-            postsList.innerHTML = ""
-
+            Cells_manager.message_list = document.getElementById('tableBody')
+            Cells_manager.message_list.innerHTML = ""
+            const data_day = date_day_now()
+            const div = document.getElementById('tableBody')
+            const son = document.createElement('div')
+            son.innerHTML = `<div class="date_day">${data_day}</div>`
+            div.appendChild(son)
             for (let i = 0; i < Cells_manager.size_array.length; i++) {
-                const row = document.createElement('div')
+                Cells_manager.son = document.createElement('div')
+
                 let id = Cells_manager.size_array[i].id
                 if (Cells_manager.size_array[i].user === Cells_manager.name) {
-                    if (Cells_manager.size_array[i].text !== undefined) {
-                        row.innerHTML = `       <br />
-                            <div>
-                                <div>
-                                    <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
-                                    <div><b>${Cells_manager.size_array[i].user}</b></div>
-                                </div>
-                                <div class="message-balloon">
-                                    <div class="message-balloon" id="message-${id}">
-                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-                                    </div>
 
-                                    <div>${Cells_manager.size_array[i].text}</div>
-                                    <div><sub>${Cells_manager.size_array[i].time}</sub></div>
-                                </div>
-                            </div>`
-                        postsList.appendChild(row)
-                        addCellClick(`message-${id}`, id)
-                    }
+                    Cells_manager.type_class = "message-balloon"
 
-                    else {
-                         if (Cells_manager.size_array[i].img !== undefined) {
-
-                            row.innerHTML = ` <br />
-                                <div>
-                                    <div><img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
-                                        <div>
-                                            <b>${Cells_manager.size_array[i].user}</b>
-                                        </div>
-                                    </div>
-                                    <div class="message-balloon">
-                                        <spam class="message-balloon" id="message-${id}">
-                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-                                    </spam> 
-                                        <img src="${Cells_manager.size_array[i].img}" width="200px" height="200px" />
-                                        <div><sub>${Cells_manager.size_array[i].time}</sub></div>
-                                    </div>
-                                    </div>
-                                </div>
-                    `
-                            postsList.appendChild(row)
-                            addCellClick(`message-${id}`, id)
-                        }
-                        if (Cells_manager.size_array[i].link !== undefined) {
-
-                            row.innerHTML = `<br/>
-                            <div><img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
-                            <div>
-                                    <b>${Cells_manager.size_array[i].user}</b>
-                                </div>
-                                <div class="message-balloon">
-                                    <div class="message-balloon" id="message-${id}">
-                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-
-                                    <a href="${Cells_manager.size_array[i].link}">${Cells_manager.size_array[i].link}</a>
-                                    </br>
-                                    
-                               <sub>${Cells_manager.size_array[i].time}</sub></div>
-                                </div>
-                            </div>
-                        </div>
-                            `
-                            postsList.appendChild(row)
-                            addCellClick(`message-${id}`, id)
-                        }
-                        if (Cells_manager.size_array[i].tube !== undefined) {
-                            row.innerHTML = `<br/>
-                        <div>
-                            <div>
-                                <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
-                                    <div ><b>${Cells_manager.size_array[i].user}</b></div>
-                                </div>
-                                <div class="message-balloon">
-                                  
-                                <iframe width="300" height="200" src="https://www.youtube.com/embed/Vaxpu-8m4kw?${Cells_manager.size_array[i].tube}"
-                                 title="YouTube video player" frameborder="0" 
-                                 allow="accelerometer; autoplay; clipboard-write;
-                                 encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                 allowfullscreen></iframe>
-                                 <spam class="message-balloon" id="message-${id}">
-                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-                                    </spam> 
-                                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
-                            </div>
-                        </div>`
-                            postsList.appendChild(row)
-                            addCellClick(`message-${id}`, id)
-                        }
-                        if (Cells_manager.size_array[i].img !== undefined) {
-
-                            row.innerHTML = `<br/><div>
-                    <div><img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" /><div >
-                        <b>${Cells_manager.size_array[i].user}</b></div></div>
-                         <div class="message-balloon">
-                                   
-                    <img src="${Cells_manager.size_array[i].img}" width="200px" height="200px" />
-                    <spam class="message-balloon" id="message-${id}">
-                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-                                    </spam> 
-                    <div><sub>${Cells_manager.size_array[i].time}</sub></div></div></div>
-                    `
-                            postsList.appendChild(row)
-                            addCellClick(`message-${id}`, id)
-                        }
-                        if (Cells_manager.size_array[i].tube !== undefined) {
-                            row.innerHTML = `<br/>
-                        <div>
-                            <div>
-                                <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
-                                    <div ><b>${Cells_manager.size_array[i].user}</b></div>
-                                </div>
-                                <div class="message-balloon">
-                                                              
-                                <iframe width="300" height="200" src="https://www.youtube.com/embed/Vaxpu-8m4kw?${Cells_manager.size_array[i].tube}"
-                                 title="YouTube video player" frameborder="0" 
-                                 allow="accelerometer; autoplay; clipboard-write;
-                                 encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                 allowfullscreen></iframe>
-                                 <spam class="message-balloon" id="message-${id}">
-                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-                                    </spam> 
-                                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
-                            </div>
-                        </div>`
-                            postsList.appendChild(row)
-                            addCellClick(`message-${id}`, id)
-                        }
-                        if (Cells_manager.size_array[i].face !== undefined) {
-                            runfacebookScript()
-
-                            row.innerHTML = `<br/>
-                        <div>
-                            <div>
-                                <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
-                                    <div ><b>${Cells_manager.size_array[i].user}</b></div>
-                                </div>
-                                <div class="message-balloon">
-                                                                
-                                    <iframe width="300" height="200" src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FSirtonimInt%2Fvideos%2F${Cells_manager.size_array[i].face}%2F&show_text=false&width=560&t=0"
-                                 title="YouTube video player" frameborder="0" 
-                                 allow="accelerometer; autoplay; clipboard-write;
-                                 encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                 allowfullscreen></iframe>
-                                 <spam class="message-balloon" id="message-${id}">
-                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-                                    </spam> 
-                                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
-                            </div>
-                        </div>`
-                            postsList.appendChild(row)
-                            addCellClick(`message-${id}`, id)
-                        }
-                        if (Cells_manager.size_array[i].tiktok !== undefined) {
-                            runTikTokScript()
-                            const url = Cells_manager.size_array[i].tiktok
-                            const parts = url.split("/");
-
-                            const videoId = parts[parts.length - 1];
-
-                            const id = videoId.split("?");
-
-                            // מקבל את החלק הראשון של הקישור
-                            const firstPart = id[0];
-
-                            // מדפיס את ה-id של הסרטון
-
-
-                            row.innerHTML = `<br/>
-                        <div>
-                            <div>
-                                <img id="user-img" src="${Cells_manager.img}" width="50px" height="50px" />
-                                    <div ><b>${Cells_manager.size_array[i].user}</b></div>
-                                </div>
-                        </div>         
-                        <div class="message-balloon">
-                                                                 
-                                    <blockquote class="tiktok-embed" cite="${Cells_manager.size_array[i].tiktok}" data-video-id="${firstPart}" style="width="300px" height="200px";" > <section> </section> </blockquote> 
-                                    <spam class="message-balloon" id="message-${id}">
-                                        <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-                                    </spam> 
-                                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
-                            </div>`
-                            postsList.appendChild(row)
-                            addCellClick(`message-${id}`, id)
-                        }
-                    }
+                    Cells_manager.img = Cells_manager.img_user
+                    Cells_manager.type_id = "user_img"
 
                 }
                 else {
-                    row.innerHTML = `<br/>
-                    <div class="message-balloon-received" id="message-${id}">
-                        <div >:${Cells_manager.size_array[i].user}</div>
-                        <div>${Cells_manager.size_array[i].text}</div>
-                        <div><sub>${Cells_manager.size_array[i].time}</sub></div>
-                    </div>`
-                    postsList.appendChild(row)
-                    addCellClick(`message-${id}`, id)
+                    Cells_manager.img = "bot.png"
+                    Cells_manager.type_class = "message-balloon-received"
+                    Cells_manager.type_id = "Another_user"
                 }
+                if (Cells_manager.size_array[i].text !== undefined) {
+                    text_message(i, id)
+                }
+                else {
+                    if (Cells_manager.size_array[i].img !== undefined) {
+                        image_Message(i, id)
+                    }
+                    if (Cells_manager.size_array[i].link !== undefined) {
+                        link_message(i, id)
+                    }
+                    if (Cells_manager.size_array[i].tube !== undefined) {
+                        youtube_message(i, id)
+                    }
+                    if (Cells_manager.size_array[i].face !== undefined) {
+                        facebook_message(i, id)
+                        runfacebookScript()
+                    }
+                    if (Cells_manager.size_array[i].tiktok !== undefined) {
+                        runTikTokScript()
+                        tiktok_message(i, id)
+                    }
+                }
+
             }
 
         }
 
+
+
+
+
         function PUT(number, value) {
 
-            let new_user = Cells_manager.name
             Cells_manager.new_text = value
             //   document.getElementById(`message-${number}`).value
             Cells_manager.new_time = time_now()
@@ -587,7 +497,7 @@
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
-                            "user": "${new_user}",
+                            "user": "${Cells_manager.name}",
                             "text": "${Cells_manager.new_text}",
                             "time": "${Cells_manager.new_time}"
                         }`
@@ -694,7 +604,7 @@
             script.async = false;
             document.body.appendChild(script);
         }
-  
+
 
 
         intervalId = setInterval(Push_update, 500)
