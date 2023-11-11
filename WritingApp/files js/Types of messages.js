@@ -2,24 +2,22 @@
 
 function text_message(i,id) {
     Cells_manager.son.innerHTML = `
-    <br />
+    <br/>
+    
     <div>
-        <spam>
-            <div>
-                <img id="${Cells_manager.type_id}" src="${Cells_manager.img}" />
-                <div id="${Cells_manager.type_id}"><b>${Cells_manager.size_array[i].user}</b></div>
-            </div>
-            <div class="${Cells_manager.type_class}">
-                <spam class="${Cells_manager.type_class}" id="message-${id}">
-                    <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-                </spam>
-
-                <spam>${Cells_manager.size_array[i].text}</spam>
-                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
-            </div>
+        <div>
+            <img id="${Cells_manager.type_id}" src="${Cells_manager.img}" />
+            <div id="${Cells_manager.margin_bottom}"><b>${Cells_manager.size_array[i].user}</b></div>
         </div>
-        <br />
-        <br />
+        <div class="${Cells_manager.type_class}">
+            <span class="user" id="message-${id}">
+                <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+            </span>
+            <span>${Cells_manager.size_array[i].text}</span>
+            <div><sub>${Cells_manager.size_array[i].time}</sub></div>
+        </div>
+  </div>
+  <br/><br/><br/>
         `
     Cells_manager.message_list.appendChild(Cells_manager.son)
     addCellClick(`message-${id}`, id)
@@ -28,19 +26,17 @@ function text_message(i,id) {
 function image_Message(i,id) {
     Cells_manager.son.innerHTML = ` <br />
         <div>
-            <div><img id="${Cells_manager.type_id}" src="${Cells_manager.img}" />
-                <div>
-                    <b>${Cells_manager.size_array[i].user}</b>
-                </div>
+            <div>
+                <img id="${Cells_manager.type_id}" src="${Cells_manager.img}" />
+                <div id="${Cells_manager.margin_bottom}"><b>${Cells_manager.size_array[i].user}</b></div>
             </div>
             <div class="${Cells_manager.type_class}">
-                <spam class="${Cells_manager.type_class}" id="message-${id}">
+                <div class="${Cells_manager.type_class}" id="message-${id}">
                 <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-            </spam> 
+             
                 <img src="${Cells_manager.size_array[i].img}" width="200px" height="200px" />
+            </div>
                 <div><sub>${Cells_manager.size_array[i].time}</sub></div>
-            </div>
-            </div>
         </div>`
     Cells_manager.message_list.appendChild(Cells_manager.son)
     addCellClick(`message-${id}`, id)
@@ -133,7 +129,7 @@ function tiktok_message(i,id) {
         </blockquote> 
             <spam class="${Cells_manager.type_class}" id="message-${id}">
                 <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
-            </spam> 
+            </span> 
         <div><sub>${Cells_manager.size_array[i].time}</sub></div>
     </div>`
     Cells_manager.message_list.appendChild(Cells_manager.son)

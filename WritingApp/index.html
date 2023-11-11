@@ -39,6 +39,7 @@
         max-width: 600px;
         margin: 0 auto;
         padding: 20px;
+        max-height: 500px;
         background-color: rgba(255, 255, 255, 0.9);
         /* Semi-transparent white background */
         border-radius: 10px;
@@ -50,17 +51,25 @@
         flex-direction: column;
         /* Display latest message at the bottom */
         overflow-y: auto;
-        margin-left: 20%;
+        margin-left: 25%;
+        border: 10px solid rgb(41, 42, 42);
+        box-shadow:
+            rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+            rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+            rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+            rgb(115, 117, 118) 0px 0px 0px 5px,
+            rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+            rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+            rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+
     }
 
     .message-balloon {
         background-color: #035d4c;
-        /* Green background for sent messages */
         color: #fff;
-        /* Text color for sent messages */
         padding: 10px;
         border-radius: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 5%;
         clear: both;
         float: left;
         width: auto;
@@ -69,9 +78,7 @@
 
     .message-balloon-received {
         background-color: #1f2c34;
-        /* White background for received messages */
         color: #fff;
-        /* Text color for received messages */
         padding: 10px;
         border-radius: 10px;
         margin-bottom: 20px;
@@ -108,6 +115,15 @@
         border-radius: 30px;
         width: 50px;
         height: 50px;
+        margin-bottom: 1%;
+
+    }
+    #margin-bottom{
+        margin-bottom: -5%
+    }
+    #margin_bottom_Another_user{
+        text-align: right;
+        margin-bottom: 5%
 
     }
 
@@ -144,7 +160,47 @@
     }
 
 
-    conversation-compose .photo:after {
+
+
+    .photo i {
+        display: block;
+        color: #7d8488;
+        font-size: 24px;
+        transform: translate(-50%, -50%);
+        position: relative;
+        top: 50%;
+        left: 50%;
+    }
+
+    .conversation-compose {
+        height: 50px;
+        width: 245%;
+
+
+
+
+    }
+
+    .conversation-compose div {
+        background: #fff;
+        height: 100%;
+        width: 200%;
+
+    }
+
+
+
+    .margin-right {
+        margin-right: 65%;
+
+
+
+    }
+
+
+
+
+    .photo:after {
         border-width: 0px 0 10px 10px;
         border-color: transparent transparent transparent #fff;
         border-style: solid;
@@ -166,58 +222,7 @@
         left: 50%;
     }
 
-    .conversation-compose {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        overflow: hidden;
-        height: 50px;
-        width: 90%;
-        z-index: 2;
-    }
-
-    .conversation-compose div,
-    .conversation-compose input {
-        background: #fff;
-        height: 100%;
-    }
-
-    .conversation-compose .emoji {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: white;
-        border-radius: 5px 0 0 5px;
-        flex: 0 0 auto;
-        margin-left: 8px;
-        width: 48px;
-    }
-
-
-
-    .conversation-compose .photo:after {
-        border-width: 0px 0 10px 10px;
-        border-color: transparent transparent transparent #fff;
-        border-style: solid;
-        position: absolute;
-        width: 0;
-        height: 0;
-        content: "";
-        top: 0;
-        right: -10px;
-    }
-
-    .conversation-compose .photo i {
-        display: block;
-        color: #7d8488;
-        font-size: 24px;
-        transform: translate(-50%, -50%);
-        position: relative;
-        top: 50%;
-        left: 50%;
-    }
-
-    .conversation-compose .send {
+    .send {
         background: transparent;
         border: 0;
         cursor: pointer;
@@ -229,7 +234,7 @@
         outline: none;
     }
 
-    .conversation-compose .send .circle {
+    .send .circle {
         background: #008a7c;
         border-radius: 50%;
         color: #fff;
@@ -241,16 +246,51 @@
         justify-content: center;
     }
 
-    .conversation-compose .send .circle i {
-        font-size: 24px;
-        margin-left: 5px;
+    
+
+
+   
+   
+
+    #emoji-1 {
+        width: 60px;
+        height: 60px;
+        border-radius:80%;
+        background-color: rgba(204, 204, 204, 0)2c2;
+
+
+    }
+    
+    #emoji-2 {
+        width: 45px;
+        height: 45px;
+        border-radius: 80%;
+
+
+    }
+    #smile{
+
+        margin: 7;
+
+
+    }
+    .margin-left {
+        margin-left: 25%;
     }
 
-    #image {
-        background-color: #fff;
-    }
+    input[type=text],
+    textarea {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-bottom-right-radius: 30px;
+        height: 100px;
+        width: 50%;
+        margin: 0;
+        margin-top: 2%;
 
-    /* Small Screens */
+        
+
+    }
 </style>
 
 <body>
@@ -258,38 +298,46 @@
     <h1>WritingApp</h1>
 
     <div class="chat-container" style="display: none;" id="tableBody"></div>
+    <div class="margin-left" id="button-send" style="display: none">
+        <div class="form-row"></div>
+        <span id="emoji-1" onclick="">
+            <img id="emoji-2" src="https://media.tenor.com/Wq-MvpjAJksAAAAC/emojilaugh-emoji.gif" >
+        
+        </span>
+        <textarea id="textarea" name="text" placeholder="Type a message.."  ></textarea>
 
-        <div class="conversation-compose">
-            <input type="text" id="text" placeholder="Type a message" autocomplete="off" autofocus>
-            <button class="send" id="post-button" onclick="post_data()">
-                <samp class="circle">
-                    <iconify-icon icon="zmdi:mail-send"></iconify-icon>
-                </samp>
-            </button>
-        </div>
-        <form class=" mt-5 mx-auto col-6 col-md-8 col-lg-6 was-validated " id="from" style="display: block;">
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <input type="name" class="form-control" id="name" placeholder="Jane Doe.." value="" required>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <input type="number" class="form-control mb-2" id="Phone" minlength="9" maxlength="10"
-                        placeholder="050-1234567.." min="10" required><br />
-                </div>
-                <div class="custom-file col-md-4 mb-3">
-                    <input type="file" onchange="add_img()" class="custom-file-input" id="files" required>
-                    <label class="custom-file-label" for="file"><b>add a picture..</b></label>
-                </div>
-            </div>
-            <button onclick="activation()" class="btn btn-primary col" type="button">connect</button>
-        </form>
+        <button class="send" id="smile" onclick="post_data()">
+            <span class="circle">
+                <iconify-icon icon="zmdi:mail-send"></iconify-icon>
+            </span>
+        </button>
+    </div>
+
     
+    <form class=" mt-5 mx-auto col-6 col-md-8 col-lg-6 was-validated " id="from" style="display: block;">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <input type="name" class="form-control" id="name" placeholder="Jane Doe.." value="" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="number" class="form-control mb-2" id="Phone" minlength="9" maxlength="10"
+                    placeholder="050-1234567.." min="10" required><br />
+            </div>
+            <div class="custom-file col-md-4 mb-3">
+                <input type="file" onchange="add_img()" class="custom-file-input" id="files" required>
+                <label class="custom-file-label" for="file"><b>add a picture..</b></label>
+            </div>
+        </div>
+        <button onclick="activation()" class="btn btn-primary col" type="button">connect</button>
+    </form>
+
     <img id="frame" style="display: none;" src="" width="0px" height="0px" />
 
     <script>
 
         class Default_cells {
-            constructor(_name, _img, _img_user, _Push, _size_array, _new_text, _new_time, _string_name, _message_list, _son, _type_class, _type_id, _time_date) {
+            constructor(_name, _img, _img_user, _Push, _size_array, _new_text, _new_time, _string_name,
+             _message_list, _son, _type_class, _type_id, _time_date,_margin_bottom) {
                 this.name = _name
                 this.img_user = _img_user
                 this.img = _img
@@ -303,6 +351,7 @@
                 this.type_class = _type_class
                 this.type_id = _type_id
                 this.time_date = _time_date
+                this.margin_bottom =_margin_bottom
 
             }
         }
@@ -325,8 +374,11 @@
         function Hide_div() {
             const div1 = document.getElementById("tableBody");
             div1.style.display = div1.style.display === "none" ? "block" : "none";
-            const div2 = document.getElementById("from");
-            div2.style.display = div2.style.display === "block" ? "none" : "none";
+            const div2 = document.getElementById("button-send");
+            div2.style.display = div2.style.display === "none" ? "block" : "none";
+            const div3 = document.getElementById("from");
+            div3.style.display = div3.style.display === "block" ? "none" : "none";
+            
         }
 
         function activation() {
@@ -352,7 +404,7 @@
 
             Cells_manager.string_name = "text"
             link_type()
-            const input = document.getElementById('text')
+            const input = document.getElementById('textarea')
             input.value = '';
 
             const url = 'https://db-nmn5.onrender.com/chats'
@@ -372,7 +424,7 @@
                 text.includes(".jpg") || text.includes(".svg") || text.includes(".jpeg");
         }
         function link_type() {
-            Cells_manager.new_text = document.getElementById('text').value
+            Cells_manager.new_text = document.getElementById('textarea').value
             Cells_manager.new_time = time_now()
             let img_or_no = isLink_img(Cells_manager.new_text)
             let tube_or_no = Cells_manager.new_text.includes("youtu") || Cells_manager.new_text.includes("youtube")
@@ -446,15 +498,16 @@
                 if (Cells_manager.size_array[i].user === Cells_manager.name) {
 
                     Cells_manager.type_class = "message-balloon"
-
                     Cells_manager.img = Cells_manager.img_user
                     Cells_manager.type_id = "user_img"
+                    Cells_manager.margin_bottom = "margin_bottom"
 
                 }
                 else {
                     Cells_manager.img = "bot.png"
                     Cells_manager.type_class = "message-balloon-received"
                     Cells_manager.type_id = "Another_user"
+                    Cells_manager.margin_bottom ="margin_bottom_Another_user"
                 }
                 if (Cells_manager.size_array[i].text !== undefined) {
                     text_message(i, id)
@@ -531,7 +584,7 @@
         function edit_or_delete(number) {
             const element = document.getElementById(`message-${number}`);
             const classes = element.className;
-            if (classes === "message-balloon") {
+            if (classes === "user") {
                 Swal.fire({
                     title: 'Edit or delete the message?',
                     showDenyButton: true,
