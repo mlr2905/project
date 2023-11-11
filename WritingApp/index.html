@@ -17,7 +17,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </head>
 <style>
@@ -118,13 +117,14 @@
         margin-bottom: 1%;
 
     }
-    #margin-bottom{
+
+    #margin-bottom {
         margin-bottom: -5%
     }
-    #margin_bottom_Another_user{
+
+    #margin_bottom_Another_user {
         text-align: right;
         margin-bottom: 5%
-
     }
 
     #Another_user {
@@ -246,21 +246,21 @@
         justify-content: center;
     }
 
-    
 
 
-   
-   
+
+
+
 
     #emoji-1 {
         width: 60px;
         height: 60px;
-        border-radius:80%;
+        border-radius: 80%;
         background-color: rgba(204, 204, 204, 0)2c2;
 
 
     }
-    
+
     #emoji-2 {
         width: 45px;
         height: 45px;
@@ -268,12 +268,11 @@
 
 
     }
-    #smile{
 
+    #smile {
         margin: 7;
-
-
     }
+
     .margin-left {
         margin-left: 25%;
     }
@@ -287,33 +286,59 @@
         width: 50%;
         margin: 0;
         margin-top: 2%;
-
-        
-
     }
 </style>
 
 <body>
-
     <h1>WritingApp</h1>
+    <table class=" col-2 table-striped table-dark mx-auto" id="chats" style="width: 200px; display:none">
+        <thead>
+            <tr>
+                <th scope="col">chats</th>
+                <th scope="col">last message</th>
 
-    <div class="chat-container" style="display: none;" id="tableBody"></div>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td onclick="activation(1)">chat1</td>
+                <td id="td-1"></td>
+
+            </tr>
+            <tr>
+                <td onclick="activation(2)">chat2</td>
+                <td id="td-2"></td>
+
+            </tr>
+            <tr>
+                <td onclick="activation(3)">chat3</td>
+                <td id="td-3"></td>
+
+            </tr>
+            <tr>
+                <td onclick="activation(4)">chat4</td>
+                <td id="td-4"></td>
+
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <div class="chat-container" style="display: none;" id="tableBody">
+
+
+    </div>
     <div class="margin-left" id="button-send" style="display: none">
         <div class="form-row"></div>
         <span id="emoji-1" onclick="">
-            <img id="emoji-2" src="https://media.tenor.com/Wq-MvpjAJksAAAAC/emojilaugh-emoji.gif" >
-        
+            <img id="emoji-2" src="https://media.tenor.com/Wq-MvpjAJksAAAAC/emojilaugh-emoji.gif">
         </span>
-        <textarea id="textarea" name="text" placeholder="Type a message.."  ></textarea>
-
+        <textarea id="textarea" name="text" placeholder="Type a message.."></textarea>
         <button class="send" id="smile" onclick="post_data()">
             <span class="circle">
                 <iconify-icon icon="zmdi:mail-send"></iconify-icon>
             </span>
         </button>
     </div>
-
-    
     <form class=" mt-5 mx-auto col-6 col-md-8 col-lg-6 was-validated " id="from" style="display: block;">
         <div class="form-row">
             <div class="col-md-4 mb-3">
@@ -328,7 +353,7 @@
                 <label class="custom-file-label" for="file"><b>add a picture..</b></label>
             </div>
         </div>
-        <button onclick="activation()" class="btn btn-primary col" type="button">connect</button>
+        <button onclick="Hide_div2()" class="btn btn-primary col" type="button">connect</button>
     </form>
 
     <img id="frame" style="display: none;" src="" width="0px" height="0px" />
@@ -337,7 +362,7 @@
 
         class Default_cells {
             constructor(_name, _img, _img_user, _Push, _size_array, _new_text, _new_time, _string_name,
-             _message_list, _son, _type_class, _type_id, _time_date,_margin_bottom) {
+                _message_list, _son, _type_class, _type_id, _time_date, _margin_bottom, _chat_n) {
                 this.name = _name
                 this.img_user = _img_user
                 this.img = _img
@@ -351,14 +376,15 @@
                 this.type_class = _type_class
                 this.type_id = _type_id
                 this.time_date = _time_date
-                this.margin_bottom =_margin_bottom
+                this.margin_bottom = _margin_bottom
+                this.chat_n = _chat_n
 
             }
         }
-        const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
+        const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
         Cells_manager.son
         function Push_update() {
-            fetch("https://db-nmn5.onrender.com/chats")
+            fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
                 .then(res => res.json())
                 .then(data => {
                     localStorage.setItem("check", JSON.stringify(data));
@@ -373,21 +399,28 @@
         }
         function Hide_div() {
             const div1 = document.getElementById("tableBody");
-            div1.style.display = div1.style.display === "none" ? "block" : "none";
+            div1.style.display = "block"
             const div2 = document.getElementById("button-send");
-            div2.style.display = div2.style.display === "none" ? "block" : "none";
-            const div3 = document.getElementById("from");
-            div3.style.display = div3.style.display === "block" ? "none" : "none";
-            
+            div2.style.display = "block"
+
         }
 
-        function activation() {
+        function Hide_div2() {
+            const div3 = document.getElementById("from");
+            div3.style.display = div3.style.display === "block" ? "none" : "none";
+            const div4 = document.getElementById("chats");
+            div4.style.display = div4.style.display === "none" ? "block" : "none";
+            last_message()
+
+        }
+
+        function activation(n) {
             Cells_manager.name = document.getElementById('name').value
             if (Cells_manager.name !== '') {
                 Hide_div()
+                Cells_manager.chat_n = n
 
                 Cells_manager.size_array = []
-
             }
             else {
                 Swal.fire('Must enter a name', '', 'success')
@@ -407,7 +440,7 @@
             const input = document.getElementById('textarea')
             input.value = '';
 
-            const url = 'https://db-nmn5.onrender.com/chats'
+            const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`
             fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -455,7 +488,7 @@
             const minutes = Cells_manager.time_date.getMinutes();
 
             const seconds = Cells_manager.time_date.getSeconds();
-            let time = `${hours}:${minutes}:${seconds}`
+            let time = `${hours}:${minutes}`
 
             return time
         }
@@ -476,7 +509,7 @@
 
         function get() {
 
-            fetch("https://db-nmn5.onrender.com/chats")
+            fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
                 .then(res => res.json())
                 .then(data => {
                     localStorage.setItem("db-chats", JSON.stringify(data));
@@ -491,9 +524,16 @@
             const son = document.createElement('div')
             son.innerHTML = `<div class="date_day">${data_day}</div>`
             div.appendChild(son)
+            // const td = document.getElementById(`td-${Cells_manager.chat_n}`)
+            // const td_son = document.createElement('td')
+            
+            // td.innerHTML = ""
+
+
             for (let i = 0; i < Cells_manager.size_array.length; i++) {
                 Cells_manager.son = document.createElement('div')
-
+                //     td_son.innerHTML = `<td>${Cells_manager.size_array[i].text}</td>`
+                // td.appendChild(td_son)
                 let id = Cells_manager.size_array[i].id
                 if (Cells_manager.size_array[i].user === Cells_manager.name) {
 
@@ -507,7 +547,7 @@
                     Cells_manager.img = "bot.png"
                     Cells_manager.type_class = "message-balloon-received"
                     Cells_manager.type_id = "Another_user"
-                    Cells_manager.margin_bottom ="margin_bottom_Another_user"
+                    Cells_manager.margin_bottom = "margin_bottom_Another_user"
                 }
                 if (Cells_manager.size_array[i].text !== undefined) {
                     text_message(i, id)
@@ -545,7 +585,7 @@
             Cells_manager.new_text = value
             //   document.getElementById(`message-${number}`).value
             Cells_manager.new_time = time_now()
-            const url = `https://db-nmn5.onrender.com/chats/${number}`
+            const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}/${number}`
             fetch(url, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -569,7 +609,7 @@
 
         function delete_(number) {
 
-            fetch(`https://db-nmn5.onrender.com/chats/${number}`, {
+            fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}/${number}`, {
                 method: 'DELETE'
 
             }).then(response => {
@@ -658,6 +698,29 @@
             document.body.appendChild(script);
         }
 
+
+
+        async function last_message() {
+
+            for (let i = 1; i < 5; i++) {
+                let url =`https://db-nmn5.onrender.com/chat${i}`
+                let response = await fetch(`${url}`)
+                if (!response.ok) {
+                    console.error('network problem')
+                    return
+                }
+                let data = await response.json()
+                localStorage.setItem(`chat${i}`, JSON.stringify(data));
+                let last_m = data
+                let a = last_m.length - 1
+
+                 let td = document.getElementById(`td-${i}`)
+            let td_son = document.createElement('td')
+                 td_son.innerHTML = `<td>${last_m[a].text}</td>`
+                td.appendChild(td_son)
+
+        }
+    }
 
 
         intervalId = setInterval(Push_update, 500)
