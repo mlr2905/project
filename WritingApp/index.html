@@ -36,7 +36,7 @@
     .chat-container {
         background-image: url("w.jpg");
         max-width: 600px;
-        margin: 0 auto;
+        margin-top: -35%;
         padding: 20px;
         max-height: 500px;
         background-color: rgba(255, 255, 255, 0.9);
@@ -291,38 +291,40 @@
 
 <body>
     <h1>WritingApp</h1>
-    <table class=" col-2 table-striped table-dark mx-auto" id="chats" style="width: 200px; display:none">
-        <thead>
-            <tr>
-                <th scope="col">chats</th>
-                <th scope="col">last message</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td onclick="activation(1)">chat1</td>
-                <td id="td-1"></td>
-
-            </tr>
-            <tr>
-                <td onclick="activation(2)">chat2</td>
-                <td id="td-2"></td>
-
-            </tr>
-            <tr>
-                <td onclick="activation(3)">chat3</td>
-                <td id="td-3"></td>
-
-            </tr>
-            <tr>
-                <td onclick="activation(4)">chat4</td>
-                <td id="td-4"></td>
-
-            </tr>
-        </tbody>
-    </table>
-    <br />
+    <div class="table-responsive-sm">
+        <table class="table table-success table-hover" id="chats" style="width: 250px; display:none">
+            <thead>
+                <tr>
+                    <th scope="row">#</th>
+                    <th colspan="2">Chats</th>
+                    <th colspan="2">Last Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr onclick="activation(1)">
+                    <th scope="row">1</th>
+                    <td colspan="2">chat1</td>
+                    <td colspan="2" id="td-1"></td>
+                </tr>
+                <tr onclick="activation(2)">
+                    <th scope="row">2</th>
+                    <td colspan="2">chat2</td>
+                    <td colspan="2" id="td-2"></td>
+                </tr>
+                <tr onclick="activation(3)">
+                    <th scope="row">3</th>
+                    <td colspan="2">chat3</td>
+                    <td colspan="2" id="td-3"></td>
+                </tr>
+                <tr onclick="activation(4)">
+                    <th scope="row">4</th>
+                    <td colspan="2">chat4</td>
+                    <td colspan="2" id="td-4"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+    </div>
     <div class="chat-container" style="display: none;" id="tableBody">
 
 
@@ -362,7 +364,7 @@
 
         class Default_cells {
             constructor(_name, _img, _img_user, _Push, _size_array, _new_text, _new_time, _string_name,
-                _message_list, _son, _type_class, _type_id, _time_date, _margin_bottom, _chat_n) {
+                _message_list, _son, _type_class, _type_id, _time_date, _margin_bottom, _chat_n, _json_id) {
                 this.name = _name
                 this.img_user = _img_user
                 this.img = _img
@@ -378,10 +380,11 @@
                 this.time_date = _time_date
                 this.margin_bottom = _margin_bottom
                 this.chat_n = _chat_n
+                this.json_id = _json_id
 
             }
         }
-        const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
+        const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
         Cells_manager.son
         function Push_update() {
             fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
@@ -393,6 +396,7 @@
                         if (Cells_manager.Push.length !== Cells_manager.size_array.length) {
                             Cells_manager.Push = 0;
                             get();
+
                         }
                     }
                 });
@@ -402,6 +406,7 @@
             div1.style.display = "block"
             const div2 = document.getElementById("button-send");
             div2.style.display = "block"
+            last_message()
 
         }
 
@@ -411,14 +416,16 @@
             const div4 = document.getElementById("chats");
             div4.style.display = div4.style.display === "none" ? "block" : "none";
             last_message()
-
         }
 
         function activation(n) {
             Cells_manager.name = document.getElementById('name').value
             if (Cells_manager.name !== '') {
+
+                Hide_div()
                 Hide_div()
                 Cells_manager.chat_n = n
+                Cells_manager.json_id = id_message(n)
 
                 Cells_manager.size_array = []
             }
@@ -432,10 +439,32 @@
             Cells_manager.img_user = frame.src
         }
 
+        function id_message(i) {
+            let url = `https://db-nmn5.onrender.com/chat${i}`
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    localStorage.setItem(`id${i}`, JSON.stringify(data));
+                })
+
+            let date = JSON.parse(localStorage.getItem(`id${i}`))
+            let id_n = date
+
+            const id = id_n.filter((item) => item.id === Math.max(...id_n.map((item) => item.id)));
+             
+            return id[0].id;
+        }
+
+
+
+
 
         function post_data() {
 
+
             Cells_manager.string_name = "text"
+            Cells_manager.json_id += 1
+
             link_type()
             const input = document.getElementById('textarea')
             input.value = '';
@@ -447,8 +476,10 @@
                 body: `{
                             "user": "${Cells_manager.name}",
                             "${Cells_manager.string_name}": "${Cells_manager.new_text}",
-                            "time": "${Cells_manager.new_time}"
+                            "time": "${Cells_manager.new_time}",
+                            "id": ${Cells_manager.json_id}
                         }`})
+
         }
 
 
@@ -526,7 +557,7 @@
             div.appendChild(son)
             // const td = document.getElementById(`td-${Cells_manager.chat_n}`)
             // const td_son = document.createElement('td')
-            
+
             // td.innerHTML = ""
 
 
@@ -701,9 +732,8 @@
 
 
         async function last_message() {
-
             for (let i = 1; i < 5; i++) {
-                let url =`https://db-nmn5.onrender.com/chat${i}`
+                let url = `https://db-nmn5.onrender.com/chat${i}`
                 let response = await fetch(`${url}`)
                 if (!response.ok) {
                     console.error('network problem')
@@ -714,13 +744,15 @@
                 let last_m = data
                 let a = last_m.length - 1
 
-                 let td = document.getElementById(`td-${i}`)
-            let td_son = document.createElement('td')
-                 td_son.innerHTML = `<td>${last_m[a].text}</td>`
+                let td = document.getElementById(`td-${i}`)
+                td.innerHTML = ""
+                let td_son = document.createElement('td')
+                td_son.innerHTML = `<td colspan="2">${last_m[a].text}</td>`
                 td.appendChild(td_son)
 
+
+            }
         }
-    }
 
 
         intervalId = setInterval(Push_update, 500)
