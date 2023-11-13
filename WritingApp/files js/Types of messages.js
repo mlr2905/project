@@ -13,7 +13,7 @@ function text_message(i,id) {
             <span class="user" id="message-${id}">
                 <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
             </span>
-            <span>${Cells_manager.size_array[i].text}</span>
+            <span >${Cells_manager.size_array[i].text}</span>
             <div><sub>${Cells_manager.size_array[i].time}</sub></div>
         </div>
   </div>
@@ -122,9 +122,9 @@ function tiktok_message(i,id) {
                 <div ><b>${Cells_manager.size_array[i].user}</b></div>
             </div>
     </div>         
-    <div class="${Cells_manager.type_class}">                          
+    <div class="${Cells_manager.type_class}" style="width="300px" height="200px";>                          
         <blockquote class="tiktok-embed" cite="${Cells_manager.size_array[i].tiktok}" 
-            data-video-id="${firstPart}" style="width="300px" height="200px";" > 
+            data-video-id="${firstPart}" " > 
             <section> </section>
         </blockquote> 
             <spam class="${Cells_manager.type_class}" id="message-${id}">
