@@ -4,12 +4,12 @@ function text_message(i,id) {
     Cells_manager.son.innerHTML = `
     <br/>
     
-    <div>
-        <div>
+    <div class="xxx">
+        <div">
             <img id="${Cells_manager.type_id}" src="${Cells_manager.img}" />
             <div id="${Cells_manager.margin_bottom}"><b>${Cells_manager.size_array[i].user}</b></div>
         </div>
-        <div class="${Cells_manager.type_class}">
+        <div class="${Cells_manager.type_class} col4-md-4 mb-3">
             <span class="user" id="message-${id}">
                 <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
             </span>

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WritingApp</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/request/2.88.0/request.min.js"></script>
+
     <script src="files js/Types of messages.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -34,11 +36,12 @@
     }
 
     .chat-container {
-        font-size:20px;
+        flex-direction: column-reverse;
 
+        font-size: 20px;
         background-image: url("w.jpg");
         max-width: 600px;
-        margin-top: -33%;
+        margin-top: -43%;
         padding: 20px;
         max-height: 500px;
         background-color: rgba(255, 255, 255, 0.9);
@@ -48,10 +51,8 @@
         /* Box shadow for a card-like appearance */
         border: 1px solid #ccc;
         display: flex;
-        /* Use flexbox to control container's height */
-        flex-direction: column;
-        /* Display latest message at the bottom */
-        overflow-y: auto;
+
+        overflow-y: scroll;
         margin-left: 25%;
         border: 10px solid rgb(41, 42, 42);
         box-shadow:
@@ -104,18 +105,11 @@
         margin-left: 30%;
     }
 
-    /* .iconify-icon {
-        height: calc(100% - 68px);
-        box-shadow: inset 0 10px 10px -10px #000000;
-        overflow-x: hidden;
-        padding: 0 16px;
-        margin-bottom: 19px;
-    } */
 
     #user_img {
-        border-radius: 30px;
-        width: 50px;
-        height: 50px;
+        border-radius: 50%;
+        width: 10%;
+        height: 10%;
         margin-bottom: 1%;
 
     }
@@ -130,9 +124,9 @@
     }
 
     #Another_user {
-        border-radius: 30px;
-        width: 50px;
-        height: 50px;
+        border-radius: 50%;
+        width: 10%;
+        height: 10%;
         text-align: right;
         margin-left: 90%;
     }
@@ -288,10 +282,10 @@
         width: 50%;
         margin: 0;
         margin-top: 2%;
-        font-size:24px
-
+        font-size: 24px
     }
-    #emoji{
+
+    #emoji {
         max-width: 300px;
         padding: 20px;
         max-height: 200px;
@@ -315,47 +309,72 @@
             rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
 
     }
-    #emoji .row{
+
+    #emoji .row {
         margin-left: 0%;
     }
-    .emojis{
-        font-size:24px
+
+    .emojis {
+        font-size: 24px
     }
-.css-ukfjzf {
-    max-height: 200px;
-}
+
+    .css-ukfjzf {
+        max-height: 200px;
+    }
+
+    *[id^="img_user"] {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%
+    }
+
+    #chats {
+        width: 350px;
+        margin-left: -10%;
+    }
 </style>
 
 <body>
     <h1>WritingApp</h1>
     <div class="table-responsive-sm">
-        <table class="table table-success table-hover" id="chats" style="width: 250px; display:none">
+        <table class="table table-success table-hover" id="chats" style=" display:none">
             <thead>
                 <tr>
-                    <th scope="row">#</th>
                     <th colspan="2">Chats</th>
+                    <th colspan="1"></th>
+
                     <th colspan="2">Last Message</th>
+                    <th colspan="1">Online</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr onclick="activation(1)">
-                    <th scope="row">1</th>
                     <td colspan="2">chat1</td>
+                    <td><img id="img_user1" src="" /></td>
+
+
                     <td colspan="2" id="td-1"></td>
+                    <td rowspan="4" id="online"></td>
+
+
                 </tr>
                 <tr onclick="activation(2)">
-                    <th scope="row">2</th>
                     <td colspan="2">chat2</td>
+                    <td><img id="img_user2" src="" /></td>
+
                     <td colspan="2" id="td-2"></td>
                 </tr>
                 <tr onclick="activation(3)">
-                    <th scope="row">3</th>
                     <td colspan="2">chat3</td>
+                    <td><img id="img_user3" src="" /></td>
+
                     <td colspan="2" id="td-3"></td>
                 </tr>
                 <tr onclick="activation(4)">
-                    <th scope="row">4</th>
                     <td colspan="2">chat4</td>
+                    <td><img id="img_user4" src="" /></td>
+
                     <td colspan="2" id="td-4"></td>
                 </tr>
             </tbody>
@@ -388,21 +407,98 @@
                     placeholder="050-1234567.." min="10" required><br />
             </div>
             <div class="custom-file col-md-4 mb-3">
+
                 <input type="file" onchange="add_img()" class="custom-file-input" id="files" required>
                 <label class="custom-file-label" for="file"><b>add a picture..</b></label>
-            </div>
-        </div>
-        <button onclick="Hide_div2()" class="btn btn-primary col" type="button">connect</button>
     </form>
-    <br/>
-    <div id="emoji" style="display: none;"></div><br/>
+    </div>
+
+    <button onclick="Hide_div2()" class="btn btn-primary col" type="button">connect</button>
+    </form>
+    <br />
+    <div id="emoji" style="display: none;"></div><br />
 
 
 
     <img id="frame" style="display: none;" src="" width="0px" height="0px" />
+    <p id="data"></p>
+
+
 
     <script>
-        function Show_emojis(){
+        
+   
+        async function check_online(){
+
+
+            Cells_manager.new_text = document.getElementById('name').value
+            let time = time_now()
+            time += `:${Cells_manager.time_date.getSeconds()}`
+
+            const url = "https://db-nmn5.onrender.com/online"
+
+            let response = await fetch(`${url}`)
+            if (!response.ok) {
+                console.error('network problem')
+                return
+            }
+            let data = await response.json()
+
+            localStorage.setItem("check-online", JSON.stringify(data));
+            Cells_manager._online = JSON.parse(localStorage.getItem("check-online"));
+            
+            let td = document.getElementById(`online`)
+            for (let i = 0; i < Cells_manager._online.length; i++) {
+                let td_son = document.createElement('td')
+
+                td.innerHTML += `<td ><b>${Cells_manager._online[i].user}:</b></td>
+                    <td colspan="2"><sub>${Cells_manager._online[i].time}</sub></td>`
+                td.appendChild(td_son)
+            }
+
+            for (let i = 1; i < Cells_manager._online.length; i++) {
+
+                if (Cells_manager._online[i].user === Cells_manager.new_text) {
+
+                    let offline = Cells_manager._online[i].time.split(":")[2];
+
+                    if (offline > 15) {
+                        fetch(`https://db-nmn5.onrender.com/online/${i}`, {
+                            method: 'DELETE'
+
+                        }).then(response => {
+                            if (!response.ok) {
+                                console.error(response)
+                                alert('failure') // 1 -- failure
+                            } else {
+                            }
+                        })
+
+                    }
+
+                }
+                
+                let jsonArray = Cells_manager._online
+let name = jsonArray.findIndex((item) => item.user ===  Cells_manager.new_text);
+
+
+                if(name === -1) {
+
+                    if (i === Cells_manager._online.length - 1) {
+                        fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: `{
+                "user": "${Cells_manager.new_text}",
+                "time": "${time}"
+            }`})
+                    }
+                }
+
+            }
+        }
+
+        function Show_emojis() {
             const div1 = document.getElementById("emoji");
             div1.style.display = div1.style.display === "none" ? "block" : "none";
         }
@@ -422,7 +518,6 @@
                 })
 
             const emojis = JSON.parse(localStorage.getItem("emojis"))
-
             const father_div = document.getElementById('emoji')
             const son = document.createElement('div')
             son.classList.add("row");
@@ -430,23 +525,19 @@
             let id_emojis = 3
             const max_for = 133
 
-
             for (let i = 0; i < max_for; i++) {
-                
-
                 for (let j = 0; j < 12; j++) {
-                    if(id_emojis === 19){
-                        id_emojis++ 
+                    if (id_emojis === 19) {
+                        id_emojis++
                     }
                     const son_row = document.createElement('div')
                     son_row.innerHTML = `<div>${emojis[id_emojis].character}</div>`
                     son_row.classList.add("emojis");
                     son_row.id = `emoji-${id_emojis}`
                     const div = document.getElementById(`emoji-${id_emojis}`);
-                    let img =emojis[id_emojis].character
-
+                    let img = emojis[id_emojis].character
                     son.appendChild(son_row)
-                    add_Cell_Click_emoji(`${son_row.id}`,img)
+                    add_Cell_Click_emoji(`${son_row.id}`, img)
                     id_emojis++
                 }
             }
@@ -461,7 +552,7 @@
 
         class Default_cells {
             constructor(_name, _img, _img_user, _Push, _size_array, _new_text, _new_time, _string_name,
-                _message_list, _son, _type_class, _type_id, _time_date, _margin_bottom, _chat_n, _json_id) {
+                _message_list, _son, _type_class, _type_id, _time_date, _margin_bottom, _chat_n, _json_id, _online) {
                 this.name = _name
                 this.img_user = _img_user
                 this.img = _img
@@ -478,10 +569,11 @@
                 this.margin_bottom = _margin_bottom
                 this.chat_n = _chat_n
                 this.json_id = _json_id
+                this.online = _online
 
             }
         }
-        const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
+        const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
         Cells_manager.son
         function Push_update() {
             fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
@@ -493,6 +585,8 @@
                         if (Cells_manager.Push.length !== Cells_manager.size_array.length) {
                             Cells_manager.Push = 0;
                             get();
+
+
 
                         }
                     }
@@ -512,11 +606,13 @@
             div3.style.display = div3.style.display === "block" ? "none" : "none";
             const div4 = document.getElementById("chats");
             div4.style.display = div4.style.display === "none" ? "block" : "none";
-            last_message()
+            intervalId = setInterval(last_message, 500)
+            check_online()
+            intervalId = setInterval(check_online, 1600)
+
         }
 
         function activation(n) {
-            Cells_manager.name = document.getElementById('name').value
             if (Cells_manager.name !== '') {
 
                 Hide_div()
@@ -700,7 +796,8 @@
                 }
 
             }
-
+            let scroll_to_bottom = document.getElementById('tableBody');
+            scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
         }
 
 
@@ -815,7 +912,7 @@
                 edit_or_delete(number);
             });
         }
-     
+
 
 
         function runTikTokScript() {
@@ -834,6 +931,9 @@
 
 
         async function last_message() {
+
+            Cells_manager.name = document.getElementById('name').value
+
             for (let i = 1; i < 5; i++) {
                 let url = `https://db-nmn5.onrender.com/chat${i}`
                 let response = await fetch(`${url}`)
@@ -848,23 +948,54 @@
 
                 let td = document.getElementById(`td-${i}`)
                 td.innerHTML = ""
-                let td_son = document.createElement('td') 
-                if(last_m[a].text !== undefined){
-                    td_son.innerHTML = `<td colspan="2">${last_m[a].text}</td>`
-                td.appendChild(td_son)
-                }else{
-                    td_son.innerHTML = `<td colspan="2">link message!!</td>`
-                td.appendChild(td_son) 
+                let td_son = document.createElement('td')
+                let user_name = null
+                if (last_m[a].text !== undefined) {
+                    if (last_m[a].user === Cells_manager.name) {
+                        user_name = "you"
+                        if (i === 1) {
+                            img_user1.src = Cells_manager.img_user
+                        }
+                        if (i === 2) {
+                            img_user2.src = Cells_manager.img_user
+                        } if (i === 3) {
+                            img_user3.src = Cells_manager.img_user
+                        } if (i === 4) {
+                            img_user4.src = Cells_manager.img_user
+                        }
+                    }
+                    else {
+                        user_name = last_m[a].user
+                        if (i === 1) {
+                            img_user1.src = "bot.png"
+                        }
+                        if (i === 2) {
+                            img_user2.src = "bot.png"
+                        } if (i === 3) {
+                            img_user3.src = "bot.png"
+                        } if (i === 4) {
+                            img_user4.src = "bot.png"
+                        }
+                    }
+
+                    td.innerHTML = `<td ><sub><b>${user_name}:</b></sub></td>
+                    <td colspan="2">${last_m[a].text}</td>`
+
+                    td.appendChild(td_son)
+                } else {
+                    td_son.innerHTML = `<td ><sub><b>${user_name}:</b></sub></td>'
+                    <td colspan="2">link message!!</td> `
+                    td.appendChild(td_son)
                 }
-               
+
 
 
             }
+
         }
 
 
         intervalId = setInterval(Push_update, 500)
-
 
 
     </script>
