@@ -448,10 +448,11 @@
             Cells_manager._online = JSON.parse(localStorage.getItem("check-online"));
             
             let td = document.getElementById(`online`)
+            td.innerHTML = ""
             for (let i = 0; i < Cells_manager._online.length; i++) {
                 let td_son = document.createElement('td')
 
-                td.innerHTML += `<td ><b>${Cells_manager._online[i].user}:</b></td>
+                td_son.innerHTML = `<td ><b>${Cells_manager._online[i].user}:</b></td>
                     <td colspan="2"><sub>${Cells_manager._online[i].time}</sub></td>`
                 td.appendChild(td_son)
             }
@@ -482,7 +483,7 @@
 let name = jsonArray.findIndex((item) => item.user ===  Cells_manager.new_text);
 
 
-                if(name === -1) {
+                if(name !== -1) {
 
                     if (i === Cells_manager._online.length - 1) {
                         fetch(url, {
