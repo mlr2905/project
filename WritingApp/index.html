@@ -462,16 +462,18 @@
 
             for (let i = 0; i < Cells_manager._online.length; i++) {
 
-                if (Cells_manager._online[i].user === Cells_manager.new_text) {
 
-                    let offline = Cells_manager._online[i].time.split(":")[2];
-
+                    let  a = Cells_manager._online[i].time.split(":")[2];
+                    
+                    let offline =  time.split(":")[2]
+                    offline = offline  -a
+                    let id = Cells_manager._online[i].id
                     if (offline > 15) {
-                        fetch(`https://db-nmn5.onrender.com/online/${i-1}`, {
+                        fetch(`https://db-nmn5.onrender.com/online/${id}`, {
                             method: 'DELETE'
                         })
                     }
-                }
+                
                 v++
             }
             if (name === -1) {
@@ -596,9 +598,9 @@
             div3.style.display = div3.style.display === "block" ? "none" : "none";
             const div4 = document.getElementById("chats");
             div4.style.display = div4.style.display === "none" ? "block" : "none";
-            intervalId = setInterval(last_message, 500)
-            check_online()
-            intervalId = setInterval(check_online, 500)
+            setInterval(last_message, 500)
+            setInterval(check_online, 500)
+           
 
         }
 
