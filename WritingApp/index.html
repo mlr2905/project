@@ -426,13 +426,14 @@
 
 
     <script>
-        
-   
-        async function check_online(){
+
+
+        async function check_online() {
 
 
             Cells_manager.new_text = document.getElementById('name').value
             let time = time_now()
+            let v = 0
             time += `:${Cells_manager.time_date.getSeconds()}`
 
             const url = "https://db-nmn5.onrender.com/online"
@@ -446,7 +447,7 @@
 
             localStorage.setItem("check-online", JSON.stringify(data));
             Cells_manager._online = JSON.parse(localStorage.getItem("check-online"));
-            
+
             let td = document.getElementById(`online`)
             td.innerHTML = ""
             for (let i = 0; i < Cells_manager._online.length; i++) {
@@ -456,46 +457,34 @@
                     <td colspan="2"><sub>${Cells_manager._online[i].time}</sub></td>`
                 td.appendChild(td_son)
             }
+            let jsonArray = Cells_manager._online
+            let name = jsonArray.findIndex((item) => item.user === Cells_manager.new_text);
 
-            for (let i = 1; i < Cells_manager._online.length; i++) {
+            for (let i = 0; i < Cells_manager._online.length; i++) {
 
                 if (Cells_manager._online[i].user === Cells_manager.new_text) {
 
                     let offline = Cells_manager._online[i].time.split(":")[2];
 
                     if (offline > 15) {
-                        fetch(`https://db-nmn5.onrender.com/online/${i}`, {
+                        fetch(`https://db-nmn5.onrender.com/online/${i-1}`, {
                             method: 'DELETE'
-
-                        }).then(response => {
-                            if (!response.ok) {
-                                console.error(response)
-                                alert('failure') // 1 -- failure
-                            } else {
-                            }
                         })
-
-                    }
-
-                }
-                
-                let jsonArray = Cells_manager._online
-let name = jsonArray.findIndex((item) => item.user ===  Cells_manager.new_text);
-
-
-                if(name !== -1) {
-
-                    if (i === Cells_manager._online.length - 1) {
-                        fetch(url, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: `{
-                "user": "${Cells_manager.new_text}",
-                "time": "${time}"
-            }`})
                     }
                 }
+                v++
+            }
+            if (name === -1) {
 
+                if (v === Cells_manager._online.length) {
+                    fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: `{
+                                "user": "${Cells_manager.new_text}",
+                                "time": "${time}"
+                                }`})
+                }
             }
         }
 
@@ -609,7 +598,7 @@ let name = jsonArray.findIndex((item) => item.user ===  Cells_manager.new_text);
             div4.style.display = div4.style.display === "none" ? "block" : "none";
             intervalId = setInterval(last_message, 500)
             check_online()
-            intervalId = setInterval(check_online, 1600)
+            intervalId = setInterval(check_online, 500)
 
         }
 
