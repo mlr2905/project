@@ -1,163 +1,1392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/391827d54c.js" crossorigin="anonymous"></script>
+  <title>Whatsapp Clone</title>
+  
+\  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+
 </head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #ccc;
+}
+
+.background-green {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 20%;
+  background-color: #009688;
+}
+
+.main-container {
+  position: relative;
+  width: 1000px;
+  max-width: 100%;
+  height: calc(100vh - 40px);
+  background: #fff;
+  display: flex;
+  box-shadow: 0px 1px 1px  0 rgba(0,0,0,0.5), 0px 2px 5px 0 rgba(0,0,0,0.6);
+}
+
+.main-container .left-container {
+  position:relative;
+  width: 30%;
+  height:100%;
+  flex: 30%;
+  background: #fff;
+}
+
+.main-container .right-container {
+  position: relative;
+  width: 70%;
+  height: 100%;
+  flex: 70%;
+  background: #e5ddd5;
+}
+
+.main-container .right-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(https://camo.githubusercontent.com/854a93c27d64274c4f8f5a0b6ec36ee1d053cfcd934eac6c63bed9eaef9764bd/68747470733a2f2f7765622e77686174736170702e636f6d2f696d672f62672d636861742d74696c652d6461726b5f61346265353132653731393562366237333364393131306234303866303735642e706e67);
+  opacity: 0.5;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  background: #ededed;
+  padding: 0 15px;
+}
+
+.user-img {
+  position:relative;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.dp {
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.nav-icons {
+  display:flex;
+  justify-content: flex-end;
+  padding-left: 110px;
+}
+
+.nav-icons li {
+  backgroud-color:pink;
+  list-style: none;
+  display: flex;
+  cursor: pointer;
+  color: #51585c;
+  margin-left: 22px;
+  font-size: 18px;
+}
+
+.notif-box {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 70px;
+  background: #76daff;
+  align-items: center;
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+.notif-box i {
+  position:relative;
+  left: 13px;
+  background:#fff;
+  padding:10px;
+  width: 42px;
+  height: auto;
+  font-size: 20px;
+  border-radius: 55%;
+  cursor: pointer;
+  color:#76daff;
+}
+
+.notif-box .fa-xmark {
+  position: absolute;
+  left: 260px;
+  text-align:center;
+  background:#76daff;
+  color: #fff;
+}
+
+.notif-text {
+  margin: 25px;
+}
+
+.notif-text a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9em;
+}
+
+.search-container {
+  position:relative;
+  width: 100%;
+  height: 40px;
+  background: #f6f6f6;
+  display: flex;
+/*   justify-content: center; */
+  align-items: center;
+}
+
+.search-container .input input {
+  width: 121%;
+  outline: none;
+  border: none;
+  background: #fff;
+  padding: 5px;
+  height: 30x;
+  border-radius: 10px;
+  font-size: 12px;
+  padding-left: 60px;
+  margin: 10px
+}
+
+.search-container .input i {
+  position: absolute;
+  left: 26px;
+  top: 14px;
+  color:#bbb;
+  font-size: 0.8em;
+}
+
+.chat-list {
+  position: relative;
+  height:calc(100% - 170px);
+  overflow-y: auto;
+}
+
+.chat-list .chat-box {
+  position: relative;
+  width: 100%;
+  display:flex;
+/*   justify-content: center; */
+  align-items:center;
+  cursor: pointer;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.chat-list .chat-box .img-box {
+  position:relative;
+  width: 55px;
+  height:45px;
+  overflow:hidden;
+  border-radius: 50%;
+}
+
+.chat-list .chat-box .chat-details {
+  width: 100%;
+  margin-left: 10px;
+}
+
+.chat-list .chat-box .chat-details .text-head {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom:2px;
+}
+
+.chat-list .chat-box .chat-details .text-head h4 {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #000;
+}
+
+.chat-list .chat-box .chat-details .text-head .time {
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+.chat-list .chat-box .chat-details .text-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-list .chat-box .chat-details .text-message p {
+  color: #aaa;
+  font-size: 0.9em;
+  overlay: hidden;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.chat-list .chat-box .chat-details .text-message b {
+  background: #06e744;
+  color: #fff;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+/*   text-align: center; */
+  font-size: 0.8em;
+  font-weight: 400;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.chat-list .active {
+  background: #ebebeb;
+}
+
+.chat-list .chat-box:hover {
+  background: #f5f5f5;
+}
+
+.chat-list .chat-box .chat-details .text-head .unread {
+  color: #06e744;
+}
+
+
+/* right-container */
+
+
+.right-container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-container .header .img-text .user-img .dp {
+  position:relative;
+  top: -2px;
+  left: 0px;
+  width: 40px;
+  height:auto;
+  overflow:hidden;
+  object-fit: cover;
+}
+
+.right-container .header .img-text {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.right-container .header .img-text h4 {
+  font-weight: 500;
+  line-height: 1.2em;
+  margin-left: 15px;
+}
+
+.right-container .header .img-text h4 span {
+  font-size: 0.8em;
+  color: #555;
+}
+
+.right-container .header .nav-icons {
+  position: relative;
+  margin-right:0px;
+/*   padding: 5px; */
+}
+
+.right-container .header .nav-icons i {
+  padding: 10px;
+}
+
+.chat-container {
+  position:relative;
+  width: 100%;
+  height: calc(100% - 120px);  /*60+60*/
+  padding: 50px;
+  overflow-y: auto;
+}
+
+.message-box {
+  position:relative;
+  display: flex;
+  width:100%;
+  margin: 5px 0;
+}
+
+.message-box  {
+  position:relative;
+  right: 0;
+  text-align: right;
+  max-width: 65%;
+  padding: 12px;
+  background: #dcf8c6;
+  border-radius: 10px;
+  font-size: 0.9em;
+}
+
+.message-box.my-message :before {
+  content : '';
+  position: absolute;
+  top: 0;
+  right: -12px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #dcf8c6 0%, #dcf8c6 50%, transparent 50%, transparent);
+}
+
+.message-box  span {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8em;
+  opacity: 0.5;
+}
+
+.my-message {
+  justify-content: flex-end;
+}
+
+.friend-message {
+  background: #ffffff;
+}
+
+.friend-message {
+  justify-content: flex-start;
+  
+
+}
+
+.chat-container .my-message  {
+  color: rgb(12, 12, 2);
+}
+
+.message-box.friend-message::before {
+  content : '';
+  position: absolute;
+  top: 0;
+  left: -12px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(225deg, #fff 0%, #fff 50%, transparent 50%, transparent);
+  margin-right:20%
+}
+
+.chatbox-input {
+  position:relative;
+  width: 100%;
+  height: 60px;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatbox-input i {
+  cursor: pointer;
+  font-size: 1.8em;
+  color: #515855;
+}
+
+.chatbox-input i:nth-child(1) {
+   margin: 15px;
+}
+
+.chatbox-input i:last-child {
+  margin-right: 25px;
+}
+
+ .chatbox-input input {
+    position: relative;
+    width: 90%;
+    margin: 0 20px;
+    padding: 10px 20px;
+    border-radius:10px;
+    font-size: 1em;
+    border:none;
+    outline:none;
+ }
+
+ #Another_user {
+        border-radius: 50%;
+        width: 10%;
+        height: 10%;
+        margin-bottom: 1%;
+
+    }
+
+    #margin-bottom {
+     
+      margin-right: 20%;
+    }
+
+    #margin_bottom_Another_user {
+        text-align: left;
+        margin-right: -5%;
+    }
+    
+    #user_img {
+        border-radius: 50%;
+        width: 10%;
+        height: 10%;
+        text-align: right;
+    }
+
+
+
+</style>
 <body>
-    <script async defer src="https://apis.google.com/js/api.js"></script>
-<script async defer src="https://accounts.google.com/gsi/client"></script>
-<script>
-    var CLIENT_ID = '639609669934-eaescllh1k9fpp4nggtdoh1lc0p8kihh.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyAXs-Hb9cjDptjCqjS2ST5gd0_c7KbSvAM';
-var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
-var SCOPES = 'https://www.googleapis.com/auth/drive';
-var signinButton = document.getElementsByClassName('signin')[0];
-var signoutButton = document.getElementsByClassName('signout')[0];
-let tokenClient;
-let gapiInited = false;
-let gisInited = false;
-function gapiLoaded() {
-    gapi.load('client', initializeGapiClient);
-}
+  <div class="background-green"></div>
 
-async function initializeGapiClient() {
-    await gapi.client.init({
-        apiKey: API_KEY,
-        discoveryDocs: DISCOVERY_DOCS,
-    });
-    gapiInited = true;
-    maybeEnableButtons();
-}
+  <form class=" mt-5 mx-auto col-6 col-md-8 col-lg-6 was-validated " id="from" style="display: block;">
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <input type="name" class="form-control" id="name" placeholder="Jane Doe.." value="" required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <input type="number" class="form-control mb-2" id="Phone" minlength="9" maxlength="10"
+                placeholder="050-1234567.." min="10" required><br />
+        </div>
+        <div class="custom-file col-md-4 mb-3">
 
-function gisLoaded() {
-    tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: CLIENT_ID,
-        scope: SCOPES,
-        callback: ''
-    });
-    gisInited = true;
-    maybeEnableButtons();
-}
+            <input type="file" onchange="add_img()" class="custom-file-input" id="files" required>
+            <label class="custom-file-label" for="file"><b>add a picture..</b></label>
+</div>
 
-function maybeEnableButtons() {
-    if (gapiInited && gisInited) {
-        signinButton.style.display = 'block'
+
+
+<button onclick="" class="btn btn-primary col" type="button">connect</button>
+</form>
+<div></div>
+  <div class="main-container">
+    <div class="left-container">
+
+<!--header -->
+      <div class="header">
+        <div class="user-img">
+          <img class="dp" src="https://www.codewithfaraz.com/InstaPic.png" alt="">
+        </div>
+        <div class="nav-icons">
+          <li><i class="fa-solid fa-users"></i></li>
+          <li><i class="fa-solid fa-message">
+ </i></li>
+          <li><i class="fa-solid fa-ellipsis-vertical"></i></li>
+        </div>
+      </div>
+
+
+<!--notification -->
+      <div class="notif-box">
+        <i class="fa-solid fa-bell-slash"></i>
+        <div class="notif-text">
+             <p>Get Notified of New Messages</p>
+             <a href="#">Turn on Desktop Notifications ›</a>
+            </div>
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+
+<!--search-container -->
+      <div class="search-container">
+        <div class="input">
+<i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search or start new chat   "></div>
+     <i class="fa-sharp fa-solid fa-bars-filter"></i>
+      </div>
+
+
+<!--chats -->
+      <div class="chat-list">
+        <div class="chat-box" onclick="activation(1)">
+          <div class="img-box">
+            <img class="img-cover" id="img_user1" src=" " alt="">
+          </div>
+          <div class="chat-details" >
+            <div class="text-head">
+              <h4>Group 1</h4>
+              <p class="time unread">11:49</p>
+            </div>
+            <div class="text-message" >
+              <p id="td-1"></p>
+              <b>1</b>
+            </div>
+          </div>
+        </div>
+        <div class="chat-box" onclick="activation(2)">
+          <div class="img-box">
+            <img class="img-cover" id="img_user2" src=" " alt="">
+          </div>
+          <div class="chat-details">
+            <div class="text-head">
+              <h4>Group 2</h4>
+              <p class="time unread">10:49</p>
+            </div>
+            <div class="text-message">
+              <p id="td-2"></p>
+              <b>4</b>
+            </div>
+          </div>
+        </div>
+        <div class="chat-box" onclick="activation(3)">
+          <div class="img-box">
+            <img class="img-cover" id="img_user3"  src=" " alt="">
+          </div>
+          <div class="chat-details">
+            <div class="text-head">
+              <h4>Group 3</h4>
+              <p class="time unread">09:49</p>
+            </div>
+            <div class="text-message">
+              <p id="td-3"></p>
+              <b>2</b>
+            </div>
+          </div>
+        </div>
+        <div class="chat-box active" onclick="activation(4)">
+          <div class="img-box">
+            <img class="img-cover" id="img_user4"  src=" " alt="">
+          </div>
+          <div class="chat-details">
+            <div class="text-head">
+              <h4>Group 4</h4>
+              <p class="time">08:49</p>
+            </div>
+            <div class="text-message">
+              <p id="td-4"></p>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+    </div>
+    
+
+
+
+
+
+    <div class="right-container">
+      <div class="header">
+        <div class="img-text">
+          <div class="user-img">
+          <img class="dp" src="https://images.pexels.com/photos/2474307/pexels-photo-2474307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+        </div>
+          <h4>Leo<br><span>Online</span></h4>
+        </div>
+        <div class="nav-icons">
+          <li><i class="fa-solid fa-magnifying-glass"></i></li>
+          <li><i class="fa-solid fa-ellipsis-vertical"></i></li>
+        </div>
+      </div>
+
+<!--chat-container -->
+      <div class="chat-container"  id="tableBody">
+       
+      </div>
+
+<!--input-bottom -->
+      <div class="chatbox-input">
+        <i class="fa-regular fa-face-grin"></i>
+        <i class="fa-sharp fa-solid fa-paperclip"></i>
+        <input type="text" placeholder="Type a message" id="textarea" >
+        <!-- <i class="fa-solid fa-microphone"></i> -->
+        <button class="send" id="smile" onclick="post_data()">
+
+        <span class="circle">
+          <iconify-icon icon="zmdi:mail-send"></iconify-icon>
+      </span>
+  </button>
+      </div>
+    </div>
+
+  </div>
+  <img id="frame" style="display: none;" src="" width="0px" height="0px" />
+  <p id="data"></p>
+  
+  <img id="frame" style="display: none;" src="" width="0px" height="0px" />
+  <p id="data"></p>
+  <div id="all-emoji" style="display: none;"></div>
+
+
+  <div class="table-responsive-sm">
+    <table class="table table-success table-hover" id="chats" style=" display:none">
+        <thead>
+            <tr>
+                <th colspan="2">Chats</th>
+                <th colspan="1"></th>
+                <th colspan="2">Last Message</th>
+                <th colspan="1">Online</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr onclick="activation(1)">
+                <td colspan="2">chat1</td>
+                <td><img id="img_user1" src="" /></td>
+                <td colspan="2" id="td-1"></td>
+                <td rowspan="4" id="online"></td>
+            </tr>
+            <tr onclick="activation(2)">
+                <td colspan="2">chat2</td>
+                <td><img id="img_user2" src="" /></td>
+                <td colspan="2" id="td-2"></td>
+            </tr>
+            <tr onclick="activation(3)">
+                <td colspan="2">chat3</td>
+                <td><img id="img_user3" src="" /></td>
+                <td colspan="2" id="td-3"></td>
+            </tr>
+            <tr onclick="activation(4)">
+                <td colspan="2">chat4</td>
+                <td><img id="img_user4" src="" /></td>
+                <td colspan="2" id="td-4"></td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+</div>
+  <script>
+    
+    async function check_online() {
+
+while (true) {
+    Cells_manager.new_text = document.getElementById('name').value
+    let time = time_now()
+    let v = 0
+    time += `:${Cells_manager.time_date.getSeconds()}`
+
+
+    const url = "https://db-nmn5.onrender.com/online"
+
+    let response = await fetch(`${url}`)
+    if (!response.ok) {
+        console.error('network problem')
+        return
     }
-}
-signinButton.onclick = () => handleAuthClick()
-function handleAuthClick() {
-    tokenClient.callback = async (resp) => {
-        if (resp.error !== undefined) {
-            throw (resp);
+    let data = await response.json()
+
+    localStorage.setItem("check-online", JSON.stringify(data));
+    Cells_manager._online = JSON.parse(localStorage.getItem("check-online"));
+
+    let td = document.getElementById(`online`)
+    td.innerHTML = ""
+    for (let i = 0; i < Cells_manager._online.length; i++) {
+        let td_son = document.createElement('span')
+        td_son.innerHTML = `<br/><td colspan="2"><b>${Cells_manager._online[i].user}:</b><sub>${Cells_manager._online[i].time}</sub></>
+     `
+        td.appendChild(td_son)
+    }
+    let jsonArray = Cells_manager._online
+    let name = jsonArray.findIndex((item) => item.user === Cells_manager.new_text);
+
+    for (let i = 0; i < Cells_manager._online.length; i++) {
+
+
+        let a = Cells_manager._online[i].time.split(":")[2];
+
+        let offline = time.split(":")[2]
+        offline = offline + a
+        let id = Cells_manager._online[i].id
+        if (offline > 15) {
+            fetch(`https://db-nmn5.onrender.com/online/${id}`, {
+                method: 'DELETE'
+            })
         }
-        signinButton.style.display = 'none'
-        signoutButton.style.display = 'block'
-        console.log('Sign-in Successful');
-    };
 
-    if (gapi.client.getToken() === null) {
-        tokenClient.requestAccessToken({ prompt: 'consent' });
-    } else {
-        tokenClient.requestAccessToken({ prompt: '' });
+        v++
+    }
+    if (name === -1) {
+
+        if (v === Cells_manager._online.length) {
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: `{
+                    "user": "${Cells_manager.new_text}",
+                    "time": "${time}"
+                    }`})
+        }
     }
 }
+}
 
-signoutButton.onclick = () => handleSignoutClick()
-function handleSignoutClick() {
-    const token = gapi.client.getToken();
-    if (token !== null) {
-        google.accounts.oauth2.revoke(token.access_token);
-        gapi.client.setToken('');
-        signinButton.style.display = 'block'
-        signoutButton.style.display = 'none'
+function Show_emojis() {
+const div1 = document.getElementById("emoji");
+div1.style.display = div1.style.display === "none" ? "block" : "none";
+}
+
+function copy_To_Clipboard(a) {
+const input = document.getElementById('textarea')
+input.value += a;
+}
+emoji_keyboard()
+function emoji_keyboard() {
+
+const url = "https://emoji-api.com/emojis?access_key=d43e0d96d977b343931bd3b2ae90d2d15f362bc0"
+fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        localStorage.setItem("emojis", JSON.stringify(data));
+    })
+
+const emojis = JSON.parse(localStorage.getItem("emojis"))
+const father_div = document.getElementById('all-emoji')
+const son = document.createElement('div')
+son.classList.add("row");
+father_div.appendChild(son)
+let id_emojis = 3
+const max_for = 133
+
+for (let i = 0; i < max_for; i++) {
+    for (let j = 0; j < 12; j++) {
+        if (id_emojis === 19) {
+            id_emojis++
+        }
+        const son_row = document.createElement('div')
+        son_row.innerHTML = `<div>${emojis[id_emojis].character}</div>`
+        son_row.classList.add("emojis");
+        son_row.id = `emoji-${id_emojis}`
+        const div = document.getElementById(`emoji-${id_emojis}`);
+        let img = emojis[id_emojis].character
+        son.appendChild(son_row)
+        add_Cell_Click_emoji(`${son_row.id}`, img)
+        id_emojis++
     }
 }
-function checkFolder() {
-    gapi.client.drive.files.list({
-        // give name of the folder to check
-        'q': 'name = "Backup Folder"',
-    }).then(function (response) {
-        var files = response.result.files;
-        if (files && files.length > 0) {
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                console.log('Folder Available');
+}
+function add_Cell_Click_emoji(divId, number) { //Adds onClick to this div
+const div = document.getElementById(divId);
+div.addEventListener("click", function () {
+    // קריאה לפונקציה `cell_click()` עם מספר התמונה
+    copy_To_Clipboard(number);
+});
+}
+
+class Default_cells {
+constructor(_name, _img, _img_user, _Push, _size_array, _new_text, _new_time, _string_name,
+    _message_list, _son, _type_class, _type_id, _time_date, _margin_bottom, _chat_n, _json_id, _online) {
+    this.name = _name
+    this.img_user = _img_user
+    this.img = _img
+    this.Push = _Push
+    this.size_array = _size_array
+    this.new_text = _new_text
+    this.new_time = _new_time
+    this.string_name = _string_name
+    this.message_list = _message_list
+    this.son = _son
+    this.type_class = _type_class
+    this.type_id = _type_id
+    this.time_date = _time_date
+    this.margin_bottom = _margin_bottom
+    this.chat_n = _chat_n
+    this.json_id = _json_id
+    this.online = _online
+
+}
+}
+const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ")
+Cells_manager.son
+function Push_update() {
+fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
+    .then(res => res.json())
+    .then(data => {
+        localStorage.setItem("check", JSON.stringify(data));
+        Cells_manager.Push = JSON.parse(localStorage.getItem("check"));
+        if (Cells_manager.name !== '') {
+            if (Cells_manager.Push.length !== Cells_manager.size_array.length) {
+                Cells_manager.Push = 0;
+                get();
+
+
+
             }
-        } else {
-            // if folder not available
-            console.log('Folder not available');
         }
-    })
+    });
+}
+function Hide_div() {
+const div1 = document.getElementById("tableBody");
+div1.style.display = "block"
+const div2 = document.getElementById("button-send");
+div2.style.display = "block"
+last_message()
+
 }
 
-function createFolder() {
-    var access_token = gapi.auth.getToken().access_token;
-    var request = gapi.client.request({
-        'path': 'drive/v2/files',
-        'method': 'POST',
-        'headers': {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + access_token,
-        },
-        'body': {
-            'title': 'Backup Folder',
-            'mimeType': 'application/vnd.google-apps.folder'
+function Hide_div2() {
+const div3 = document.getElementById("from");
+div3.style.display = div3.style.display === "block" ? "none" : "none";
+const div4 = document.getElementById("chats");
+div4.style.display = div4.style.display === "none" ? "block" : "none";
+intervalId = setInterval(last_message, 500)
+check_online()
+
+}
+
+function activation(n) {
+  intervalId = setInterval(last_message, 500)
+check_online()
+
+if (Cells_manager.name !== '') {
+
+    // Hide_div()
+    // Hide_div()
+    Cells_manager.chat_n = n
+    Cells_manager.json_id = id_message(n)
+
+    Cells_manager.size_array = []
+}
+else {
+    Swal.fire('Must enter a name', '', 'success')
+}
+}
+
+function add_img() {
+frame.src = URL.createObjectURL(event.target.files[0]);
+Cells_manager.img_user = frame.src
+}
+
+function id_message(i) {
+let url = `https://db-nmn5.onrender.com/chat${i}`
+fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        localStorage.setItem(`id${i}`, JSON.stringify(data));
+    })
+
+let date = JSON.parse(localStorage.getItem(`id${i}`))
+let id_n = date
+
+const id = id_n.filter((item) => item.id === Math.max(...id_n.map((item) => item.id)));
+
+return id[0].id;
+}
+
+
+
+
+
+function post_data() {
+
+Cells_manager.new_text = document.getElementById('textarea').value
+Cells_manager.string_name = "text"
+Cells_manager.json_id += 1
+
+link_type()
+const input = document.getElementById('textarea')
+input.value = '';
+
+const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`
+fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: `{
+                "user": "${Cells_manager.name}",
+                "${Cells_manager.string_name}": "${Cells_manager.new_text}",
+                "time": "${Cells_manager.new_time}",
+                "id": ${Cells_manager.json_id}
+            }`})
+
+}
+
+
+function isLink_img(text) {
+return text.includes(".gif") || text.includes(".png") ||
+    text.includes(".jpg") || text.includes(".svg") || text.includes(".jpeg");
+}
+function link_type() {
+Cells_manager.new_time = time_now()
+let img_or_no = isLink_img(Cells_manager.new_text)
+let tube_or_no = Cells_manager.new_text.includes("youtu") || Cells_manager.new_text.includes("youtube")
+let tiktok_or_no = Cells_manager.new_text.includes("tiktok")
+let facebook_or_on = Cells_manager.new_text.includes("facebook")
+let link_or_no = Cells_manager.new_text.includes("http")
+
+Cells_manager.string_name = img_or_no ? "img" : tiktok_or_no ? "tiktok" : tube_or_no ? "tube" : "text";
+const all_or_no = !img_or_no && !tiktok_or_no && !tube_or_no && !facebook_or_on
+if (all_or_no) {
+    if (link_or_no) {
+        Cells_manager.string_name = "link"
+    }
+}
+
+if (facebook_or_on) {
+    Cells_manager.new_text = Cells_manager.new_text.split("=")[1];
+    Cells_manager.string_name = "face";
+}
+}
+
+
+function time_now() {
+Cells_manager.time_date = new Date();
+
+const hours = Cells_manager.time_date.getHours();
+
+const minutes = Cells_manager.time_date.getMinutes();
+
+const seconds = Cells_manager.time_date.getSeconds();
+let time = `${hours}:${minutes}`
+
+return time
+}
+
+function date_day_now() {
+Cells_manager.time_date = new Date();
+
+const day = Cells_manager.time_date.getDate()
+
+const Month = Cells_manager.time_date.getMonth() + 1
+
+const Year = Cells_manager.time_date.getFullYear()
+
+let Date_dey = `${day}/${Month}/${Year}`
+
+return Date_dey
+}
+
+function get() {
+
+fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
+    .then(res => res.json())
+    .then(data => {
+        localStorage.setItem("db-chats", JSON.stringify(data));
+    })
+
+Cells_manager.size_array = JSON.parse(localStorage.getItem("db-chats"))
+
+Cells_manager.message_list = document.getElementById('tableBody')
+Cells_manager.message_list.innerHTML = ""
+const data_day = date_day_now()
+const div = document.getElementById('tableBody')
+const son = document.createElement('div')
+son.innerHTML = `<div class="date_day">${data_day}</div>`
+div.appendChild(son)
+// const td = document.getElementById(`td-${Cells_manager.chat_n}`)
+// const td_son = document.createElement('td')
+
+// td.innerHTML = ""
+
+
+for (let i = 0; i < Cells_manager.size_array.length; i++) {
+    Cells_manager.son = document.createElement('div')
+    //     td_son.innerHTML = `<td>${Cells_manager.size_array[i].text}</td>`
+    // td.appendChild(td_son)
+    let id = Cells_manager.size_array[i].id
+    if (Cells_manager.size_array[i].user === Cells_manager.name) {
+
+        Cells_manager.type_class = "message-box my-message"
+        Cells_manager.img = Cells_manager.img_user
+        Cells_manager.type_id = "dp"
+        Cells_manager.margin_bottom = "margin_bottom"
+
+    }
+    else {
+        Cells_manager.img = "bot.png"
+        Cells_manager.type_class = "message-box friend-message"
+        Cells_manager.type_id = "dp"
+        Cells_manager.margin_bottom = "margin_bottom_Another_user"
+    }
+    if (Cells_manager.size_array[i].text !== undefined) {
+        text_message(i, id)
+    }
+    else {
+        if (Cells_manager.size_array[i].img !== undefined) {
+            image_Message(i, id)
         }
-    });
-    request.execute(function (response) {
-        // folder is created
-        console.log(response);
+        if (Cells_manager.size_array[i].link !== undefined) {
+            link_message(i, id)
+        }
+        if (Cells_manager.size_array[i].tube !== undefined) {
+            youtube_message(i, id)
+        }
+        if (Cells_manager.size_array[i].face !== undefined) {
+            facebook_message(i, id)
+            runfacebookScript()
+        }
+        if (Cells_manager.size_array[i].tiktok !== undefined) {
+            runTikTokScript()
+            tiktok_message(i, id)
+        }
+    }
+
+}
+let scroll_to_bottom = document.getElementById('tableBody');
+scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+}
+
+
+
+
+
+function PUT(number, value) {
+
+Cells_manager.new_text = value
+Cells_manager.string_name = "text"
+
+link_type()
+//   document.getElementById(`message-${number}`).value
+Cells_manager.new_time = time_now()
+const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}/${number}`
+fetch(url, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: `{
+                "user": "${Cells_manager.name}",
+                "${Cells_manager.string_name}": "${Cells_manager.new_text}",
+                "time": "${Cells_manager.new_time}"
+            }`
+}).then(response => {
+    if (!response.ok) {
+        console.error(response)
+        alert('failure') // 1 -- failure
+    }
+    else {
+
+    }
+})
+
+
+}
+
+function delete_(number) {
+
+fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}/${number}`, {
+    method: 'DELETE'
+
+}).then(response => {
+    if (!response.ok) {
+        console.error(response)
+        alert('failure') // 1 -- failure
+    } else {
+    }
+})
+}
+
+function edit_or_delete(number) {
+const element = document.getElementById(`message-${number}`);
+const classes = element.className;
+if (classes === "message-balloon") {
+    Swal.fire({
+        title: 'Edit or delete the message?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'edit',
+        denyButtonText: `delete`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+
+        if (result.isConfirmed) {
+            text_editing(number)
+
+
+        } else if (result.isDenied) {
+            Swal.fire('The message has been deleted', '', 'info')
+            delete_(number)
+
+        }
     })
 }
-function upload() {
-    // set file metadata
-    var metadata = {
-        name: 'name.txt',
-        mimeType: 'plain/text',
-        parents: [parent_Folder_id]
-    };
-    var formData = new FormData();
-    formData.append("metadata", new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
-    // set file as blob formate
-    formData.append("file", file_in_blob_formate);
-    fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
-        method: 'POST',
-        headers: new Headers({ "Authorization": "Bearer " + gapi.auth.getToken().access_token }),
-        body: formData
-    }).then(function (response) {
-        return response.json();
-    }).then(function (value) {
-        console.log(value);
-        // file is uploaded
-    });
-}
-function downloadFile() {
-    // only file can be download able not folder or zip
-    gapi.client.drive.files.get({
-        // give id of file to download
-        fileId: id_of_file,
-        alt: 'media'
-    }).then(function (res) {
-        // set the different type if file is not text file
-        var blob = new Blob([res.body], { type: 'plain/text' });
-        var a = document.createElement('a');
-        a.href = window.URL.createObjectURL(blob);
-        // give file name
-        a.download = 'file-name';
-        a.click();
+else {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You are trying to edit a message that is not yours!',
     })
 }
-function deleteFile() {
-    var request = gapi.client.drive.files.delete({
-        // give file id to delete
-        'fileId': id_of_file
-    });
-    request.execute(function (res) {
-        console.log('File Deleted');
-    })
 }
-</script>
+
+
+function text_editing(number) {
+(async () => {
+
+    const { value: text } = await Swal.fire({
+        input: 'textarea',
+        inputLabel: 'Message',
+        inputPlaceholder: 'Type your message here...',
+        inputAttributes: {
+            'aria-label': 'Type your message here'
+        },
+        showCancelButton: true
+    })
+
+    if (text) {
+        [Swal.fire(text)
+
+        ]
+        PUT(number, text)
+    }
+
+})()
+}
+
+function addCellClick(divId, number) { //Adds onClick to this div
+const div = document.getElementById(divId);
+div.addEventListener("click", function () {
+    // קריאה לפונקציה `cell_click()` עם מספר התמונה
+    edit_or_delete(number);
+});
+}
+
+
+
+function runTikTokScript() {
+const script = document.createElement("script");
+script.src = "https://www.tiktok.com/embed.js";
+script.async = false;
+document.body.appendChild(script);
+}
+function runfacebookScript() {
+const script = document.createElement("script");
+script.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2";
+script.async = false;
+document.body.appendChild(script);
+}
+
+
+
+async function last_message() {
+
+Cells_manager.name = document.getElementById('name').value
+
+for (let i = 1; i < 5; i++) {
+    let url = `https://db-nmn5.onrender.com/chat${i}`
+    let response = await fetch(`${url}`)
+    if (!response.ok) {
+        console.error('network problem')
+        return
+    }
+    let data = await response.json()
+    localStorage.setItem(`chat${i}`, JSON.stringify(data));
+    let last_m = data
+    let a = last_m.length - 1
+
+    let td = document.getElementById(`td-${i}`)
+    td.innerHTML = ""
+    let td_son = document.createElement('td')
+    let user_name = null
+    if (last_m[a].text !== undefined) {
+        if (last_m[a].user === Cells_manager.name) {
+            user_name = "you"
+            if (i === 1) {
+                img_user1.src = Cells_manager.img_user
+            }
+            if (i === 2) {
+                img_user2.src = Cells_manager.img_user
+            } if (i === 3) {
+                img_user3.src = Cells_manager.img_user
+            } if (i === 4) {
+                img_user4.src = Cells_manager.img_user
+            }
+        }
+        else {
+            user_name = last_m[a].user
+            if (i === 1) {
+                img_user1.src = "bot.png"
+            }
+            if (i === 2) {
+                img_user2.src = "bot.png"
+            } if (i === 3) {
+                img_user3.src = "bot.png"
+            } if (i === 4) {
+                img_user4.src = "bot.png"
+            }
+        }
+
+        td.innerHTML = `<td ><sub><b>${user_name}:</b></sub></td>
+        <td colspan="2">${last_m[a].text}</td>`
+
+        td.appendChild(td_son)
+    } else {
+        td_son.innerHTML = `<td ><sub><b>${user_name}:</b></sub></td>'
+        <td colspan="2">link message!!</td> `
+        td.appendChild(td_son)
+    }
+
+
+
+}
+
+}
+
+
+intervalId = setInterval(Push_update, 500)
+
+
+
+function text_message(i,id) {
+    Cells_manager.son.innerHTML = `
+    <br/>
+    
+    <div>
+        <div class="user-img">
+            <img id="${Cells_manager.type_id}" src="${Cells_manager.img}" />
+            </div>
+
+            <div id="${Cells_manager.margin_bottom}"><b>${Cells_manager.size_array[i].user}</b></div>
+        <p class="${Cells_manager.type_class} ">
+            <span class="user" id="message-${id}">
+                <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+            </span>
+            ${Cells_manager.size_array[i].text}
+            <sub>${Cells_manager.size_array[i].time}</sub>
+        </p>
+  </div>
+  <br/><br/><br/>
+        `
+    Cells_manager.message_list.appendChild(Cells_manager.son)
+    addCellClick(`message-${id}`, id)
+}
+
+function image_Message(i,id) {
+    Cells_manager.son.innerHTML = ` <br />
+        <div>
+            <div>
+                <img id="${Cells_manager.type_id}" src="${Cells_manager.img}" />
+                <div id="${Cells_manager.margin_bottom}"><b>${Cells_manager.size_array[i].user}</b></div>
+            </div>
+            <div class="${Cells_manager.type_class}">
+                <div class="${Cells_manager.type_class}" id="message-${id}">
+                <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+             
+                <img src="${Cells_manager.size_array[i].img}" width="200px" height="200px" />
+            </div>
+                <div><sub>${Cells_manager.size_array[i].time}</sub></div>
+        </div>`
+    Cells_manager.message_list.appendChild(Cells_manager.son)
+    addCellClick(`message-${id}`, id)
+}
+
+
+function link_message(i,id) {
+    Cells_manager.son.innerHTML = `<br/>
+    <div><img id="${Cells_manager.type_id}" src="${Cells_manager.img}"/>
+    
+        <b>${Cells_manager.size_array[i].user}</b>
+        </div>
+        <div class="${Cells_manager.type_class}">
+            <div class="${Cells_manager.type_class}" id="message-${id}">
+                <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+            <a href="${Cells_manager.size_array[i].link}">${Cells_manager.size_array[i].link}</a>
+            </br>
+            <sub>${Cells_manager.size_array[i].time}</sub></div>
+        </div>
+    </div>
+    </div>`
+    Cells_manager.message_list.appendChild(Cells_manager.son)
+    addCellClick(`message-${id}`, id)
+}
+function youtube_message(i,id) {
+    Cells_manager.son.innerHTML = `
+    <br />
+    <div>
+        <div>
+            <img id="${Cells_manager.type_id}" src="${Cells_manager.img}"/>
+            <div><b>${Cells_manager.size_array[i].user}</b></div>
+        </div>
+        <div class="${Cells_manager.type_class}">
+            <iframe width="300" height="200"
+                src="https://www.youtube.com/embed/Vaxpu-8m4kw?${Cells_manager.size_array[i].tube}"
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+        encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <spam class="${Cells_manager.type_class}" id="message-${id}">
+                <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+            </spam>
+            <div><sub>${Cells_manager.size_array[i].time}</sub></div>
+        </div>
+    </div>`
+    Cells_manager.message_list.appendChild(Cells_manager.son)
+    addCellClick(`message-${id}`, id)
+}
+function facebook_message(i,id) {
+    Cells_manager.son.innerHTML = `
+    <br/>
+    <div>
+        <div>
+            <img id="${Cells_manager.type_id}" src="${Cells_manager.img}" />
+                <div ><b>${Cells_manager.size_array[i].user}</b></div>
+            </div>
+            <div class="${Cells_manager.type_class}">                          
+                <iframe width="300" height="200" 
+                    src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FSirtonimInt%2Fvideos%2F${Cells_manager.size_array[i].face}%2F&show_text=false&width=560&t=0"
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write;
+                    encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            <spam class="${Cells_manager.type_class}" id="message-${id}">
+                    <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+                </spam> 
+            <div><sub>${Cells_manager.size_array[i].time}</sub></div>
+        </div>
+    </div>`
+    Cells_manager.message_list.appendChild(Cells_manager.son)
+    addCellClick(`message-${id}`, id)
+}
+function tiktok_message(i,id) {
+    const url = Cells_manager.size_array[i].tiktok
+    const parts = url.split("/");
+    const videoId = parts[parts.length - 1];
+    const id_link = videoId.split("?");
+    const firstPart = id_link[0];
+    Cells_manager.son.innerHTML = `
+    <br/>
+    <div>
+        <div>
+            <img id="${Cells_manager.type_id}" src="${Cells_manager.img}" />
+                <div ><b>${Cells_manager.size_array[i].user}</b></div>
+            </div>
+    </div>         
+    <div class="${Cells_manager.type_class}" style="width="300px" height="200px";>                          
+        <blockquote class="tiktok-embed" cite="${Cells_manager.size_array[i].tiktok}" 
+            data-video-id="${firstPart}" " > 
+            <section> </section>
+        </blockquote> 
+            <spam class="${Cells_manager.type_class}" id="message-${id}">
+                <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
+            </span> 
+        <div><sub>${Cells_manager.size_array[i].time}</sub></div>
+    </div>`
+    Cells_manager.message_list.appendChild(Cells_manager.son)
+    addCellClick(`message-${id}`, id)
+}
+
+  </script>
 </body>
 </html>

@@ -8,6 +8,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/request/2.88.0/request.min.js"></script>
 
     <script src="files js/Types of messages.js"></script>
+    <script src="files js/last_maessage.js"></script>
+
+
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -26,13 +29,13 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        background-color: #f8f9fa;
-        /* Fallback background color */
+        background: #ccc;
         margin: 0;
         min-height: 100vh;
-        background-image: url("wallpaper-dark.jpg");
         width: 80%;
         margin-left: 10%;
+        background-image: url("wallpaper-dark.jpg");
+      
     }
 
     .chat-container {
@@ -41,7 +44,7 @@
         font-size: 20px;
         background-image: url("w.jpg");
         max-width: 600px;
-        margin-top: -43%;
+        margin-top: -5%;
         padding: 20px;
         max-height: 500px;
         background-color: rgba(255, 255, 255, 0.9);
@@ -218,19 +221,39 @@
         left: 50%;
     }
 
+    .flex {
+        display: flex;
+
+    }
+
+
+
     .send {
         background: transparent;
         border: 0;
         cursor: pointer;
         flex: 0 0 auto;
-        margin-left: 8px;
-        margin-right: 8px;
         padding: 0;
         position: relative;
         outline: none;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: -5%
+    }
+
+    .exit {
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        padding: 0;
+        position: relative;
+        outline: none;
+        margin-left: 0.5%;
+        margin-top: -70%
     }
 
     .send .circle {
+        Cursor: pointer;
         background: #008a7c;
         border-radius: 50%;
         color: #fff;
@@ -242,10 +265,18 @@
         justify-content: center;
     }
 
-
-
-
-
+    .exit .circle {
+        Cursor: pointer;
+        background: #8a4500;
+        border-radius: 50%;
+        color: #fff;
+        position: relative;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
 
     #emoji-1 {
@@ -261,7 +292,11 @@
         width: 45px;
         height: 45px;
         border-radius: 80%;
+        Cursor: pointer;
+    }
 
+    .iconify-icon {
+        Cursor: pointer;
 
     }
 
@@ -285,7 +320,9 @@
         font-size: 24px
     }
 
-    #emoji {
+    #all-emoji {
+        Cursor: pointer;
+
         max-width: 300px;
         padding: 20px;
         max-height: 200px;
@@ -310,7 +347,7 @@
 
     }
 
-    #emoji .row {
+    #all-emoji .row {
         margin-left: 0%;
     }
 
@@ -318,9 +355,11 @@
         font-size: 24px
     }
 
-    .css-ukfjzf {
-        max-height: 200px;
+    .emojis:hover {
+        Cursor: pointer;
+        font-size: 54px
     }
+
 
     *[id^="img_user"] {
         width: 50px;
@@ -328,75 +367,202 @@
         border-radius: 50%
     }
 
-    #chats {
-        width: 400px;
-        margin-left: -10%;
+    *[id^="message-"] {
+        Cursor: pointer;
+
     }
+
+
+    .chat-list {
+        position: relative;
+        height: calc(100% - 170px);
+        overflow-y: auto;
+        width: 70%;
+        box-shadow: 0px 1px 1px  0 rgba(0,0,0,0.5), 0px 2px 5px 0 rgba(0,0,0,0.6);
+        background-color:white
+
+
+
+    }
+
+    .chat-list .chat-box {
+        position: relative;
+        width: 100%;
+        display: flex;
+        /*   justify-content: center; */
+        align-items: center;
+        cursor: pointer;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+
+    }
+
+    .chat-list .chat-box .img-box {
+        position: relative;
+        width: 55px;
+        height: 45px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .chat-list .chat-box .chat-details {
+        width: 100%;
+        margin-left: 10px;
+    }
+
+    .chat-list .chat-box .chat-details .text-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2px;
+    }
+
+    .chat-list .chat-box .chat-details .text-head h4 {
+        font-size: 1.1em;
+        font-weight: 600;
+        color: #000;
+    }
+
+    .chat-list .chat-box .chat-details .text-head .time {
+        font-size: 0.8em;
+        color: #aaa;
+    }
+
+    .chat-list .chat-box .chat-details .text-message {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chat-list .chat-box .chat-details .text-message p {
+        color: #282727;
+        font-size: 0.9em;
+        overlay: hidden;
+    }
+
+    img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .chat-list .chat-box .chat-details .text-message b {
+        background: #06e744;
+        color: #fff;
+        min-width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        /*   text-align: center; */
+        font-size: 0.8em;
+        font-weight: 400;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .chat-list .active {
+        background: #ebebeb;
+    }
+
+    .chat-list .chat-box:hover {
+        background: #f5f5f5;
+    }
+
+    .chat-list .chat-box .chat-details .text-head .unread {
+        color: #06e744;
+        
+    }
+
+    .online{
+        margin-left: 90%;
+        margin-top: -30%;
+        box-shadow: 0px 1px 1px  0 rgba(0,0,0,0.5), 0px 2px 5px 0 rgba(0,0,0,0.6);
+        background-color:white
+    }
+
 </style>
 
 <body>
     <h1>WritingApp</h1>
-    <div class="table-responsive-sm">
-        <table class="table table-success table-hover" id="chats" style=" display:none">
-            <thead>
-                <tr>
-                    <th colspan="2">Chats</th>
-                    <th colspan="1"></th>
 
-                    <th colspan="2">Last Message</th>
-                    <th colspan="1">Online</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr onclick="activation(1)">
-                    <td colspan="2">chat1</td>
-                    <td><img id="img_user1" src="" /></td>
-
-
-                    <td colspan="2" id="td-1"></td>
-                    <td rowspan="4" id="online"></td>
-
-
-                </tr>
-                <tr onclick="activation(2)">
-                    <td colspan="2">chat2</td>
-                    <td><img id="img_user2" src="" /></td>
-
-                    <td colspan="2" id="td-2"></td>
-                </tr>
-                <tr onclick="activation(3)">
-                    <td colspan="2">chat3</td>
-                    <td><img id="img_user3" src="" /></td>
-
-                    <td colspan="2" id="td-3"></td>
-                </tr>
-                <tr onclick="activation(4)">
-                    <td colspan="2">chat4</td>
-                    <td><img id="img_user4" src="" /></td>
-
-                    <td colspan="2" id="td-4"></td>
-                </tr>
-            </tbody>
-        </table>
-        <br />
+    <div class="chat-list" id="chats" style=" display:none">
+        <div class="chat-box" onclick="activation(1)">
+            <div class="img-box">
+                <img class="img-cover" id="img_user1" src="" />
+            </div>
+            <div class="chat-details">
+                <div class="text-head" id="user-name1">
+                </div>
+                <div class="text-message" id="p-1">
+                </div>
+            </div>
+        </div>
+        <div class="chat-box" onclick="activation(2)">
+            <div class="img-box">
+                <img class="img-cover" id="img_user2" src="" />
+            </div>
+            <div class="chat-details">
+                <div class="text-head" id="user-name2">
+                </div>
+                <div class="text-message" id="p-2">
+                </div>
+            </div>
+        </div>
+        <div class="chat-box" onclick="activation(3)">
+            <div class="img-box">
+                <img class="img-cover" id="img_user3" src="" />
+            </div>
+            <div class="chat-details">
+                <div class="text-head" id="user-name3">
+                </div>
+                <div class="text-message" id="p-3">
+                </div>
+            </div>
+        </div>
+        <div class="chat-box" onclick="activation(4)">
+            <div class="img-box">
+                <img class="img-cover" id="img_user4" src="" />
+            </div>
+            <div class="chat-details">
+                <div class="text-head" id="user-name4">
+                </div>
+                <div class="text-message" id="p-4">
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+
+    </div>
+    <br />
+
     <div class="chat-container" style="display: none;" id="tableBody">
-
-
     </div>
+
     <div class="margin-left" id="button-send" style="display: none">
         <div class="form-row"></div>
         <span id="emoji-1" onclick="Show_emojis()">
             <img id="emoji-2" src="https://media.tenor.com/Wq-MvpjAJksAAAAC/emojilaugh-emoji.gif">
         </span>
         <textarea id="textarea" name="text" placeholder="Type a message.."></textarea>
+
         <button class="send" id="smile" onclick="post_data()">
             <span class="circle">
+
                 <iconify-icon icon="zmdi:mail-send"></iconify-icon>
             </span>
         </button>
+        <button class="exit" id="smile" onclick="Hide_di3()">
+            <span class="circle">
+
+                <iconify-icon icon="game-icons:exit-door"></iconify-icon>
+            </span>
+        </button>
+
     </div>
+
+
     <form class=" mt-5 mx-auto col-6 col-md-8 col-lg-6 was-validated " id="from" style="display: block;">
         <div class="form-row">
             <div class="col-md-4 mb-3">
@@ -410,89 +576,100 @@
 
                 <input type="file" onchange="add_img()" class="custom-file-input" id="files" required>
                 <label class="custom-file-label" for="file"><b>add a picture..</b></label>
+            </div>
+            <button onclick="Hide_div2()" class="btn btn-primary col" type="button">connect</button>
     </form>
-    </div>
 
-    <button onclick="Hide_div2()" class="btn btn-primary col" type="button">connect</button>
-    </form>
     <br />
-    <div id="emoji" style="display: none;"></div><br />
-
+    </div>
 
 
     <img id="frame" style="display: none;" src="" width="0px" height="0px" />
     <p id="data"></p>
+    <div id="all-emoji" style="display: none;"></div>
+    <br />
+    <div class="online">
+        <div class="chat-details">
+            <h3>online</h3>
+            <div id="online">
+            </div>
 
-
+        </div>
+    </div>
 
     <script>
 
 
         async function check_online() {
 
-            while (true) {
-                Cells_manager.new_text = document.getElementById('name').value
-                let time = time_now()
-                let v = 0
-                time += `:${Cells_manager.time_date.getSeconds()}`
+            Cells_manager.new_text = document.getElementById('name').value
+            let time = time_now()
+            let v = 0
+            time += `:${Cells_manager.time_date.getSeconds()}`
 
 
-                const url = "https://db-nmn5.onrender.com/online"
+            const url = "https://db-nmn5.onrender.com/online"
 
-                let response = await fetch(`${url}`)
-                if (!response.ok) {
-                    console.error('network problem')
-                    return
-                }
-                let data = await response.json()
+            let response = await fetch(`${url}`)
+            if (!response.ok) {
+                console.error('network problem')
+                return
+            }
+            let data = await response.json()
 
-                localStorage.setItem("check-online", JSON.stringify(data));
-                Cells_manager._online = JSON.parse(localStorage.getItem("check-online"));
+            localStorage.setItem("check-online", JSON.stringify(data));
+            Cells_manager._online = JSON.parse(localStorage.getItem("check-online"));
 
-                let td = document.getElementById(`online`)
-                td.innerHTML = ""
-                for (let i = 0; i < Cells_manager._online.length; i++) {
-                    let td_son = document.createElement('span')
-                    td_son.innerHTML = `<br/><td colspan="2"><b>${Cells_manager._online[i].user}:</b><sub>${Cells_manager._online[i].time}</sub></>
+            let td = document.getElementById(`online`)
+            td.innerHTML = ""
+            for (let i = 0; i < Cells_manager._online.length; i++) {
+                let td_son = document.createElement('span')
+                if (Cells_manager._online[i].user !== "") {
+                    td_son.innerHTML = `<span><b>${Cells_manager._online[i].user}:</b><sub>${Cells_manager._online[i].time}</sub></span>
                  `
                     td.appendChild(td_son)
                 }
-                let jsonArray = Cells_manager._online
-                let name = jsonArray.findIndex((item) => item.user === Cells_manager.new_text);
+            }
+            let jsonArray = Cells_manager._online
+            let name = jsonArray.findIndex((item) => item.user === Cells_manager.new_text);
 
-                for (let i = 0; i < Cells_manager._online.length; i++) {
+            for (let i = 0; i < Cells_manager._online.length; i++) {
 
 
-                    let a = Cells_manager._online[i].time.split(":")[2];
+                let a = Cells_manager._online[i].time.split(":")[2];
 
-                    let offline = time.split(":")[2]
-                    offline = offline + a
-                    let id = Cells_manager._online[i].id
-                    if (offline > 15) {
-                        fetch(`https://db-nmn5.onrender.com/online/${id}`, {
-                            method: 'DELETE'
-                        })
-                    }
+                let offline = time.split(":")[2]
+                offline = offline + a
+                let id = Cells_manager._online[i].id
+                if (offline > 15) {
+                    fetch(`https://db-nmn5.onrender.com/online/${id}`, {
+                        method: 'DELETE'
+                    })
 
-                    v++
                 }
-                if (name === -1) {
 
-                    if (v === Cells_manager._online.length) {
-                        fetch(url, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: `{
+                v++
+            }
+            if (name === -1) {
+
+                if (v === Cells_manager._online.length) {
+                    fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: `{
                                 "user": "${Cells_manager.new_text}",
-                                "time": "${time}"
+                                "time": "${time}",
+                                "id": "${Cells_manager._id_online}"
                                 }`})
-                    }
+                    Cells_manager._id_online++
+
                 }
             }
         }
-        
+
+
         function Show_emojis() {
-            const div1 = document.getElementById("emoji");
+            const div1 = document.getElementById("all-emoji");
             div1.style.display = div1.style.display === "none" ? "block" : "none";
         }
 
@@ -511,7 +688,7 @@
                 })
 
             const emojis = JSON.parse(localStorage.getItem("emojis"))
-            const father_div = document.getElementById('emoji')
+            const father_div = document.getElementById('all-emoji')
             const son = document.createElement('div')
             son.classList.add("row");
             father_div.appendChild(son)
@@ -545,7 +722,7 @@
 
         class Default_cells {
             constructor(_name, _img, _img_user, _Push, _size_array, _new_text, _new_time, _string_name,
-                _message_list, _son, _type_class, _type_id, _time_date, _margin_bottom, _chat_n, _json_id, _online) {
+                _message_list, _son, _type_class, _type_id, _time_date, _margin_bottom, _chat_n, _json_id, _online, _id_online) {
                 this.name = _name
                 this.img_user = _img_user
                 this.img = _img
@@ -563,6 +740,7 @@
                 this.chat_n = _chat_n
                 this.json_id = _json_id
                 this.online = _online
+                this.id_online = _id_online
 
             }
         }
@@ -586,27 +764,39 @@
                 });
         }
         function Hide_div() {
-            const div1 = document.getElementById("tableBody");
-            div1.style.display = "block"
-            const div2 = document.getElementById("button-send");
+            const div2 = document.getElementById("tableBody");
             div2.style.display = "block"
-            last_message()
+            const div3 = document.getElementById("button-send");
+            div3.style.display = "block"
+            // last_message()
 
         }
 
+        function Hide_di3() {
+            const div2 = document.getElementById("tableBody");
+            div2.style.display = "none"
+            const div3 = document.getElementById("button-send");
+            div3.style.display = "none"
+            const div5 = document.getElementById("chats");
+            div5.style.display = div5.style.display === "none" ? "block" : "none";
+            Cells_manager.size_array =
+            Cells_manager.message_list = document.getElementById('tableBody')
+            Cells_manager.message_list.innerHTML = ""
+
+        }
         function Hide_div2() {
-            const div3 = document.getElementById("from");
-            div3.style.display = div3.style.display === "block" ? "none" : "none";
-            const div4 = document.getElementById("chats");
-            div4.style.display = div4.style.display === "none" ? "block" : "none";
+            const div4 = document.getElementById("from");
+            div4.style.display = div4.style.display === "block" ? "none" : "none";
+            const div5 = document.getElementById("chats");
+            div5.style.display = div5.style.display === "none" ? "block" : "none";
             intervalId = setInterval(last_message, 500)
-            check_online()
+           
 
         }
 
         function activation(n) {
             if (Cells_manager.name !== '') {
-
+                Hide_div2()
                 Hide_div()
                 Hide_div()
                 Cells_manager.chat_n = n
@@ -622,6 +812,8 @@
         function add_img() {
             frame.src = URL.createObjectURL(event.target.files[0]);
             Cells_manager.img_user = frame.src
+            Cells_manager._id_online = 0
+            setInterval(check_online, 1000);
         }
 
         function id_message(i) {
@@ -922,69 +1114,7 @@
 
 
 
-        async function last_message() {
 
-            Cells_manager.name = document.getElementById('name').value
-
-            for (let i = 1; i < 5; i++) {
-                let url = `https://db-nmn5.onrender.com/chat${i}`
-                let response = await fetch(`${url}`)
-                if (!response.ok) {
-                    console.error('network problem')
-                    return
-                }
-                let data = await response.json()
-                localStorage.setItem(`chat${i}`, JSON.stringify(data));
-                let last_m = data
-                let a = last_m.length - 1
-
-                let td = document.getElementById(`td-${i}`)
-                td.innerHTML = ""
-                let td_son = document.createElement('td')
-                let user_name = null
-                if (last_m[a].text !== undefined) {
-                    if (last_m[a].user === Cells_manager.name) {
-                        user_name = "you"
-                        if (i === 1) {
-                            img_user1.src = Cells_manager.img_user
-                        }
-                        if (i === 2) {
-                            img_user2.src = Cells_manager.img_user
-                        } if (i === 3) {
-                            img_user3.src = Cells_manager.img_user
-                        } if (i === 4) {
-                            img_user4.src = Cells_manager.img_user
-                        }
-                    }
-                    else {
-                        user_name = last_m[a].user
-                        if (i === 1) {
-                            img_user1.src = "bot.png"
-                        }
-                        if (i === 2) {
-                            img_user2.src = "bot.png"
-                        } if (i === 3) {
-                            img_user3.src = "bot.png"
-                        } if (i === 4) {
-                            img_user4.src = "bot.png"
-                        }
-                    }
-
-                    td.innerHTML = `<td ><sub><b>${user_name}:</b></sub></td>
-                    <td colspan="2">${last_m[a].text}</td>`
-
-                    td.appendChild(td_son)
-                } else {
-                    td_son.innerHTML = `<td ><sub><b>${user_name}:</b></sub></td>'
-                    <td colspan="2">link message!!</td> `
-                    td.appendChild(td_son)
-                }
-
-
-
-            }
-
-        }
 
 
         intervalId = setInterval(Push_update, 500)
