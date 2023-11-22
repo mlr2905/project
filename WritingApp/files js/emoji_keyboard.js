@@ -9,7 +9,7 @@ function copy_To_Clipboard(a) {
 }
 
 function emoji_keyboard() {
-    const url = "https://emoji-api.com/emojis?access_key=d43e0d96d977b343931bd3b2ae90d2d15f362bc0"
+    const url = "https://emojis-e61p.onrender.com/emojis"
     fetch(url)
         .then(res => res.json())
         .then(data => {

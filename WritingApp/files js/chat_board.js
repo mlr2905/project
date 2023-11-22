@@ -29,7 +29,8 @@ function Hide_div2() {
     intervalId = setInterval(last_message, 500)
 
     if (Cells_manager.One_time === 0) {
-        setInterval(check_online, 100)
+        check_online()
+        setInterval(check_online, 15000)
         emoji_keyboard()
         Cells_manager.One_time++
     }
@@ -96,7 +97,6 @@ function activation(n) {
 function add_img() {
     frame.src = URL.createObjectURL(event.target.files[0]);
     Cells_manager.img_user = frame.src
-    setInterval(check_online, 1000);
 }
 
 function id_message(i) {
