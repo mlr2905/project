@@ -24,7 +24,6 @@ function Hide_di3() {
 function Hide_div2() {
     const div4 = document.getElementById("from");
     div4.style.display = div4.style.display === "block" ? "none" : "none";
-    chats()
     const div5 = document.getElementById("chats");
     div5.style.display = div5.style.display === "none" ? "block" : "none";
     intervalId = setInterval(last_message, 500)
