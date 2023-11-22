@@ -1,7 +1,5 @@
 async function last_message() {
-
     Cells_manager.name = document.getElementById('name').value
-
     for (let i = 1; i < 5; i++) {
         let url = `https://db-nmn5.onrender.com/chat${i}`
         let response = await fetch(`${url}`)
@@ -13,7 +11,6 @@ async function last_message() {
         localStorage.setItem(`chat${i}`, JSON.stringify(data));
         let last_m = data
         let a = last_m.length - 1
-
         let div = document.getElementById(`p-${i}`)
         div.innerHTML = ""
         let p_son = document.createElement('p')
@@ -22,8 +19,6 @@ async function last_message() {
         let h4_son = document.createElement('h4')
         let p_son_time = document.createElement('p')
         let p_son_b = document.createElement('b')
-
-
         let user_name = null
         if (last_m[a].text !== undefined) {
             if (last_m[a].user === Cells_manager.name) {
@@ -52,21 +47,21 @@ async function last_message() {
                     img_user4.src = "bot.png"
                 }
             }
-            h4_son.innerHTML =user_name
-            p_son_time.innerHTML =last_m[a].time
-            div2.appendChild(h4_son)
-            div2.appendChild(p_son_time)
-            p_son.innerHTML = last_m[a].text
-            p_son_b.innerHTML =a
-            div.appendChild(p_son)
-            div.appendChild(p_son_b)
-
-        } else {
-            h4_son.innerHTML =user_name
+            h4_son.innerHTML = user_name
             p_son_time.innerHTML = last_m[a].time
             div2.appendChild(h4_son)
             div2.appendChild(p_son_time)
-            p_son.innerHTML ="link message!!"
+            p_son.innerHTML = last_m[a].text
+            p_son_b.innerHTML = a
+            div.appendChild(p_son)
+            div.appendChild(p_son_b)
+        } 
+        else {
+            h4_son.innerHTML = user_name
+            p_son_time.innerHTML = last_m[a].time
+            div2.appendChild(h4_son)
+            div2.appendChild(p_son_time)
+            p_son.innerHTML = "link message!!"
             div.appendChild(p_son)
         }
     }
