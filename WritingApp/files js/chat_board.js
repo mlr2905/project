@@ -111,10 +111,10 @@ function id_message(i) {
     return id[0].id;
 }
 
-function handleEnter(event) {
-    if (event.keyCode === 13) {
+function handleEnter(enter) {
+    if (enter.keyCode === 13) {
         if (document.querySelector("textarea").value !== "") {
-            event.preventDefault()
+            enter.preventDefault()
             post_data()
         }
     }
