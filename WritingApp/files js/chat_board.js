@@ -1,24 +1,24 @@
-const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",)
+const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",)
 
 Cells_manager.One_time = 0
 
 function Hide_div() {
-    const div2 = document.getElementById("tableBody");
+    const div2 = document.getElementById("page-content");
     div2.style.display = "block"
-    const div3 = document.getElementById("button-send");
-    div3.style.display = "block"
+ 
 }
 
 function Hide_di3() {
-    const div2 = document.getElementById("tableBody");
+    const div2 = document.getElementById("page-content");
     div2.style.display = "none"
-    const div3 = document.getElementById("button-send");
-    div3.style.display = "none"
+
     const div5 = document.getElementById("chats");
     div5.style.display = div5.style.display === "none" ? "block" : "none";
-    Cells_manager.size_array =
-    Cells_manager.message_list = document.getElementById('tableBody')
+    Cells_manager.size_array = []
+    Cells_manager.message_list = document.getElementById('box-body')
     Cells_manager.message_list.innerHTML = ""
+    
+
 }
 
 function Hide_div2() {
@@ -67,7 +67,7 @@ function edit_or_delete(number) {
 function text_editing(number) {
     (async () => {
         const { value: text } = await Swal.fire({
-            input: 'textarea',
+            input: 'text',
             inputLabel: 'Message',
             inputPlaceholder: 'Type your message here...',
             inputAttributes: {
@@ -81,7 +81,7 @@ function text_editing(number) {
 
 function activation(n) {
     if (Cells_manager.name !== '') {
-        document.querySelector("#textarea").addEventListener("keydown", handleEnter);
+        document.querySelector("#text").addEventListener("keydown", handleEnter);
         Hide_div2()
         Hide_div()
         Hide_div()
@@ -113,7 +113,7 @@ function id_message(i) {
 
 function handleEnter(enter) {
     if (enter.keyCode === 13) {
-        if (document.querySelector("textarea").value !== "") {
+        if (document.getElementById("text").value !== "") {
             enter.preventDefault()
             post_data()
         }

@@ -19,17 +19,13 @@ function Push_update() {
 
 function get() {
 
-    fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
-        .then(res => res.json())
-        .then(data => {
-            localStorage.setItem("db-chats", JSON.stringify(data));
-        })
+    // I use get execute function last_message
 
-    Cells_manager.size_array = JSON.parse(localStorage.getItem("db-chats"))
-    Cells_manager.message_list = document.getElementById('tableBody')
+    Cells_manager.size_array = JSON.parse(localStorage.getItem(`chat${Cells_manager.chat_n}`))
+    Cells_manager.message_list = document.getElementById('box-body')
     Cells_manager.message_list.innerHTML = ""
     const data_day = date_day_now()
-    const div = document.getElementById('tableBody')
+    const div = document.getElementById('box-body')
     const son = document.createElement('div')
     son.innerHTML = `<div class="date_day">${data_day}</div>`
     div.appendChild(son)
@@ -37,12 +33,12 @@ function get() {
 }
 
 function post_data() {
-    if (document.querySelector("textarea").value !== ""){
-    Cells_manager.new_text = document.getElementById('textarea').value
+    if (document.getElementById("text").value !== ""){
+    Cells_manager.new_text = document.getElementById('text').value
     Cells_manager.string_name = "text"
     Cells_manager.json_id += 1
     link_type()
-    const input = document.getElementById('textarea')
+    const input = document.getElementById('text')
     input.value = '';
     const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`
     fetch(url, {

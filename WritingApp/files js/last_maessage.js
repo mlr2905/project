@@ -9,7 +9,7 @@ async function last_message() {
         }
         let data = await response.json()
         localStorage.setItem(`chat${i}`, JSON.stringify(data));
-        let last_m = data
+        let last_m = await data
         let a = last_m.length - 1
         let div = document.getElementById(`p-${i}`)
         div.innerHTML = ""

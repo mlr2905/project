@@ -83,32 +83,61 @@
             </div>
         </div>
     </div>
+    <br />
+
+    <div class="page-content" id="page-content" style="display: none">
+        <div class="padding">
+            
+            <div class="row container d-flex justify-content-center">
+                <div class="col-md-5">
+                    <div class="box box-warning direct-chat direct-chat-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Chat Messages</h3>
+                        </div>
+
+                        <div class="box-body">
+                            <div class="direct-chat-messages" id="box-body">
+                            </div>
+                            <div class="box-footer">
+                                <form action="#" method="post">
+                                    <div class="input-group">
+                                        <input type="text" onclick="hide_emojis()" id="text" name="message" placeholder="Type Message ..."
+                                            class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-warning btn-flat"
+                                                onclick="post_data()">Send</button>
+                                        </span>
+
+                                    </div>
+                                </form>
+                                <br />
+                                <div class="row" style=" justify-content: center;">
+                                    <span id="emoji-1" onclick="Show_emojis()" style="margin-right: 4%;">
+                                        <iconify-icon icon="fe:smile"
+                                            style='font-size:40px;color: #c69607'></iconify-icon>
+                                    </span>
+                                    <div class="image" style="margin-right: 5%;">
+                                        <label for="image">
+                                            <iconify-icon icon="lets-icons:img-box-fill" alt="בחר קובץ"
+                                                style='font-size:40px;color: #c69607'></iconify-icon>
+                                        </label>
+                                    </div>
+                                    <div class="exit" onclick="Hide_di3()">
+                                        <iconify-icon icon="game-icons:exit-door"
+                                            style='font-size:40px;color: #c69607;'></iconify-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <br />
-    <div class="chat-container" style="display: none;" id="tableBody">
-    </div>
-    <br />
-    <div class="margin-left" id="button-send" style="display: none">
-        <textarea id="textarea" name="text" placeholder="Type a message.."></textarea>
-        <div id="emoji-1" onclick="Show_emojis()">
-            <img id="emoji-2" src="https://media.tenor.com/Wq-MvpjAJksAAAAC/emojilaugh-emoji.gif">
-        </div>
-        <div class="image">
-            <label for="image">
-                <iconify-icon icon="lets-icons:img-box-fill" alt="בחר קובץ"
-                    style='font-size:48px;color:white'></iconify-icon>
-            </label>
-        </div>
-        <input type="file" id="image" style="display: none;" onchange="post_img()" />
-        <div class="send" onclick="post_data()">
-            <span class="circle">
-                <iconify-icon icon="zmdi:mail-send"></iconify-icon>
-            </span>
-        </div>
-        <div class="exit" onclick="Hide_di3()">
-            <iconify-icon icon="game-icons:exit-door" style='font-size:40px;color: red;'></iconify-icon>
-        </div>
-    </div>
+    <input type="file" id="image" style="display: none;" onchange="post_img()" />
+
+   
     <form class=" mt-5 mx-auto col-6 col-md-8 col-lg-6 was-validated " id="from" style="display: block;">
         <div class="form-row">
             <div class="col-md-4 mb-3">
@@ -119,10 +148,10 @@
                     placeholder="050-1234567.." min="10" required><br />
             </div>
             <div class="custom-file col-md-4 mb-3">
-                <input type="file" onchange="add_img()" class="custom-file-input" id="files" required>
+                <input type="file" onchange="add_img()" class="custom-file-input bg-warning" id="files" required>
                 <label class="custom-file-label" for="file"><b>add a picture..</b></label>
             </div>
-            <button onclick="Hide_div2()" class="btn btn-primary col" type="button">connect</button>
+            <button onclick="Hide_div2()" class="btn bg-warning col" type="button"><b>connect</b></button>
     </form>
     <br />
     </div>
@@ -137,5 +166,9 @@
             </div>
         </div>
     </div>
+
+
+
 </body>
+
 </html>

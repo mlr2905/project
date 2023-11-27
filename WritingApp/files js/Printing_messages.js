@@ -27,21 +27,16 @@ function message_sorting() {
     for (let i = 0; i < Cells_manager.size_array.length; i++) {
         Cells_manager.son = document.createElement('div')
         let id = Cells_manager.size_array[i].id
-        if (Cells_manager.size_array[i].user === Cells_manager.name) {
-            Cells_manager.type_class = "message-balloon"
-            Cells_manager.img = Cells_manager.img_user
-            Cells_manager.type_id = "user_img"
-            Cells_manager.margin_bottom = "margin_bottom"
-            Cells_manager.user_or_Another_user = "user"
-        }
-        else {
+        if (Cells_manager.size_array[i].user !== Cells_manager.name) {
+            Cells_manager.type_class = "-"
             Cells_manager.img = "bot.png"
-            Cells_manager.type_class = "message-balloon-received"
-            Cells_manager.type_id = "Another_user"
-            Cells_manager.margin_bottom = "margin_bottom_Another_user"
             Cells_manager.user_or_Another_user = "Another-user"
         }
-        picture_and_name(i)
+        else {
+            Cells_manager.img = Cells_manager.img_user
+            Cells_manager.type_class = "right"
+            Cells_manager.user_or_Another_user = "user"
+        }
         if (Cells_manager.size_array[i].text !== undefined) {
             text_message(i, id)
         }
@@ -66,7 +61,7 @@ function message_sorting() {
         }
 
     }
-    let scroll_to_bottom = document.getElementById('tableBody');
+    let scroll_to_bottom = document.getElementById('box-body');
     scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
 }
 
