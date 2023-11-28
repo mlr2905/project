@@ -99,6 +99,7 @@ function add_img() {
     Cells_manager.img_user = frame.src
 }
 
+
 function id_message(i) {
     let url = `https://db-nmn5.onrender.com/chat${i}`
     fetch(url)

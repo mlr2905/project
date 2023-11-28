@@ -32,25 +32,41 @@ function get() {
     message_sorting()
 }
 
-function post_data() {
-    if (document.getElementById("text").value !== ""){
-    Cells_manager.new_text = document.getElementById('text').value
-    Cells_manager.string_name = "text"
-    Cells_manager.json_id += 1
-    link_type()
-    const input = document.getElementById('text')
-    input.value = '';
+function post_img() {
+    Cells_manager.new_time = time_now()
+    image.src = URL.createObjectURL(event.target.files[0]);
+    const img =  image.src
     const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`
     fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: `{
                     "user": "${Cells_manager.name}",
+                    "img": "${img}",
+                    "time": "${Cells_manager.new_time}"
+                }`})
+}
+
+function post_data() {
+    if (document.getElementById("text").value !== "") {
+        Cells_manager.new_time = time_now()
+        Cells_manager.new_text = document.getElementById('text').value
+        Cells_manager.string_name = "text"
+        Cells_manager.json_id += 1
+        link_type()
+        const input = document.getElementById('text')
+        input.value = '';
+        const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: `{
+                    "user": "${Cells_manager.name}",
                     "${Cells_manager.string_name}": "${Cells_manager.new_text}",
                     "time": "${Cells_manager.new_time}",
                     "id": ${Cells_manager.json_id}
                 }`})
-            }
+    }
 }
 
 function put(number, value) {
@@ -71,7 +87,7 @@ function put(number, value) {
     }).then(response => {
         if (!response.ok) {
             console.error(response)
-            alert('failure') 
+            alert('failure')
         }
     })
 }

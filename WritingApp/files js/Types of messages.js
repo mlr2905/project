@@ -19,6 +19,7 @@ function text_message(i, id) {
 `
     Cells_manager.message_list.appendChild(Cells_manager.son)
     addCellClick(`message-${id}`, id)
+
 }
 
 function image_Message(i, id) {
@@ -31,13 +32,18 @@ function image_Message(i, id) {
                     <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
                 </span>
             </div>
-            <img class="direct-chat-img" src="${Cells_manager.img}" alt="message user image">
+            <img class="direct-chat-img" src="${Cells_manager.img}"  alt="message user image">
             <div class="direct-chat-text">
-            <img src="${Cells_manager.size_array[i].img}" width="200px" height="200px" />
+            <img src="${Cells_manager.size_array[i].img}"  id="img-${id}" />
             </div>
-        </div>`
+        </div>
+        `
     Cells_manager.message_list.appendChild(Cells_manager.son)
     addCellClick(`message-${id}`, id)
+    addCellClick2(`img-${id}`, id)
+
+
+      
 }
 
 function link_message(i, id) {
@@ -50,7 +56,7 @@ function link_message(i, id) {
                     <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
                 </span>
             </div>
-            <img class="direct-chat-img" src="${Cells_manager.img}" alt="message user image">
+            <img class="direct-chat-img" src="${Cells_manager.img}"  alt="message user image">
             <div class="direct-chat-text">
             <a href="${Cells_manager.size_array[i].link}">${Cells_manager.size_array[i].link}</a>
             </div>
@@ -75,7 +81,7 @@ function youtube_message(i, id) {
                     <iconify-icon icon="uim:ellipsis-v"></iconify-icon>
                 </span>
             </div>
-            <img class="direct-chat-img" src="${Cells_manager.img}" alt="message user image">
+            <img class="direct-chat-img" src="${Cells_manager.img}"  alt="message user image">
             <div class="direct-chat-text">
                 <iframe width="300" height="200"
                 src="https://www.youtube.com/embed/${firstPart}?si=cFQc8PdAdX4dZwNQ""
@@ -145,3 +151,19 @@ function addCellClick(divId, number) {
         edit_or_delete(number);
     });
 }
+
+
+function addCellClick2(divId) {
+    const div = document.getElementById(divId);
+    div.addEventListener("click", function () {
+        downloadImage(divId);
+    });
+}
+function downloadImage(a) {
+    const image = document.getElementById(a);
+    const link = document.createElement("a");
+    link.href = image.src;
+    link.download = " תמונה מהצאט";
+    link.click();
+  }
+  
