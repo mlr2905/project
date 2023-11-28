@@ -20,7 +20,6 @@ async function last_message() {
         let p_son_time = document.createElement('p')
         let p_son_b = document.createElement('b')
         let user_name = null
-        if (last_m[a].text !== undefined) {
             if (last_m[a].user === Cells_manager.name) {
                 user_name = "you"
                 if (i === 1) {
@@ -51,19 +50,48 @@ async function last_message() {
             p_son_time.innerHTML = last_m[a].time
             div2.appendChild(h4_son)
             div2.appendChild(p_son_time)
+            if(last_m[a].text !== undefined){
             p_son.innerHTML = last_m[a].text
+            }
+            else{
+                p_son.innerHTML = "link message!!"
+
+            }
             p_son_b.innerHTML = a
             div.appendChild(p_son)
             div.appendChild(p_son_b)
         } 
-        else {
-            h4_son.innerHTML = user_name
-            p_son_time.innerHTML = last_m[a].time
-            div2.appendChild(h4_son)
-            div2.appendChild(p_son_time)
-            p_son.innerHTML = "link message!!"
-            div.appendChild(p_son)
-        }
+       
     }
 
+
+
+
+function image_recognition(img){
+    if (  img === Cells_manager.name) {
+        user_name = "you"
+        if (i === 1) {
+            img_user1.src = Cells_manager.img_user
+        }
+        if (i === 2) {
+            img_user2.src = Cells_manager.img_user
+        } if (i === 3) {
+            img_user3.src = Cells_manager.img_user
+        } if (i === 4) {
+            img_user4.src = Cells_manager.img_user
+        }
+    }
+    else {
+        user_name = last_m[a].user
+        if (i === 1) {
+            img_user1.src = "bot.png"
+        }
+        if (i === 2) {
+            img_user2.src = "bot.png"
+        } if (i === 3) {
+            img_user3.src = "bot.png"
+        } if (i === 4) {
+            img_user4.src = "bot.png"
+        }
+    }
 }

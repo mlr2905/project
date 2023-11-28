@@ -2,6 +2,7 @@ function isLink_img(text) {
     return text.includes(".gif") || text.includes(".png") ||
         text.includes(".jpg") || text.includes(".svg") || text.includes(".jpeg");
 }
+
 function link_type() {
     Cells_manager.new_time = time_now()
     let img_or_no = isLink_img(Cells_manager.new_text)
