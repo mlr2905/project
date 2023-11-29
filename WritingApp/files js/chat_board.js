@@ -76,7 +76,9 @@ function text_editing(number) {
         if (text) {
             [Swal.fire(text)]
             put(number, text)
+
         }})()
+
 }
 
 function activation(n) {

@@ -31,7 +31,7 @@ function delete_or_post() {
     let name = jsonArray.findIndex((item) => item.user === Cells_manager.new_text);
     if (name === -1) {
         const url = "https://db-nmn5.onrender.com/online"
-        fetch("https://db-nmn5.onrender.com/autoincrement")
+        fetch("https://db-nmn5.onrender.com/auto_id")
             .then(res => res.json())
             .then(data => {
                 localStorage.setItem("id", JSON.stringify(data));
@@ -46,8 +46,9 @@ function delete_or_post() {
                         "id": "${id}"
                         }`})
                 id++
-                fetch("https://db-nmn5.onrender.com/autoincrement", {
-                    method: 'POST',
+
+                fetch(`https://db-nmn5.onrender.com/auto_id`, {
+                    method: 'post',
                     headers: { 'Content-Type': 'application/json' },
                     body: `{
                         "id":${id}

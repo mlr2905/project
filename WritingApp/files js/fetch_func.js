@@ -1,17 +1,16 @@
 intervalId = setInterval(Push_update, 500)
 
-function Push_update() {
-    if (Cells_manager.chat_n !== " ") {
+function Push_update(ok) {
+    if (Cells_manager.chat_n !== " " || ok === "ok") {
         fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
             .then(res => res.json())
             .then(data => {
                 localStorage.setItem("check", JSON.stringify(data));
                 Cells_manager.Push = JSON.parse(localStorage.getItem("check"));
                 if (Cells_manager.name !== '') {
-                    if (Cells_manager.Push.length !== Cells_manager.size_array.length) {
+                    if (Cells_manager.Push.length !== Cells_manager.size_array.length || ok === "ok") {
                         Cells_manager.Push = 0;
-                        get();
-                    }
+                        get();                    }
                 }
             });
     }
@@ -69,27 +68,33 @@ function post_data() {
     }
 }
 
-function put(number, value) {
+
+
+async  function put(number, value) {
     Cells_manager.new_text = value
     Cells_manager.string_name = "text"
     link_type()
     //   document.getElementById(`message-${number}`).value
     Cells_manager.new_time = time_now()
     const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}/${number}`
-    fetch(url, {
+    let response = await fetch(`${url}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: `{
                     "user": "${Cells_manager.name}",
                     "${Cells_manager.string_name}": "${Cells_manager.new_text}",
                     "time": "${Cells_manager.new_time}"
-                }`
-    }).then(response => {
-        if (!response.ok) {
-            console.error(response)
-            alert('failure')
+                }`})
+        let data = await response.json()
+        if(data){
+            clearInterval(intervalId); 
+            Push_update("ok")
+            intervalId = setInterval(Push_update, 500)
+
+
         }
-    })
+              
+
 }
 
 function delete_(number) {
