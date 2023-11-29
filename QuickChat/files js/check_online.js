@@ -75,7 +75,7 @@ function delete_or_post() {
 
                 const difference = differenceInSeconds(time1, time2);
 
-                if (difference > 30) {
+                if (difference > 60) {
                         fetch(`https://db-nmn5.onrender.com/online/${id}`, {
                             method: 'DELETE'
                         }).then(response => {
