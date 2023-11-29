@@ -14,7 +14,7 @@ async function check_online() {
             for (let i = 0; i < Cells_manager.online.length; i++) {
                 if (!users.includes(Cells_manager.online[i].user)) {
                     users.push(Cells_manager.online[i].user);
-                    td_son.innerHTML = `<b>${Cells_manager.online[i].user}</b>`
+                    td_son.innerHTML += `<br/><b>${Cells_manager.online[i].user}</b>`
                     td.appendChild(td_son)
                 }
             }

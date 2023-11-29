@@ -1,14 +1,16 @@
 
 function time_now() {
     Cells_manager.time_date = new Date();
-    const hours = Cells_manager.time_date.getHours();
-    const a = Cells_manager.time_date.getMinutes();
+    const a = Cells_manager.time_date.getHours();
+    const b = Cells_manager.time_date.getMinutes();
     let minutes = 0
-    if (a < 10) {
+    let hours = 0
+    if (a < 10 || b <10 ) {
         minutes = `0${a}`;
       }
       else{
          minutes = `${a}`
+         hours = `${b}`
       }
     let time = `${hours}:${minutes}`
     return time
