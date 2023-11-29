@@ -6,15 +6,14 @@ async function check_online() {
     localStorage.setItem("check-online", JSON.stringify(data));
     Cells_manager.online = JSON.parse(localStorage.getItem("check-online"));
     let td = document.getElementById(`online`)
-    td.innerHTML = ""
     let users = [];
     for (let i = 0; i < Cells_manager.online.length; i++) {
-        let td_son = document.createElement('span')
+        let td_son = document.createElement('div')
         if (Cells_manager.online[i].user !== "") {
             for (let i = 0; i < Cells_manager.online.length; i++) {
                 if (!users.includes(Cells_manager.online[i].user)) {
                     users.push([Cells_manager.online[i].user, Cells_manager.online[i].time]);
-                    td_son.innerHTML = `<b>${Cells_manager.online[i].user}:</b><sub>${Cells_manager.online[i].time}</sub>`
+                    td_son.innerHTML = `<b>${Cells_manager.online[i].user}</b>`
                     td.appendChild(td_son)
                 }
             }
@@ -77,8 +76,7 @@ function delete_or_post() {
                 const difference = differenceInSeconds(time1, time2);
 
                 if (difference > 30) {
-                    if (!id_delete.includes(id)) {
-                        id_delete.push(id);
+                    
                         fetch(`https://db-nmn5.onrender.com/online/${id}`, {
                             method: 'DELETE'
                         }).then(response => {
@@ -90,4 +88,4 @@ function delete_or_post() {
             }
         }
     }
-}
+
