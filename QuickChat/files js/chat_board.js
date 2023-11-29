@@ -32,7 +32,7 @@ function Hide_div2() {
 
     if (Cells_manager.One_time === 0) {
         check_online()
-        setInterval(check_online, 15000)
+        setInterval(check_online, 5000)
         emoji_keyboard()
         Cells_manager.One_time++
     }
