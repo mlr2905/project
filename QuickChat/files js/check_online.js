@@ -6,6 +6,7 @@ async function check_online() {
     localStorage.setItem("check-online", JSON.stringify(data));
     Cells_manager.online = JSON.parse(localStorage.getItem("check-online"));
     let td = document.getElementById(`online`)
+    td.innerHTML = ""
     let users = [];
     for (let i = 0; i < Cells_manager.online.length; i++) {
         let td_son = document.createElement('div')
