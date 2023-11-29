@@ -12,7 +12,7 @@ async function check_online() {
         if (Cells_manager.online[i].user !== "") {
             for (let i = 0; i < Cells_manager.online.length; i++) {
                 if (!users.includes(Cells_manager.online[i].user)) {
-                    users.push([Cells_manager.online[i].user, Cells_manager.online[i].time]);
+                    users.push(Cells_manager.online[i].user);
                     td_son.innerHTML = `<b>${Cells_manager.online[i].user}</b>`
                     td.appendChild(td_son)
                 }
@@ -24,7 +24,6 @@ async function check_online() {
 
 function delete_or_post() {
 
-    let id_delete = []
     let time = time_now()
     let getSeconds = Cells_manager.time_date.getSeconds()
     if (getSeconds < 10) {
@@ -76,7 +75,6 @@ function delete_or_post() {
                 const difference = differenceInSeconds(time1, time2);
 
                 if (difference > 30) {
-                    
                         fetch(`https://db-nmn5.onrender.com/online/${id}`, {
                             method: 'DELETE'
                         }).then(response => {
