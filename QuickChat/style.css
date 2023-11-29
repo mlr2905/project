@@ -252,10 +252,11 @@ img {
 .chat-list .chat-box:hover {
     background: #cb9f58;
 }
-
 .online {
-    margin-left: 90%;
-    margin-top: -30%;
+    margin-left: 70%;
+    margin-right: 20%;
+    margin-top: -35%;
+    height: 50%;
     box-shadow: 0px 1px 1px 0 rgba(0, 0, 0, 0.5), 0px 2px 5px 0 rgba(0, 0, 0, 0.6);
     background-color: white;
     border-radius: 10%;

@@ -24,9 +24,18 @@ async function check_online() {
 }
 
 function delete_or_post() {
+
     let id_delete = []
     let time = time_now()
-    time += `:${Cells_manager.time_date.getSeconds()}`
+    let getSeconds = Cells_manager.time_date.getSeconds()
+    if (getSeconds < 10) {
+        time += `:0${Cells_manager.time_date.getSeconds()}`
+    }
+    else {
+        time += `:${Cells_manager.time_date.getSeconds()}`
+
+    }
+
     let jsonArray = Cells_manager.online
     let name = jsonArray.findIndex((item) => item.user === Cells_manager.new_text);
     if (name === -1) {
@@ -58,11 +67,16 @@ function delete_or_post() {
     else {
         for (let i = 0; i < Cells_manager.online.length; i++) {
             if (Cells_manager.online[i].time !== undefined) {
-                let a = Cells_manager.online[i].time.split(":")[2];
-                let offline = time.split(":")[2]
-                offline = offline + a
                 let id = Cells_manager.online[i].id
-                if (offline > 15) {
+                let a = Cells_manager.online[i].time
+                let offline = time
+
+                const time1 = new Date(`2023-11-29T${a}`);
+                const time2 = new Date(`2023-11-29T${offline}`);
+
+                const difference = differenceInSeconds(time1, time2);
+
+                if (difference > 30) {
                     if (!id_delete.includes(id)) {
                         id_delete.push(id);
                         fetch(`https://db-nmn5.onrender.com/online/${id}`, {

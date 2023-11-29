@@ -3,6 +3,8 @@ const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", 
 Cells_manager.One_time = 0
 
 function Hide_div() {
+    const div1 = document.getElementById("onlines");
+    div1.style.display = "block"
     const div2 = document.getElementById("page-content");
     div2.style.display = "block"
  
