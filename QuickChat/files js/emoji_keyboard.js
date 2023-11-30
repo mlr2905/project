@@ -1,14 +1,12 @@
 
 function hide_emojis() {
     const div1 = document.getElementById("all-emoji");
- 
   div1.style.display = "none";
 }
 
 function Show_emojis() {
     const div1 = document.getElementById("all-emoji");
     div1.style.display = div1.style.display === "none" ? "block" : "none";
-    
 }
 
 function copy_To_Clipboard(a) {

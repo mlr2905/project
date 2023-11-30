@@ -108,3 +108,68 @@ function delete_(number) {
         }
     })
 }
+function id_message(i) {
+    let url = `https://db-nmn5.onrender.com/chat${i}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem(`id${i}`, JSON.stringify(data));
+        })
+    let date = JSON.parse(localStorage.getItem(`id${i}`))
+    let id_n = date
+    const id = id_n.filter((item) => item.id === Math.max(...id_n.map((item) => item.id)));
+    return id[0].id;
+}
+
+function post_new_login(time){
+
+    const url1 = "https://db-nmn5.onrender.com/online"
+    const url2 = "https://db-nmn5.onrender.com/auto_id"
+    fetch(url2)
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem("id", JSON.stringify(data));
+            Cells_manager.id_online = JSON.parse(localStorage.getItem("id"));
+            let id = Cells_manager.id_online.reduce((max, cell) => max > cell.id ? max : cell.id, -1);
+            fetch(url1, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: `{
+                "user": "${Cells_manager.new_text}",
+                "time": "${time}",
+                "id": "${id}"
+                }`})
+            id++
+            fetch(url2, {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: `{
+                "id":${id}
+                }`})
+        })
+}
+
+function delete_out_user(time){
+    for (let i = 0; i < Cells_manager.online.length; i++) {
+        if (Cells_manager.online[i].time !== undefined) {
+            let id = Cells_manager.online[i].id
+            let a = Cells_manager.online[i].time
+            const offline = time;
+            const time1 = new Date(`2023-11-29T${a}`);
+            const time2 = new Date(`2023-11-29T${offline}`);
+            const difference = difference_in_seconds(time1, time2);
+
+            if (difference > 60) {
+                fetch(`https://db-nmn5.onrender.com/online/${id}`, {
+                    method: 'DELETE'
+                }).then(response => {
+                    if (!response.ok) {
+                        // Handle error
+                    }
+                });
+            }
+        }
+    }
+    post_new_login(time)
+
+}

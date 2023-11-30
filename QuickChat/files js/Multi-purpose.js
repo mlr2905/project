@@ -5,13 +5,9 @@ function time_now() {
     const b = Cells_manager.time_date.getMinutes();
     let minutes = 0
     let hours = 0
-    if (a < 10 || b <10 ) {
-        minutes = `0${a}`;
-      }
-      else{
-         minutes = `${a}`
-         hours = `${b}`
-      }
+    hours = a < 10 ? `0${a}` : `${a}`;
+    minutes = b < 10 ? `0${b}` : `${b}`;
+    
     let time = `${hours}:${minutes}`
     return time
 }
@@ -25,7 +21,7 @@ function date_day_now() {
     return Date_dey
 }
 
-function differenceInSeconds(time1, time2) {
+function difference_in_seconds(time1, time2) {
     // מחלק את הזמן לשעות, דקות ו-שניות
     const hours1 = time1.getHours();
     const minutes1 = time1.getMinutes();

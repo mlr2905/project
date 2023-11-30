@@ -7,27 +7,24 @@ function Hide_div() {
     div1.style.display = "block"
     const div2 = document.getElementById("page-content");
     div2.style.display = "block"
- 
+
 }
 
 function Hide_di3() {
-    const div2 = document.getElementById("page-content");
-    div2.style.display = "none"
-
-    const div5 = document.getElementById("chats");
-    div5.style.display = div5.style.display === "none" ? "block" : "none";
+    const div1 = document.getElementById("page-content");
+    div1.style.display = "none"
+    const div2 = document.getElementById("chats");
+    div2.style.display = div2.style.display === "none" ? "block" : "none";
     Cells_manager.size_array = []
     Cells_manager.message_list = document.getElementById('box-body')
     Cells_manager.message_list.innerHTML = ""
-    
-
 }
 
 function Hide_div2() {
-    const div4 = document.getElementById("from");
-    div4.style.display = div4.style.display === "block" ? "none" : "none";
-    const div5 = document.getElementById("chats");
-    div5.style.display = div5.style.display === "none" ? "block" : "none";
+    const div1 = document.getElementById("from");
+    div1.style.display = div1.style.display === "block" ? "none" : "none";
+    const div2 = document.getElementById("chats");
+    div2.style.display = div2.style.display === "none" ? "block" : "none";
     intervalId = setInterval(last_message, 500)
 
     if (Cells_manager.One_time === 0) {
@@ -49,12 +46,7 @@ function edit_or_delete(number) {
             confirmButtonText: 'edit',
             denyButtonText: `delete`,
         }).then((result) => {
-            if (result.isConfirmed) {
-                text_editing(number)
-            } else if (result.isDenied) {
-                Swal.fire('The message has been deleted', '', 'info')
-                delete_(number)
-            }
+            result.isConfirmed ? text_editing(number) : (Swal.fire('The message has been deleted', '', 'info'), delete_(number));
         })
     }
     else {
@@ -74,13 +66,13 @@ function text_editing(number) {
             inputPlaceholder: 'Type your message here...',
             inputAttributes: {
                 'aria-label': 'Type your message here'
-            },showCancelButton: true})
+            }, showCancelButton: true
+        })
         if (text) {
             [Swal.fire(text)]
             put(number, text)
-
-        }})()
-
+        }
+    })()
 }
 
 function activation(n) {
@@ -89,6 +81,7 @@ function activation(n) {
         Hide_div2()
         Hide_div()
         Hide_div()
+        post_data() // test
         Cells_manager.chat_n = n
         Cells_manager.json_id = id_message(n)
         Cells_manager.size_array = []
@@ -103,24 +96,10 @@ function add_img() {
     Cells_manager.img_user = frame.src
 }
 
-
-function id_message(i) {
-    let url = `https://db-nmn5.onrender.com/chat${i}`
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            localStorage.setItem(`id${i}`, JSON.stringify(data));})
-    let date = JSON.parse(localStorage.getItem(`id${i}`))
-    let id_n = date
-    const id = id_n.filter((item) => item.id === Math.max(...id_n.map((item) => item.id)));
-    return id[0].id;
-}
-
 function handleEnter(enter) {
-    if (enter.keyCode === 13) {
-        if (document.getElementById("text").value !== "") {
-            enter.preventDefault()
-            post_data()
-        }
+    const text = document.getElementById("text").value;
+    if (enter.keyCode === 13 && text !== "") {
+        enter.preventDefault();
+        post_data(text);
     }
 }
