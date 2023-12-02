@@ -45,6 +45,7 @@ function emoji_keyboard() {
         }
     }
 }
+
 function add_Cell_Click_emoji(divId, number) { 
     const div = document.getElementById(divId);
     div.addEventListener("click", function () {

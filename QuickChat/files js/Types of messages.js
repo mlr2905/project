@@ -1,6 +1,4 @@
 
-``
-
 function text_message(i, id) {
     Cells_manager.son.innerHTML = `
     <div class="direct-chat-msg ${Cells_manager.type_class}">
@@ -19,7 +17,6 @@ function text_message(i, id) {
 `
     Cells_manager.message_list.appendChild(Cells_manager.son)
     addCellClick(`message-${id}`, id)
-
 }
 
 function image_Message(i, id) {
@@ -40,10 +37,7 @@ function image_Message(i, id) {
         `
     Cells_manager.message_list.appendChild(Cells_manager.son)
     addCellClick(`message-${id}`, id)
-    addCellClick2(`img-${id}`, id)
-
-
-      
+    addCellClick2(`img-${id}`, id)     
 }
 
 function link_message(i, id) {
@@ -152,13 +146,13 @@ function addCellClick(divId, number) {
     });
 }
 
-
 function addCellClick2(divId) {
     const div = document.getElementById(divId);
     div.addEventListener("click", function () {
         downloadImage(divId);
     });
 }
+
 function downloadImage(a) {
     const image = document.getElementById(a);
     const link = document.createElement("a");

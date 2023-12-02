@@ -28,16 +28,12 @@ function message_sorting() {
     for (let i = 0; i < Cells_manager.size_array.length; i++) {
         Cells_manager.son = document.createElement('div')
         let id = Cells_manager.size_array[i].id
-        if (Cells_manager.size_array[i].user !== Cells_manager.name) {
-            Cells_manager.type_class = "-"
-            Cells_manager.img = "bot.png"
-            Cells_manager.user_or_Another_user = "Another-user"
-        }
-        else {
-            Cells_manager.img = Cells_manager.img_user
-            Cells_manager.type_class = "right"
-            Cells_manager.user_or_Another_user = "user"
-        }
+
+        Cells_manager.type_class = Cells_manager.size_array[i].user === Cells_manager.name ? "right" : "-";
+        Cells_manager.img = Cells_manager.size_array[i].user === Cells_manager.name ? Cells_manager.img_user : "bot.png";
+        Cells_manager.user_or_Another_user = Cells_manager.size_array[i].user === Cells_manager.name ? "user" : "Another-user";
+
+    
         if (Cells_manager.size_array[i].text !== undefined) {
             text_message(i, id)
         }
@@ -52,8 +48,8 @@ function message_sorting() {
                 youtube_message(i, id)
             }
             if (Cells_manager.size_array[i].face !== undefined) {
-                facebook_message(i, id)
                 runfacebookScript()
+                facebook_message(i, id)
             }
             if (Cells_manager.size_array[i].tiktok !== undefined) {
                 runTikTokScript()

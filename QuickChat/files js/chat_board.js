@@ -25,7 +25,7 @@ function Hide_div2() {
     div1.style.display = div1.style.display === "block" ? "none" : "none";
     const div2 = document.getElementById("chats");
     div2.style.display = div2.style.display === "none" ? "block" : "none";
-    intervalId = setInterval(last_message, 500)
+    intervalId = setInterval(last_message, 1500)
 
     if (Cells_manager.One_time === 0) {
         check_online()
@@ -38,6 +38,7 @@ function Hide_div2() {
 function edit_or_delete(number) {
     const element = document.getElementById(`message-${number}`);
     const classes = element.className;
+
     if (classes === "user") {
         Swal.fire({
             title: 'Edit or delete the message?',

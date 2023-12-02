@@ -7,7 +7,6 @@ function time_now() {
     let hours = 0
     hours = a < 10 ? `0${a}` : `${a}`;
     minutes = b < 10 ? `0${b}` : `${b}`;
-    
     let time = `${hours}:${minutes}`
     return time
 }
@@ -29,16 +28,12 @@ function difference_in_seconds(time1, time2) {
     const hours2 = time2.getHours();
     const minutes2 = time2.getMinutes();
     const seconds2 = time2.getSeconds();
-  
     // מחשב את ההפרש בשעות
     const hoursDiff = hours2 - hours1;
-  
     // מחשב את ההפרש בדקות
     const minutesDiff = minutes2 - minutes1;
-  
     // מחשב את ההפרש בשניות
     const secondsDiff = seconds2 - seconds1;
-  
     // מחזיר את ההפרש הכולל בשניות
     return hoursDiff * 3600 + minutesDiff * 60 + secondsDiff;
   }
