@@ -185,7 +185,6 @@ body {
 
 }
 
-
 .chat-list .chat-box .img-box {
     position: relative;
     width: 55px;
@@ -698,4 +697,8 @@ margin-right: 10%;
     Cursor: pointer;
 
 
+}
+.main_screen{
+    margin-left: 70%;
+    cursor: pointer;
 }

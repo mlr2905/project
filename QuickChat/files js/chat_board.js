@@ -10,7 +10,7 @@ function Hide_div() {
 
 }
 
-function Hide_di3() {
+function Hide_div3() {
     const div1 = document.getElementById("page-content");
     div1.style.display = "none"
     const div2 = document.getElementById("chats");
@@ -22,7 +22,7 @@ function Hide_di3() {
 
 function Hide_div2() {
     const div1 = document.getElementById("from");
-    div1.style.display = div1.style.display === "block" ? "none" : "none";
+    div1.style.display = div1.style.display === "block" ? "none" : "block";
     const div2 = document.getElementById("chats");
     div2.style.display = div2.style.display === "none" ? "block" : "none";
     intervalId = setInterval(last_message, 1500)
@@ -92,6 +92,12 @@ function activation(n) {
     }
 }
 
+function main_screen(){
+    const div1 = document.getElementById("from");
+    div1.style.display = "block"
+    const div2 = document.getElementById("chats");
+    div2.style.display =  "none"
+}
 function add_img() {
     frame.src = URL.createObjectURL(event.target.files[0]);
     Cells_manager.img_user = frame.src
