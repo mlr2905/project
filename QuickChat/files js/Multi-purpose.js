@@ -21,20 +21,18 @@ function date_day_now() {
 }
 
 function difference_in_seconds(time1, time2) {
-    // מחלק את הזמן לשעות, דקות ו-שניות
-    const hours1 = time1.getHours();
+    // divides the time into hours, minutes and seconds const hours1 = time1.getHours();
     const minutes1 = time1.getMinutes();
     const seconds1 = time1.getSeconds();
     const hours2 = time2.getHours();
     const minutes2 = time2.getMinutes();
     const seconds2 = time2.getSeconds();
-    // מחשב את ההפרש בשעות
+    // Calculates the difference in hours
     const hoursDiff = hours2 - hours1;
-    // מחשב את ההפרש בדקות
+    // Calculates the difference in minutes
     const minutesDiff = minutes2 - minutes1;
-    // מחשב את ההפרש בשניות
+    // Calculates the difference in seconds
     const secondsDiff = seconds2 - seconds1;
-    // מחזיר את ההפרש הכולל בשניות
+    // Returns the total difference in seconds
     return hoursDiff * 3600 + minutesDiff * 60 + secondsDiff;
-  }
-  
+}

@@ -1,3 +1,4 @@
+//*Printing a message according to the type of message
 
 function text_message(i, id) {
     Cells_manager.son.innerHTML = `

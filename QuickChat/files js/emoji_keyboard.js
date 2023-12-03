@@ -1,20 +1,20 @@
 
-function hide_emojis() {
+function hide_emojis() {  //Hides the emoji that are clicked on the chat screen or on input text
     const div1 = document.getElementById("all-emoji");
-  div1.style.display = "none";
+    div1.style.display = "none";
 }
 
-function Show_emojis() {
+function Show_emojis() {//Displays the emojis after clicking on the smiling image
     const div1 = document.getElementById("all-emoji");
     div1.style.display = div1.style.display === "none" ? "block" : "none";
 }
 
-function copy_To_Clipboard(a) {
+function copy_To_Clipboard(a) {//Copy the desired emoji to input text
     const input = document.getElementById('text')
     input.value += a;
 }
 
-function emoji_keyboard() {
+function emoji_keyboard() {//Emoji keyboard creator
     const url = "https://emojis-e61p.onrender.com/emojis"
     fetch(url)
         .then(res => res.json())
@@ -46,7 +46,7 @@ function emoji_keyboard() {
     }
 }
 
-function add_Cell_Click_emoji(divId, number) { 
+function add_Cell_Click_emoji(divId, number) { //Adds onclick to every emoji
     const div = document.getElementById(divId);
     div.addEventListener("click", function () {
         copy_To_Clipboard(number);

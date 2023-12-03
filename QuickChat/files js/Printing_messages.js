@@ -1,31 +1,5 @@
-function isLink_img(text) {
-    return text.includes(".gif") || text.includes(".png") ||
-        text.includes(".jpg") || text.includes(".svg") || text.includes(".jpeg");
-}
-
-function link_type() {
-    Cells_manager.new_time = time_now()
-    let img_or_no = isLink_img(Cells_manager.new_text)
-    let tube_or_no = Cells_manager.new_text.includes("youtu") || Cells_manager.new_text.includes("youtube")
-    let tiktok_or_no = Cells_manager.new_text.includes("tiktok")
-    let facebook_or_on = Cells_manager.new_text.includes("facebook")
-    let link_or_no = Cells_manager.new_text.includes("http")
-    Cells_manager.string_name = img_or_no ? "img" : tiktok_or_no ? "tiktok" : tube_or_no ? "tube" : "text";
-    const all_or_no = !img_or_no && !tiktok_or_no && !tube_or_no && !facebook_or_on
-    if (all_or_no) {
-        if (link_or_no) {
-            Cells_manager.string_name = "link"
-        }
-    }
-
-    if (facebook_or_on) {
-        Cells_manager.new_text = Cells_manager.new_text.split("=")[1];
-        Cells_manager.string_name = "face";
-    }
-}
-
 function message_sorting() {
-    for (let i = 0; i < Cells_manager.size_array.length; i++) {
+    for (let i = 0; i < Cells_manager.size_array.length; i++) {//Sorting my messages from all messages
         Cells_manager.son = document.createElement('div')
         let id = Cells_manager.size_array[i].id
 
@@ -60,6 +34,31 @@ function message_sorting() {
     }
     let scroll_to_bottom = document.getElementById('box-body');
     scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
+}
+function isLink_img(text) { //Tester with boosted in picture message
+    return text.includes(".gif") || text.includes(".png") ||
+        text.includes(".jpg") || text.includes(".svg") || text.includes(".jpeg");
+}
+
+function link_type() {//Checks if it is a link message and what type
+    Cells_manager.new_time = time_now()
+    let img_or_no = isLink_img(Cells_manager.new_text)
+    let tube_or_no = Cells_manager.new_text.includes("youtu") || Cells_manager.new_text.includes("youtube")
+    let tiktok_or_no = Cells_manager.new_text.includes("tiktok")
+    let facebook_or_on = Cells_manager.new_text.includes("facebook")
+    let link_or_no = Cells_manager.new_text.includes("http")
+    Cells_manager.string_name = img_or_no ? "img" : tiktok_or_no ? "tiktok" : tube_or_no ? "tube" : "text";
+    const all_or_no = !img_or_no && !tiktok_or_no && !tube_or_no && !facebook_or_on
+    if (all_or_no) {
+        if (link_or_no) {
+            Cells_manager.string_name = "link"
+        }
+    }
+
+    if (facebook_or_on) {
+        Cells_manager.new_text = Cells_manager.new_text.split("=")[1];
+        Cells_manager.string_name = "face";
+    }
 }
 
 function runTikTokScript() {

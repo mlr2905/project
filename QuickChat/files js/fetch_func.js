@@ -1,6 +1,6 @@
 intervalId = setInterval(push_update, 500)
 
-function push_update(ok) {
+function push_update(ok) { //Updates the messages displayed in the chat only if there are changes
     if (Cells_manager.chat_n !== " " || ok === "ok") {
         fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
             .then(res => res.json())
@@ -28,10 +28,10 @@ function get() {
     const son = document.createElement('div')
     son.innerHTML = `<div class="date_day">${data_day}</div>`
     div.appendChild(son)
-    message_sorting()
+    message_sorting() //Printing_messages.js
 }
 
-function post_img() {
+function post_img() {//Only the sender sees the picture
     Cells_manager.new_time = time_now()
     image.src = URL.createObjectURL(event.target.files[0]);
     const img = image.src
@@ -46,13 +46,13 @@ function post_img() {
                 }`})
 }
 
-function post_data() {
+function post_data() {//Sending a text message, a link to YouTube, Tiktok, Facebook, or a photo link or a regular link
     if (document.getElementById("text").value !== "") {
         Cells_manager.new_time = time_now()
         Cells_manager.new_text = document.getElementById('text').value
         Cells_manager.string_name = "text"
         Cells_manager.json_id += 1
-        link_type()
+        link_type()  //Printing_messages.js
         const input = document.getElementById('text')
         input.value = '';
         const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`
@@ -68,7 +68,7 @@ function post_data() {
     }
 }
 
-async function put(number, value) {
+async function put(number, value) { //Editing of a message of any type to any type
     let new_text = value
     Cells_manager.string_name = "text"
     link_type()
@@ -88,12 +88,11 @@ async function put(number, value) {
         const ok = "ok"
         push_update(ok)
         push_update(ok)
-
         intervalId = setInterval(push_update, 500)
     }
 }
 
-function delete_(number) {
+function delete_(number) {//Deletes a message
     fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}/${number}`, {
         method: 'DELETE'
     }).then(response => {
