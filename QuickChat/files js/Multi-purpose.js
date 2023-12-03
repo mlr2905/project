@@ -22,6 +22,7 @@ function date_day_now() {
 
 function difference_in_seconds(time1, time2) {
     // divides the time into hours, minutes and seconds const hours1 = time1.getHours();
+    const hours1 = time1.getHours();
     const minutes1 = time1.getMinutes();
     const seconds1 = time1.getSeconds();
     const hours2 = time2.getHours();

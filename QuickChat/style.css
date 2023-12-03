@@ -96,6 +96,9 @@ body {
 
 
 
+#emoji-1,#image{
+        Cursor: pointer;
+}
 
 #all-emoji {
     Cursor: pointer;
