@@ -69,7 +69,7 @@ function post_data() {
 }
 
 async function put(number, value) {
-    Cells_manager.new_text = value
+    let new_text = value
     Cells_manager.string_name = "text"
     link_type()
     Cells_manager.new_time = time_now()
@@ -79,13 +79,16 @@ async function put(number, value) {
         headers: { 'Content-Type': 'application/json' },
         body: `{
                     "user": "${Cells_manager.name}",
-                    "${Cells_manager.string_name}": "${Cells_manager.new_text}",
+                    "${Cells_manager.string_name}": "${new_text}",
                     "time": "${Cells_manager.new_time}"
                 }`})
     let data = await response.json()
     if (data) {
         clearInterval(intervalId);
-        push_update("ok")
+        const ok = "ok"
+        push_update(ok)
+        push_update(ok)
+
         intervalId = setInterval(push_update, 500)
     }
 }

@@ -1,45 +1,53 @@
 const Cells_manager = new Default_cells(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",)
 
-Cells_manager.One_time = 0
 
 function Hide_div() {
-    const div1 = document.getElementById("onlines");
+    const div1 = document.getElementById("onlines"); // Logged in users window
     div1.style.display = "block"
-    const div2 = document.getElementById("page-content");
+    const div2 = document.getElementById("page-content"); // View of the chat
     div2.style.display = "block"
 
 }
 
-function Hide_div3() {
-    const div1 = document.getElementById("page-content");
-    div1.style.display = "none"
-    const div2 = document.getElementById("chats");
+
+function Hide_div2() {
+    const div1 = document.getElementById("from"); //Login 
+    div1.style.display = div1.style.display === "block" ? "none" : "none";
+    const div2 = document.getElementById("chats"); // Chats menu
     div2.style.display = div2.style.display === "none" ? "block" : "none";
+    intervalId = setInterval(last_message, 1500)
+
+    if (Cells_manager.One_time !== 0) { //A one-time operation
+        check_online()
+        setInterval(check_online, 5000)
+        emoji_keyboard()
+        Cells_manager.One_time = 0
+    }
+}
+
+function Hide_div3() {
+    const div1 = document.getElementById("page-content"); // View of the chat
+    div1.style.display = "none"
+    const div2 = document.getElementById("chats");  // Chats menu
+    div2.style.display = div2.style.display === "none" ? "block" : "none";
+    // Every time you go to chat profiles, a reset is performed
     Cells_manager.size_array = []
     Cells_manager.message_list = document.getElementById('box-body')
     Cells_manager.message_list.innerHTML = ""
 }
 
-function Hide_div2() {
+function main_screen(){
     const div1 = document.getElementById("from");
-    div1.style.display = div1.style.display === "block" ? "none" : "block";
+    div1.style.display = "block"
     const div2 = document.getElementById("chats");
-    div2.style.display = div2.style.display === "none" ? "block" : "none";
-    intervalId = setInterval(last_message, 1500)
-
-    if (Cells_manager.One_time === 0) {
-        check_online()
-        setInterval(check_online, 5000)
-        emoji_keyboard()
-        Cells_manager.One_time++
-    }
+    div2.style.display =  "none"
 }
 
-function edit_or_delete(number) {
+function edit_or_delete(number) { //Edit or delete a message
     const element = document.getElementById(`message-${number}`);
     const classes = element.className;
 
-    if (classes === "user") {
+    if (classes === "user") {//Only the owner of the message can delete or edit
         Swal.fire({
             title: 'Edit or delete the message?',
             showDenyButton: true,
@@ -76,34 +84,30 @@ function text_editing(number) {
     })()
 }
 
-function activation(n) {
+function activation(n) { //The function is responsible for displaying storage of the selected chat
     if (Cells_manager.name !== '') {
         document.querySelector("#text").addEventListener("keydown", handleEnter);
         Hide_div2()
         Hide_div()
         Hide_div()
         post_data() // test
-        Cells_manager.chat_n = n
-        Cells_manager.json_id = id_message(n)
+        //Defining components for future use
+        Cells_manager.chat_n = n // Used by fetch functions
+        Cells_manager.json_id = id_message(n) //Used by the post_data function
         Cells_manager.size_array = []
     }
     else {
-        Swal.fire('Must enter a name', '', 'success')
+        Swal.fire('Must enter a name!! Without a name you can see recent messages', '', 'success')
     }
 }
 
-function main_screen(){
-    const div1 = document.getElementById("from");
-    div1.style.display = "block"
-    const div2 = document.getElementById("chats");
-    div2.style.display =  "none"
-}
-function add_img() {
+
+function add_img() {  //A function saves the user's image
     frame.src = URL.createObjectURL(event.target.files[0]);
     Cells_manager.img_user = frame.src
 }
 
-function handleEnter(enter) {
+function handleEnter(enter) { //Makes the enter button work like a send button
     const text = document.getElementById("text").value;
     if (enter.keyCode === 13 && text !== "") {
         enter.preventDefault();
