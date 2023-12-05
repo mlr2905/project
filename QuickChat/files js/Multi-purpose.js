@@ -1,5 +1,5 @@
 
-function time_now() {
+function time_new() {
     Cells_manager.time_date = new Date();
     const a = Cells_manager.time_date.getHours();
     const b = Cells_manager.time_date.getMinutes();
@@ -11,7 +11,7 @@ function time_now() {
     return time
 }
 
-function date_day_now() {
+function date_day_new() {
     Cells_manager.time_date = new Date();
     const day = Cells_manager.time_date.getDate()
     const Month = Cells_manager.time_date.getMonth() + 1

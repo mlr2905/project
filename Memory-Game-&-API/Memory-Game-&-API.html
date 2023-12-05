@@ -18,11 +18,15 @@
   <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
 
   <link rel="stylesheet" href="Memory-Game-&-API.css">
-  <script src="calss/Api.js"></script>
-  <script src="calss/Board.js"></script>
-  <script src="calss/data_all.js"></script>
-  <script src="calss/Style_cards.js"></script>
-  <script src="Memory-Game-&-API.js"></script>
+  <script src="class/Api_data.js"></script>
+  <script src="class/Game_board.js"></script>
+  <script src="class/Playing_card_style.js"></script>
+
+  <script src="files js/default.js"></script>
+  <script src="files js/buttons.js"></script>
+  <script src="files js/board_printing.js"></script>
+  <script src="files js/moves_and_win.js"></script>
+  <script src="files js/fetch_fun.js"></script>
 
   <title>Memory-Game-&-API</title>
 </head>
@@ -69,25 +73,7 @@
   </div>
 </body>
 <script>
-
-  Create_authorized_buttons()
-  function Create_authorized_buttons() {
-    const buttons = [
-      { id: "exit", text: "Exit", classes: ["btn", "exit", "button"], onClick: exit },
-      { id: "Oneplayer", text: "One player", classes: ["btn", "bot", "button"], onClick: one_player },
-      { id: "TwoPlayer", text: "Two Player", classes: ["btn", "TwoPlayer", "button"], onClick: player_vs_player },
-      { id: "bot", text: "Player VS Bot", classes: ["btn", "bot", "button"], onClick: player_vs_bot },
-    ];
-
-    buttons.forEach((button) => {
-      const buttonElement = document.createElement("button");
-      buttonElement.id = button.id;
-      buttonElement.textContent = button.text;
-      buttonElement.classList.add(...button.classes);
-      buttonElement.addEventListener("click", button.onClick);
-      buttonElement.style.display = button.display;
-      document.body.appendChild(buttonElement);
-    });
-  }
+ Create_authorized_buttons() 
+  
 </script>
 </html>

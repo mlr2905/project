@@ -29,7 +29,7 @@ async function check_online() { //A function that checks who logged in and who l
 }
 
 function clock_repair() {  //Clock repair according to the requested format
-    let time = time_now()
+    let time = time_new()
     time += `:${Cells_manager.time_date.getSeconds() < 10 ? `0${Cells_manager.time_date.getSeconds()}` : Cells_manager.time_date.getSeconds()}`;
     return time
 }

@@ -1,4 +1,4 @@
-class Style_cards {
+class Playing_card_style {
     constructor(_card_back, _catd_front, _card_over,_imgN) {
       this.card_back = _card_back;
       this.catd_front = _catd_front;
