@@ -13,7 +13,7 @@ function cell_click(a) { // The function works when the card is clicked
                 break;
             }
         }
-        checkEqual()
+        check_Equal()
     }
 }
 
@@ -33,7 +33,7 @@ function Hide_div_son_show_father(a) {
 //A function that checks: 
 //1. Whether there is a cell or not
 //2. If the game the games
-function checkEqual() {
+function check_Equal() {
     Board.Two_numbers_use.sort();
     Board.first_card = Board.Two_numbers_use[0]
     Board.Second_card = Board.Two_numbers_use[1]
@@ -50,9 +50,9 @@ function checkEqual() {
             Board.check = Board.pairs[i]
             if (Board.check[0] === Board.first_card && Board.check[1] === Board.Second_card) {
                 freeze()
-                outDiv(Board.first_card, Board.Second_card)
+                out_div(Board.first_card, Board.Second_card)
                 setTimeout(function () {
-                    RemoveClass_out(Board.first_card, Board.Second_card)
+                    Remove_class_out(Board.first_card, Board.Second_card)
                 }, 1600);
                 setTimeout(function () { HideDiv(Board.first_card, Board.Second_card), Board.Two_numbers_use = [], freeze(); }, 1500);
                 memory = Board.pairs[i]
@@ -98,14 +98,14 @@ function checkEqual() {
             if (Board.for_ended === Board.pairs.length - 1) {
                 if (Board.check[0] !== Board.check[1]) {
                     freeze()
-                    ShakeDiv(Board.first_card, Board.Second_card)
+                    shake_div(Board.first_card, Board.Second_card)
                     if (Board.game_type === "one_player_only") {
                         Board.player_one_moves++
                         bar_update()
                     }
                     TwoPlayer()
                     setTimeout(function () {
-                        RemoveClass_Shake(Board.first_card, Board.Second_card),
+                        remove_class_shake(Board.first_card, Board.Second_card),
                             Hide_div_son_show_father(Board.first_card),
                             Hide_div_son_show_father(Board.Second_card), Board.Two_numbers_use = [], freeze()
                     }, 1100)
@@ -258,28 +258,28 @@ function HideDiv(a, b) {
     div2.classList.add("Hide");
 }
 
-function outDiv(a, b) {
+function out_div(a, b) {
     const div3 = document.querySelector(`#card-${a}`)
     div3.classList.add("out");
     const div4 = document.querySelector(`#card-${b}`)
     div4.classList.add("out");
 }
 
-function RemoveClass_out(a, b) {
+function Remove_class_out(a, b) {
     const div1 = document.querySelector(`#card-${a}`)
     div1.classList.remove("out");
     const div2 = document.querySelector(`#card-${b}`)
     div2.classList.remove("out");
 }
 
-function ShakeDiv(a, b) {
+function shake_div(a, b) {
     const div3 = document.querySelector(`#Hide-${a}`)
     div3.classList.add("shake");
     const div4 = document.querySelector(`#Hide-${b}`)
     div4.classList.add("shake");
 }
 
-function RemoveClass_Shake(a, b) {
+function remove_class_shake(a, b) {
     const div1 = document.querySelector(`#Hide-${a}`)
     div1.classList.remove("shake");
     const div2 = document.querySelector(`#Hide-${b}`)

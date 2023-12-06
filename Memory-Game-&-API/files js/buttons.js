@@ -35,13 +35,13 @@ function select_first() {  //  Board.style =  Game style (image type)
         1: "HarryPotter", 2: "Dogs", 3: "Digimon", 4: "Pokémon", 5: random_style()
     }
     Board.style = arr[option]
-    HideOptions()
+    Hide_Options()
     Hide_or_show_div("select_first")
     Hide_or_show_div("select_two")
 }
 
-function HideOptions() { //In the Ari Potter game, the board is limited to 6x6
-    if (Board.style === "HarryPotter" || Board.style === "Dogs") {
+function Hide_Options() { //In the Ari Potter game, the board is limited to 6x6
+    if (Board.style === "HarryPotter" ) {
         const select = document.getElementById("select_Third");
         const options = select.querySelectorAll("option");
         options[3].style.display = "none";
