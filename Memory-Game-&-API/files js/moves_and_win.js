@@ -29,7 +29,6 @@ function Hide_div_son_show_father(a) {
     div.id = `front-${a}`
     const div1 = document.querySelector(`#card-${a}`);
     div1.id = `cell-${a}`;
-
 }
 //A function that checks: 
 //1. Whether there is a cell or not
@@ -119,7 +118,6 @@ function checkEqual() {
     }
 }
 
-
 function style_type_random() {
     Board.style = random_style()
     if (Board.board_size === 32 || Board.board_size === 50) {
@@ -168,12 +166,9 @@ function Check_who_win() {
         if (Board.win_player_one < Board.win_player_two) {
             swal({ title: 'Player 2 Win!! - The game is over!!', text: "", timer: 3000 })
         }
-
         if (Board.win_player_one < Board.win_player_bot) {
             swal({ title: 'Bot Win!! - The game is over!!', text: "", timer: 3000 })
         }
-         
-
         if (Board.win_player_one > Board.win_player_two && Board.game_type === "player_one" || Board.game_type === "player_two") {
             swal({ title: 'Player 1 Win!! -The game is over!!', text: "", timer: 3000 })
         }
@@ -202,18 +197,18 @@ function bar_update() {
     const gameTypes = {
         "one_player_only": {
             round: `ROUND: ${Board.rounds}`,
-            player1: `WIN: ${Board.win_player_one} --- Guess: ${Board.player_one_Guess} --- Moves:${Board.player_one_moves}`,
+            player1: `WIN: ${Board.win_player_one} --- Guess: ${Board.player_one_Guess} --- Moves:${Board.player_one_moves}`
         },
         "player_one": {
             round: `Player-1 -- ROUND: ${Board.rounds} -- Player-2`,
             player1: `Guess: ${Board.player_one_Guess} --- VS --- Guess: ${Board.player_two_Guess}`,
-            win: `WIN: ${Board.win_player_one} --- VS --- WIN: ${Board.win_player_two}`,
+            win: `WIN: ${Board.win_player_one} --- VS --- WIN: ${Board.win_player_two}`
         },
         "player": {
             round: `Player-1 - ROUND: ${Board.rounds} - Player-BOT`,
             player1: `Guess: ${Board.player_one_Guess} --- VS --- Guess: ${Board.player_bot_Guess}`,
-            win: `WIN: ${Board.win_player_one} --- VS --- WIN: ${Board.win_player_bot}`,
-        },
+            win: `WIN: ${Board.win_player_one} --- VS --- WIN: ${Board.win_player_bot}`
+        }
     };
     document.getElementById("round").textContent = gameTypes[Board.game_type].round;
     document.getElementById("player1").textContent = gameTypes[Board.game_type].player1;
