@@ -1,67 +1,47 @@
 function one_player() {
-    Board.game_type = 5, Hide_select_first(), hide_button()
+    Board.game_type = "one_player_only", Hide_or_show_div("select_first"), hide_button()
 }
 
 // Player vs player. The function is activated as soon as the button is pressed
 function player_vs_player() {
-    Board.game_type = 2, Hide_select_first(), hide_button()
+    Board.game_type = "player_one", Hide_or_show_div("select_first"), hide_button()
 }
 
 // Player vs bot . The function is activated as soon as the button is pressed
 function player_vs_bot() {
-    Board.game_type = 0, Hide_select_first(), hide_button()
+    Board.game_type = "player", Hide_or_show_div("select_first"), hide_button()
 }
 
 function hide_button() {
-    const div1 = document.getElementById("TwoPlayer");
-    div1.style.display = div1.style.display === "none" ? "block" : "none";
-    const div2 = document.getElementById("bot");
-    div2.style.display = div2.style.display === "none" ? "block" : "none";
-    const div3 = document.getElementById("Oneplayer");
-    div3.style.display = div3.style.display === "none" ? "block" : "none";
+    Hide_or_show_div("TwoPlayer")
+    Hide_or_show_div("bot")
+    Hide_or_show_div("Oneplayer")
 }
 
-function Hide_select_first() {
-    const div1 = document.getElementById("select_first");
-    div1.style.display = div1.style.display === "none" ? "block" : "none";
-}
-
-function Hide_select_two() {
-    const div1 = document.getElementById("select_two");
-    div1.style.display = div1.style.display === "none" ? "block" : "none";
-}
-function Hide_select_Third() {
-    const div1 = document.getElementById("select_Third");
+function Hide_or_show_div(element) {
+    const div1 = document.getElementById(element);
     div1.style.display = div1.style.display === "none" ? "block" : "none";
 }
 
 function random_style() {
     const array = ["HarryPotter", "Dogs", "Digimon", "Pokémon"];
-
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
 }
 
-
 function select_first() {  //  Board.style =  Game style (image type)
-    let option = document.getElementById('select_first').value;
-    switch (option) {
-        case "1": Board.style = "HarryPotter", Hide_select_first(), Hide_select_two(), HideOptions()
-            break;
-        case "2": Board.style = "Dogs", Hide_select_first(), Hide_select_two()
-            break;
-        case "3": Board.style = "Digimon", Hide_select_first(), Hide_select_two()
-            break;
-        case "4": Board.style = "Pokémon", Hide_select_first(), Hide_select_two()
-            break;
-        case "5": Board.style = random_style(), Hide_select_first(), Hide_select_two(), HideOptions()
-            break;
+    const option = document.getElementById('select_first').value;
+    const arr = {
+        1: "HarryPotter", 2: "Dogs", 3: "Digimon", 4: "Pokémon", 5: random_style()
     }
+    Board.style = arr[option]
+    HideOptions()
+    Hide_or_show_div("select_first")
+    Hide_or_show_div("select_two")
 }
-arr = ["HarryPotter", "Dogs", "Digimon", "Pokémon"]
 
 function HideOptions() { //In the Ari Potter game, the board is limited to 6x6
-    if (Board.style === "HarryPotter") {
+    if (Board.style === "HarryPotter" || Board.style === "Dogs") {
         const select = document.getElementById("select_Third");
         const options = select.querySelectorAll("option");
         options[3].style.display = "none";
@@ -70,32 +50,25 @@ function HideOptions() { //In the Ari Potter game, the board is limited to 6x6
 }
 
 function select_two() {
-    let option = document.getElementById('select_two').value;
-    switch (option) {
-        case "1": Hide_select_two(), Board.max_rounds = 4, Hide_select_Third()
-            break;
-        case "2": Hide_select_two(), Board.max_rounds = 6, Hide_select_Third()
-            break;
-        case "3": Hide_select_two(), Hide_select_Third()
-            break;
-    }
+    const option = document.getElementById('select_two').value;
+    const arr = { 1: 4, 2: 6, 3: Infinity }
+    Board.max_rounds = arr[option]
+    Hide_or_show_div("select_two")
+    Hide_or_show_div("select_Third")
 }
 
 function select_Third() { //  Board.maxarr = With it the size of the board is determined (And it is relevant in other functions)
     Board.One_time = 0
-    let option = document.getElementById('select_Third').value;
-    switch (option) {
-        case "1": Hide_select_Third(), Board.maxarr = 10, Board.max_show_all_cards = 3, main_function(4, 5) //20 cards
-            break;
-        case "2": Hide_select_Third(), Board.maxarr = 18, Board.max_show_all_cards = 5, main_function(6, 6) //32 cards
-            break;
-        case "3": Hide_select_Third(), Board.maxarr = 32, Board.max_show_all_cards = 10, main_function(8, 8) //64 cards
-            break;
-        case "4": Hide_select_Third(), Board.maxarr = 50, Board.max_show_all_cards = 15, main_function(10, 10) //100 cards
-            break;
-    }
+    const option = document.getElementById('select_Third').value;
+    const arr1 = { 1: 10, 2: 18, 3: 32, 4: 50 }
+    const arr2 = { 1: 3, 2: 5, 3: 10, 4: 15 }
+    const arr3 = { 1: [4, 5], 2: [6, 6], 3: [8, 8], 4: [10, 10] }
+    const arr4 = arr3[option]
+    Hide_or_show_div("select_Third")
+    Board.maxarr = arr1[option]
+    Board.max_show_all_cards = arr2[option]
+    const function_activation = main_function(arr4[0], arr4[1])
 }
-
 
 function Create_authorized_buttons() {
     const buttons = [

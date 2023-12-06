@@ -41,20 +41,19 @@ function bar_default() {
   Board.player_one_moves = 0;
 
   const gameTypes = {
-    2: {
+    "player_one": {
       player1: `Player-1: ${Board.player_one_Guess} - VS - Player-2: ${Board.player_two_Guess}`,
       round: `Round: ${Board.rounds}`,
     },
-    0: {
+    "player": {
       player1: `Player-1: ${Board.player_one_Guess} - VS - Player-Bot: ${Board.player_bot_Guess}`,
       round: `Round: ${Board.rounds}`,
     },
-    5: {
+    "one_player_only": {
       player1: `WIN: ${Board.win_player_one} - Guess: ${Board.player_one_Guess} - Moves: ${Board.player_one_moves}`,
       round: `Round: ${Board.rounds}`,
     },
   };
-
   const display = gameTypes[Board.game_type];
 
   document.getElementById("player1").textContent = display.player1;
@@ -160,9 +159,7 @@ function create_pairs() { // Create pairs according to board size
       Board.pairs.push([a - 1, a]);
     }
   }
-
   return Board.pairs;
-
 }
 
 function get_random_number() {// Generates a random number between 2 and 548

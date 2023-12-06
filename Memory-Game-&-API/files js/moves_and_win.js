@@ -75,11 +75,11 @@ function checkEqual() {
                         }
                         Removal_of_children()
                         Definition_of_properties()
-                        if (Board.game_type === 2 || Board.game_type === 3) {
-                            Board.game_type = 2
+                        if (Board.game_type === "player_one" || Board.game_type === "player_two") {
+                            Board.game_type = "player_one"
                         }
-                        if (Board.game_type === 0 || Board.game_type === 1) {
-                            Board.game_type = 0
+                        if (Board.game_type === "player_vs_bot" || Board.game_type === "bot") {
+                            Board.game_type = "player_vs_bot"
                         }
                         style_type_random()
                         Board.maxarr = Board.board_size
@@ -89,7 +89,7 @@ function checkEqual() {
                         Board.show_all_cards = 0
                         break;
                     }
-                    if (Board.game_type === 0 || Board.game_type === 1) {
+                    if (Board.game_type === "player" || Board.game_type === "bot") {
                         setTimeout(function () { player_or_bot(), freeze() }, 2500);
                     }
                     break;
@@ -100,7 +100,7 @@ function checkEqual() {
                 if (Board.check[0] !== Board.check[1]) {
                     freeze()
                     ShakeDiv(Board.first_card, Board.Second_card)
-                    if (Board.game_type === 5) {
+                    if (Board.game_type === "one_player_only") {
                         Board.player_one_moves++
                         bar_update()
                     }
@@ -110,7 +110,7 @@ function checkEqual() {
                             Hide_div_son_show_father(Board.first_card),
                             Hide_div_son_show_father(Board.Second_card), Board.Two_numbers_use = [], freeze()
                     }, 1100)
-                    if (Board.game_type === 0 || Board.game_type === 1) {
+                    if (Board.game_type === "player" || Board.game_type === "bot") {
                         setTimeout(function () { player_or_bot(), Board.Two_numbers_use = [], freeze() }, 2500);
                     }
                 }
@@ -130,11 +130,11 @@ function style_type_random() {
 }
 
 function Check_who_win_rounds() {
-    if (Board.game_type === 5) {
+    if (Board.game_type === "one_player_only") {
         swal({ title: "Well done, you have completed a round!!", text: "", timer: 2000 })
         Board.win_player_one++
     }
-    if (Board.game_type !== 5) {
+    if (Board.game_type !== "one_player_only") {
         if (Board.player_one_Guess === Board.player_two_Guess || Board.player_one_Guess === Board.player_bot_Guess) {
             swal({ title: "Dead heat!!", text: "", timer: 3000 })
         }
@@ -146,11 +146,11 @@ function Check_who_win_rounds() {
             swal({ title: "Bot Win!! (Won the current round)", text: "", timer: 3000 })
             Board.win_player_bot++
         }
-        if (Board.player_one_Guess > Board.player_bot_Guess && Board.game_type === 0 || Board.game_type === 1) {
+        if (Board.player_one_Guess > Board.player_bot_Guess && Board.game_type === "player" || Board.game_type === "bot") {
             swal({ title: "Player 1 Win!!(Won the current round)", text: "", timer: 3000 })
             Board.win_player_one++
         }
-        if (Board.player_one_Guess > Board.player_two_Guess && Board.game_type === 2 || Board.game_type === 3) {
+        if (Board.player_one_Guess > Board.player_two_Guess && Board.game_type === "player_one" || Board.game_type === "player_two") {
             swal({ title: "Player 1 Win!!(Won the current round)", text: "", timer: 3000 })
             Board.win_player_one++
         }
@@ -158,10 +158,10 @@ function Check_who_win_rounds() {
 }
 
 function Check_who_win() {
-    if (Board.game_type === 5) {
+    if (Board.game_type === "one_player_only") {
         swal({ title: "Well done, game over!!", text: "", timer: 3000 })
     }
-    if (Board.game_type !== 5) {
+    if (Board.game_type !== "one_player_only") {
         if (Board.win_player_one === Board.win_player_two || Board.win_player_one === Board.win_player_bot) {
             swal({ title: "Dead heat!! - The game is over!!", text: "", timer: 3000 })
         }
@@ -172,43 +172,44 @@ function Check_who_win() {
         if (Board.win_player_one < Board.win_player_bot) {
             swal({ title: 'Bot Win!! - The game is over!!', text: "", timer: 3000 })
         }
+         
 
-        if (Board.win_player_one > Board.win_player_two && Board.game_type === 2 || Board.game_type === 3) {
+        if (Board.win_player_one > Board.win_player_two && Board.game_type === "player_one" || Board.game_type === "player_two") {
             swal({ title: 'Player 1 Win!! -The game is over!!', text: "", timer: 3000 })
         }
-        if (Board.win_player_one > Board.win_player_bot && Board.game_type === 0 || Board.game_type === 1) {
+        if (Board.win_player_one > Board.win_player_bot && Board.game_type === "player" || Board.game_type === "bot") {
             swal({ title: 'Player One Win!! - The game is over!!', text: "", timer: 3000 })
         }
     }
 }
 
 function card_matches() {
-    if (Board.game_type === 0 || Board.game_type === 2) {
+    if (Board.game_type === "player" || Board.game_type === "player_one") {
         Board.player_one_Guess++
     }
-    if (Board.game_type === 1) {
+    if (Board.game_type === "bot") {
         Board.player_bot_Guess++
     }
-    if (Board.game_type === 3) {
+    if (Board.game_type === "player_two") {
         Board.player_two_Guess++
     }
-    if (Board.game_type === 5) {
+    if (Board.game_type === "one_player_only") {
         Board.player_one_Guess++
     }
 }
 
 function bar_update() {
     const gameTypes = {
-        5: {
+        "one_player_only": {
             round: `ROUND: ${Board.rounds}`,
             player1: `WIN: ${Board.win_player_one} --- Guess: ${Board.player_one_Guess} --- Moves:${Board.player_one_moves}`,
         },
-        2: {
+        "player_one": {
             round: `Player-1 -- ROUND: ${Board.rounds} -- Player-2`,
             player1: `Guess: ${Board.player_one_Guess} --- VS --- Guess: ${Board.player_two_Guess}`,
             win: `WIN: ${Board.win_player_one} --- VS --- WIN: ${Board.win_player_two}`,
         },
-        0: {
+        "player": {
             round: `Player-1 - ROUND: ${Board.rounds} - Player-BOT`,
             player1: `Guess: ${Board.player_one_Guess} --- VS --- Guess: ${Board.player_bot_Guess}`,
             win: `WIN: ${Board.win_player_one} --- VS --- WIN: ${Board.win_player_bot}`,
@@ -220,22 +221,22 @@ function bar_update() {
 
 function TwoPlayer() {
     switch (Board.game_type) {
-        case 3:
-            Board.game_type = 2 //player_one
+        case "player_two":
+            Board.game_type = "player_one";
             break;
-        case 2:
-            Board.game_type = 3;//player_two
+        case "player_one":
+            Board.game_type = "player_two";
             break;
     }
 }
 
-function player_or_bot() {//Board.game_type = 1 = player one ,Board.game_type = 0 =  player bot 
+function player_or_bot() {
     switch (Board.game_type) {
-        case 0:
-            Board.game_type = 1, bot_random_number()
+        case "player":
+            Board.game_type = "bot", bot_random_number()
             break;
-        case 1:
-            Board.game_type = 0;
+        case "bot":
+            Board.game_type = "player";
             break;
     }
 }

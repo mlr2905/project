@@ -5,9 +5,6 @@ const Board = new Game_board(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
 
 const Style_cards = new Playing_card_style(" ", " ", " ", " ")
 
-Definition_of_properties()
-default_value()
-
 //  Sets a background and also that it changes every 5 seconds
 function changeBackground() {
   document.body.style.backgroundRepeat = "no-repeat";
@@ -18,6 +15,8 @@ function changeBackground() {
   document.querySelector("body").style.backgroundImage = `url(${images[index]})`;
 }
 intervalId = setInterval(changeBackground, 5000);
+
+Definition_of_properties()
 
 // Setting default properties
 function Definition_of_properties() {
@@ -30,6 +29,7 @@ function Definition_of_properties() {
   Board.show_all_cards = 0
 }
 
+default_value()
 function default_value() {
   Board.win_player_one = 0
   Board.win_player_two = 0

@@ -44,6 +44,5 @@ class Game_board {
     this.show_all_cards = _show_all_cards
     this.max_show_all_cards = _max_show_all_cards
     this.eye = _eye
-
   }
 }

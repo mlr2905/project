@@ -1,5 +1,3 @@
-
-
 class Api_data {
   constructor(_data1, _data2, _data3, _data4) {
     this.data1 = _data1
@@ -8,6 +6,3 @@ class Api_data {
     this.data4 = _data4
   }
 }
-
-
-
