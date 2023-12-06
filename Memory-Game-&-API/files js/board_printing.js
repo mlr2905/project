@@ -110,7 +110,7 @@ function sound() { //A function that configures the icon of the music with the o
   Board.audio.appendChild(cellDiv);
   Board.img = document.createElement("img");
   Board.src = document.getElementById("audio");
-  Board.img.src = "images/on.png"
+  Board.img.src = "images/on.gif"
   Board.src.appendChild(Board.img);
   Board.src.addEventListener("click", on_or_off_sound);
 }
@@ -131,7 +131,7 @@ function on_or_off_sound() {
     Board.src.removeChild(Board.img);
     Board.img = document.createElement("img");
     Board.src = document.getElementById("audio");
-    Board.img.src = "images/on.png"
+    Board.img.src = "images/on.gif"
     Board.src.appendChild(Board.img);
     Board.audio.play();
     Board.on_or_off = "ON"

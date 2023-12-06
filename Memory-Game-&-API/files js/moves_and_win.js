@@ -24,7 +24,7 @@ function hide_div_father_show_son(a) {
     div1.id = `card-${a}`
 }
 
-function Hide_div_son_show_father(a) {
+function hide_div_son_show_father(a) {
     const div = document.querySelector(`#Hide-${a}`);
     div.id = `front-${a}`
     const div1 = document.querySelector(`#card-${a}`);
@@ -52,72 +52,83 @@ function check_Equal() {
                 freeze()
                 out_div(Board.first_card, Board.Second_card)
                 setTimeout(function () {
-                    Remove_class_out(Board.first_card, Board.Second_card)
+                    remove_class_out(Board.first_card, Board.Second_card)
                 }, 1600);
-                setTimeout(function () { HideDiv(Board.first_card, Board.Second_card), Board.Two_numbers_use = [], freeze(); }, 1500);
+                setTimeout(function () { hide_div(Board.first_card, Board.Second_card), Board.Two_numbers_use = [], freeze(); }, 1500);
                 memory = Board.pairs[i]
                 memory_arr = [Board.first_card, Board.Second_card]
-                if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1]) {
-                    Board.check[0] = -1
-                    Board.check[1] = -1
-                    Board.pairs.splice(i, 1);
-                    card_matches()
-                    TwoPlayer()
-                    bar_update()
-                    if (Board.pairs.length === 0) { // A condition that is activated at the exit of a round and deletes the current board and creates a new one
-                        Check_who_win_rounds()
-                        Board.rounds++
-                        if (Board.max_rounds === Board.rounds) {//A condition that checks if the desired number of rounds has been reached
-                            Check_who_win()
-                            setTimeout(function () { exit(); }, 2000);
-                            break;
-                        }
-                        Removal_of_children()
-                        Definition_of_properties()
-                        if (Board.game_type === "player_one" || Board.game_type === "player_two") {
-                            Board.game_type = "player_one"
-                        }
-                        if (Board.game_type === "player_vs_bot" || Board.game_type === "bot") {
-                            Board.game_type = "player_vs_bot"
-                        }
-                        style_type_random()
-                        Board.maxarr = Board.board_size
-                        main_function(Board.rows, Board.cols)
-                        bar_update()
-                        show_eye()
-                        Board.show_all_cards = 0
-                        break;
-                    }
-                    if (Board.game_type === "player" || Board.game_type === "bot") {
-                        setTimeout(function () { player_or_bot(), freeze() }, 2500);
-                    }
-                    break;
-                }
+                round_or_game_over(memory, memory_arr,i)
+                break;
             }
-            // שאין התמאה
-            if (Board.for_ended === Board.pairs.length - 1) {
-                if (Board.check[0] !== Board.check[1]) {
-                    freeze()
-                    shake_div(Board.first_card, Board.Second_card)
-                    if (Board.game_type === "one_player_only") {
-                        Board.player_one_moves++
-                        bar_update()
-                    }
-                    TwoPlayer()
-                    setTimeout(function () {
-                        remove_class_shake(Board.first_card, Board.Second_card),
-                            Hide_div_son_show_father(Board.first_card),
-                            Hide_div_son_show_father(Board.Second_card), Board.Two_numbers_use = [], freeze()
-                    }, 1100)
-                    if (Board.game_type === "player" || Board.game_type === "bot") {
-                        setTimeout(function () { player_or_bot(), Board.Two_numbers_use = [], freeze() }, 2500);
-                    }
-                }
+            no_match()
+
+        }
+    }
+       
+
+    
+}
+
+function round_or_game_over(memory,memory_arr,i) {
+    if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1]) {
+        Board.check[0] = -1
+        Board.check[1] = -1
+        Board.pairs.splice(i, 1);
+        card_matches()
+        two_player()
+        bar_update()
+        if (Board.pairs.length === 0) { // A condition that is activated at the exit of a round and deletes the current board and creates a new one
+            check_who_win_rounds()
+            Board.rounds++
+            if (Board.max_rounds === Board.rounds) {//A condition that checks if the desired number of rounds has been reached
+                Check_who_win()
+                setTimeout(function () { exit(); }, 2000);
+                return
+            }
+            removal_of_children()
+            Definition_of_properties()
+            if (Board.game_type === "player_one" || Board.game_type === "player_two") {
+                Board.game_type = "player_one"
+            }
+            if (Board.game_type === "player_vs_bot" || Board.game_type === "bot") {
+                Board.game_type = "player_vs_bot"
+            }
+            style_type_random()
+            Board.maxarr = Board.board_size
+            main_function(Board.rows, Board.cols)
+            bar_update()
+            show_eye()
+            Board.show_all_cards = 0
+            return
+        }
+        if (Board.game_type === "player" || Board.game_type === "bot") {
+            setTimeout(function () { player_or_bot(), freeze() }, 2500);
+        }
+    }
+
+}
+
+function no_match() {
+    if (Board.for_ended === Board.pairs.length - 1) {
+        if (Board.check[0] !== Board.check[1]) {
+            freeze()
+            shake_div(Board.first_card, Board.Second_card)
+            if (Board.game_type === "one_player_only") {
+                Board.player_one_moves++
+                bar_update()
+            }
+            two_player()
+            setTimeout(function () {
+                remove_class_shake(Board.first_card, Board.Second_card),
+                    hide_div_son_show_father(Board.first_card),
+                    hide_div_son_show_father(Board.Second_card), Board.Two_numbers_use = [], freeze()
+            }, 1100)
+            if (Board.game_type === "player" || Board.game_type === "bot") {
+                setTimeout(function () { player_or_bot(), Board.Two_numbers_use = [], freeze() }, 2500);
             }
         }
     }
 }
-
 function style_type_random() {
     Board.style = random_style()
     if (Board.board_size === 32 || Board.board_size === 50) {
@@ -127,7 +138,7 @@ function style_type_random() {
     }
 }
 
-function Check_who_win_rounds() {
+function check_who_win_rounds() {
     if (Board.game_type === "one_player_only") {
         swal({ title: "Well done, you have completed a round!!", text: "", timer: 2000 })
         Board.win_player_one++
@@ -214,7 +225,7 @@ function bar_update() {
     document.getElementById("player1").textContent = gameTypes[Board.game_type].player1;
 }
 
-function TwoPlayer() {
+function two_player() {
     switch (Board.game_type) {
         case "player_two":
             Board.game_type = "player_one";
@@ -251,7 +262,7 @@ function freeze() { // Locks and unlocks the board
     }
 }
 
-function HideDiv(a, b) {
+function hide_div(a, b) {
     const div1 = document.querySelector(`#card-${a}`)
     div1.classList.add("Hide");
     const div2 = document.querySelector(`#card-${b}`)
@@ -265,7 +276,7 @@ function out_div(a, b) {
     div4.classList.add("out");
 }
 
-function Remove_class_out(a, b) {
+function remove_class_out(a, b) {
     const div1 = document.querySelector(`#card-${a}`)
     div1.classList.remove("out");
     const div2 = document.querySelector(`#card-${b}`)
@@ -286,7 +297,7 @@ function remove_class_shake(a, b) {
     div2.classList.remove("shake");
 }
 
-function Removal_of_children() {
+function removal_of_children() {
     let parent = document.getElementById("board");
     // Delete all children
     parent.innerHTML = "";
