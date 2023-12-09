@@ -57,19 +57,16 @@ function check_Equal() {
                 setTimeout(function () { hide_div(Board.first_card, Board.Second_card), Board.Two_numbers_use = [], freeze(); }, 1500);
                 memory = Board.pairs[i]
                 memory_arr = [Board.first_card, Board.Second_card]
-                round_or_game_over(memory, memory_arr,i)
+                round_or_game_over(memory, memory_arr, i)
                 break;
             }
             no_match()
 
         }
     }
-       
-
-    
 }
 
-function round_or_game_over(memory,memory_arr,i) {
+function round_or_game_over(memory, memory_arr, i) {
     if (memory[0] === memory_arr[0] && memory[1] === memory_arr[1]) {
         Board.check[0] = -1
         Board.check[1] = -1
@@ -105,7 +102,6 @@ function round_or_game_over(memory,memory_arr,i) {
             setTimeout(function () { player_or_bot(), freeze() }, 2500);
         }
     }
-
 }
 
 function no_match() {
@@ -190,17 +186,18 @@ function Check_who_win() {
 }
 
 function card_matches() {
-    if (Board.game_type === "player" || Board.game_type === "player_one") {
-        Board.player_one_Guess++
-    }
-    if (Board.game_type === "bot") {
-        Board.player_bot_Guess++
-    }
-    if (Board.game_type === "player_two") {
-        Board.player_two_Guess++
-    }
-    if (Board.game_type === "one_player_only") {
-        Board.player_one_Guess++
+    switch (Board.game_type) {
+        case "player":
+        case "player_one":
+        case "one_player_only":
+            Board.player_one_Guess++;
+            break;
+        case "bot":
+            Board.player_bot_Guess++;
+            break;
+        case "player_two":
+            Board.player_two_Guess++;
+            break;
     }
 }
 
