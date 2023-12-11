@@ -1,94 +1,66 @@
-
 function cell_click(cell_number) { //  פוקציה אשר בודקת תורמי ואם יש בחירה כפולה על תא
+    const img = document.createElement("img");
+    const turn = Game_board.xo === 1 ? "x" : "o";
     if (Game_board.arr[cell_number] == "x" || Game_board.arr[cell_number] == "o") { // בודק עם אין בחירה נוספת על תא תופס
         swal("Error!", "The place is taken, you need to choose a new place", "error")
     }
-    if (Game_board.arr[cell_number] != "x" && Game_board.xo == "1" && Game_board.arr[cell_number] != "o") { // מפניה לפוקציות נוספות X בודק עם התא הנבחר פנוי ואם זה תור של 
-        //
-        const img = document.createElement("img");
-        img.src = "imgs/x.png";
+    else { // מפניה לפוקציות נוספות X בודק עם התא הנבחר פנוי ואם זה תור של 
+        img.src = `imgs/${turn}.png`;
         const src = document.getElementById(`cell-${cell_number}`);
         src.appendChild(img); //בתא הנבחר X  שם תמונה של 
-        Game_board.arr[cell_number] = "x"//זהה למספר התא indexב  X מגדיר מחרוזת 
+        Game_board.arr[cell_number] = turn//זהה למספר התא indexב  X מגדיר מחרוזת 
         Game_board.xo = 3 // נועל את האפשרות ללחוץ על הלוח
         win() // מפנה לפוקציה בדיקת ניצחון
         Game_board.xo = 3 // נועל את האפשרות ללחוץ על הלוח
         //X פוקציה זו מחכה שהסתיים בדיקה של הנצחון ואז מפנה לבדיקה של סיום משחק וכיבוי האור המהבב מעל ה
-        setTimeout(function () { finish1(), off_blink_for_x(), on_blink_for_o(); }, 1300);
-    }
-    if (Game_board.arr[cell_number] != "o" && Game_board.xo == "0" && Game_board.arr[cell_number] != "x") { //O כנל בהקשר של 
-        const img = document.createElement("img");
-        img.src = "imgs/o.png";
-        const src = document.getElementById(`cell-${cell_number}`);
-        src.appendChild(img);
-        Game_board.arr[cell_number] = "o"
-        Game_board.xo = 3
-        win()
-        Game_board.xo = 3
-        setTimeout(function () { finish2(), off_blink_for_o(), on_blink_for_x(); }, 1300);
+        if (turn === "x") {
+            setTimeout(function () { finish(turn), off_blink_for_x(), on_blink_for_o(); }, 1300);
+        }
+        else {
+            setTimeout(function () { finish(turn), off_blink_for_o(), on_blink_for_x(); }, 1300);
+
+        }
     }
 }
-
-
+function check_win(arr1, arr2) {
+    if (arr2.length >= 3) {
+        let win = null
+        arr1.sort();
+        arr2.sort();
+        if (arr1[0] === arr2[0] && arr1[1] === arr2[1] && arr1[2] === arr2[2]) {
+            return win = true
+        }
+        else {
+            return win = false
+        }
+    }
+}
 
 function win() { // O או של  X פונקציה שבודקת ניצחון של
     // במידה ושי ניצחון היא מפעילה מספר פונקציות
-    switch (true) {
-        case (Game_board.arr[0] == "x" && Game_board.arr[1] == "x" && Game_board.arr[2] == "x"):
-            return blink(0, 1, 2), show_x_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(0, 1, 2) }, 1299);
-        case (Game_board.arr[2] == "x" && Game_board.arr[4] == "x" && Game_board.arr[6] == "x"):
-            return blink(2, 4, 6), show_x_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(2, 4, 6) }, 1299);
-        case (Game_board.arr[0] == "x" && Game_board.arr[3] == "x" && Game_board.arr[6] == "x"):
-            return blink(0, 3, 6), show_x_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(0, 3, 6) }, 1299);
-        case (Game_board.arr[0] == "x" && Game_board.arr[4] == "x" && Game_board.arr[8] == "x"):
-            return blink(0, 4, 8), show_x_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(0, 4, 8) }, 1299);
-        case (Game_board.arr[3] == "x" && Game_board.arr[4] == "x" && Game_board.arr[5] == "x"):
-            return blink(3, 4, 5), show_x_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(3, 4, 5) }, 1299);
-        case (Game_board.arr[6] == "x" && Game_board.arr[7] == "x" && Game_board.arr[8] == "x"):
-            return blink(6, 7, 8), show_x_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(6, 7, 8) }, 1299);
-        case (Game_board.arr[2] == "x" && Game_board.arr[5] == "x" && Game_board.arr[8] == "x"):
-            return blink(2, 5, 8), show_x_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(2, 5, 8) }, 1299);
-        case (Game_board.arr[1] == "x" && Game_board.arr[4] == "x" && Game_board.arr[7] == "x"):
-            return blink(1, 4, 7), show_x_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(1, 4, 7) }, 1299);
-        case (Game_board.arr[0] == "o" && Game_board.arr[1] == "o" && Game_board.arr[2] == "o"):
-            return blink(0, 1, 2), show_o_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(0, 1, 2) }, 1299);
-        case (Game_board.arr[2] == "o" && Game_board.arr[4] == "o" && Game_board.arr[6] == "o"):
-            return blink(2, 4, 6), show_o_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(2, 4, 6) }, 1299);
-        case (Game_board.arr[0] == "o" && Game_board.arr[3] == "o" && Game_board.arr[6] == "o"):
-            return blink(0, 3, 6), show_o_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(0, 3, 6) }, 1299);
-        case (Game_board.arr[0] == "o" && Game_board.arr[4] == "o" && Game_board.arr[8] == "o"):
-            return blink(0, 4, 8), show_o_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(0, 4, 8) }, 1299);
-        case (Game_board.arr[3] == "o" && Game_board.arr[4] == "o" && Game_board.arr[5] == "o"):
-            return blink(3, 4, 5), show_o_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(3, 4, 5) }, 1299);
-        case (Game_board.arr[6] == "o" && Game_board.arr[7] == "o" && Game_board.arr[8] == "o"):
-            return blink(6, 7, 8), show_o_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(6, 7, 8) }, 1299);
-        case (Game_board.arr[2] == "o" && Game_board.arr[5] == "o" && Game_board.arr[8] == "o"):
-            return blink(2, 5, 8), show_o_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(2, 5, 8) }, 1299);
-        case (Game_board.arr[1] == "o" && Game_board.arr[4] == "o" && Game_board.arr[7] == "o"):
-            return blink(1, 4, 7), show_o_win(), Game_board.arr = Game_board.arr.map(reset),
-                setTimeout(function () { Canceling_blink(1, 4, 7) }, 1299);
+    const test_win = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+    const index_x = [];
+    const index_o = []
+    for (const i of Game_board.arr.keys()) {
+        if (Game_board.arr[i] === "x") index_x.push(i);
+        if (Game_board.arr[i] === "o") index_o.push(i);
+    }
+    for (const win of test_win) {
+        if (check_win(win, index_x)) {
+            Game_board.who_winner = "x"
+            blink(...win), show_x_win(), Game_board.arr = Game_board.arr.map(reset), setTimeout(() => Canceling_blink(...win), 1299);
+        }
+        if (check_win(win, index_o)) {
+            Game_board.who_winner = "o"
+            blink(...win), show_o_win(), Game_board.arr = Game_board.arr.map(reset), setTimeout(() => Canceling_blink(...win), 1299);
+        }
     }
 }
+function reset(n) { // למספר 0  MAP בעזרת  ARR בעת ניצחון מתבצע איפוס לרשימה 
+    return 0;
+}
 
-function blink(d, e, f) { //מדליק אור מהבהב על השורה המנצחת
-    const a = d
-    const b = e
-    const c = f
+function blink(a, b, c) { //מדליק אור מהבהב על השורה המנצחת
     const div1 = document.querySelector(`#cell-${a}`);
     div1.id = `blink-cell-${a}`;
     const div2 = document.querySelector(`#cell-${b}`);
@@ -97,10 +69,7 @@ function blink(d, e, f) { //מדליק אור מהבהב על השורה המנ�
     div3.id = `blink-cell-${c}`;
 }
 
-function Canceling_blink(d, e, f) {   // מכבה את האור המהבהב של השורה המנצחת
-    const a = d
-    const b = e
-    const c = f
+function Canceling_blink(a, b, c) {   // מכבה את האור המהבהב של השורה המנצחת
     const div1 = document.querySelector(`#blink-cell-${a}`);
     div1.id = `cell-${a}`;
     const div2 = document.querySelector(`#blink-cell-${b}`);
@@ -121,24 +90,21 @@ function show_o_win() { // מציגה התראה ניצחון מרחפת מלמ�
     setTimeout(function () { o.className = o.className.replace("show", ""); }, 3000);
 }
 
-function reset(n) { // למספר 0  MAP בעזרת  ARR בעת ניצחון מתבצע איפוס לרשימה 
-    return 0;
-}
-
-function finish2() {  // פונקציה בודקת אם המשחק  הסתיים ומעלה את מספר הסיבובים והנצחנות של עיגול ואם לא ממשיכה לתור הבא
+function finish(a) {  // פונקציה בודקת אם המשחק  הסתיים ומעלה את מספר הסיבובים והנצחנות של עיגול ואם לא ממשיכה לתור הבא
     for (const number of Game_board.arr) {
         if (number == 0) {
-            for (let index = 0; index < Game_board.arr.length; index++) {
-                document.getElementById(`cell-${index}`).textContent = null;
+            for (let i = 0; i < Game_board.arr.length; i++) {
+                document.getElementById(`cell-${i}`).textContent = null;
             }
-            return Game_board.arr = [-1, -1, -1, -1, -1, -1, -1, -1, -1], Game_board.rounds++, Game_board.win_o++, Game_board.xo = "1",
+            Game_board.who_winner === "x" ? (Game_board.xo = 0, Game_board.win_x++) : (Game_board.xo = 1, Game_board.win_o++);
+            return Game_board.arr = [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                Game_board.rounds++,
                 document.getElementById("c-5").textContent = Game_board.win_x,
                 document.getElementById("c-6").textContent = Game_board.rounds,
-                document.getElementById("c-7").textContent = Game_board.win_o,
-                Game_board.xo = 1
+                document.getElementById("c-7").textContent = Game_board.win_o
         }
         else {
-            return Check_full_arr2(Game_board.arr)
+            return a === "x" ? Check_full_arr(Game_board.arr) : Check_full_arr2(Game_board.arr);
         }
     }
 }
@@ -148,23 +114,6 @@ function off_blink_for_o() {  //O מכבה אור מהבב של ה
     div1.id = "c-4";
 }
 
-function finish1() {  // פונקציה בודקת אם המשחק  הסתיים  מעלה  ב1 את מספר הסיבובים ומספר הנצחונות של איקס ואם לא אז בודקת אם היה תיקו
-    for (const number of Game_board.arr) {
-        if (number == 0) {
-            for (let index = 0; index < Game_board.arr.length; index++) {
-                document.getElementById(`cell-${index}`).textContent = null;
-            }
-            return Game_board.arr = [-1, -1, -1, -1, -1, -1, -1, -1, -1], Game_board.rounds++, Game_board.win_x++,
-                document.getElementById("c-5").textContent = Game_board.win_x,
-                document.getElementById("c-6").textContent = Game_board.rounds,
-                document.getElementById("c-7").textContent = Game_board.win_o,
-                Game_board.xo = 1;
-        } else {
-            Game_board.xo = 0
-            return Check_full_arr(Game_board.arr)
-        }
-    }
-}
 
 function off_blink_for_x() {  //X מכבה אור מהבב של ה     
     const div1 = document.querySelector("#blink-2");

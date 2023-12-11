@@ -10,6 +10,7 @@ function Default_values() {
     Game_board.arr = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
 }
 function o_or_x_first() { //  ומציגה שתי אפשרויות שמי ישחק ראשון Two Playerפוקציה זו מופעלת ברגע שלוחצים על כפתור 
+    Default_values()
     document.getElementById('bot_or_you').style.display = "none"; // זה הגדרתי שם במידה התחרט ורוצה לשחק נגד שחקן אחר
     document.getElementById('x_or_o').style.display = "block";  // מציג את האפשרויות 
     document.getElementById('x_first').onclick = function () { // מתחיל  X אפשרות ראשון ה
