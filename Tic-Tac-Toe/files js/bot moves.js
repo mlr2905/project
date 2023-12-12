@@ -1,6 +1,9 @@
 
 function easy_bot() { //  זה בעצם הרמה הקלה  היא יכולה לנצח וגם נתן לנצח אותה
-    const cond = [Game_board.arr[4] !== "o" && Game_board.arr[4] !== "x", Game_board.arr[4] === "x" && Game_board.arr[8] === -1,
+   
+        const cond = [
+    Game_board.arr[4] !== "o" && Game_board.arr[4] !== "x",
+    Game_board.arr[4] === "x" && Game_board.arr[8] === -1,
     Game_board.arr[0] === "x" && Game_board.arr[1] === "x" && Game_board.arr[2] === -1,
     Game_board.arr[0] === "x" && Game_board.arr[2] === "x" && Game_board.arr[1] === -1,
     Game_board.arr[1] === "x" && Game_board.arr[2] === "x" && Game_board.arr[0] === -1,
@@ -25,7 +28,7 @@ function easy_bot() { //  זה בעצם הרמה הקלה  היא יכולה ל�
     for (let i = 0; i < cond.length; i++) {
         if (cond[i] === true) {
             action[i]
-            return cell_click(action[i])
+            return cell_click(action[i],Game_board.xo = 0)
         }
     }
     return default1()
@@ -85,7 +88,7 @@ function Hard_bot() { // הרמה הקשה לא ניתן לנצח אותה
     for (let i = 0; i < cond.length; i++) {
         if (cond[i] === true) {
             action[i]
-            return cell_click(action[i])
+            return cell_click(action[i],Game_board.xo = 0)
         }
     }
     return default1()
@@ -95,7 +98,7 @@ function default1() { //פונקציה שנתונת תא אקראי
     while (true) {
         const cell_number = Math.floor(Math.random() * Game_board.arr.length);
         if (Game_board.arr[cell_number] === -1) {
-            return cell_click(cell_number)
+            return cell_click(cell_number,Game_board.xo = 0)
         } else {
             continue;
         }
