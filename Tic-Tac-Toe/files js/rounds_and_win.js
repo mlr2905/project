@@ -1,18 +1,18 @@
 function cell_click(cell_number) { //  פוקציה אשר בודקת תורמי ואם יש בחירה כפולה על תא
     const img = document.createElement("img");
-    const Who  = Game_board.xo === 1 ? "x" : "o";
+    const Who = Game_board.xo === 1 ? "x" : "o";
     if (Game_board.arr[cell_number] == "x" || Game_board.arr[cell_number] == "o") { // בודק עם אין בחירה נוספת על תא תופס
         swal("Error!", "The place is taken, you need to choose a new place", "error")
     }
-    if ( Game_board.xo !==3) { // מפניה לפוקציות נוספות X בודק עם התא הנבחר פנוי ואם זה תור של 
+    if (Game_board.xo !== 3) { // מפניה לפוקציות נוספות X בודק עם התא הנבחר פנוי ואם זה תור של 
         Game_board.xo = 3
-        img.src = `imgs/${Who }.png`;
+        img.src = `imgs/${Who}.png`;
         const src = document.getElementById(`cell-${cell_number}`);
         src.appendChild(img); //בתא הנבחר X  שם תמונה של 
         Game_board.arr[cell_number] = Who //זהה למספר התא indexב  X מגדיר מחרוזת 
         win() // מפנה לפוקציה בדיקת ניצחון
         //X פוקציה זו מחכה שהסתיים בדיקה של הנצחון ואז מפנה לבדיקה של סיום משחק וכיבוי האור המהבב מעל ה
-        setTimeout(function () { finish(Who), toggle_Blin_For_X_or_o(2), toggle_Blin_For_X_or_o(4)}, 1300);
+        setTimeout(function () { finish(Who), toggle_Blin_For_X_or_o(2), toggle_Blin_For_X_or_o(4) }, 1300);
     }
 }
 function check_win(arr1, arr2) {
@@ -35,11 +35,11 @@ function win() { // O או של  X פונקציה שבודקת ניצחון של
     for (const win of test_win) {
         if (check_win(win, index_x)) {
             Game_board.who_winner = "x"
-            blink_on_or_off(...win), show_win("x"), Game_board.arr = Game_board.arr.map(reset), setTimeout(() => blink_on_or_off(...win), 1299);
+            return blink_on_or_off(...win), show_win("x"), Game_board.arr = Game_board.arr.map(reset), setTimeout(() => blink_on_or_off(...win), 1299);
         }
         if (check_win(win, index_o)) {
             Game_board.who_winner = "o"
-            blink_on_or_off(...win), show_win("o"), Game_board.arr = Game_board.arr.map(reset), setTimeout(() => blink_on_or_off(...win), 1299);
+            return blink_on_or_off(...win), show_win("o"), Game_board.arr = Game_board.arr.map(reset), setTimeout(() => blink_on_or_off(...win), 1299);
         }
     }
 }
