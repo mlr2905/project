@@ -57,8 +57,9 @@ function edit_or_delete(number) { //Edit or delete a message
             confirmButtonText: 'edit',
             denyButtonText: `delete`,
         }).then((result) => {
-            result.isConfirmed ? text_editing(number) : (Swal.fire('The message has been deleted', '', 'info'), delete_(number));
-        })
+            !result.isDismissed && (result.isConfirmed ? text_editing(number) : Swal.fire('The message has been deleted', '', 'info') && delete_(number));
+
+                      })
     }
     else {
         Swal.fire({
