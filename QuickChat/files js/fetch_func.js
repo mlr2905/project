@@ -32,9 +32,8 @@ function get() {
 }
 
 function post_img() {//Only the sender sees the picture
-    Cells_manager.new_time = time_new()
-    image.src = URL.createObjectURL(event.target.files[0]);
-    const img = image.src
+    Cells_manager.new_time = time_new() 
+    const img =  image1.src = URL.createObjectURL(event.target.files[0]);
     const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`
     fetch(url, {
         method: 'POST',
