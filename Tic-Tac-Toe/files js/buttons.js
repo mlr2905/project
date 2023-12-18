@@ -23,7 +23,7 @@ function o_or_x_first() { //  ומציגה שתי אפשרויות שמי ישח
 function Two_Player() { // פוקציה זו מגדירה שהמחשק הוא נגד שחקן אחר  ומפעילה מספר פוקציות
     hide_button()
     return Game_board.game_type = 1;
-}
+} 
 
 // פונקציה שאחראית לנתב לפוקציה רצוי ברגע שבוחרים באחד מאפשרויות
 function select() {

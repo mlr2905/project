@@ -114,7 +114,6 @@ function Check_full_arr(a) { // בודקת אם נישאר תא פנוי או ש
         }
     }
     (Game_board.xo === 1) ? Game_board.xo = 0 : Game_board.xo = 1;
-
     return swal({ title: "Dead heat!!", text: "", timer: 1000 }),
         Game_board.arr = Game_board.arr.map(reset),
         Game_board.rounds++,
