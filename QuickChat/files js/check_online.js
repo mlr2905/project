@@ -1,5 +1,5 @@
 async function check_online() { //A function that checks who logged in and who logged out
-    Cells_manager.new_text = document.getElementById('name').value
+    Cells_manager.name_connected = document.getElementById('name').value
     const url = "https://db-nmn5.onrender.com/online"
     let response = await fetch(url)
     let data = await response.json()
