@@ -47,7 +47,7 @@ function delete_out_user() { //A function that checks if 60 seconds have passed 
             const difference = difference_in_seconds(time1, time2);
 
             if (difference > 60) {
-                if (Cells_manager.online[i].user === Cells_manager.new_text) { //Checking if my user has been logged out
+                if (Cells_manager.online[i].user === Cells_manager.name_connected) { //Checking if my user has been logged out
                     Cells_manager.connected = "not"
                 }
                 fetch(`https://db-nmn5.onrender.com/online/${id}`, {
@@ -81,7 +81,7 @@ function post_new_login(time) { //Connection of a user that does not exist
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: `{
-                "user": "${Cells_manager.new_text}",
+                "user": "${Cells_manager.name_connected}",
                 "time": "${time}",
                 "id": "${id}"
                 }`})
