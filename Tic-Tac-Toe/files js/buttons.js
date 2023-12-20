@@ -23,32 +23,25 @@ function o_or_x_first() { //  ומציגה שתי אפשרויות שמי ישח
 function Two_Player() { // פוקציה זו מגדירה שהמחשק הוא נגד שחקן אחר  ומפעילה מספר פוקציות
     hide_button()
     return Game_board.game_type = 1;
-} 
-
+}
 // פונקציה שאחראית לנתב לפוקציה רצוי ברגע שבוחרים באחד מאפשרויות
 function select() {
     Default_values()
-    let option = document.getElementById('select').value;
-    switch (option) {
-        case "3": Easy()  // #1
-            break;
-        case "4":  bot_or_you() // #2
-            break;
-    }
+    const option = document.getElementById('select').value;
+    [option === "3" && Easy(), option === "4" && bot_or_you()][0];
 }
 // פונקציה זו מפעילה מספר פונקציות וגם מגירה שהשחקן משחק נגד רמה הקלה #1
 function Easy() {
-    Hide_select() //  מסתיר את הרשימה הנפתחת
-    hide_button() // מסתירה את הכפתורים
-    toggle_Blin_For_X_or_o("2")
-    return Game_board.game_type = 2;
+    Hide_select(), hide_button(), toggle_Blin_For_X_or_o("2")
+    Game_board.game_type = 2;
 }
 
 function bot_or_you() {  // #2   פוקציה זו מציג בפניה המשתמש שתי אופציות 1 שהוא מתחיל והשניה שהמחשב מתחיל
     document.getElementById('x_or_o').style.display = "none";   // זה הגדרתי שם במידה התחרט ורוצה לשחק נגד מחשב
     document.getElementById('bot_or_you').style.display = "block"; // מציג את האפשרויות
     document.getElementById('you_first').onclick = function () {  // אפשרות ראשנה השחקן משחק ראשון 
-        return Game_board.xo = 1, Hard_last_game(), document.getElementById('bot_or_you').style.display = "none";
+        Game_board.xo = 1, document.getElementById('bot_or_you').style.display = "none";
+        return Hard_last_game()
     };
     document.getElementById('bot_first').onclick = function () {// אפשרות שניה המחשב משחק ראשון
         document.getElementById('bot_or_you').style.display = "none"; Game_board.xo = 0, Hard(), document.getElementById('bot_or_you').style.display = "none";
@@ -56,19 +49,17 @@ function bot_or_you() {  // #2   פוקציה זו מציג בפניה המשת�
 }
 
 function Hard_last_game() { //  פןקציה זו מופעלת על ידי בחירה ששחקן יתחיל ראשון בעת משחק נגד מחשב ברשמה קשה ומפעילה מספר פוקציות
-    hide_button()
-    Hide_select()
+    hide_button(), Hide_select()
     toggle_Blin_For_X_or_o("2")
     on_or_off_rotation_for_pattern()
-    return Game_board.game_type = 3;  // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
+    Game_board.game_type = 3;  // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
 }
 
 function Hard() { // פוקציה זו מופעלת על ידי בחירה שהמחשב יתחיל ראשון ברמה הקשה ומפעילה מספר פוקציות
-    hide_button()
-    Hide_select()
+    hide_button(), Hide_select()
     setTimeout(function () { toggle_Blin_For_X_or_o("4"), cell_click(4); }, 1300);      // צעד ראשון שהמחשב תופס את המרכז
     on_or_off_rotation_for_pattern()
-    return Game_board.game_type = 3;   // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
+    Game_board.game_type = 3;   // הגדרה זו חשובה על מנת לדעת שהמשחק מתנהל ברמה קשה
 }
 
 function Hide_select() { // מסתיר או מציג בהתאם את הרשימה הנפתחת
@@ -130,7 +121,7 @@ function restarting() {
     for (let index = 0; index < Game_board.arr.length; index++) {
         document.getElementById(`cell-${index}`).textContent = null;
     }
-    return Game_board.arr = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
+    Game_board.arr = [-1, -1, -1, -1, -1, -1, -1, -1, -1]
 }
 function exit() { // exit פונקציה שמופעלת בעת לחיצה על הכפתור 
     window.setTimeout(function () { window.location.reload(); }, 0.1);

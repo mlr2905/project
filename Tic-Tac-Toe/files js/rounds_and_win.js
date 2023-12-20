@@ -17,9 +17,12 @@ function cell_click(cell_number) { //  פוקציה אשר בודקת תורמי
 }
 function check_win(arr1, arr2) {
     if (arr2.length >= 3) {
-        arr1.sort();
-        arr2.sort();
-        return arr1.reduce((acc, el, i) => (acc && el === arr2[i]), true);
+        for (let i = 0; i < arr1.length; i++) {
+            if (!arr2.includes(arr1[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 
@@ -36,6 +39,7 @@ function win() { // O או של  X פונקציה שבודקת ניצחון של
         if (check_win(win, index_x)) {
             Game_board.who_winner = "x"
             return blink_on_or_off(...win), show_win("x"), Game_board.arr = Game_board.arr.map(reset), setTimeout(() => blink_on_or_off(...win), 1299);
+
         }
         if (check_win(win, index_o)) {
             Game_board.who_winner = "o"
@@ -80,11 +84,16 @@ function finish(a) {  // פונקציה בודקת אם המשחק  הסתיים
                 Game_board.rounds++,
                 document.getElementById("c-5").textContent = Game_board.win_x,
                 document.getElementById("c-6").textContent = Game_board.rounds,
-                document.getElementById("c-7").textContent = Game_board.win_o
+                document.getElementById("c-7").textContent = Game_board.win_o, let_x_start()
         }
         else {
             return Check_full_arr(a);
         }
+    }
+}
+function let_x_start() {
+    if (Game_board.game_type === 2) {
+        toggle_Blin_For_X_or_o(2), toggle_Blin_For_X_or_o(4), Game_board.xo = 1
     }
 }
 function toggle_Blin_For_X_or_o(id) {
@@ -113,9 +122,10 @@ function Check_full_arr(a) { // בודקת אם נישאר תא פנוי או ש
             }
         }
     }
-    (Game_board.xo === 1) ? Game_board.xo = 0 : Game_board.xo = 1;
+    Game_board.xo === 1 ? Game_board.xo = 0 : Game_board.xo = 1;
     return swal({ title: "Dead heat!!", text: "", timer: 1000 }),
         Game_board.arr = Game_board.arr.map(reset),
         Game_board.rounds++,
-        document.getElementById("c-6").textContent = Game_board.rounds, restarting()
+        document.getElementById("c-6").textContent = Game_board.rounds, restarting(),
+        toggle_Blin_For_X_or_o(2), toggle_Blin_For_X_or_o(4)
 }
