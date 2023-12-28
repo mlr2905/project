@@ -32,7 +32,7 @@ function image_Message(i, id) {
             </div>
             <img class="direct-chat-img" src="${Cells_manager.img}"  alt="message user image">
             <div class="direct-chat-text">
-            <img src="${Cells_manager.size_array[i].img}"  id="img-${id}" />
+            <img src="${Cells_manager.size_array[i].text}"  id="img-${id}" />
             </div>
         </div>
         `
@@ -53,7 +53,7 @@ function link_message(i, id) {
             </div>
             <img class="direct-chat-img" src="${Cells_manager.img}"  alt="message user image">
             <div class="direct-chat-text">
-            <a href="${Cells_manager.size_array[i].link}">${Cells_manager.size_array[i].link}</a>
+            <a href="${Cells_manager.size_array[i].text}">${Cells_manager.size_array[i].text}</a>
             </div>
         </div>
         `
@@ -62,7 +62,7 @@ function link_message(i, id) {
 }
 
 function youtube_message(i, id) {
-    const url = Cells_manager.size_array[i].tube
+    const url = Cells_manager.size_array[i].text
     const parts = url.split("/");
     const videoId = parts[parts.length - 1];
     const id_link = videoId.split("?");
@@ -102,7 +102,7 @@ function facebook_message(i, id) {
             <img class="direct-chat-img" src="${Cells_manager.img}" alt="message user image">
             <div class="direct-chat-text">
                 <iframe width="300" height="200"
-                    src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FSirtonimInt%2Fvideos%2F${Cells_manager.size_array[i].face}%2F&show_text=false&width=560&t=0"
+                    src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FSirtonimInt%2Fvideos%2F${Cells_manager.size_array[i].text}%2F&show_text=false&width=560&t=0"
                     title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write;
             encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
                 </iframe>
@@ -114,7 +114,7 @@ function facebook_message(i, id) {
 }
 
 function tiktok_message(i, id) {
-    const url = Cells_manager.size_array[i].tiktok
+    const url = Cells_manager.size_array[i].text
     const parts = url.split("/");
     const videoId = parts[parts.length - 1];
     const id_link = videoId.split("?");
@@ -130,7 +130,7 @@ function tiktok_message(i, id) {
             </div>
             <img class="direct-chat-img" src="${Cells_manager.img}" alt="message user image">
             <div class="direct-chat-text">
-                <blockquote class="tiktok-embed" cite="${Cells_manager.size_array[i].tiktok}"data-video-id="${firstPart}"> 
+                <blockquote class="tiktok-embed" cite="${Cells_manager.size_array[i].text}"data-video-id="${firstPart}"> 
                     <section></section>
                 </blockquote> 
             </div>

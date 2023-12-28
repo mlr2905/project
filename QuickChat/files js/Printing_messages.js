@@ -8,24 +8,24 @@ function message_sorting() {
         Cells_manager.user_or_Another_user = Cells_manager.size_array[i].user === Cells_manager.name ? "user" : "Another-user";
 
     
-        if (Cells_manager.size_array[i].text !== undefined) {
+        if (Cells_manager.size_array[i].type === "text") {
             text_message(i, id)
         }
         else {
-            if (Cells_manager.size_array[i].img !== undefined) {
+            if (Cells_manager.size_array[i].type == "img") {
                 image_Message(i, id)
             }
-            if (Cells_manager.size_array[i].link !== undefined) {
+            if (Cells_manager.size_array[i].type === "link") {
                 link_message(i, id)
             }
-            if (Cells_manager.size_array[i].tube !== undefined) {
+            if (Cells_manager.size_array[i].type === "tube") {
                 youtube_message(i, id)
             }
-            if (Cells_manager.size_array[i].face !== undefined) {
+            if (Cells_manager.size_array[i].type === "face") {
                 runfacebookScript()
                 facebook_message(i, id)
             }
-            if (Cells_manager.size_array[i].tiktok !== undefined) {
+            if (Cells_manager.size_array[i].type === "tiktok") {
                 runTikTokScript()
                 tiktok_message(i, id)
             }

@@ -1,7 +1,7 @@
 async function last_message() { //Shows recent messages in chat details with sender name and number of messages
     Cells_manager.name = document.getElementById('name').value
     for (let i = 1; i < 5; i++) {
-        let url = `https://db-nmn5.onrender.com/chat${i}`
+        let url = `https://cloud-memory.onrender.com/api/chat${i}`
         let response = await fetch(url)
         response.ok || console.error('network problem');
         let data = await response.json()
@@ -35,7 +35,7 @@ async function last_message() { //Shows recent messages in chat details with sen
         div2.appendChild(h4_son)
         div2.appendChild(p_son_time)
 
-        if (last_m[a].text !== undefined) {
+        if (last_m[a].type === text) {
             p_son.innerHTML = last_m[a].text
         }
         else {

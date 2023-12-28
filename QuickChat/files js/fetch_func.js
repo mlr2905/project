@@ -2,12 +2,13 @@ intervalId = setInterval(push_update, 500)
 
 function push_update(ok) { //Updates the messages displayed in the chat only if there are changes
     if (Cells_manager.chat_n !== " " || ok === "ok") {
-        fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`)
+        let url = `https://cloud-memory.onrender.com/api/chat${Cells_manager.chat_n}`
+        fetch(url)
             .then(res => res.json())
             .then(data => {
                 localStorage.setItem("check", JSON.stringify(data));
                 Cells_manager.Push = JSON.parse(localStorage.getItem("check"));
-                if (Cells_manager.name !== '') {
+                if (Cells_manager.user !== '') {
                     if (Cells_manager.Push.length !== Cells_manager.size_array.length || ok === "ok") {
                         Cells_manager.Push = 0;
                         get();
@@ -32,16 +33,18 @@ function get() {
 }
 
 function post_img() {//Only the sender sees the picture
-    Cells_manager.new_time = time_new() 
-    const img =  image1.src = URL.createObjectURL(event.target.files[0]);
-    const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`
+    Cells_manager.new_time = time_new()
+    const img = image1.src = URL.createObjectURL(event.target.files[0]);
+    const url = `https://cloud-memory.onrender.com/api/chat${Cells_manager.chat_n}`
     fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: `{
                     "user": "${Cells_manager.name}",
-                    "img": "${img}",
-                    "time": "${Cells_manager.new_time}"
+                    "text": "${img}",
+                    "time": "${Cells_manager.new_time}:00",
+                    "type": "img"
+
                 }`})
 }
 
@@ -54,15 +57,15 @@ function post_data() {//Sending a text message, a link to YouTube, Tiktok, Faceb
         link_type()  //Printing_messages.js
         const input = document.getElementById('text')
         input.value = '';
-        const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}`
+        let url = `https://cloud-memory.onrender.com/api/chat${Cells_manager.chat_n}`
         fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: `{
                     "user": "${Cells_manager.name}",
-                    "${Cells_manager.string_name}": "${Cells_manager.new_text}",
+                    "text": "${Cells_manager.new_text}",
                     "time": "${Cells_manager.new_time}",
-                    "id": ${Cells_manager.json_id}
+                    "type": "${Cells_manager.string_name}"
                 }`})
     }
 }
@@ -72,14 +75,15 @@ async function put(number, value) { //Editing of a message of any type to any ty
     Cells_manager.string_name = "text"
     link_type()
     Cells_manager.new_time = time_new()
-    const url = `https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}/${number}`
+    let url = `https://cloud-memory.onrender.com/api/chat${Cells_manager.chat_n}/${number}`
     let response = await fetch(`${url}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: `{
-                    "user": "${Cells_manager.name}",
-                    "${Cells_manager.string_name}": "${new_text}",
-                    "time": "${Cells_manager.new_time}"
+            "user": "${Cells_manager.name}",
+            "text": "${Cells_manager.new_text}",
+            "time": "${Cells_manager.new_time}",
+            "type": "${Cells_manager.string_name}"
                 }`})
     let data = await response.json()
     if (data) {
@@ -92,7 +96,8 @@ async function put(number, value) { //Editing of a message of any type to any ty
 }
 
 function delete_(number) {//Deletes a message
-    fetch(`https://db-nmn5.onrender.com/chat${Cells_manager.chat_n}/${number}`, {
+    let url =`https://cloud-memory.onrender.com/api/chat${Cells_manager.chat_n}/${number}`
+    fetch(url, {
         method: 'DELETE'
     }).then(response => {
         if (!response.ok) {
@@ -103,7 +108,7 @@ function delete_(number) {//Deletes a message
     })
 }
 function id_message(i) {
-    let url = `https://db-nmn5.onrender.com/chat${i}`
+    let url = `https://cloud-memory.onrender.com/api/chat${i}`
     fetch(url)
         .then(res => res.json())
         .then(data => {

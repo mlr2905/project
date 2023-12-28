@@ -1,18 +1,18 @@
 async function check_online() { //A function that checks who logged in and who logged out
-    Cells_manager.name_connected = document.getElementById('name').value
-    const url = "https://db-nmn5.onrender.com/online"
+    Cells_manager.name_connected = document.getElementById("name").value
+    let url = "https://cloud-memory.onrender.com/api/connected"
     let response = await fetch(url)
     let data = await response.json()
     localStorage.setItem("check-online", JSON.stringify(data));
     Cells_manager.online = JSON.parse(localStorage.getItem("check-online"));
     let td = document.getElementById(`online`)
-    const td_son = document.createElement('div');
+    const td_son = document.createElement("div");
     td.innerHTML = ""
     td_son.innerHTML = " "
     let users = [];
     Cells_manager.connected = "not"
     for (let i = 0; i < Cells_manager.online.length; i++) {
-        if (Cells_manager.online[i].user === Cells_manager.new_text) { //Checking if I'm connected
+        if (Cells_manager.online[i].user === Cells_manager.new_text) { //Checking if I"m connected
             Cells_manager.connected = "ok"
         }
         if (Cells_manager.online[i].user !== "") {
@@ -50,8 +50,9 @@ function delete_out_user() { //A function that checks if 60 seconds have passed 
                 if (Cells_manager.online[i].user === Cells_manager.name_connected) { //Checking if my user has been logged out
                     Cells_manager.connected = "not"
                 }
-                fetch(`https://db-nmn5.onrender.com/online/${id}`, {
-                    method: 'DELETE'
+                let url = `https://cloud-memory.onrender.com/api/connected/${id}`
+                fetch(url, {
+                    method: "DELETE"
                 }).then(response => {
                     if (!response.ok) {
                         // Handle error
@@ -68,32 +69,20 @@ function delete_out_user() { //A function that checks if 60 seconds have passed 
 
 function post_new_login(time) { //Connection of a user that does not exist
 
-    const url1 = "https://db-nmn5.onrender.com/online"
-    const url2 = "https://db-nmn5.onrender.com/auto_id"
-    fetch(url2) //Checking from the highest id
-        .then(res => res.json())
-        .then(data => {
-            localStorage.setItem("id", JSON.stringify(data));
-            Cells_manager.id_online = JSON.parse(localStorage.getItem("id"));
-            let id = Cells_manager.id_online.reduce((max, cell) => max > cell.id ? max : cell.id, -1);
+    let url = "https://cloud-memory.onrender.com/api/connected"
 
-            fetch(url1, { //Uses the highest id
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: `{
-                "user": "${Cells_manager.name_connected}",
-                "time": "${time}",
-                "id": "${id}"
-                }`})
-            id++
-            //The id used is increased by 1
-            fetch(url2, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: `{
-                "id":${id}
-                }`})
-        })
+    fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: `{
+                        "user":"${Cells_manager.name_connected}",
+                        "time":"${time}"
+                    }`}).then(response => {
+            if (!response.ok) {
+                console.error()
+            }
+        });
 }
+
 
 
